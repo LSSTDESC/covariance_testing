@@ -54,11 +54,22 @@ There are a number of codes that compute covariance matrices analytically; the p
 There are several ways to tests covariance matrices
 \subsection{One-to-one Comparison}
 
-This is a simple matter of comparing elements of a covariance matrix, usually starting with diagonal elements. 
+This is a simple matter of comparing elements of a covariance matrix, usually starting with diagonal elements. \figref{xipmscatter} shows an example.
+
+\begin{figure}
+\includegraphics[width=0.9\columnwidth]{xipmscatter.png}
+\caption{A simple scatter plot of elements of covariance matrices produced by two separate halo model codes. \label{fig:xipmscatter}}
+\end{figure}
+
 
 \subsection{Eigenvalues and eigenvectors}
 
-This is slightly more sophisticated: diagonalize the covariance matrix and examine the eigenvalues and also the associated eigenvectors.
+This is slightly more sophisticated: diagonalize the covariance matrix and examine the eigenvalues and also the associated eigenvectors. \figref{evector} shows an example of the eigenvectors from two different covariance codes.
+
+\begin{figure}
+\includegraphics[width=0.9\columnwidth]{evector.png}
+\caption{A simple scatter plot of elements of covariance matrices produced by two separate halo model codes. \label{fig:evector}}
+\end{figure}
 
 \subsection{Parameter Estimation}
 
@@ -66,7 +77,9 @@ Ultimately, what matters is well the likelihood does at extracting parameter con
 
 \subsection{Shrinkage}
 
-There have been several methods proposed in the literature to compress the data vectors, extracting as much information as possible. 
+There have been several methods proposed in the literature to compress the data vectors, extracting as much information as possible. Here we consider two: first compression at the map level, where linear combination of the tomographic maps are used. If there are 4 tomographic bins, an uncompressed analysis would require ten separate 2-point functions (or 20 for cosmic shear), whereas a compression scheme leads to just a few uncorrelated maps. If there were 3 such maps, then only three 2-point functions would need to be used for the likelihood analysis.
+
+The second compression takes place at the 2-point level, with the compressed data vector containing linear combinations of the many 2-point functions. In principle, this might work with only $N_p$ 2-point functions where $N_p$ is the number of parameters varied, and each mode, or linear combination, contains all the information necessary about the parameter of interest.
 
 
 % ----------------------------------------------------------------------
