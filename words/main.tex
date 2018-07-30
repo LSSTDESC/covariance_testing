@@ -51,7 +51,9 @@ There are a number of codes that compute covariance matrices analytically; the p
 \section{Methods}
 \label{sec:methods}
 
-There are several ways to tests covariance matrices
+There are several ways to tests covariance matrices. We will illustrate each of these on cosmic shear statistics $\xi_\pm(\theta)$, focusing for the most part of the Year 1 results of the Dark Energy Survey~\cite{Abbott:2017wau}. One of the codes will be {\tt Cosmolike}~\cite{Krause:2016jvl}; another will be the one used to analyze the KiDS-450 survey~\cite{Kohlinger:2017sxk}.
+
+
 \subsection{One-to-one Comparison}
 
 This is a simple matter of comparing elements of a covariance matrix, usually starting with diagonal elements. \figref{xipmscatter} shows an example.
@@ -64,7 +66,14 @@ This is a simple matter of comparing elements of a covariance matrix, usually st
 
 \subsection{Eigenvalues and eigenvectors}
 
-This is slightly more sophisticated: diagonalize the covariance matrix and examine the eigenvalues and also the associated eigenvectors. \figref{evector} shows an example of the eigenvectors from two different covariance codes.
+This is slightly more sophisticated: diagonalize the covariance matrix and examine the eigenvalues and also the associated eigenvectors. \figref{coveigen} shows an example of the eigenvalues from two different covariance codes.
+
+\begin{figure}
+\includegraphics[width=0.9\columnwidth]{coveigen.png}
+\caption{A simple scatter plot of elements of covariance matrices produced by two separate halo model codes. \label{fig:coveigen}}
+\end{figure}
+
+\figref{evector} shows an example of one of the eigenvectors, the one associated with the smallest eigenvalue. This low-eigenvalue mode picks up the differences between the correlation function at different angular scales (each vertical line delineates between two-point functions of shears in different tomographic bin pairs).
 
 \begin{figure}
 \includegraphics[width=0.9\columnwidth]{evector.png}
@@ -77,9 +86,9 @@ Ultimately, what matters is well the likelihood does at extracting parameter con
 
 \subsection{Shrinkage}
 
-There have been several methods proposed in the literature to compress the data vectors, extracting as much information as possible. Here we consider two: first compression at the map level, where linear combination of the tomographic maps are used. If there are 4 tomographic bins, an uncompressed analysis would require ten separate 2-point functions (or 20 for cosmic shear), whereas a compression scheme leads to just a few uncorrelated maps. If there were 3 such maps, then only three 2-point functions would need to be used for the likelihood analysis.
+There have been several methods proposed in the literature to compress the data vectors, extracting as much information as possible. Here we consider two: first compression at the map level\cite{Alonso:2017hhj}, where linear combination of the tomographic maps are used. If there are 4 tomographic bins, an uncompressed analysis would require ten separate 2-point functions (or 20 for cosmic shear), whereas a compression scheme leads to just a few uncorrelated maps. If there were 3 such maps, then only three 2-point functions would need to be used for the likelihood analysis.
 
-The second compression takes place at the 2-point level, with the compressed data vector containing linear combinations of the many 2-point functions. In principle, this might work with only $N_p$ 2-point functions where $N_p$ is the number of parameters varied, and each mode, or linear combination, contains all the information necessary about the parameter of interest.
+The second compression takes place at the 2-point level\cite{Zablocki:2015zcm}, with the compressed data vector containing linear combinations of the many 2-point functions. In principle, this might work with only $N_p$ 2-point functions where $N_p$ is the number of parameters varied, and each mode, or linear combination, contains all the information necessary about the parameter of interest.
 
 
 % ----------------------------------------------------------------------
