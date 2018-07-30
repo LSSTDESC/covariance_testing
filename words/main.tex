@@ -1,0 +1,120 @@
+\RequirePackage{docswitch}
+% \flag is set by the user, through the makefile:
+%    make note
+%    make apj
+% etc.
+\setjournal{\flag}
+
+\documentclass[\docopts]{\docclass}
+
+% You could also define the document class directly
+%\documentclass[]{emulateapj}
+
+% Custom commands from LSST DESC, see texmf/styles/lsstdesc_macros.sty
+\usepackage{lsstdesc_macros}
+
+\usepackage{graphicx}
+\graphicspath{{./}{./figures/}}
+\bibliographystyle{apj}
+
+% Add your own macros here:
+
+
+
+% ======================================================================
+
+\begin{document}
+
+\title{Covariance Testing}
+
+\maketitlepre
+
+\begin{abstract}
+
+There are a number of codes that compute covariance matrices analytically; the plan is to use these to build TJPCov. In this project, we start along the path of comparing these different codes, building up a suite of tools that can be used to compare covariance matrices. We expect these tools to be useful not only for converging on a single accurate code for computing covariance matrices but also more generally for understanding which parts of the covariance matrix carry the most information (and therefore need the most attention to get right) and which are not relevant (so for example matrices that are not positive definite may still be usable if the negative eigenmodes are not relevant).
+\end{abstract}
+
+% Keywords are ignored in the LSST DESC Note style:
+\dockeys{}
+
+\maketitlepost
+
+% ----------------------------------------------------------------------
+% {% raw %}
+
+\section{Introduction}
+\label{sec:intro}
+
+
+% ----------------------------------------------------------------------
+
+\section{Methods}
+\label{sec:methods}
+
+There are several ways to tests covariance matrices
+\subsection{One-to-one Comparison}
+
+This is a simple matter of comparing elements of a covariance matrix, usually starting with diagonal elements. 
+
+\subsection{Eigenvalues and eigenvectors}
+
+This is slightly more sophisticated: diagonalize the covariance matrix and examine the eigenvalues and also the associated eigenvectors.
+
+\subsection{Parameter Estimation}
+
+Ultimately, what matters is well the likelihood does at extracting parameter constraints. Since most analyses assume a Gaussian likelihood, this boils down to how well the contours in parameter space agree when using two different covariance matrices.
+
+\subsection{Shrinkage}
+
+There have been several methods proposed in the literature to compress the data vectors, extracting as much information as possible. 
+
+
+% ----------------------------------------------------------------------
+
+\section{Results}
+\label{sec:results}
+
+
+
+% ----------------------------------------------------------------------
+
+\section{Discussion}
+\label{sec:discussion}
+
+
+
+% ----------------------------------------------------------------------
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+
+
+% ----------------------------------------------------------------------
+
+\subsection*{Acknowledgments}
+
+%%% Here is where you should add your specific acknowledgments, remembering that some standard thanks will be added via the \code{desc-tex/ack/*.tex} and \code{contributions.tex} files.
+
+%This paper has undergone internal review in the LSST Dark Energy Science Collaboration. % REQUIRED if true
+
+\input{contributions} % Standard papers only: author contribution statements. For examples, see http://blogs.nature.com/nautilus/2007/11/post_12.html
+
+% This work used TBD kindly provided by Not-A-DESC Member and benefitted from comments by Another Non-DESC person.
+
+% Standard papers only: A.B.C. acknowledges support from grant 1234 from ...
+
+\input{desc-tex/ack/standard} % also available: key standard_short
+
+% This work used some telescope which is operated/funded by some agency or consortium or foundation ...
+
+% We acknowledge the use of An-External-Tool-like-NED-or-ADS.
+
+%{\it Facilities:} \facility{LSST}
+
+% Include both collaboration papers and external citations:
+\bibliography{main,lsstdesc}
+
+\end{document}
+
+% ======================================================================
