@@ -7,6 +7,61 @@
 
 \documentclass[\docopts]{\docclass}
 
+%%%% Scott's macros
+\newcommand{\sfig}[2]{
+\includegraphics[width=#2]{#1}
+        }
+\newcommand{\Sfig}[2]{
+    \begin{figure}[thbp]
+    \sfig{../Figures/#1.pdf}{\columnwidth}
+    \caption{{\small #2}}
+    \label{fig:#1}
+    \end{figure}
+}
+\newcommand{\Swide}[2]{
+\begin{figure*}[thbp]
+ \sfig{../Figures/#1.pdf}{.8\textwidth}
+  \caption{{\small #2}}
+   \label{fig:#1}
+   \end{figure*}
+}
+\newcommand{\Sswide}[2]{
+\begin{figure*}[thbp]
+ \sfig{../Figures/#1.pdf}{.7\textwidth}
+  \caption{{\small #2}}
+   \label{fig:#1}
+   \end{figure*}
+}
+\newcommand{\Svwide}[2]{
+\begin{figure*}[thbp]
+ \sfig{../Figures/#1.pdf}{\textwidth}
+  \caption{{\small #2}}
+   \label{fig:#1}
+   \end{figure*}
+}
+
+\newcommand{\Spng}[2]{
+    \begin{figure}[thbp]
+    \sfig{../Figures/#1.png}{0.95\columnwidth}
+    \caption{{\small #2}}
+    \label{fig:#1}
+    \end{figure}
+}
+\newcommand{\Rf}[1]{\ref{fig:#1}}
+\newcommand{\rf}[1]{\ref{fig:#1}}
+\newcommand{\ec}[1]{Eq.~(\ref{eq:#1})}
+\newcommand{\ecalt}[1]{Eq.~\ref{eq:#1}}
+\newcommand{\Ec}[1]{(\ref{eq:#1})}
+\newcommand{\eeec}[3]{Eqs.~(\ref{eq:#1}, \ref{eq:#2}, \ref{eq:#3})}
+\newcommand{\eql}[1]{\label{eq:#1}}
+\newcommand\be{\begin{equation}}
+\newcommand\ee{\end{equation}}
+\def\bea{\begin{eqnarray}}
+\def\eea{\end{eqnarray}}
+% \def\bea{\begin{eqnarray}}
+% \def\eea{\end{eqnarray}}
+\def\svs{\nonumber\\}
+
 % You could also define the document class directly
 %\documentclass[]{emulateapj}
 
@@ -82,15 +137,28 @@ This is slightly more sophisticated: diagonalize the covariance matrix and exami
 
 \subsection{Parameter Estimation}
 
-Ultimately, what matters is well the likelihood does at extracting parameter constraints. Since most analyses assume a Gaussian likelihood, this boils down to how well the contours in parameter space agree when using two different covariance matrices.
+Ultimately, what matters is how well the likelihood does at extracting parameter constraints. Since most analyses assume a Gaussian likelihood, this boils down to how well the contours in parameter space agree when computing the $\chi^2$ using two different covariance matrices.
 
 \subsection{Shrinkage}
 
-There have been several methods proposed in the literature to compress the data vectors, extracting as much information as possible. Here we consider two: first compression at the map level\cite{Alonso:2017hhj}, where linear combination of the tomographic maps are used. If there are 4 tomographic bins, an uncompressed analysis would require ten separate 2-point functions (or 20 for cosmic shear), whereas a compression scheme leads to just a few uncorrelated maps. If there were 3 such maps, then only three 2-point functions would need to be used for the likelihood analysis.
+There have been several methods proposed in the literature to compress the data vectors, extracting as much information as possible. Here we consider two: first compression at the map level~\cite{Alonso:2017hhj}, where linear combination of the tomographic maps are used. If there are 4 tomographic bins, an uncompressed analysis would require ten separate 2-point functions (or 20 for cosmic shear), whereas a compression scheme leads to just a few uncorrelated maps. If there were 3 such maps, then only three 2-point functions would need to be used for the likelihood analysis.
 
-The second compression takes place at the 2-point level\cite{Zablocki:2015zcm}, with the compressed data vector containing linear combinations of the many 2-point functions. In principle, this might work with only $N_p$ 2-point functions where $N_p$ is the number of parameters varied, and each mode, or linear combination, contains all the information necessary about the parameter of interest. 
+The second compression takes place at the 2-point level~\cite{Zablocki:2015zcm}, with the compressed data vector containing linear combinations of the many 2-point functions. In principle, this might work with only $N_p$ 2-point functions where $N_p$ is the number of parameters varied, and each mode, or linear combination, contains all the information necessary about the parameter of interest. 
 
-
+For each parameter $p_\alpha$ that is varied, one captures a single linear mode
+\be
+y_\alpha = U_{\alpha,i} D_i
+\ee
+where $D_i$ are the data points and the coefficients are defined as
+\be
+U_{\alpha,i} \equiv \frac{\partial T_j}{\partial p_\alpha} \, C^{-1}{}_{ji}
+\ee
+where $T_j$ is the theoretical prediction for the data point $D_j$.
+The now much smaller data set $\{y_\alpha\}$, which contains as few as $N_p$ data points carries with it its own covariance matrix, with which the $\chi^2$ can be computed for each point in parameter space. Propagating through shows that this covariance matrix is related to the original $C_{ij}$ via
+\be
+C_{\alpha\beta} = U_{\alpha i} C_{ij} U^t_{j\beta}.
+\ee
+To take an example from DES-Y1, $C_{ij}$ is a $400\times 400$ matrix, while the number of parameters needed to specify the model is only 16, so $C_{\alpha\beta}$ is a $16\times 16$ matrix. We have apparently captured from the initial set of $400\times 401/2=80,200$ independent elements of the covariance matrix a small subset (only 136 in this case) of linear combinations of these 80k elements that really matter. If two covariance matrices give the same set of $C_{\alpha\beta}$, we do not care whether any of the other eighty thousand elements differ from one another.
 
 
 % ----------------------------------------------------------------------
