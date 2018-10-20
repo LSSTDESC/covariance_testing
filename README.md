@@ -7,8 +7,7 @@ Please generate a 3x2pt Non-Gaussian covariance matrix for the parameters below.
 Code comparison at the precision required for an approximate DES Y3 analysis
 
 ## Cosmology
-Omega_m : 0.2837
-
+Omega_m : 0.2837.  
 Omega_v : 0.7163
 
 sigma_8 : 0.795431
@@ -28,9 +27,9 @@ source_tomobins : 4
 
 lens_tomobins : 5
 
-shear_REDSHIFT_FILE : ingredients/source.nz
+shear_REDSHIFT_FILE : data/cosmolike_cov_Y3ish/source.nz
 
-clustering_REDSHIFT_FILE : ingredients/lens.nz
+clustering_REDSHIFT_FILE : data/cosmolike_cov_Y3ish//lens.nz
 
 tmin : 2.5
 
