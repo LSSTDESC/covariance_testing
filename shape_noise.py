@@ -83,3 +83,39 @@ np.savetxt(fname,cov_th)
 
 fname='shape_noise_cov_unbinned_theta.dat'
 np.savetxt(fname,th)
+
+#using direct expression from Joachimi+ for real space
+area_rad=4*np.pi*f_sky
+N1=2*np.pi*area_rad*n_gal_rad**2 #area and number density in the normalization
+
+dthb=th_bins[1:]-th_bins[:-1]
+N2=(thb*dthb*d2r**2)**2  #bin volumes in the normalization
+N2/=thb*dthb*d2r**2 #bin volume in the numerator.
+
+N1*=2 #factor of 2 missing in Joachimi's paper? N1*N2 is the definition of Np above eq. 34.
+
+"""
+Direct real space expression for shape noise should be:
+
+unbinned, SN(theta_1,theta_2)= 2 * 1./(2*pi*A) * (sigma_e**2/(2n) )**2 \delta_D(theta_1,theta_2)/theta_1
+
+factor of 2 in the beginning is because we have 2 terms. 
+
+binned SN= \int_b1 d\theta_1 theta_1 \int_b2 d\theta_2 theta_2 SN(theta_1,theta_2) / N
+where N=(\int_b1 d\theta_1 theta_1)*(\int_b2 d\theta_2 theta_2)
+
+b1,b2 are the bins
+\int_b1 d\theta_1 theta_1 \approx \theta_1'\Delta\theta_1' (mean theta of bin times the size of the bin)
+
+This gives
+
+binned SN= Unbinned SN * \theta_1'\Delta\theta_1' / (\theta_1'\Delta\theta_1')**2
+
+        = 2* 1./(2*pi*A) * (sigma_e**2/(2n) )**2 / (\theta_1'\Delta\theta_1')
+        
+        =\sigma_2**4 / (pi A 4 n**2 \theta_1'\Delta\theta_1')
+"""
+
+SN_diag=sigma_e**4/N1/N2
+fname='shape_noise_diag.dat'
+np.savetxt(fname,SN_diag)
