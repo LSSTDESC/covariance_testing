@@ -135,6 +135,22 @@ This is slightly more sophisticated: diagonalize the covariance matrix and exami
 \caption{A simple scatter plot of elements of covariance matrices produced by two separate halo model codes. \label{fig:evector}}
 \end{figure}
 
+Since the values of the data points vary by many orders of magnitude, the range of eigenvalues in Fig.~\rf{evector} is a bit misleading. In addition, it is not clear which eigenvectors should be dropped: should it be chose with large eigenvalues (noise) or small ones (the noise is noisy)? Ideally, what we would like is to create a list of eigenvectors ordered in some way and drop the least important. This ties into the section below on Shrinkage. A very simple way to do this is to note that the total signal to noise squared is
+\be
+\left(\frac{S}{N}\right)^2 = \sum_{ij} D_i C^{-1}_{ij} D_j
+,\ee
+where $_i$ are the data points and $C$ the covariance matrix. If $C$ were diagonal, then the eigenvectors would simply be the data points themselves, and we could estimate the signal to noise squared expected in each mode by simply computing $T_i^2/C_{ii}$ where $T_i$ is the theoretical prediction. Then we could throw out the modes with the lowest signal to noise. Since $C$ is not diagonal, we have first diagonalize it and then order. So, we write the expected signal to noise squared as
+%to do things a bit differently. Let's first define re-scaled data points
+\bea
+\left(\frac{S}{N}\right)^2 &=& \sum_{ij} T_i  C^{-1}_{ij} T_j\nonumber\\
+&=& \sum_{ij} \frac{v_i^2}{\lambda_i}
+,\eea
+where $\lambda_i$ are the eigenvalues of the covariance matrix, which is diagonalized with the unitary matrix $U$, and the eigenvectors are 
+\be
+v_i\equiv U_{ij} T_j
+\ee
+This makes it very clear which modes should be kept and which dropped. Modes $v_i$ for which $v_i^2/\lambda_i$ is very small can be dropped.
+
 \subsection{Parameter Estimation}
 
 Ultimately, what matters is how well the likelihood does at extracting parameter constraints. Since most analyses assume a Gaussian likelihood, this boils down to how well the contours in parameter space agree when computing the $\chi^2$ using two different covariance matrices.
