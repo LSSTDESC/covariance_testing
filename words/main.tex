@@ -5,7 +5,7 @@
 % etc.
 \setjournal{\flag}
 
-\documentclass[\docopts]{\docclass}
+\documentclass[twocolumn]{\docclass}
 
 %%%% Scott's macros
 \newcommand{\sfig}[2]{
@@ -106,8 +106,9 @@ There are a number of codes that compute covariance matrices analytically; the p
 \section{Methods}
 \label{sec:methods}
 
-There are several ways to tests covariance matrices. We will illustrate each of these on cosmic shear statistics $\xi_\pm(\theta)$, focusing for the most part of the Year 1 results of the Dark Energy Survey~\citep{Abbott:2017wau}. One of the codes will be {\tt Cosmolike}~\citep{Krause:2016jvl}; another will be the one used to analyze the KiDS-450 survey~\citep{Kohlinger:2017sxk}.
+There are several ways to tests covariance matrices. In this work, we will illustrate these on cosmic shear statistics $\xi_\pm(\theta)$, focusing for the most part on the Year 1 results of the Dark Energy Survey~\citep{Abbott:2017wau} (DESY1), and also on predictions for Year 3 (DESY3).  For each $\xi_+(\theta)$ and $\xi_-(\theta)$, we have 200 datapoints, which give 400 in total, divided in 20 angular bins between 2.5 and 250 arcmin, and five tomographic bins, as described in ~\citep{Abbott:2018cms}. We apply the same angular cuts to this dataset as in the aforementioned paper, resulting in 227 datapoints, which correspond to a $227 \times 227$ covariance matrix.
 
+The two codes employed here for computing the covariance matrices are {\tt Cosmolike}~\citep{Krause:2016jvl} and the one used to analyze the KiDS-450 survey~\citep{Kohlinger:2017sxk}, hereafter referred to as CL and BJ, respectively. To perform cosmological parameter inference we used the {\tt CosmoSIS}~\citep{ZUNTZ201545} pipeline, choosing the {\tt MultiNest}~\citep{nested:feroz09} sampler to explore the parameter space, with 500 livepoints, efficiency set to 0.8, and tolerance to 0.1.
 
 \subsection{One-to-one Comparison}
 
@@ -121,11 +122,18 @@ This is a simple matter of comparing elements of a covariance matrix, usually st
 
 \subsection{Eigenvalues and eigenvectors}
 
-This is slightly more sophisticated: diagonalize the covariance matrix and examine the eigenvalues and also the associated eigenvectors. \figref{coveigen} shows an example of the eigenvalues from two different covariance codes.
+An intuitive approach to identifying the most contributing elements of a covariance matrix is to look at its eigenvalues, since we can associated them to the noise in the measurement. The lowest eigenvalues would correspond to the least noise and therefore hold the most information about the parameters, whereas the highest eigenvalues would contribute significantly less. We check this assumption by replacing the 50 highest eigenvalues with a very large number (about nine orders of magnitude higher), thus removing their effective contribution, and then obtain a new covariance matrix with the modified eigenvalues. To check whether we have indeed kept the most informative modes, we perform an analysis with the new covariance matrix, to constrain cosmological and systematic parameters; which we then compare to the constraints obtained with the original covariance matrix. The results are shown in Fig.~\rf{eigenvalues}, for $\Omega_m$ and $\sigma_8$, where we can see that although the constraints are consistent, we have lost a noticeable amount of information of the parameters.
 
 \begin{figure}
-\includegraphics[width=0.9\columnwidth]{coveigen.png}
-\caption{A simple scatter plot of elements of covariance matrices produced by two separate halo model codes. \label{fig:coveigen}}
+\includegraphics[width=0.9\columnwidth]{Eigenvalues.pdf}
+\caption{Constraints on cosmological parameters $\Omega_m$ and $\sigma_8$ for the original DESY1 covariance matrix (in purple) and for a new covariance matrix (in blue) obtained by setting the fifty highest eigenvalues of the original matrix to nine orders of magnitude higher. The constraints are consistent, however, we notice a slightly larger $1\sigma$ error for the latter. \label{fig:eigenvalues}}
+\end{figure}
+
+A visual comparison of two matrices produced by CL and BJ is shown in Fig.~\rf{coveigen} where we have plotted their eigenvalues in blue and orange, respectively. On average, the eigenvalues differ by an order of $\approx 15 \%$. Notice that the order of magnitude of the values vary greatly, making it difficult to compare them efficiently; furthermore, it is not clear which elements are most important. 
+
+\begin{figure}
+\includegraphics[width=0.9\columnwidth]{coveigen_BJ-CL.png}
+\caption{A plot showing the $227$ eigenvalues of two covariance matrices produced for cosmic shear for the Year 3 projection of the Dark Energy Survey. The blue curve is for CL and the orange one is for BJ. \label{fig:coveigen}}
 \end{figure}
 
 \figref{evector} shows an example of one of the eigenvectors, the one associated with the smallest eigenvalue. This low-eigenvalue mode picks up the differences between the correlation function at different angular scales (each vertical line delineates between two-point functions of shears in different tomographic bin pairs).
@@ -135,21 +143,42 @@ This is slightly more sophisticated: diagonalize the covariance matrix and exami
 \caption{A simple scatter plot of elements of covariance matrices produced by two separate halo model codes. \label{fig:evector}}
 \end{figure}
 
-Since the values of the data points vary by many orders of magnitude, the range of eigenvalues in Fig.~\rf{evector} is a bit misleading. In addition, it is not clear which eigenvectors should be dropped: should it be chose with large eigenvalues (noise) or small ones (the noise is noisy)? Ideally, what we would like is to create a list of eigenvectors ordered in some way and drop the least important. This ties into the section below on Shrinkage. A very simple way to do this is to note that the total signal to noise squared is
+Another interesting way of analysing covariance matrices is by calculating the signal to noise ratio (S/N). A simple way of achieving this is to note that the total signal to noise squared is
+
+%Since the values of the data points vary by many orders of magnitude, the range of eigenvalues in Fig.~\rf{evector} is a bit misleading. In addition, it is not clear which eigenvectors should be dropped: should it be chose with large eigenvalues (noise) or small ones (the noise is noisy)? Ideally, what we would like is to create a list of eigenvectors ordered in some way and drop the least important. This ties into the section below on Shrinkage. A very simple way to do this is to note that the total signal to noise squared is
 \be
-\left(\frac{S}{N}\right)^2 = \sum_{ij} D_i C^{-1}_{ij} D_j
+\left(\frac{S}{N}\right)^2 = \sum_{ij} D_i C^{-1}_{ij} D_j\
 ,\ee
-where $_i$ are the data points and $C$ the covariance matrix. If $C$ were diagonal, then the eigenvectors would simply be the data points themselves, and we could estimate the signal to noise squared expected in each mode by simply computing $T_i^2/C_{ii}$ where $T_i$ is the theoretical prediction. Then we could throw out the modes with the lowest signal to noise. Since $C$ is not diagonal, we have first diagonalize it and then order. So, we write the expected signal to noise squared as
+where $D_i$ and $D_j$ are the data points and $C$ the covariance matrix. If $C$ were diagonal, then the eigenvectors would simply be the data points themselves, and we could estimate the signal to noise squared expected in each mode by simply computing $T_i^2/C_{ii}$ where $T_i$ is the theoretical prediction. Then we could throw out the modes with the lowest signal to noise. Since $C$ is not diagonal, we have to first diagonalize it and then order the values. So, we write the expected signal to noise squared as
 %to do things a bit differently. Let's first define re-scaled data points
 \bea
 \left(\frac{S}{N}\right)^2 &=& \sum_{ij} T_i  C^{-1}_{ij} T_j\nonumber\\
-&=& \sum_{ij} \frac{v_i^2}{\lambda_i}
+&=& \sum_{i} \frac{v_i^2}{\lambda_i}
 ,\eea
 where $\lambda_i$ are the eigenvalues of the covariance matrix, which is diagonalized with the unitary matrix $U$, and the eigenvectors are 
 \be
-v_i\equiv U_{ij} T_j
+v_i\equiv U_{ij}^t T_j
 \ee
-This makes it very clear which modes should be kept and which dropped. Modes $v_i$ for which $v_i^2/\lambda_i$ is very small can be dropped.
+This makes it very clear which modes should be kept and which should be dropped. Modes $v_i$ for which $v_i^2/\lambda_i$ is very small can be discarted. 
+
+We follow the same procedure described earlier for the eigenvalues, where we remove the lowest values by setting them to even lower values. When doing this, we must be careful, because the highest modes do not necessarily hold the most information for all of the parameters; it is therefore necessary to check this for each parameter before applying the cuts. To test this we take
+\bea
+\left(\frac{\partial S/\partial \theta}{N}\right)^2 = \sum_{i} \frac{(\partial v_i / \partial \theta)^2}{\lambda_i}
+,\eea
+with
+\be
+v_i^\theta \equiv U_{ij}^t \frac{\partial T_j}{\partial \theta}
+.\ee
+
+The importance of this is illustrated in Fig.~\rf{signalnoise}, where we can see that while the highest signal to noise for all the parameters does indeed correspond to those that hold most information for parameters $\Omega_m$ and $A_s$, this is not the case for the intrinsic alignment parameters $A$ and $\eta$, so that we end up losing constraining power over these parameters when we modify the lowest values of S/N. This is clearly shown by looking at Fig\textcolor{red}{insert figure}, which shows constraints for the aforementioned parameters for the modified S/N and compares them against the ones obtained for the original covariance matrix.
+
+\begin{figure}
+\includegraphics[width=0.9\columnwidth]{SN_cuts.pdf}
+\caption{Scatter plot for the relation between the signal to noise obtained with the covariance matrix for DESY1 for each parameter (x-axis) against that for the full set of parameters (y-axis). The derivatives are shown with respect to cosmological parameters $\Omega_m$ (blue) and $A_s$ (orange), and for the intrinsic alignment parameters $A$ (green) and $\eta$ (red). The purple rectangle spreads until the fiftieth lowest value of S/N, which corresponds to the values that were modified for parameter constraints. \label{fig:signalnoise}}
+\end{figure}
+
+
+
 
 \subsection{Parameter Estimation}
 
@@ -163,7 +192,7 @@ We characterize a given element in the data vector by its angular and tomographi
 \be
 b_\mu(\vec\theta) = \sum_{\alpha} F_{\mu\alpha} a_\alpha(\theta)
 \ee
-where the $F$'s are chosen\footnote{Note that this definition of $F$ differs from that in ~\citep{Alonso:2017hhj} in that it includes the inverse of the noise matrix.} so that the correlation functions of the $b$'s are diagonal in tomographic space: 
+where the $F$'s are chosen \footnote{Note that this definition of $F$ differs from that in \citep{Alonso:2017hhj} in that it includes the inverse of the noise matrix.} so that the correlation functions of the $b$'s are diagonal in tomographic space: 
 \bea
 w_{\mu\nu}(\theta) &=& \langle b_\mu(\vec\theta_1) b_\nu(\vec\theta_2)\rangle\vert_{\vert\vec\theta_1-\vec\theta_2\vert\in\theta}
 \svs
@@ -195,6 +224,15 @@ The now much smaller data set $\{y_\alpha\}$, which contains as few as $N_p$ dat
 C_{\alpha\beta} = U_{\alpha i} C_{ij} U^t_{j\beta}.
 \ee
 To take an example from DES-Y1, $C_{ij}$ is a $400\times 400$ matrix, while the number of parameters needed to specify the model is only 16, so $C_{\alpha\beta}$ is a $16\times 16$ matrix. We have apparently captured from the initial set of $400\times 401/2=80,200$ independent elements of the covariance matrix a small subset (only 136 in this case) of linear combinations of these 80k elements that really matter. If two covariance matrices give the same set of $C_{\alpha\beta}$, we do not care whether any of the other eighty thousand elements differ from one another.
+
+When comparing the constraints obtained via the compressed dataset and corresponding covariance matrix to that obtained with the full, original ones, we must be careful when computing $U_{\alpha, i}$. This is because the curve shifts depending on where the derivative is taken. For better results, we must take the derivative at the best-fit value, otherwise the constraints will shift, as discussed in more detail in Appendix A. The power of this compression scheme can be appreciated in Fig.
+
+We apply this methodology to comparing the covariance matrices of interest, i. e. CL and BJ. In order to do this, we take two different approaches: first, we assume that $U_{\alpha, i}$ is the same for both covariance matrices and we calculate it with BJ. The second approach is that each compression scheme must use the original covariance matrix that will be compressed, so that $U_{\alpha, i}$ will be different for each covariance matrix. Fig.~\rf{correlation} was obtained for the first method, it shows the correlation matrix for BJ and CL, and that of the difference between them; this figure is important because we can clearly see the difference between the two matrices by simply looking at only $16 \times 16$ elements, as opposed to having to analyse the larger correlation matrix for the full covariance matrices. It is also crucial that the matrices used for comparison here are those obtained via the same compression scheme, so that we can be sure that their differences are indeed only related to the differences in the original $227 \times 227$ matrices.
+
+\begin{figure}
+\includegraphics[width=0.9\columnwidth]{Correlation_compression.png}
+\caption{The upper right and lower left plots display the correlation matrix for BJ and CL respectively, while the lower right is the difference between the two. \label{fig:correlation}}
+\end{figure}
 
 
 % ----------------------------------------------------------------------
