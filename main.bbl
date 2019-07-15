@@ -1,0 +1,35 @@
+\begin{thebibliography}{}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[{Abbott {et~al.}(2017)}]{Abbott:2017wau}
+Abbott, T. M.~C., {et~al.} 2017, arXiv:1708.01530
+
+\bibitem[{Abbott {et~al.}(2018)}]{Abbott:2018cms}
+---. 2018, Phys. Rev. D, 98, 043526
+
+\bibitem[{Alonso(2018)}]{Alonso:2017hhj}
+Alonso, D. 2018, Mon. Not. Roy. Astron. Soc., 473, 4306
+
+\bibitem[{Feroz {et~al.}(2009)Feroz, Hobson, \& Bridges}]{nested:feroz09}
+Feroz, F., Hobson, M.~P., \& Bridges, M. 2009, Monthly Notices of the Royal
+  Astronomical Society, 398, 1601
+
+\bibitem[{Krause \& Eifler(2017)}]{Krause:2016jvl}
+Krause, E., \& Eifler, T. 2017, Mon. Not. Roy. Astron. Soc., 470, 2100
+
+\bibitem[{Köhlinger {et~al.}(2017)}]{Kohlinger:2017sxk}
+Köhlinger, F., {et~al.} 2017, Mon. Not. Roy. Astron. Soc., 471, 4412
+
+\bibitem[{Note1(????)}]{Note1}
+Note1. ????, note that this definition of $F$ differs from that in \protect
+  \citep {Alonso:2017hhj} in that it includes the inverse of the noise matrix.
+
+\bibitem[{Zablocki \& Dodelson(2016)}]{Zablocki:2015zcm}
+Zablocki, A., \& Dodelson, S. 2016, Phys. Rev., D93, 083525
+
+\bibitem[{Zuntz {et~al.}(2015)Zuntz, Paterno, Jennings, Rudd, Manzotti,
+  Dodelson, Bridle, Sehrish, \& Kowalkowski}]{ZUNTZ201545}
+Zuntz, J., Paterno, M., Jennings, E., {et~al.} 2015, Astronomy and Computing,
+  12, 45
+
+\end{thebibliography}
