@@ -298,6 +298,8 @@ Where $W^{ij}$, the $l$-independent compression weight is calculated by
 W^{ij} = \frac{\int_{l_{min}}^{l_{max}} (2l+1) W^{ij}_l}{\int_{l_{min}}^{l_{max}} (2l+1)}
 \ee
 
+We make a more conservative angular cut than the angular cut discussed in [ref]. We make sure that the cut for both $\xi_{+/-}$ are uniform regarding tomographic combinations. For $\xi_+$, we considered an angular scale from 7.195 degree to 250.0 degree. For $\xi_-$, the angular scale is from 90.579 to 250.0. Therefore, for the purpose of demostrating KL-transform, the raw data vector has a length of 190, and by shrinking 10 tomographic combinations for each angle into 1 KL-mode, the data is shrunk to 19. Therefore the number of elements in the covariance matrices are shrunk by 99 \%.
+
 
 
 
@@ -408,7 +410,7 @@ On the right of Figure~\rf{ClDl} shows the KL-transformed eigenmode $D_l$ of $C_
 	\caption{\textbf{Left:} Sheer power spectrum of DESY1. Solid lines are diagonal elements of the signal matrix $S_l$, and dashed lines are the diagonal elements of noise matrix $N_l$; \textbf{Right:} Signal to noise ratio matrix $D_l$ of KL-modes of the power spectrum on the left. \label{fig:ClDl}}
 \end{figure}
 
-In Figure~\rf{kl-mode}, we plot the normalized KL-eigenmode $E_l^i$ of $C_l$ and its corresponding $W^{ij}_l=E_l^i E_l^j$. Modes with different $l$ are plotted with different depth of the color. We can see that the KL-modes do not depend a lot on scale factor $l$ by a large portion, so we take the weighted average of the eigenmodes $E_l^p$ and its quadratic form $W_l$ over $l$s and plot them with black lines.
+In Figure~\rf{kl-mode}, we plot the normalized KL-eigenmode $E_l^i$ of $C_l$ and its corresponding $W^{ij}_l=E_l^i E_l^j$. Modes with different $l$ are plotted with different depth of the color. We can see that the KL-modes do not depend a lot on scale factor $l$ by a large portion, so we take the weighted average of the eigenmodes $E_l^p$ and its quadratic form $W_l$ over $l$s and plot them with black lines. 
 
 \begin{figure}
 	\includegraphics[width=0.42\columnwidth]{epi.png}
@@ -416,8 +418,27 @@ In Figure~\rf{kl-mode}, we plot the normalized KL-eigenmode $E_l^i$ of $C_l$ and
 	\caption{\textbf{Left:} Normalized KL-eigenmodes $E_L^P$ of the shear power spectrum $C_l$, darkness of the color is representing different $l$; \textbf{Right:} Transformation on tomographic bin combination $W_{ij}$ constructed by the KL-eigenmodes. Black lines are the weighted average of each mode. \label{fig:kl-mode}}
 \end{figure}
 
+For different $l$, the KL-modes do varies by a slight amount. We also observed that tomographic bins with higher redshift gains more weight than those with low redshift. This is also shown by the weight on tomographci combination that the combination of bin 3 and bin 4 gains most of the weight to maximize signal to noise ratio. This agrees with the fact that the diagonal elements$Cl$ for low redshift is much less than those with high redshift. *Is my $N_l$ actually right?*
+
+We take the first KL mode and compressed the tomographic combination for each angle $\theta$. As a result, 190 data points for 19 angles are compressed into 19 numbers.  We then shrink the CL and BJ covariance matrices with the same compression scheme generated. The compressed CL and BJ covariance matrices are plotted in Figure~\rf{comp-cov}
+
+\begin{figure}
+	\includegraphics[width=0.34\columnwidth]{kl_comp_cl.png}
+	\includegraphics[width=0.34\columnwidth]{kl_comp_bj.png}
+	\includegraphics[width=0.27\columnwidth]{kl_scatter.png}
+	\caption{\textbf{Left:} CL covariance matrix compressed by the first KL-mode; \textbf{Mid:} BJ covariance matrix compressed by the first KL-mode;\textbf{Right:} One-to-One scatter of the two compressed matrices \label{fig:comp-cov}}
+\end{figure}
+
+If we now again make a one-to-one comparison of these two compressed covariance matrices. We can easily notice that the huge clump at the bottom right for scatter of original matrices, which represent elements with great difference, are gone in the compressed covariance. Instead, the two covariance matrices just have a relative constant difference because of the different model they use. This shows that the divergence between CL and BJ covariance does not affect the overall signal to noise ratio a lot.
+
+
 
 \subsection{Cosmological Constraints}
+
+In this part, we will focus on the result of cosmological constraints that both CL and BJ give us. We also want to show the result of constraints that the compressed data and covariance. We want to compare the constraints and check if the compression works well in the cosmology sense.
+
+\subsection{Constraints of compressed data}
+
 
 
 \subsection{Tolerence Testing}

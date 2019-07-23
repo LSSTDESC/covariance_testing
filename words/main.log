@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.1.16)  22 JUL 2019 04:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.1.16)  22 JUL 2019 23:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -405,81 +405,103 @@ File: ./figures/Correlation_compression.pdf Graphic file (type pdf)
 
 <use ./figures/Correlation_compression.pdf>
 Package pdftex.def Info: ./figures/Correlation_compression.pdf used on input li
-ne 383.
+ne 385.
 (pdftex.def)             Requested size: 221.3985pt x 191.70422pt.
-
-<./figures/Cl_pst.png, id=167, 412.54124pt x 384.43625pt>
+ [6 <./figures/Correlation_compression.pdf>] <./figures/Cl_pst.png, id=188, 412
+.54124pt x 384.43625pt>
 File: ./figures/Cl_pst.png Graphic file (type png)
 
 <use ./figures/Cl_pst.png>
-Package pdftex.def Info: ./figures/Cl_pst.png used on input line 406.
+Package pdftex.def Info: ./figures/Cl_pst.png used on input line 408.
 (pdftex.def)             Requested size: 118.07895pt x 110.03474pt.
 
-<./figures/Dl_pst.png, id=168, 393.47pt x 381.425pt>
+<./figures/Dl_pst.png, id=189, 393.47pt x 381.425pt>
 File: ./figures/Dl_pst.png Graphic file (type png)
 
 <use ./figures/Dl_pst.png>
-Package pdftex.def Info: ./figures/Dl_pst.png used on input line 407.
+Package pdftex.def Info: ./figures/Dl_pst.png used on input line 409.
 (pdftex.def)             Requested size: 118.07895pt x 114.46329pt.
- [6 <./figures/Correlation_compression.pdf>]
+
 <./figures/epi.png, id=190, 398.48875pt x 376.40625pt>
 File: ./figures/epi.png Graphic file (type png)
  <use ./figures/epi.png>
-Package pdftex.def Info: ./figures/epi.png used on input line 414.
+Package pdftex.def Info: ./figures/epi.png used on input line 416.
 (pdftex.def)             Requested size: 103.31955pt x 97.59337pt.
 
 <./figures/Wij.png, id=191, 510.90875pt x 376.40625pt>
 File: ./figures/Wij.png Graphic file (type png)
  <use ./figures/Wij.png>
-Package pdftex.def Info: ./figures/Wij.png used on input line 415.
+Package pdftex.def Info: ./figures/Wij.png used on input line 417.
 (pdftex.def)             Requested size: 130.3797pt x 96.05411pt.
 
-(./contributions.tex) (./desc-tex/ack/standard.tex) (./main.bbl
+<./figures/kl_comp_cl.png, id=192, 334.24875pt x 264.99pt>
+File: ./figures/kl_comp_cl.png Graphic file (type png)
+
+<use ./figures/kl_comp_cl.png>
+Package pdftex.def Info: ./figures/kl_comp_cl.png used on input line 426.
+(pdftex.def)             Requested size: 83.6391pt x 66.30798pt.
+
+<./figures/kl_comp_bj.png, id=193, 334.24875pt x 264.99pt>
+File: ./figures/kl_comp_bj.png Graphic file (type png)
+
+<use ./figures/kl_comp_bj.png>
+Package pdftex.def Info: ./figures/kl_comp_bj.png used on input line 427.
+(pdftex.def)             Requested size: 83.6391pt x 66.30798pt.
+
+<./figures/kl_scatter.png, id=194, 403.5075pt x 392.46625pt>
+File: ./figures/kl_scatter.png Graphic file (type png)
+
+<use ./figures/kl_scatter.png>
+Package pdftex.def Info: ./figures/kl_scatter.png used on input line 428.
+(pdftex.def)             Requested size: 66.42105pt x 64.60442pt.
+ (./contributions.tex)
+(./desc-tex/ack/standard.tex) [7 <./figures/Cl_pst.png> <./figures/Dl_pst.png> 
+<./figures/epi.png> <./figures/Wij.png> <./figures/kl_comp_cl.png> <./figures/k
+l_comp_bj.png> <./figures/kl_scatter.png>] (./main.bbl
 Missing character: There is no Ã in font cmr9!
 Missing character: There is no ¶ in font cmr9!
 )
 
 Package natbib Warning: There were undefined citations.
 
-[7 <./figures/Cl_pst.png> <./figures/Dl_pst.png> <./figures/epi.png> <./figures
-/Wij.png>] (./main.aux) ) 
+[8] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 5162 strings out of 493014
- 67684 string characters out of 6133351
- 163259 words of memory out of 5000000
- 8623 multiletter control sequences out of 15000+600000
+ 5177 strings out of 493014
+ 68075 string characters out of 6133351
+ 163274 words of memory out of 5000000
+ 8635 multiletter control sequences out of 15000+600000
  8103 words of font info for 30 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  38i,10n,37p,1950b,303s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmbx9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmex10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmmi12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmmi5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmmi6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmmi8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-mi9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
-0.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.
-pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pf
-b></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><
-/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></us
-r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/l
-ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/loca
-l/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local
-/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/t
-exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/tex
-live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texli
-ve/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive
-/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2
-016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on main.pdf (7 pages, 1086170 bytes).
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmbx9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmex10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmmi12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mmi5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
+i6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7
+.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.p
+fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb
+></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><
+/usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></u
+sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr
+/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/lo
+cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local
+/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/te
+xlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texli
+ve/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texliv
+e/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/
+2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/20
+16/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2016
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2016/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2016/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on main.pdf (8 pages, 1120726 bytes).
 PDF statistics:
- 262 PDF objects out of 1000 (max. 8388607)
- 199 compressed objects within 2 object streams
+ 272 PDF objects out of 1000 (max. 8388607)
+ 201 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
- 61 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 76 words of extra memory for PDF output out of 10000 (max. 10000000)
 
