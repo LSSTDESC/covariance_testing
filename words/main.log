@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.1.16)  24 JUL 2019 07:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.1.16)  24 JUL 2019 17:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -371,7 +371,7 @@ pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./figures/Y3-comparison.pdf)
 >]
 
 LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
- on input line 190.
+ on input line 186.
 
 <./figures/SN.pdf, id=89, 233.90082pt x 235.59271pt>
 File: ./figures/SN.pdf Graphic file (type pdf)
@@ -495,13 +495,13 @@ Package natbib Warning: There were undefined citations.
 
 [9] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 5190 strings out of 493014
- 68447 string characters out of 6133351
+ 5191 strings out of 493014
+ 68457 string characters out of 6133351
  170308 words of memory out of 5000000
- 8646 multiletter control sequences out of 15000+600000
+ 8647 multiletter control sequences out of 15000+600000
  8103 words of font info for 30 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,10n,37p,1950b,303s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,10n,37p,1977b,303s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
