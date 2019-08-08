@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 \RequirePackage{docswitch}
 % \flag is set by the user, through the makefile:
 %    make note
@@ -9,43 +10,43 @@
 
 %%%% Scott's macros
 \newcommand{\sfig}[2]{
-\includegraphics[width=#2]{#1}
-        }
+	\includegraphics[width=#2]{#1}
+}
 \newcommand{\Sfig}[2]{
-    \begin{figure}[thbp]
-    \sfig{../Figures/#1.pdf}{\columnwidth}
-    \caption{{\small #2}}
-    \label{fig:#1}
-    \end{figure}
+	\begin{figure}[thbp]
+		\sfig{../Figures/#1.pdf}{\columnwidth}
+		\caption{{\small #2}}
+		\label{fig:#1}
+	\end{figure}
 }
 \newcommand{\Swide}[2]{
-\begin{figure*}[thbp]
- \sfig{../Figures/#1.pdf}{.8\textwidth}
-  \caption{{\small #2}}
-   \label{fig:#1}
-   \end{figure*}
+	\begin{figure*}[thbp]
+		\sfig{../Figures/#1.pdf}{.8\textwidth}
+		\caption{{\small #2}}
+		\label{fig:#1}
+	\end{figure*}
 }
 \newcommand{\Sswide}[2]{
-\begin{figure*}[thbp]
- \sfig{../Figures/#1.pdf}{.7\textwidth}
-  \caption{{\small #2}}
-   \label{fig:#1}
-   \end{figure*}
+	\begin{figure*}[thbp]
+		\sfig{../Figures/#1.pdf}{.7\textwidth}
+		\caption{{\small #2}}
+		\label{fig:#1}
+	\end{figure*}
 }
 \newcommand{\Svwide}[2]{
-\begin{figure*}[thbp]
- \sfig{../Figures/#1.pdf}{\textwidth}
-  \caption{{\small #2}}
-   \label{fig:#1}
-   \end{figure*}
+	\begin{figure*}[thbp]
+		\sfig{../Figures/#1.pdf}{\textwidth}
+		\caption{{\small #2}}
+		\label{fig:#1}
+	\end{figure*}
 }
 
 \newcommand{\Spng}[2]{
-    \begin{figure}[thbp]
-    \sfig{../Figures/#1.png}{0.95\columnwidth}
-    \caption{{\small #2}}
-    \label{fig:#1}
-    \end{figure}
+	\begin{figure}[thbp]
+		\sfig{../Figures/#1.png}{0.95\columnwidth}
+		\caption{{\small #2}}
+		\label{fig:#1}
+	\end{figure}
 }
 \newcommand{\Rf}[1]{\ref{fig:#1}}
 \newcommand{\rf}[1]{\ref{fig:#1}}
@@ -79,469 +80,991 @@
 % ======================================================================
 
 \begin{document}
-
-\title{Covariance Testing}
-
-\maketitlepre
-
-\begin{abstract}
-
-There  are a number of codes that compute covariance matrices analytically; the plan is to use these to build TJPCov. In this project, we start along the path of comparing these different codes, building up a suite of tools that can be used to compare covariance matrices. We expect these tools to be useful not only for converging on a single accurate code for computing covariance matrices but also more generally for understanding which parts of the covariance matrix carry the most information (and therefore need the most attention to get right) and which are not relevant (so for example matrices that are not positive definite may still be usable if the negative eigenmodes are not relevant).
-\end{abstract}
-
-% Keywords are ignored in the LSST DESC Note style:
-\dockeys{}
-
-\maketitlepost
-
-% ----------------------------------------------------------------------
-% {% raw %}
-
-\section{Introduction}
-\label{sec:intro}
-
-
-% ----------------------------------------------------------------------
-% ----------------------------------------------------------------------
-
-\section{Methods}
-\label{sec:methods}
-
-Our analysis is carried out using cosmic shear statistics $\xi_\pm(\theta)$, focusing for the most part on the Year 1 results of the Dark Energy Survey~\citep{Abbott:2017wau} (DESY1), and also on predictions for DES Year 3 (DESY3). The data is divided into four tomographic redshift bins spanning the interval $0.20 - 1.30$, which gives us 10 bin combinations, each one containing 20 angular bins between 2.5 and 250 arcmin. We thus have 200 data points for each $\xi_+(\theta)$ and $\xi_-(\theta)$, giving us 400 in total. 
-
-We apply the angular cuts described in ~\citep{Abbott:2018cms}, which removes the scales most sensitive to baryonic effects; this leaves us with 167 points for $\xi_+(\theta)$ and 60 for $\xi_-(\theta)$ (for which baryonic interactions are more relevant), resulting in 227 data, which correspond to a $227 \times 227$ covariance matrix.
-
-The two codes employed here for computing the covariance matrices are {\tt Cosmolike}~\citep{Krause:2016jvl} and a simpler version of the code used to analyze the KiDS-450 survey~\citep{Kohlinger:2017sxk}, hereafter referred to as CL and BJ, respectively. To perform cosmological parameter inference we use the {\tt CosmoSIS}~\citep{ZUNTZ201545} pipeline, while employing the {\tt MultiNest}~\citep{nested:feroz09} sampler to explore the parameter space, with 500 {\tt livepoints}, {\tt efficiency} set to 0.3, {\tt tolerance} to 0.1 and {\tt constant efficiency} set to False.
-
-\begin{table}
-\centering
-\begin{tabular} { l c} 
-\hline
-\hline
-Parameter							& Prior	\\ \hline
-Cosmological & \\ [1ex]
-$\Omega_m$						& $\mathcal{U}(0.1, 0.9)$		\\
-$A_s \times 10^9$					& $\mathcal{U}(0.5, 5)$		\\
-$H_0 \mathrm{(km s^{-1} Mpc^{-1})}$	& $\mathcal{U}(55, 91)$		\\
-$\Omega_b$						& $\mathcal{U}(0.03, 0.07)$	\\
-$\Omega_\nu h^2$					& $\mathcal{U}(0.0005, 0.01)$	\\
-$n_s$							& $\mathcal{U}(0.87, 1.07)$	\\ [1ex]
-\hline
-Astrophysical & \\ [1ex]
-$A$								& $\mathcal{U}(-5, 5)$ \\
-$\eta$							& $\mathcal{U}(-5, 5)$ \\ [1ex]
-\hline
-Systematic & \\ [1ex]
-$m^i$							& $\mathcal{G}(0.012, 0.023)$	 \\
-$\Delta z^1$						& $\mathcal{G}(-0.001, 0.016)$	 \\
-$\Delta z^2$						& $\mathcal{G}(-0.019, 0.013)$	 \\
-$\Delta z^3$						& $\mathcal{G}(0.009, 0.011)$	 \\
-$\Delta z^4$						& $\mathcal{G}(-0.018, 0.022)$	 \\ [1ex]
-\hline
-\hline
-\end{tabular}
-\caption{List of the priors used in the analysis for parameter constraints. For the cosmological parameters, we fixed $w = -1.0$, $\Omega_k =  0.0$ and $\tau =  0.08$. The astrophysical parameters are associated with the intrinsic alignment, they follow the relation $A(z) = A[(1+z)/1.62]^{\eta}$, we have also $z_0 = 0.62$. Lastly, for systematics we have $m^i$ corresponding to the shear calibration, and  $\Delta z^i$ for the source photo-$z$ shift, with $i = 1, 4$ in both cases. The lens photo-$z$ shift parameters $\Delta z^i$, $i = 1, 5$ were fixed to zero.}
-\label{tab:constraints}
-\end{table}
-
-\subsection{One-to-one Comparison}
-
-This is a simple matter of comparing elements of a covariance matrix, usually starting with diagonal elements. \figref{xipmscatter} shows an example.
-
-\begin{figure}
-\includegraphics[width=0.9\columnwidth]{xipmscatter.png}
-\caption{A simple scatter plot of elements of covariance matrices produced by two separate halo model codes. \label{fig:xipmscatter}}
-\end{figure}
-
-% ----------------------------------------------------------------------
-
-\subsection{Eigenvalues}
-
-An intuitive approach to identifying the most contributing elements of a covariance matrix is to look at its eigenvalues, since we can associate them to the variance. The lowest eigenvalues would correspond to the least variance and therefore hold the most information, whereas the highest eigenvalues would implicate larger error and thus contribute significantly less, which means that the most important elements of the matrix would be those with the lowest eigenvalues. To verify this assumption, we need to look at the parameter constraints: removing the elements with the highest eigenvalues should not alter our results; the opposite, however, should give us a broader constraints. Our procedure consists of first diagonalising the covariance matrix in order to calculate its eigenvalues and then replacing the eigenvalues of interest with numbers of about nine orders of magnitude higher, thus removing their effective contribution; we then obtain a new covariance matrix with the modified eigenvalues. Finally, we perform a cosmological analysis with the new covariances matrices, to constrain the parameters of our model. 
-
-% ----------------------------------------------------------------------
-
-\subsection{Signal to noise}
-
-Another way of analysing covariance matrices is by obtaining the signal-to-noise ratio (SNR). A simple way of achieving this is to note that the total SNR squared is
-
-%Since the values of the data points vary by many orders of magnitude, the range of eigenvalues in Figure~\rf{evector} is a bit misleading. In addition, it is not clear which eigenvectors should be dropped: should it be chose with large eigenvalues (noise) or small ones (the noise is noisy)? Ideally, what we would like is to create a list of eigenvectors ordered in some way and drop the least important. This ties into the section below on Shrinkage. A very simple way to do this is to note that the total signal to noise squared is
-\be
-\left(\frac{S}{N}\right)^2 = \sum_{ij} D_i C^{-1}_{ij} D_j\
-,\ee
-where $D_i$ and $D_j$ are the data points and $C$ the covariance matrix. If $C$ were diagonal, then the eigenvectors would simply be the data points themselves, and we could estimate the SNR squared expected in each mode by simply computing $T_i^2/C_{ii}$ where $T_i$ is the theoretical prediction. Then we could throw out the modes with the lowest SNR. Since $C$ is not diagonal, we have to first diagonalise it and then order the values. So, we write the expected SNR squared as
-%to do things a bit differently. Let's first define re-scaled data points
-\bea
-\left(\frac{S}{N}\right)^2 &=& \sum_{ij} T_i  C^{-1}_{ij} T_j\nonumber\\
-&=& \sum_{i} \frac{v_i^2}{\lambda_i}
-,\eea
-where $\lambda_i$ are the eigenvalues of the covariance matrix, which is diagonalised with the unitary matrix $U$, and the eigenvectors are 
-\be
-v_i\equiv U_{ij}^t T_j
-\ee
-This makes it very clear which modes should be kept and which should be dropped. Modes $v_i$ for which $v_i^2/\lambda_i$ is very small can be discarded. 
-
-After obtaining the SNR for our covariance matrix, we proceed to set the 50 lowest values to seven orders of magnitude lower, which is equivalent to increasing the noise (or decreasing the signal) of these modes. We then obtain a new covariance matrix with the corresponding modified SNR values. 
-
-% ----------------------------------------------------------------------
-
-\subsection{Shrinkage}
-
-%There have been several methods proposed in the literature to compress the data vectors, extracting as much information as possible. Here we consider two: first compression at the map level~\citep{Alonso:2017hhj}, where linear combination of the tomographic maps are used. If there are 4 tomographic bins, an uncompressed analysis would require ten separate 2-point functions (or 20 for cosmic shear), whereas a compression scheme leads to just a few uncorrelated maps. If there were 3 such maps, then only three 2-point functions would need to be used for the likelihood analysis.
-
-In order to compare covariance matrices and to extract the most important elements, we need to shrink the data vectors and their corresponding covariance matrices. There have been several methods proposed in the literature to compress the data vectors, extracting as much information as possible. Here we consider two: first compression at the map level~\citep{Alonso:2017hhj}, where linear combination of the tomographic maps are used to gain maximum signal to noise ratio. Then we transfer this compression scheme into real-space to compress the two point function. The second method directly operates in the real-space~\citep{Zablocki:2015zcm}, where modes that maximize the Fisher infomation for each of the cosmological parameters are taken to compress the data vector and the covariance matrices.
-
-Shrinking data vector and its covariance matrix is equivalent to projecting the data vector onto a subspace of the original vector space. For example, if our data have a length of $n$ and we want to compress it to a lower dimension $m\leq n$, we need to come up with a basis transformation matrix $W_{m\times n}$ that has orthonormal row vectors, or mathmatically speaking, $<W_{xi} \cdot W_{yi}>=\delta_{xy}$. Once we come up with a basis transformation matrix $W_{m\times n}$, we can compress the data vector $y$ and covariance matrix $C$ into filter data $\Tilde{y}$ and $\Tilde{C}$
-
-\bea
-\Tilde{y} &=& W y\\\nonumber
-\Tilde{C} &=&<\Tilde{y}  \Tilde{y}^T>\\
-&=&W<y y^T> W^T= W C W^T
-\eea
-
-For a data vector with length m, there are $m(m+1)/2$ elements in the covariance matrices to be evaluated. Once the data vector is shrunk to length n, elements in covariance matrices will shrink quadratically. Therefore, shrinking the covariance matrices is a effective way of comparing them.
-
-Here, we will demonstrate the two mentioned method to compress the covariance matrices. In both methods, the data vector is shrunk by 90 percent, so the covariance matrices are shrunk by 99 percent. 
-
-\subsubsection{Tomographic Compression}
-
-The first method we applied to compress the data vector is based on Karhunen-Lo\'eve decomposition for the shear power spectrum suggested by ~\citep{Alonso:2017hhj} and later applied to real space two-point function by ~\citep{Bel:2017hhj} for CFHTLens survey. This method generally finds an eigenmode with most of the signal-to-noise ratio contribution in the power spectrum, and then it can transform the two point function in real space based on this eigenmode.
-
-With  {\tt CosmoSIS}, we can generate the shear power spectrum $C_l$ of convergence $a_{lm}$ for a fiducial cosmology. The fiducial cosmology we choose is the best fit value of the DES Year 1 shear only results. With the shear power spectrum $C_l=S_l+N_l$ and its shape noise $N_l$, we can calculate the KL modes matrix $E^p_l$ by a general eigenvalue problem:
-
-\be
-C_l E^p_l = \lambda ^p N_l E^p_l
-\ee
-
-And the new observable $b_{lm} = E_p \cdot N^{-1} a_{lm}$. We should notice that $C_l$ is the power spectrum of the convergence of the weak lensing, and $E_p$ is the transformation of basis for the convergence. We should also notice that these eigenmodes are uncorrelated, so the power spectrum of the new observable $D_l$ will be a diagonal matrix, with 1+signal-noise-ratio of the corresponding eigenmodes on the diagonal elements.
-
-\be
-D_l = <b_{lm} b_{lm}^T> = E^p_l N^{-1} C_l N^{-1} E^{pT}_l
-\ee
-
-Or, if we denote $E^p_l N^{-1}$ as $R_l$, we can write the compression in one simple linear combination of the $C_l$
-
-\be
-D_l = R_l^i C_l^{ij} R_l^j = W_l^{ij} C_l^{ij}
-\ee
-
-
-
-The double summation weight $W_l^{ij}$ is the weight we want to perform tomographic compression. Since the KL decomposed modes of shear power spectrum are un-correlated, we can make a compression here by only taking the first one or two modes with the highest S/N. By doing so, we compressed 10 tomographic combinations to 1 or 2.
-
-However, we want to evantually compress the two point function data vector of DESY1. A possible way is to calculate the two point function of the KL mode of the shear power spectrum. We can calculate the two point function from the shear power spectrum by
-
-\be
-\xi_{+/-}^{ij}(\theta) = \int \frac{ldl}{2\pi}J_{0/4}(l\theta) C^{ij}(l)
-\ee
-
-In order to compress the two-point function based on the compression of the $C_l$, we need to make sure that the compression scheme for $C_l$ is $l$-independent, that is to say, the two point correlation function of $D_l$ $\Tilde{\xi}_{+/-}(\theta)$ can be directly calculated from other two-point functions.
-
-\bea
-\nonumber\Tilde{\xi}_{+/-}(\theta) &=& \int \frac{ldl}{2\pi}J_{0/4}(l\theta) D(l)\\\nonumber
-&=&\int \frac{ldl}{2\pi}J_{0/4}(l\theta) W^{ij}C^{ij}(l)\\
-&=&W^{ij}\xi_{+/-}^{ij}(\theta)
-\eea
-
-Where $W^{ij}$, the $l$-independent compression weight is calculated by 
-
-\be
-W^{ij} = \frac{\int_{l_{min}}^{l_{max}} (2l+1) W^{ij}_l}{\int_{l_{min}}^{l_{max}} (2l+1)}
-\ee
-
-We make a more conservative angular cut than the angular cut discussed in [ref]. We make sure that the cut for both $\xi_{+/-}$ are uniform regarding tomographic combinations. For $\xi_+$, we considered an angular scale from 7.195 degree to 250.0 degree. For $\xi_-$, the angular scale is from 90.579 to 250.0. Therefore, for the purpose of demostrating KL-transform, the raw data vector has a length of 190, and by shrinking 10 tomographic combinations for each angle into 1 KL-mode, the data is shrunk to 19. Therefore the number of elements in the covariance matrices are shrunk by 99 \%.
-
-
-
-
-
-
-
-%We characterize a given element in the data vector by its angular and tomographic indices: $a_i = a_{lm,\alpha}$ where $l,m$ denote the indices corresponding to given spherical harmonics and $\alpha$ is a given tomographic bin, or equivalently $a_i = a_\alpha(\vec\theta)$ in real space. The compression occurs in terms of tomographic bins, so that 
-%\be
-%b_\mu(\vec\theta) = \sum_{\alpha} F_{\mu\alpha} a_\alpha(\theta)
-%\ee
-%where the $F$'s are chosen \footnote{Note that this definition of $F$ differs from that in \citep{Alonso:2017hhj} in that it includes the inverse of the noise matrix.} so that the correlation functions of the $b$'s are diagonal in tomographic space:
-%\bea
-%w_{\mu\nu}(\theta) &=& \langle b_\mu(\vec\theta_1) b_\nu(\vec\theta_2)\rangle\vert_{\vert\vec\theta_1-\vec\theta_2\vert\in\theta}
-%\svs
-% &=& \delta_{\mu,\nu} w_{\mu}(\theta).
-%\eea
-%Usually with $N_t$ tomographic bins, one must consider $N_t(N_t+1)/2$ correlation functions, but -- due to the transformation that diagonalizes the elements -- there are only $N_t$ correlation functions to consider (for a given $\theta$). Even better, these can be ordered by the information they contain, so fewer than $N_t$can be used. In the example used in ~\citep{Alonso:2017hhj}, 16 tomographic bins were assumed, so that the standard treatment would require 136 correlation functions, but only 3 were needed in order to extract accurate constraints. 
-
-%This method suggests a way of extracting the most important pieces of the full covariance matrix $C$. We simply compute the covariance matrix of the $w_{\mu}$ in terms of $C$ and keep only the most important terms. That is,
-%\bea
-%C^b_{\mu\nu} &\equiv& \langle (w_{\mu} -\bar w_\mu)\,(w_{\nu} -\bar w_\nu)\rangle
-%\svs
-% &=& \sum_{\alpha\alpha'\beta\beta'} F_{\mu\alpha}F_{\mu\alpha'}\, F_{\nu\beta}F_{\nu\beta'}\, C_{\alpha\alpha'\beta\beta'} .
-%\eea
-%Here the angular indices have been suppressed (there are two of them, one for each $w_\mu$), but the full tomographic complexity has been retained. The covariance matrix on the right includes a total of $N_t^2 \times N_t^2$ terms (some of which are equal because of symmetry) corresponding to all possible pairs of two-point functions. But $C^b$ on the right contains only $N_t^2$ elements, and again these are ordered, so we can use only a subset of them. In the simplest case, where only one linear combination is needed so $\mu=\nu=1$, a single number (for each pair of angular bins) captures all the relevant information from the full covariance matrix.
-
-\subsubsection{2-Point Correlation Function}
-
-The second compression takes place at the 2-point level~\citep{Zablocki:2015zcm}, with the compressed data vector containing linear combinations of the many 2-point functions. In principle, this might work with only $N_p$ 2-point functions where $N_p$ is the number of parameters varied, and each mode, or linear combination, contains all the information necessary about the parameter of interest. 
-
-For each parameter $p_\alpha$ that is varied, one captures a single linear mode
-\be
-y_\alpha = U_{\alpha i} D_i
-\ee
-where $D_i$ are the data points and the coefficients are defined as
-\be \label{eq:compression_scheme}
-U_{\alpha i} \equiv \frac{\partial T_j}{\partial p_\alpha} \, C^{-1}{}_{ji}
-\ee
-where $T_j$ is the theoretical prediction for the data point $D_j$.
-The now much smaller data set $\{y_\alpha\}$, which contains as few as $N_p$ data points, carries with it its own covariance matrix, with which the $\chi^2$ can be computed for each point in parameter space. Propagating through shows that this covariance matrix is related to the original $C_{ij}$ via
-\be
-C_{\alpha\beta} = U_{\alpha i} C_{ij} U^t_{j\beta}.
-\ee
-To take an example from the full DESY1 for cosmic shear, $C_{ij}$ is a $400 \times 400$ matrix, while the number of parameters needed to specify the model is only 16, so $C_{\alpha\beta}$ is a $16\times 16$ matrix. We have apparently captured from the initial set of $(400 \times 401)/2 = 80,200$ independent elements of the covariance matrix a small subset (only 136 in this case) of linear combinations of these 80k elements that really matter. If two covariance matrices give the same set of $C_{\alpha\beta}$, we do not care whether any of the other eighty thousand elements differ from one another.
-
-In our case, our covariance matrix is  $227 \times 227$, which we then reduce to $16 \times 16$ elements. Figure \textcolor{red}{include figure} compares the constraints obtained for the compressed covariance and data with the full one, for $\Omega_m$ and $\sigma_8$.  \textcolor{red}{Include plots and talk about constraints.} While this compression does not speed up calculations, it is encouraging to see that we can compress matrices of any size without losing a significant amount of information on the parameters of our models. 
-
-One relevant point in this analysis is at which point to take the derivative of each parameter. When we wish to compare the results of our compression scheme with those obtained with the full covariance matrix and data set, it is important to derivate each parameter at their respective mean value (obtained by performing the analysis with the full covariance matrix). The shape and variance of the posterior is not dependent on the derivative, but the best fit value shifts according to the point where the derivative was taken.
-
-We also apply this methodology to comparing the covariance matrices of interest, i. e. CL and BJ. In order to do this, we take two different approaches: first, we assume that $U_{\alpha, i}$ is the same for both covariance matrices and we calculate it with BJ. The second approach is that each compression scheme must use the original covariance matrix that will be compressed, so that $U_{\alpha, i}$ will be different for each covariance matrix. Figure~\rf{correlation} was obtained for the first method, it shows the correlation matrix for BJ and CL, and that of the difference between them; we find this figure important because we can clearly see the difference between the two matrices by simply looking at only $(16 \times 17)/2$ elements, as opposed to having to analyse the larger correlation matrix for the full covariance matrices. It is also crucial that the matrices used for comparison here are those obtained via the same compression scheme, so that we can be sure that their differences are indeed only related to the differences in the original matrices.
-
-\subsubsection{Invertible Transformation}
-
-While the compression scheme is \textcolor{red}{good?}, it is not devoid of problems, the most concerning one being that we cannot recover the original covariance matrix the compressed one. Our motivation is to have an invertible transformation so that we are able to switch between a compressed and the full covariance. In order to do this, we start off with the compression scheme presented in Eq. \ref{eq:compression_scheme}, which will serve as the basis for a rotation matrix $W_\alpha$. We then use the Gram-Schmidt decomposition to create $227 - N_p$ vectors orthonormal to $U_{\alpha}$, thus obtaining a unitary $227 \times 227$ matrix. We then have,
-\be
-C'_{\alpha\beta} = W_{\alpha i} C_{ij} W^t_{j\beta}.
-\ee
- When this transformation is applied to the original matrix, $C_{ij}$, the first $N_p \times N_p$ elements of the new matrix will be the same as we had in $C_{\alpha\beta}$. Since our transformation spreads out the information contained in the compressed matrix, the relevant values for parameter estimation will be contained in the first $N_p$ rows and columns of the new covariance matrix. This means that we will have $N_p \left( 2 \times 227 - N_p \right)$ important elements, which is about an order of magnitude less than in the case of the full covariance matrix.
- 
- *******************************
- 
-In the last section, we shrunk the data vector and covariance matrices and find the most cosmological-informative modes in the data vector. However, in order to make a tolerence testing of each element in the covariance, we not only need the cosmological-informative modes but also the uninformative modes. Suppose we have found the informative set of modes for cosmology, those modes that are orthogonal to the informative set, or the complementary set of the informative set, form a set of modes that are cosmological-uninformative. We can use Gram-Schmidt decomposition to find these orthogonal modes.
-
-\begin{figure}[]
-	\includegraphics[width=0.45\columnwidth]{data_transformation.png}
 	
-	 \bigskip
-	 
-	\includegraphics[width=0.99\columnwidth]{CM_transformation.png}
-	\caption{\textbf{Top:} Illustration of transformation of data; \textbf{Bottom:} Transformation of the covariance matrix. Detail of each section in the transformed data and covariance are described below. \label{fig:illu-trans}}
-\end{figure}
-
-With this inverseable transformation W shown in Figure~\rf{illu-trans}, the data vector and covariance matrix are transformed into sectional blocks. We will describe the meaning of each blocks here. The data vector is split into two blocks. D1 is the block of transformed data points that are sensitive to the changes in cosmological parameter set, that is, the cosmological-sensitive data. D2 is generated by the modes that are orthogonal to the cosmological sensitive mode, they will in priciple stays relatively constant when cosmological parameter changes, and are uninformative for parameter constraints.
-
-The transformed covariance matrix is split into 4 blocks, with the off-diagonal blocks being the transpose of each other, there are 3 different blocks. Block C1 is the variance and covariance of the cosmological informative data,or D1. This block contribute almost everything to the $\chi^2$ calculation. C1 describes how well the cosmological-sensitive data is measured, so the value in this block will affect the parameter constraints. Block C2 is the variance and covariance of the uninformative data,or D2. It plays an minor role in the $\chi^2$, so it will affect the parameter constraints less. C3 is the cross-correlation between D1 and D2, and it will affect the parameter constraints because it describe how D1 is affected by the uncertainty of D2.
-
-By making the transformation described above, we will be able to reorganize the covariance matrices into cosmological infomative blocks and uninformative blocks. Intrinsiclly, we can tolerate more errors in the uninformative blocks and have a stronger requirement on the informative blocks. This will put a lot of simulation time into more valuable work.
-
-The gold of the invertibility of the transformation is that we can first assign higher tolerence to C2 and assign lower tolerence to C1 and C3, then use the transformation matrix to recover the covariance matrices in the original basis. Then, we can compare the recoverd matrix with the original one, and check out how much tolerence is allowed on each element. Without invertibility, we cannot accomplish this task, which allows us to precisely quantify the tolerence on each element in the covariance matrices.
-
-*****************
- 
- \begin{table}
-\centering
-\begin{tabular} { l c} 
-\hline
-\hline
-Added error	& Standard deviation 	\\ \hline \\
-$0 - 20 \% $		& 	$< 5$	\\
-$20 - 40 \% $		& 	$< 20$	\\
-$> 50 \% $		& 	$> 20$	\\ [1ex]
-\hline
-\hline
-\end{tabular}
-\caption{The first column is the introduced error to the relevant elements of the rotated covariance matrix for $\Omega_m$. The introduced error corresponds to the an arbitrary increase in each element in the first row and first column of the rotated covariance matrix }
-\label{tab:error_budget}
-\end{table}
-
-% ----------------------------------------------------------------------
-
-\subsection{Tolerence testing}
-
-
-In this section, we will introduce the methodology of tolerence testing on the covariance matrices in the new basis. We will show that after the basis transformation, we need to compare tremendously less elements from two covariance matrices.
-
- Generally speaking, the parameter constraints will get wider when part of the covariance matrix gets larger, because this means that the data is worse measured. In the normal basis, each data points varies with the parameter set, so the change of each element in the covariance matrix will affect the constraints. However, since we have found a basis where some of the data points change with parameter set while others do not, the elements that matters to the cosmological constraints will also shrink. To be specific, the C1 and C2 blocks in Figure~\rf{illu-trans} are the only parts that impact the parameter constraints. 
- 
- In order to illustrate this statement, we will first perform a sanity check. We will make each of the blocks in the covariance matrices a large number and run a chain with that covariance. We run 3 tests by making
- 1) C3,  
- 2) C2, 
- 3) C1 and C2,
- 100 times of itself/themselves. In principle, we should see that the constraints for test 1 will not change, but will get wider for test 2 and will totally blow up for test 3.
- 
-Furthermore, we want to know how minor uncertainty on the informative elements of the covariance matrix will affect the cosmological constraints. 
-
-
-
-\begin{figure}
-\includegraphics[width=0.9\columnwidth]{Correlation_compression.pdf}
-\caption{The upper right and lower left plots display the correlation matrix for BJ and CL respectively, while the lower right is the difference between the two. \label{fig:correlation}}
-\end{figure}
-
-
-% ----------------------------------------------------------------------
-% ----------------------------------------------------------------------
-
-\section{Results}
-\label{sec:results}
-
-Ultimately, what matters is how well the likelihood does at extracting parameter constraints. Since most analyses assume a Gaussian likelihood, this boils down to how well the contours in parameter space agree when computing the $\chi^2$ using two different covariance matrices.
-
-\subsection{One-to-One Comparison}
-
-*Put previous result of One-to-one comparison here and describe*
-
-% ----------------------------------------------------------------------
-
-\subsection{Eigenvalues}
-
-We perform two different analysis: the first consist of modifying the fifty lowest eigenvalues, and for the second, we take the fifty highest. The results of both approaches are compared to those obtained with the original covariance matrix, in Figure  \figref{eigenvalues}, where, for brevity, we show only $\Omega_m$ and $\sigma_8$. We can see in the Posterior Density Functions (pdfs) that the mean values of both parameters are well within the $2\sigma$ interval, the same is true for all the fourteen parameters; the size of the constraints is also within less than 5\% of each other for almost all of the parameters. Since the constraints are similar for both approaches, it becomes clear that ranking eigenvalues is not the most efficient way of evaluating where the most contributing elements of the covariance matrix lie.
-
-
-\begin{figure}
-\includegraphics[width=0.9\columnwidth]{Eigenvalues.pdf}
-\caption{Constraints on cosmological parameters $\Omega_m$ and $\sigma_8$ for the original DESY1 covariance matrix (in purple) and for two new covariance matrices obtained by setting the fifty highest eigenvalues of the original matrix to nine orders of magnitude higher (in blue), and by replacing the fifty lowest eigenvalues to nine order of magnitude lower (in magenta). \label{fig:eigenvalues}}
-\end{figure}
-
-Next, we wish to compare matrices using their eigenvalues. We plot the results obtained for constraints on $\Omega_m$ and $\sigma_8$ for BJ and CL in Figure~\rf{y3-comparison}, where we can see that, while their best fit values agree within a $2 \sigma$ interval, the constraints are up to $25 \%$ broader for the latter. This is also true for the other parameters, where, on average, constraints obtained with CL are about $18 \%$ wider. To see if we can identify these differences in the eigenvalues of the covariance matrices, we plot Figure~\rf{coveigen}. At a first glance, both curves show reasonable agreement, with values differing only by an average of $\approx 15 \%$, but we should keep in mind that the order of magnitude of the values vary greatly, which makes it difficult to compare them efficiently with this methodology. Furthermore, from our previous analysis it is not clear which elements are most important.
-
-
-\begin{figure}
-	\includegraphics[width=0.9\columnwidth]{Y3-comparison.pdf}
-	\caption{Constraints on cosmological parameters $\Omega_m$ and $\sigma_8$ for two covariance matrices produced for cosmic shear for DESY3. The purple curve is for CL while the blue is for BJ. The constraints are about $18 \%$ broader for the former, indicating that the two matrices have quantifiable differences between them. \label{fig:y3-comparison}}
-\end{figure}
-
-\begin{figure}
-	\includegraphics[width=0.9\columnwidth]{coveigen_BJ-CL.png}
-	\caption{A log plot showing the $227$ eigenvalues of two covariance matrices produced for cosmic shear for the Year 3 projection of the Dark Energy Survey. The blue curve is for CL and the orange one is for BJ. \label{fig:coveigen}}
-\end{figure}
-
-\figref{evector} shows an example of one of the eigenvectors, the one associated with the smallest eigenvalue. This low-eigenvalue mode picks up the differences between the correlation function at different angular scales (each vertical line delineates between two-point functions of shears in different tomographic bin pairs).
-
-\begin{figure}
-	\includegraphics[width=0.9\columnwidth]{evector.png}
-	\caption{A simple scatter plot of elements of covariance matrices produced by two separate halo model codes. \label{fig:evector}}
-\end{figure}
-
-% ----------------------------------------------------------------------
-
-\subsection{Signal-to-noise ratio}
-
-The parameter constraints for this method are shown in Figure~\rf{signalnoise}, where we note that the mean values are shifted about 12\% and 5\% for $\Omega_m$ and $\sigma_8$, respectively, with 17\% broader constraints for the former, when compared to the results with the original covariance, which tells us that the modes removed were essential for obtaining better constraints on these parameters. 
-
-Another aspect that we must consider when applying this procedure is that the highest modes do not necessarily hold the most information for all of the parameters; this is evident when we analyse the SNR for each parameter individually. To illustrate this we take
-\bea
-\left(\frac{\partial S/\partial p_\alpha}{N}\right)^2 = \sum_{i} \frac{(\partial v_i / \partial p_\alpha)^2}{\lambda_i}
-,\eea
-with
-\be
-v_i^\alpha \equiv U_{ij}^t \frac{\partial T_j}{\partial p_\alpha}
-,\ee
-where $\partial /\partial p_\alpha$ is the derivative with respect to each parameter $\theta$. This produces the SNR for each parameter of interest. The importance of this procedure is illustrated in Figure~\rf{signalnoise_cuts}, where we can see that while the highest SNR for all the parameters does indeed correspond to those that hold most information for parameters $\Omega_m$ and $A_s$, this is not the case, however, for the intrinsic alignment parameters $A$ and $\eta$. As a result, we may end up losing constraining power over these parameters when we modify the lowest values of SNR. While this is apparent in the aforementioned figure, it is not very clear when looking at the resulting constraints on these parameters because the constraining power of the data over these parameters is not very strong (errors of about $100 \%$). As such, these results do not encourage us to use this method for identifying the most important elements of the covariance matrix.
-
-\begin{figure}
-	\includegraphics[width=0.9\columnwidth]{SN.pdf}
-	\caption{Constraints on cosmological parameters $\Omega_m$ and $A_s$ for the original DESY1 covariance matrix (in purple) and for a covariance matrix (in blue) obtained by setting fifty elements corresponding to the lowest SNR to a value seven orders of magnitude lower, in order to evaluate their contribution to parameter constraints. \label{fig:signalnoise}}
-\end{figure}
-
-\begin{figure}
-	\includegraphics[width=1\columnwidth]{SNR_cuts.pdf}
-	\caption{Scatter plot for the relation between the signal to noise obtained with the covariance matrix for DESY1 for each parameter (x-axis) against that for the full set of parameters (y-axis). The derivatives are shown with respect to cosmological parameters $\Omega_m$ (blue) and $A_s$ (orange), and for the intrinsic alignment parameters $A$ (green) and $\eta$ (red). The purple rectangle spreads until the fiftieth lowest value of SNR, which corresponds to the values that were modified for parameter constraints. \label{fig:signalnoise_cuts}}
-\end{figure}
-
-% ----------------------------------------------------------------------
-
-\subsection{Shrinkage}
-
-In this part, we will show the result of our covariance shrinkage, including the weighting function and the compressed covariance matrices.
-
-\subsubsection{Tomographic Compression}
-
-With  {\tt CosmoSIS}, we calculated the shear power spectrum $C_l$ of DES Year 1 with a fiducial cosmology at the best fit parameters. The $l$-range we consider is $2-5000$. On the left of Figure~\rf{ClDl}, we show the diagonal elements of the signal part and the noise part of $C_l$. 
-
-On the right of Figure~\rf{ClDl} shows the KL-transformed eigenmode $D_l$ of $C_l$. We can see that the first KL mode contains most of the S/N contrinbution to the power spectrum. If we want to recover most infomation, we can also include the second mode.
-
-\begin{figure}
-	\includegraphics[width=0.48\columnwidth]{Cl_pst.png}
-	\includegraphics[width=0.48\columnwidth]{Dl_pst.png}
-	\caption{\textbf{Left:} Sheer power spectrum of DESY1. Solid lines are diagonal elements of the signal matrix $S_l$, and dashed lines are the diagonal elements of noise matrix $N_l$; \textbf{Right:} Signal to noise ratio matrix $D_l$ of KL-modes of the power spectrum on the left. \label{fig:ClDl}}
-\end{figure}
-
-In Figure~\rf{kl-mode}, we plot the normalized KL-eigenmode $E_l^i$ of $C_l$ and its corresponding $W^{ij}_l=E_l^i E_l^j$. Modes with different $l$ are plotted with different depth of the color. We can see that the KL-modes do not depend a lot on scale factor $l$ by a large portion, so we take the weighted average of the eigenmodes $E_l^p$ and its quadratic form $W_l$ over $l$s and plot them with black lines. 
-
-\begin{figure}
-	\includegraphics[width=0.42\columnwidth]{epi.png}
-	\includegraphics[width=0.53\columnwidth]{Wij.png}
-	\caption{\textbf{Left:} Normalized KL-eigenmodes $E_L^P$ of the shear power spectrum $C_l$, darkness of the color is representing different $l$; \textbf{Right:} Transformation on tomographic bin combination $W_{ij}$ constructed by the KL-eigenmodes. Black lines are the weighted average of each mode. \label{fig:kl-mode}}
-\end{figure}
-
-For different $l$, the KL-modes do varies by a slight amount. We also observed that tomographic bins with higher redshift gains more weight than those with low redshift. This is also shown by the weight on tomographci combination that the combination of bin 3 and bin 4 gains most of the weight to maximize signal to noise ratio. This agrees with the fact that the diagonal elements$Cl$ for low redshift is much less than those with high redshift. *Is my $N_l$ actually right?*
-
-We take the first KL mode and compressed the tomographic combination for each angle $\theta$. As a result, 190 data points for 19 angles are compressed into 19 numbers.  We then shrink the CL and BJ covariance matrices with the same compression scheme generated. The compressed CL and BJ covariance matrices are plotted in Figure~\rf{comp-cov}
-
-\begin{figure}
-	\includegraphics[width=0.34\columnwidth]{kl_comp_cl.png}
-	\includegraphics[width=0.34\columnwidth]{kl_comp_bj.png}
-	\includegraphics[width=0.27\columnwidth]{kl_scatter.png}
-	\caption{\textbf{Left:} CL covariance matrix compressed by the first KL-mode; \textbf{Mid:} BJ covariance matrix compressed by the first KL-mode;\textbf{Right:} One-to-One scatter of the two compressed matrices \label{fig:comp-cov}}
-\end{figure}
-
-If we now again make a one-to-one comparison of these two compressed covariance matrices. We can easily notice that the huge clump at the bottom right for scatter of original matrices, which represent elements with great difference, are gone in the compressed covariance. Instead, the two covariance matrices just have a relative constant difference because of the different model they use. This shows that the divergence between CL and BJ covariance does not affect the overall signal to noise ratio a lot.
-
-
-
-%\subsection{Cosmological Constraints}
-
-%In this part, we will focus on the result of cosmological constraints that both CL and BJ give us. We also want to show the result of constraints that the compressed data and covariance. We want to compare the constraints and check if the compression works well in the cosmology sense.
-
-%*put results of cosmological constraints for each method in this section*
-
-\subsection{Constraints of Tomographic Compression}
-
-
-
-
-
-\subsection{Tolerence Testing}
-
-
-
-
-% ----------------------------------------------------------------------
-% ----------------------------------------------------------------------
-
-\section{Discussion}
-\label{sec:discussion}
-
-
-% ----------------------------------------------------------------------
-% ----------------------------------------------------------------------
-
-\section{Conclusion}
-\label{sec:conclusion}
-
-
-% ----------------------------------------------------------------------
-% ----------------------------------------------------------------------
-
-\subsection*{Acknowledgments}
-
-%%% Here is where you should add your specific acknowledgments, remembering that some standard thanks will be added via the \code{desc-tex/ack/*.tex} and \code{contributions.tex} files.
-
-%This paper has undergone internal review in the LSST Dark Energy Science Collaboration. % REQUIRED if true
-
-\input{contributions} % Standard papers only: author contribution statements. For examples, see http://blogs.nature.com/nautilus/2007/11/post_12.html
-
-% This work used TBD kindly provided by Not-A-DESC Member and benefitted from comments by Another Non-DESC person.
-
-% Standard papers only: A.B.C. acknowledges support from grant 1234 from ...
-
-\input{desc-tex/ack/standard} % also available: key standard_short
-
-% This work used some telescope which is operated/funded by some agency or consortium or foundation ...
-
-% We acknowledge the use of An-External-Tool-like-NED-or-ADS.
-
-%{\it Facilities:} \facility{LSST}
-
-% Include both collaboration papers and external citations:
-\bibliography{main,lsstdesc}
-
+	\title{Covariance Testing}
+	
+	\maketitlepre
+	
+	\begin{abstract}
+		
+		There  are a number of codes that compute covariance matrices analytically; the plan is to use these to build TJPCov. In this project, we start along the path of comparing these different codes, building up a suite of tools that can be used to compare covariance matrices. We expect these tools to be useful not only for converging on a single accurate code for computing covariance matrices but also more generally for understanding which parts of the covariance matrix carry the most information (and therefore need the most attention to get right) and which are not relevant (so for example matrices that are not positive definite may still be usable if the negative eigenmodes are not relevant).
+	\end{abstract}
+	
+	% Keywords are ignored in the LSST DESC Note style:
+	\dockeys{}
+	
+	\maketitlepost
+	
+	% ----------------------------------------------------------------------
+	% {% raw %}
+	
+	\section{Introduction}
+	\label{sec:intro}
+	
+	
+	% ----------------------------------------------------------------------
+	% ----------------------------------------------------------------------
+	
+	\section{Methodology}
+	\label{sec:methods}
+	
+	In this section, we will be explaining the methodology used for each of the tests carried out for the analysis and comparison of the covariance matrices. 
+	
+	Our analysis is carried out using cosmic shear statistics $\xi_\pm(\theta)$, focusing for the most part on the Year 1 results of the Dark Energy Survey \citep{Abbott:2018cms} (DESY1), and also on predictions for DES Year 3 (DESY3). The data is divided into four tomographic redshift bins spanning the interval $0.20 - 1.30$, which gives us 10 bin combinations, each one containing 20 angular bins between 2.5 and 250 arcmin. We thus have 200 data points for each $\xi_+(\theta)$ and $\xi_-(\theta)$, giving us 400 in total. 
+	
+	We apply the angular cuts described in \citep{Abbott:2018cms}, which removes the scales most sensitive to baryonic effects; this leaves us with 167 points for $\xi_+(\theta)$ and 60 for $\xi_-(\theta)$, resulting in 227 data, which correspond to a $227 \times 227$ covariance matrix.
+	
+	The covariance matrices are obtained using two different codes: {\tt Cosmolike} \citep{Krause:2016jvl} and a simpler version of the code used to analyse the KiDS-450 survey \citep{Kohlinger:2017sxk}, hereafter referred to as CL and BJ, respectively. To perform cosmological parameter inference we use the {\tt CosmoSIS} \citep{Zuntz:2015med} pipeline, while employing the {\tt MultiNest} \citep{Feroz:2009fhb} sampler to explore the parameter space, with 500 {\tt livepoints}, {\tt efficiency} set to 0.3, {\tt tolerance} to 0.1 and {\tt constant efficiency} set to False.
+	
+	\begin{table}
+		\centering
+		\begin{tabular} { l c} 
+			\hline
+			\hline
+			Parameter							& Prior	\\ \hline
+			Cosmological & \\ [1ex]
+			$\Omega_m$						& $\mathcal{U}(0.1, 0.9)$		\\
+			$A_s \times 10^9$					& $\mathcal{U}(0.5, 5)$		\\
+			$H_0 \mathrm{(km s^{-1} Mpc^{-1})}$	& $\mathcal{U}(55, 91)$		\\
+			$\Omega_b$						& $\mathcal{U}(0.03, 0.07)$	\\
+			$\Omega_\nu h^2$					& $\mathcal{U}(0.0005, 0.01)$	\\
+			$n_s$							& $\mathcal{U}(0.87, 1.07)$	\\ [1ex]
+			\hline
+			Astrophysical & \\ [1ex]
+			$A$								& $\mathcal{U}(-5, 5)$ \\
+			$\eta$							& $\mathcal{U}(-5, 5)$ \\ [1ex]
+			\hline
+			Systematic & \\ [1ex]
+			$m^i$							& $\mathcal{G}(0.012, 0.023)$	 \\
+			$\Delta z^1$						& $\mathcal{G}(-0.001, 0.016)$	 \\
+			$\Delta z^2$						& $\mathcal{G}(-0.019, 0.013)$	 \\
+			$\Delta z^3$						& $\mathcal{G}(0.009, 0.011)$	 \\
+			$\Delta z^4$						& $\mathcal{G}(-0.018, 0.022)$	 \\ [1ex]
+			\hline
+			\hline
+		\end{tabular}
+		\caption{List of the priors used in the analysis for parameter constraints. For the cosmological parameters, we fixed $w = -1.0$, $\Omega_k =  0.0$ and $\tau =  0.08$. The astrophysical parameters are associated with the intrinsic alignment, they follow the relation $A(z) = A[(1+z)/1.62]^{\eta}$, we have also $z_0 = 0.62$. Lastly, for systematics we have $m^i$ corresponding to the shear calibration, and  $\Delta z^i$ for the source photo-$z$ shift, with $i = 1, 4$ in both cases. The lens photo-$z$ shift parameters $\Delta z^i$, $i = 1, 5$ are fixed to zero.}
+		\label{tab:constraints}
+	\end{table}
+	
+	\subsection{One-to-one Comparison}
+	
+	This is a simple matter of comparing the parameters constraints obtained for two different covariance matrices with the same dataset. 
+	
+	We also plot the elements of these two matrices against one another; this will be particularly useful later on when talking about compression schemes.
+	
+	% ----------------------------------------------------------------------
+	
+	\subsection{Eigenvalues}
+	
+	An intuitive approach to identifying the most contributing elements of a covariance matrix is to look at its eigenvalues, since we can associate them to the variance. The lowest eigenvalues would correspond to the least variance and therefore hold the most information, whereas the highest eigenvalues would implicate larger error and thus contribute significantly less, which means that the most important elements of the matrix would be those with the lowest eigenvalues. To verify this assumption, we need to look at the parameter constraints: removing the elements with the highest eigenvalues should not alter our results; the opposite, however, should give us broader constraints. Our procedure consists of first diagonalizing the covariance matrix in order to calculate its eigenvalues and then replacing the eigenvalues of interest with numbers of about nine orders of magnitude higher, thus removing their effective contribution; we then obtain a new covariance matrix with the modified eigenvalues. Finally, we perform a cosmological analysis with the new covariance matrix, to constrain the parameters of our model. 
+	
+	% ----------------------------------------------------------------------
+	
+	\subsection{Signal-to-noise ratio}
+	
+	Another way of analysing covariance matrices is by obtaining the signal-to-noise ratio (SNR). A simple way of achieving this is to note that the total SNR squared is
+	%Since the values of the data points vary by many orders of magnitude, the range of eigenvalues in \figref{evector} is a bit misleading. In addition, it is not clear which eigenvectors should be dropped: should it be those with large eigenvalues (noise) or small ones (the noise is noisy)? Ideally, what we would like is to create a list of eigenvectors ordered in some way and drop the least important. This ties into the section below on Shrinkage. A very simple way to do this is to note that the total signal to noise squared is
+	\be
+	\left(\frac{S}{N}\right)^2 = \sum_{ij} D_i C^{-1}_{ij} D_j\
+	,\ee
+	where $D_i$ and $D_j$ are the data points and $C$ the covariance matrix. If $C$ were diagonal, then the eigenvectors would simply be the data points themselves, and we could estimate the SNR squared expected in each mode by simply computing $T_i^2/C_{ii}$ where $T_i$ is the theoretical prediction. Then we could throw out the modes with the lowest SNR. Since $C$ is not diagonal, we have to first diagonalize it and then order the values. So, we write the expected SNR squared as
+	%to do things a bit differently. Let's first define re-scaled data points
+	\bea
+	\left(\frac{S}{N}\right)^2 &=& \sum_{ij} T_i  C^{-1}_{ij} T_j\nonumber\\
+	&=& \sum_{i} \frac{v_i^2}{\lambda_i}
+	,\eea
+	where $\lambda_i$ are the eigenvalues of the covariance matrix, which is diagonalized with the unitary matrix $U$, and the eigenvectors are 
+	\be
+	v_i\equiv U_{ij}^T T_j\
+	.\ee
+	This makes it very clear which modes should be kept and which should be dropped. Modes $v_i$ for which $v_i^2/\lambda_i$ is very small can be discarded. 
+	
+	After obtaining the SNR for the covariance matrix, we proceed to set the 50 lowest values to seven orders of magnitude lower, which is equivalent to increasing the noise (or decreasing the signal) of these modes. We then obtain a new covariance matrix with the corresponding modified SNR values. 
+	
+	% ----------------------------------------------------------------------
+	
+	\subsection{Shrinkage}
+	\label{subsec:shrinkage}
+	
+	%There have been several methods proposed in the literature to compress the data vectors, extracting as much information as possible. Here we consider two: first compression at the map level \citep{Alonso:2017hhj}, where linear combination of the tomographic maps is used. If there are 4 tomographic bins, an uncompressed analysis would require ten separate 2-point functions (or 20 for cosmic shear), whereas a compression scheme leads to just a few uncorrelated maps. If there were 3 such maps, then only three 2-point functions would need to be used for the likelihood analysis.
+	
+	Our final test for comparing covariance matrices and extracting the most important elements, consists of shrinking the data vector and the covariance matrix. There have been several methods proposed in the literature to compress the data vectors, extracting as much information as possible \citep{Tegmark:1997maa, Joachimi:2017mnr,Gualdi:2018gmj}. Here we consider two: compression at the map level \citep{Alonso:2017hhj}, where linear combinations of the tomographic maps are used to gain maximum signal-to-noise ratio, before transferring this compression scheme into real-space to compress the 2-point function. The second method directly operates in the real-space \citep{Zablocki:2015zcm}, where the modes used are those that maximize the Fisher information for each of the cosmological parameters.
+	
+	Shrinking the data vector and its covariance matrix is equivalent to projecting the data vector onto a subspace of the original vector space. For example, if our data have a length of $n$ and we want to compress it into a lower dimension $m\leq n$, we need to come up with a basis transformation matrix $U_{m\times n}$ that has orthonormal row vectors, or mathematically speaking, $<U_{xi} \cdot U_{yi}>=\delta_{xy}$. Once we have a basis transformation matrix $U_{m\times n}$, we can compress the data vector $y$ and covariance matrix $C$ into filter data $\Tilde{y}$ and $\Tilde{C}$
+	\bea
+	\Tilde{y} &=& U y\\\nonumber
+	\Tilde{C} &=&<\Tilde{y}  \Tilde{y}^T>\\
+	&=&U<y y^T> U^T= U C U^T\
+	.\eea
+	For a data vector with length $m$, there are $m(m+1)/2$ elements in the covariance matrix to be evaluated. Once the data vector is shrunk to length $n$, elements in covariance matrices will shrink quadratically. Therefore, shrinking the covariance matrices is an effective way of comparing them.
+	
+	Here, we will demonstrate these two methods to compress the covariance matrices. In both cases, the data vector is shrunk by 90\%, which correspond to the covariance matrices being reduced by 99\%. 
+	
+	\subsubsection{Tomographic Compression}
+	
+	This compression method is based on Karhunen-Lo\'eve decomposition for the shear power spectrum suggested by \citep{Alonso:2017hhj} and later applied to real space 2-point function in \citep{Bellini:2019ssw} for CFHTLens survey. This method generally finds the eigenmode with most of the signal-to-noise ratio contribution to the power spectrum, and then transforms the 2-point function in real space based on this eigenmode.
+	
+	With  {\tt CosmoSIS}, we can generate the shear power spectrum $C_{\ell}$ of convergence $a_{\ell m}$ for a fiducial cosmology. The cosmology we choose is the best-fit value of the DES Year 1 results for cosmic shear only. With the shear power spectrum $C_{\ell}=S_{\ell}+N_{\ell}$ and its shape noise $N_{\ell}$, we can calculate the Karhunen-Lo\'eve (KL) modes matrix $E^p_{\ell}$ via a general eigenvalue problem:
+	\be
+	C_{\ell} E^p_{\ell} = \lambda ^p N_{\ell} E^p_{\ell}\
+	,\ee
+	and the new observable $b_{\ell m} = E_p \cdot N^{-1} a_{\ell m}$. We should note that $C_{\ell}$ is the power spectrum of the convergence of the weak lensing, and $E_p$ is the transformation of basis for the convergence. We should point out that these eigenmodes are uncorrelated, so the power spectrum of the new observable $D_{\ell}$ is a diagonal matrix, with 1+SNR of the corresponding eigenmodes on the diagonal elements,
+	\be
+	D_{\ell} =\ <b_{\ell m} b_{\ell m}^T>\ = E^p_{\ell} N^{-1} C_{\ell} N^{-1} E^{pT}_{\ell}\
+	,\ee
+	or, if we denote $E^p_{\ell} N^{-1}$ as $R_{\ell}$, we can write the compression in one simple linear combination of the $C_{\ell}$,
+	\be
+	D_{\ell} = R_{\ell}^i C_{\ell}^{ij} R_{\ell}^j = U_{\ell}^{ij} C_{\ell}^{ij}\
+	.\ee
+	The double summation weight $U_{\ell}^{ij}$ is what we use to perform tomographic compression. Since the KL-decomposed modes of shear power spectrum are uncorrelated, we can make a compression here by only taking the first one or two modes with the highest SNR. By doing so, we compress 10 tomographic combinations to 1 or 2.
+	
+	We want, however, to eventually compress the 2-point function data vector of DESY1. One possible way is to calculate the 2-point function of the KL mode of the shear power spectrum. We can calculate the 2-point function from the shear power spectrum by
+	\be
+	\xi_{\pm}^{ij}(\theta) = \int \frac{\ell d \ell }{2\pi}J_{0/4}(\ell \theta) C^{ij}(\ell)\
+	.\ee
+	In order to compress the 2-point function based on the compression of the $C_{\ell}$, we need to make sure that the scheme for $C_{\ell}$ is $\ell$-independent, that is to say, the 2-point correlation function of $D_{\ell}$, $\Tilde{\xi}_{\pm}(\theta)$, can be directly calculated from other 2-point functions. We then have,
+	\bea
+	\nonumber\Tilde{\xi}_{\pm}(\theta) &=& \int \frac{\ell d \ell }{2\pi}J_{0/4}(\ell \theta) D(\ell)\\\nonumber
+	&=&\int \frac{\ell d \ell }{2\pi}J_{0/4}(\ell \theta) U^{ij}C^{ij}(\ell)\\
+	&=&U^{ij}\xi_{\pm}^{ij}(\theta)\
+	,\eea
+	where $U^{ij}$, the $\ell$-independent compression weight is calculated by 
+	\be
+	U^{ij} = \frac{\int_{\ell _{min}}^{\ell _{max}} (2 \ell +1) U^{ij}_{\ell}}{\int_{\ell _{min}}^{\ell _{max}} (2 \ell +1)}\
+	.\ee
+	We make a more conservative angular cut than the angular cut discussed in \textcolor{red}{[ref]}, making sure that the cut for both $\xi_{\pm}$ are uniform in regard to tomographic combinations. For $\xi_+$, we consider an angular scale from $7.195^{\circ}$ to $250.0^{\circ}$. For $\xi_-$, the angular scale is from $90.579^{\circ}$ to $250.0^{\circ}$. Therefore, for the purpose of demonstrating KL-transform, the raw data vector has a length of 190, and by shrinking 10 tomographic combinations for each angle into 1 KL-mode, the data is shrunk to 19, and so the number of elements in the covariance matrices are reduced by 99\%.
+	
+	%We characterize a given element in the data vector by its angular and tomographic indices: $a_i = a_{\ell m,\alpha}$ where $l,m$ denote the indices corresponding to given spherical harmonics and $\alpha$ is a given tomographic bin, or equivalently $a_i = a_\alpha(\vec\theta)$ in real space. The compression occurs in terms of tomographic bins, so that 
+	%\be
+	%b_\mu(\vec\theta) = \sum_{\alpha} F_{\mu\alpha} a_\alpha(\theta)
+	%\ee
+	%where the $F$'s are chosen \footnote{Note that this definition of $F$ differs from that in \citep{Alonso:2017hhj} in that it includes the inverse of the noise matrix.} so that the correlation functions of the $b$'s are diagonal in tomographic space:
+	%\bea
+	%w_{\mu\nu}(\theta) &=& \langle b_\mu(\vec\theta_1) b_\nu(\vec\theta_2)\rangle\vert_{\vert\vec\theta_1-\vec\theta_2\vert\in\theta}
+	%\svs
+	% &=& \delta_{\mu,\nu} w_{\mu}(\theta).
+	%\eea
+	%Usually with $N_t$ tomographic bins, one must consider $N_t(N_t+1)/2$ correlation functions, but -- due to the transformation that diagonalizes the elements -- there are only $N_t$ correlation functions to consider (for a given $\theta$). Even better, these can be ordered by the information they contain, so fewer than $N_t$can be used. In the example used in \citep{Alonso:2017hhj}, 16 tomographic bins were assumed, so that the standard treatment would require 136 correlation functions, but only 3 were needed in order to extract accurate constraints. 
+	
+	%This method suggests a way of extracting the most important pieces of the full covariance matrix $C$. We simply compute the covariance matrix of the $w_{\mu}$ in terms of $C$ and keep only the most important terms. That is,
+	%\bea
+	%C^b_{\mu\nu} &\equiv& \langle (w_{\mu} -\bar w_\mu)\,(w_{\nu} -\bar w_\nu)\rangle
+	%\svs
+	% &=& \sum_{\alpha\alpha'\beta\beta'} F_{\mu\alpha}F_{\mu\alpha'}\, F_{\nu\beta}F_{\nu\beta'}\, C_{\alpha\alpha'\beta\beta'} .
+	%\eea
+	%Here the angular indices have been suppressed (there are two of them, one for each $w_\mu$), but the full tomographic complexity has been retained. The covariance matrix on the right includes a total of $N_t^2 \times N_t^2$ terms (some of which are equal because of symmetry) corresponding to all possible pairs of 2-point functions. But $C^b$ on the right contains only $N_t^2$ elements, and again these are ordered, so we can use only a subset of them. In the simplest case, where only one linear combination is needed so $\mu=\nu=1$, a single number (for each pair of angular bins) captures all the relevant information from the full covariance matrix.
+	
+	\subsubsection{2-Point Correlation Function}
+	
+	The compression here  takes place at the 2-point level \citep{Zablocki:2015zcm}, with the compressed data vector containing linear combinations of the many 2-point functions. In principle, this might work with only $N_p$ 2-point functions where $N_p$ is the number of free parameters, and each mode, or linear combination, contains all the information necessary about the parameter of interest. 
+	
+	For each parameter $p_\alpha$ that is varied, one captures a single linear mode
+	\be
+	y_\alpha = U_{\alpha i} D_i\
+	,\ee
+	where $D_i$ are the data points and the coefficients are defined as
+	\be \label{eq:compression_scheme}
+	U_{\alpha i} \equiv \frac{\partial T_j}{\partial p_\alpha} \, C^{-1}{}_{ji}\
+	,\ee
+	with $T_j$ being the theoretical prediction for the data point $D_j$.
+	The now much smaller data set $\{y_\alpha\}$, which contains as few as $N_p$ data points, carries with it its own covariance matrix, with which the $\chi^2$ can be computed for each point in parameter space. Propagating through shows that this covariance matrix is related to the original $C_{ij}$ via
+	\be
+	C_{\alpha\beta} = U_{\alpha i} C_{ij} U^t_{j\beta}.
+	\ee
+	In our case, our covariance matrix is  $227 \times 227$, while the number of parameters needed to specify the model is only 16, so $C_{\alpha\beta}$ is a $16\times 16$ matrix. We have apparently captured from the initial set of $(227 \times 228)/2 = 25,878$ independent elements of the covariance matrix a small subset (only 136 in this case) of linear combinations of these 25k elements that really matter. If two covariance matrices give the same set of $C_{\alpha\beta}$, it should not matter whether any of the other eighty thousand elements differ from one another.
+	
+	
+	\subsubsection{Invertible Transformation and Tolerance Testing}
+	
+	In the last section, we shrink the data vector and covariance matrices and find the most cosmological-informative modes in both. However, in order to make a tolerance testing of each element in the covariance, we not only need the cosmological-informative modes but also the uninformative modes. Suppose we find the informative set of modes for cosmology, the modes that are orthogonal to them, or the complementary set of the informative one, form a set of modes that are cosmological-uninformative. 
+	
+	To find these modes, we start off with the compression scheme presented in Eq. \ref{eq:compression_scheme}, which will serve as the basis for a rotation matrix $W_\alpha$. We then use the Gram-Schmidt decomposition to create $227 - N_p$ vectors orthonormal to $U_{\alpha}$, thus obtaining a unitary $227 \times 227$ matrix. We then have,
+	\be
+	C'_{\alpha\beta} = W_{\alpha i} C_{ij} W^t_{j\beta}.
+	\ee
+	%When this transformation is applied to the original matrix, $C_{ij}$, the first $N_p \times N_p$ elements of the new matrix will be the same as we had in $C_{\alpha\beta}$. Since our transformation spreads out the information contained in the compressed matrix, the relevant values for parameter estimation will be contained in the first $N_p$ rows and columns of the new covariance matrix. This means that we will have $N_p \left( 2 \times 227 - N_p \right)$ important elements, which is about an order of magnitude less than in the case of the full covariance matrix.
+	
+	\begin{figure}[]
+		\includegraphics[width=0.45\columnwidth]{Transformation_data.pdf}
+		
+		\bigskip
+		
+		\includegraphics[width=0.99\columnwidth]{Transformation_CM.pdf}
+		\caption{Illustration of the invertible transformation, $W$. It's components, $U$ and $U'$ are the compression scheme described in Sections \ref{subsec:shrinkage} and orthogonal components obtained using the Gram-Schmidt decomposition, respectively. \textbf{Top:} Transformation of the data vector, where D1 corresponds to compressed set, and D2 are uninformative for parameter constraints. \textbf{Bottom:} Transformation of the covariance matrix. The last square on the right, $C'$ is divided into four blocks: C1 is the most informative to cosmology, C2 are also relevant to constraints, but on a lower scale, and, finally, C3 is irrelevant to the $\chi^2$ calculation. \label{fig:transformation}}
+	\end{figure}
+	
+	With the invertible transformation $W$, shown in \figref{transformation}, the data vector and covariance matrix are transformed into sectional blocks. We will describe the meaning of each block here. The data vector is split into two blocks: D1 has the transformed data points that are sensitive to changes in the cosmological parameters, that is, the cosmological-sensitive data; D2 is generated by the modes that are orthogonal to D1, they will, in principle, be unaffected by changes to the cosmological parameters, which makes them uninformative for parameter constraints.
+	
+	The transformed covariance matrix is split into 4 blocks, with the off-diagonal ones being the transpose of each other. Block C1 is the variance and covariance of the cosmological-sensitive data, D1, it describes how well the cosmological-sensitive data is measured, and is, therefore, the one that contributes most to the $\chi^2$ calculation, and, consequently, to parameter constraints. Block C2 is the cross-correlation between D1 and D2, it is important for parameter constraints because it describe how D1 is affected by the uncertainty of D2.  Finally, C3 relates to the uninformative data, D2; it plays a minor role to $\chi^2$, so it affects the parameter constraints least.
+	
+	%With this invertible transformation W shown in \figref{illu-trans}, the data vector and covariance matrix are transformed into sectional blocks. We will describe the meaning of each blocks here. The data vector is split into two blocks. D1 is the block of transformed data points that are sensitive to the changes in cosmological parameter set, that is, the cosmological-sensitive data. D2 is generated by the modes that are orthogonal to the cosmological sensitive mode, they will in principle stays relatively constant when cosmological parameter changes and are uninformative for parameter constraints.
+	
+	%The transformed covariance matrix is split into 4 blocks, with the off-diagonal blocks being the transpose of each other, there are 3 different blocks. Block C1 is the variance and covariance of the cosmological informative data, or D1. This block contributes almost everything to the $\chi^2$ calculation. C1 describes how well the cosmological-sensitive data is measured, so the value in this block will affect the parameter constraints. Block C2 is the variance and covariance of the uninformative data, or D2. It plays a minor role in the $\chi^2$, so it will affect the parameter constraints less. C3 is the cross-correlation between D1 and D2, and it will affect the parameter constraints because it describes how D1 is affected by the uncertainty of D2.
+	
+	The next step is then to test the tolerance of different parts of the transformed covariance matrix. We first compare the results of increasing the error of each block separately by a factor of 100 and compare the results to constraints with the unmodified covariance, then we start by introducing smaller errors to the relevant blocks, C1 and C2 and analyse the corresponding increase in the parameter constraints.
+	
+	\subsection{Tolerance testing}
+	
+	
+	In this section, we will introduce the methodology of tolerance testing on the covariance matrices in the new basis. We will show that after the basis transformation, we need to compare tremendously less elements from two covariance matrices.
+	
+	Generally speaking, the parameter constraints will get wider when part of the covariance matrix gets larger, because this means that the data is worse measured. In the normal basis, each data points varies with the parameter set, so the change of each element in the covariance matrix will affect the constraints. However, since we have found a basis where some of the data points change with parameter set while others do not, the elements that matters to the cosmological constraints will also shrink. To be specific, the C1 and C2 blocks in Figure~\rf{illu-trans} are the only parts that impact the parameter constraints. 
+	
+	In order to illustrate this statement, we will first perform a sanity check. We will make each of the blocks in the covariance matrices a large number and run a chain with that covariance. We run 3 tests by making
+	1) C3,  
+	2) C2, 
+	3) C1 and C2,
+	100 times of itself/themselves. In principle, we should see that the constraints for test 1 will not change, but will get wider for test 2 and will totally blow up for test 3.
+	
+	Furthermore, we want to know how minor uncertainty on the informative elements of the covariance matrix will affect the cosmological constraints. 
+	
+	
+	% ----------------------------------------------------------------------
+	% ----------------------------------------------------------------------
+	
+	\section{Results}
+	\label{sec:results}
+	
+	Ultimately, what matters is how well the likelihood does at extracting parameter constraints. Since most analyses assume a Gaussian likelihood, this boils down to how well the contours in parameter space agree when computing the $\chi^2$ using two different covariance matrices.
+	
+	For brevity, we show only constraints on $\Omega_m$ and $\sigma_8$.
+	
+	\subsection{One-to-One Comparison}
+	
+	Using the same data vector, we compare the constraints obtained for two different covariance matrices: CL and BJ.  \figref{y3-comparison} shows the results for the cosmological constraints, where we can see that, while the best-fit values agree within a $2 \sigma$ interval, the constraints are up to $25 \%$ broader for $\sigma_8$. This is also true for the other parameters, where, on average, constraints obtained with CL are about $18 \%$ wider.
+	
+	We make a scatter plot of the elements of the two matrices in \figref{one-to-one}, where we can see that the elements of CL are, in general, much larger than BJ's, differing in up to 3 orders of magnitude. This is in accordance to what we see in the parameter constraints: more variance in the covariance matrix translates to less constraining power.
+	
+	\begin{figure}
+		\includegraphics[width=0.9\columnwidth]{One-to-one-Y3_BJ-CL.pdf}
+		\caption{Scatter plot of the elements of the covariance matrices BJ and CL.
+			\label{fig:one-to-one}}
+	\end{figure}
+	
+	% ----------------------------------------------------------------------
+	
+	\subsection{Eigenvalues}
+	
+	We perform two different analysis: the first consist of modifying the fifty lowest eigenvalues, and for the second, we take the fifty highest.  \figref{eigenvalues} shows the results of both approaches compared to constraints for the original covariance matrix. We can see in the Posterior Density Functions (pdfs) that the mean values of both parameters are well within the $2\sigma$ interval, which is also true for all the other parameters. As for the constraining power, the sizes of the constraints are within less than 5\% of each other for almost all of the parameters. Since the results are similar for both approaches, it becomes clear that ranking eigenvalues is not the most efficient way of evaluating where the most contributing elements of the covariance matrix lie.
+	
+	The eigenvalues are also used to try to identify the differences in parameter constraints for CL and BJ shown in the previous section. We plot the eigenvalues for these matrices in \figref{coveigen}. At a first glance, both curves show reasonable agreement, with values differing only by an average of $\approx 15 \%$, but we should keep in mind that the order of magnitude of the values vary greatly, which makes it difficult to compare them efficiently with this methodology, furthermore, it is not clear which elements are most important.
+	
+	
+	\begin{figure}
+		\includegraphics[width=0.9\columnwidth]{Eigenvalues/Eigenvalues_wm-sigma8.pdf}
+		\caption{Constraints on cosmological parameters $\Omega_m$ and $\sigma_8$ for the original DESY1 covariance matrix (in purple) and for two new covariance matrices obtained by setting the fifty highest eigenvalues of the original matrix to nine orders of magnitude higher (in blue), and by replacing the fifty lowest eigenvalues to nine order of magnitude lower (in magenta). \label{fig:eigenvalues}}
+	\end{figure}
+	
+	\begin{figure}
+		\includegraphics[width=0.9\columnwidth]{Y3-comparison.pdf}
+		\caption{Constraints on cosmological parameters $\Omega_m$ and $\sigma_8$ for two covariance matrices produced for cosmic shear for DESY3. The purple curve is for CL while the blue is for BJ. The constraints are about $18 \%$ broader for the former, indicating that the two matrices have quantifiable differences between them. \label{fig:y3-comparison}}
+	\end{figure}
+	
+	\begin{figure}
+		\includegraphics[width=0.9\columnwidth]{Eigenvalues/Eigenvalues_Y3_BJ-CL.pdf}
+		\caption{A log plot showing the $227$ eigenvalues of CL (blue) and BJ (orange). \label{fig:coveigen}}
+	\end{figure}
+	
+	%\figref{evector} shows an example of one of the eigenvectors, the one associated with the smallest eigenvalue. This low-eigenvalue mode picks up the differences between the correlation function at different angular scales (each vertical line delineates between 2-point functions of shears in different tomographic bin pairs).
+	
+	%	\begin{figure}
+	%		\includegraphics[width=0.9\columnwidth]{evector.png}
+	%		\caption{A simple scatter plot of elements of covariance matrices produced by two separate halo model codes. \label{fig:evector}}
+	%	\end{figure}
+	
+	% ----------------------------------------------------------------------
+	
+	\subsection{Signal-to-noise ratio}
+	
+	The parameter constraints for this method are shown in \figref{signalnoise}, where we note that the mean values are shifted about 12\% and 5\% for $\Omega_m$ and $\sigma_8$, respectively, with 17\% broader constraints for the former, when compared to the results with the original covariance. This tells us that the modes removed are essential for obtaining better constraints on these parameters. 
+	
+	Another aspect that we must consider when applying this procedure is that the highest modes do not necessarily hold the most information for all of the parameters; this is evident when we analyse the SNR for each parameter individually. To illustrate this, we take
+	\bea
+	\left(\frac{\partial S/\partial p_\alpha}{N}\right)^2 = \sum_{i} \frac{(\partial v_i / \partial p_\alpha)^2}{\lambda_i}
+	,\eea
+	with
+	\be
+	v_i^\alpha \equiv U_{ij}^t \frac{\partial T_j}{\partial p_\alpha}
+	,\ee
+	where $\partial /\partial p_\alpha$ is the derivative with respect to each parameter $\theta$. This produces the SNR for each parameter of interest. The importance of this procedure is illustrated in \figref{signalnoise_cuts}, where we can see that while the highest SNR for all the parameters does indeed correspond to those that hold most information for parameters $\Omega_m$ and $A_s$, this is not the case, for the intrinsic alignment parameters $A$ and $\eta$. As a result, we may end up losing constraining power over these parameters when we modify the lowest values of SNR. While this is apparent in the aforementioned figure, it is not very clear when looking at the resulting constraints on these parameters because the constraining power of the data over these parameters is not very strong (errors of about $100 \%$). As such, these results do not encourage us to use this method for identifying the most important elements of the covariance matrix.
+	
+	\begin{figure}
+		\includegraphics[width=0.9\columnwidth]{SNR/SNR_wm-sigma8.pdf}
+		\caption{Constraints on cosmological parameters $\Omega_m$ and $A_s$ for the original DESY1 covariance matrix (in purple) and for a covariance matrix (in blue) obtained by setting fifty elements corresponding to the lowest SNR to a value seven orders of magnitude lower, in order to evaluate their contribution to parameter constraints. \label{fig:signalnoise}}
+	\end{figure}
+	
+	\begin{figure}
+		\includegraphics[width=1\columnwidth]{SNR/SNR_cuts.pdf}
+		\caption{Scatter plot for the relation between the signal to noise obtained with the covariance matrix for DESY1 for each parameter (x-axis) against that for the full set of parameters (y-axis). The derivatives are shown with respect to cosmological parameters $\Omega_m$ (blue) and $A_s$ (orange), and for the intrinsic alignment parameters $A$ (green) and $\eta$ (red). The purple rectangle spreads until the fiftieth lowest value of SNR, which corresponds to the values that are modified for parameter constraints. \label{fig:signalnoise_cuts}}
+	\end{figure}
+	
+	% ----------------------------------------------------------------------
+	
+	\subsection{Shrinkage}
+	
+	\subsubsection{Tomographic Compression}
+	
+	With  {\tt CosmoSIS}, we calculate the shear power spectrum $C_{\ell}$ of DES Year 1 with a fiducial cosmology at the best-fit parameters, and $\ell$-range $2-5000$. The left plot in \figref{ClDl}, shows the diagonal elements of the signal part and the noise part of $C_{\ell}$, while the right one shows the KL-transformed eigenmode $D_{\ell}$ of $C_{\ell}$. We can see that the first KL mode contains most of the SNR contribution to the power spectrum. If we want to recover most information, we can also include the second mode.
+	
+	\begin{figure}
+		\includegraphics[width=0.48\columnwidth]{Cl_pst.png}
+		\includegraphics[width=0.48\columnwidth]{Dl_pst.png}
+		\caption{\textbf{Left:} Shear power spectrum of DESY1. Solid lines are diagonal elements of the signal matrix $S_{\ell}$, and dashed lines are the diagonal elements of noise matrix $N_{\ell}$; \textbf{Right:} Signal to noise ratio matrix $D_\ell$ of KL-modes of the power spectrum on the left. \label{fig:ClDl}}
+	\end{figure}
+	
+	In \figref{kl-mode}, we plot the normalized KL-eigenmode $E_\ell^i$ of $C_{\ell}$ and its corresponding $W^{ij}_\ell=E_\ell^i E_\ell^j$. Modes with different $\ell$ are plotted with different depth of the color. We can see that the KL-modes do not depend a lot on scale factor $\ell$ by a large portion, so we take the weighted average of the eigenmodes $E_\ell^p$ and its quadratic form $W_\ell$ over $\ell$'s and plot them with black lines. 
+	
+	\begin{figure}
+		\includegraphics[width=0.42\columnwidth]{epi.png}
+		\includegraphics[width=0.53\columnwidth]{Wij.png}
+		\caption{\textbf{Left:} Normalized KL-eigenmodes $E_\ell^p$ of the shear power spectrum $C_{\ell}$, darkness of the color is representing different $\ell$; \textbf{Right:} Transformation on tomographic bin combination $W_{ij}$ constructed by the KL-eigenmodes. Black lines are the weighted average of each mode. \label{fig:kl-mode}}
+	\end{figure}
+	
+	For different $\ell$, the KL-modes do vary by a slight amount. We also observe that tomographic bins with higher redshift gains more weight than those with low redshift. This is also shown by the weight on tomographic combination that the combination of bin 3 and bin 4 gains most of the weight to maximize signal to noise ratio. This agrees with the fact that the diagonal elements $C_\ell$ for low redshift is much less than those with high redshift. \textcolor{red}{Is my $N_\ell$ actually right?}
+	
+	We use only the first KL-mode to compress the tomographic combination for each angle $\theta$, i.e., 190 data points for 19 angles are compressed into 19 numbers.  This compression scheme is also used to compress the CL and BJ covariance matrices, and we plot them in \figref{comp-cov}.
+	
+	\begin{figure}
+		\includegraphics[width=0.34\columnwidth]{kl_comp_cl.png}
+		\includegraphics[width=0.34\columnwidth]{kl_comp_bj.png}
+		\includegraphics[width=0.27\columnwidth]{kl_scatter.png}
+		\caption{\textbf{Left:} CL covariance matrix compressed by the first KL-mode; \textbf{Mid:} BJ covariance matrix compressed by the first KL-mode;\textbf{Right:} One-to-One scatter of the two compressed matrices \label{fig:comp-cov}}
+	\end{figure}
+	
+	If we now again make a one-to-one comparison of these two compressed covariance matrices. We can easily notice that the elevated clump at the bottom right for scatter of original matrices, which represent elements with great difference, are gone in the compressed covariance. Instead, the two covariance matrices just have a relative constant difference because of the different model they use. This shows that the divergence between CL and BJ covariance does not affect the overall signal to noise ratio a lot.
+	
+	\subsubsection{2-Point Correlation Function}
+	
+	\figref{compressiony1} compares the constraints obtained for the compressed covariance and data with the full one. The mean values agree to within less than 3 \% for all the cosmological parameters. While this compression does not speed up calculations, it is encouraging to see that we can compress matrices of any size without losing a significant amount of information on the parameters of our models. 
+	
+	\begin{figure}
+		\includegraphics[width=0.9\columnwidth]{Compression/CompressionY1_wm-sigma8.pdf}
+		\caption{Constraints on cosmological parameters $\Omega_m$ and $\sigma_8$ for the original DESY1 covariance matrix (in purple) and for the compressed one (in blue). \label{fig:compressiony1}}
+	\end{figure}
+	
+	One relevant point in this analysis is at which point to take the derivative of each parameter. When we wish to compare the results of our compression scheme with those obtained with the full covariance matrix and data set, it is important to derivate each parameter at their respective mean value (obtained by performing the analysis with the full covariance matrix). The shape and variance of the posterior is not dependent on the derivative, but the best-fit value shifts according to the point where the derivative is taken.
+	
+	We also apply this methodology to comparing the covariance matrices of interest, i. e. CL and BJ. In order to do this, we take two different approaches: first, we assume that $U_{\alpha, i}$ is the same for both covariance matrices and we calculate it with BJ. The second approach is that each compression scheme must use the original covariance matrix that will be compressed, so that $U_{\alpha, i}$ will be different for each covariance matrix. \figref{correlation} is obtained for the first method, it shows the correlation matrix for BJ and CL, and that of the difference between them; we find this figure important because we can clearly see the difference between the two matrices by simply looking at only $(16 \times 17)/2$ elements, as opposed to having to analyse the larger correlation matrix for the full covariance matrices. It is also crucial that the matrices used for comparison here are those obtained via the same compression scheme, so that we can be sure that their differences are indeed only related to the differences in the original matrices.
+	
+	
+	\begin{figure}
+		\includegraphics[width=0.9\columnwidth]{Correlation_compression.pdf}
+		\caption{The upper right and lower left plots display the correlation matrix for BJ and CL respectively, while the lower right is the difference between the two. \label{fig:correlation}}
+	\end{figure}
+	
+	
+	%\subsection{Cosmological Constraints}
+	
+	%In this part, we will focus on the result of cosmological constraints that both CL and BJ give us. We also want to show the result of constraints that the compressed data and covariance. We want to compare the constraints and check if the compression works well in the cosmology sense.
+	
+	%*put results of cosmological constraints for each method in this section*
+	
+	\subsection{Constraints of Tomographic Compression}
+	
+	
+	
+	
+	
+	\subsection{Tolerance Testing}
+	
+	
+	
+	
+	% ----------------------------------------------------------------------
+	% ----------------------------------------------------------------------
+	
+	\section{Discussion}
+	\label{sec:discussion}
+	
+	
+	\textcolor{red}{By making the transformation described above, we will be able to reorganize the covariance matrices into cosmological informative blocks and uninformative blocks. Intrinsically, we can tolerate more errors in the uninformative blocks and have a stronger requirement on the informative blocks. This will put a lot of simulation time into more valuable work.}
+	
+	\textcolor{red}{The gold of the invertibility of the transformation is that we can first assign higher tolerance to C2 and assign lower tolerance to C1 and C3, then use the transformation matrix to recover the covariance matrices in the original basis. Then, we can compare the recovered matrix with the original one and check out how much tolerance is allowed on each element. Without invertibility, we cannot accomplish this task, which allows us to precisely quantify the tolerance on each element in the covariance matrices.}
+	
+	
+	% ----------------------------------------------------------------------
+	% ----------------------------------------------------------------------
+	
+	\section{Conclusion}
+	\label{sec:conclusion}
+	
+	
+	% ----------------------------------------------------------------------
+	% ----------------------------------------------------------------------
+	
+	\subsection*{Acknowledgments}
+	
+	%%% Here is where you should add your specific acknowledgments, remembering that some standard thanks will be added via the \code{desc-tex/ack/*.tex} and \code{contributions.tex} files.
+	
+	%This paper has undergone internal review in the LSST Dark Energy Science Collaboration. % REQUIRED if true
+	
+	\input{contributions} % Standard papers only: author contribution statements. For examples, see http://blogs.nature.com/nautilus/2007/11/post_12.html
+	
+	% This work used TBD kindly provided by Not-A-DESC Member and benefitted from comments by Another Non-DESC person.
+	
+	% Standard papers only: A.B.C. acknowledges support from grant 1234 from ...
+	
+	\input{desc-tex/ack/standard} % also available: key standard_short
+	
+	% This work used some telescope which is operated/funded by some agency or consortium or foundation ...
+	
+	% We acknowledge the use of An-External-Tool-like-NED-or-ADS.
+	
+	%{\it Facilities:} \facility{LSST}
+	
+	% Include both collaboration papers and external citations:
+	\bibliography{main,lsstdesc}
+	
 \end{document}
 
 % ======================================================================
+=======
+\RequirePackage{docswitch}
+% \flag is set by the user, through the makefile:
+%    make note
+%    make apj
+% etc.
+\setjournal{\flag}
+
+\documentclass[twocolumn]{\docclass}
+
+%%%% Scott's macros
+\newcommand{\sfig}[2]{
+	\includegraphics[width=#2]{#1}
+}
+\newcommand{\Sfig}[2]{
+	\begin{figure}[thbp]
+		\sfig{../Figures/#1.pdf}{\columnwidth}
+		\caption{{\small #2}}
+		\label{fig:#1}
+	\end{figure}
+}
+\newcommand{\Swide}[2]{
+	\begin{figure*}[thbp]
+		\sfig{../Figures/#1.pdf}{.8\textwidth}
+		\caption{{\small #2}}
+		\label{fig:#1}
+	\end{figure*}
+}
+\newcommand{\Sswide}[2]{
+	\begin{figure*}[thbp]
+		\sfig{../Figures/#1.pdf}{.7\textwidth}
+		\caption{{\small #2}}
+		\label{fig:#1}
+	\end{figure*}
+}
+\newcommand{\Svwide}[2]{
+	\begin{figure*}[thbp]
+		\sfig{../Figures/#1.pdf}{\textwidth}
+		\caption{{\small #2}}
+		\label{fig:#1}
+	\end{figure*}
+}
+
+\newcommand{\Spng}[2]{
+	\begin{figure}[thbp]
+		\sfig{../Figures/#1.png}{0.95\columnwidth}
+		\caption{{\small #2}}
+		\label{fig:#1}
+	\end{figure}
+}
+\newcommand{\Rf}[1]{\ref{fig:#1}}
+\newcommand{\rf}[1]{\ref{fig:#1}}
+\newcommand{\ec}[1]{Eq.~(\ref{eq:#1})}
+\newcommand{\ecalt}[1]{Eq.~\ref{eq:#1}}
+\newcommand{\Ec}[1]{(\ref{eq:#1})}
+\newcommand{\eeec}[3]{Eqs.~(\ref{eq:#1}, \ref{eq:#2}, \ref{eq:#3})}
+\newcommand{\eql}[1]{\label{eq:#1}}
+\newcommand\be{\begin{equation}}
+\newcommand\ee{\end{equation}}
+\def\bea{\begin{eqnarray}}
+\def\eea{\end{eqnarray}}
+% \def\bea{\begin{eqnarray}}
+% \def\eea{\end{eqnarray}}
+\def\svs{\nonumber\\}
+
+% You could also define the document class directly
+%\documentclass[]{emulateapj}
+
+% Custom commands from LSST DESC, see texmf/styles/lsstdesc_macros.sty
+\usepackage{lsstdesc_macros}
+
+\usepackage{graphicx}
+\graphicspath{{./}{./figures/}}
+\bibliographystyle{apj}
+
+% Add your own macros here:
+
+
+
+% ======================================================================
+
+\begin{document}
+	
+	\title{Covariance Testing}
+	
+	\maketitlepre
+	
+	\begin{abstract}
+		
+		There  are a number of codes that compute covariance matrices analytically; the plan is to use these to build TJPCov. In this project, we start along the path of comparing these different codes, building up a suite of tools that can be used to compare covariance matrices. We expect these tools to be useful not only for converging on a single accurate code for computing covariance matrices but also more generally for understanding which parts of the covariance matrix carry the most information (and therefore need the most attention to get right) and which are not relevant (so for example matrices that are not positive definite may still be usable if the negative eigenmodes are not relevant).
+	\end{abstract}
+	
+	% Keywords are ignored in the LSST DESC Note style:
+	\dockeys{}
+	
+	\maketitlepost
+	
+	% ----------------------------------------------------------------------
+	% {% raw %}
+	
+	\section{Introduction}
+	\label{sec:intro}
+	
+	
+	% ----------------------------------------------------------------------
+	% ----------------------------------------------------------------------
+	
+	\section{Methods}
+	\label{sec:methods}
+	
+	Our analysis is carried out using cosmic shear statistics $\xi_\pm(\theta)$, focusing for the most part on the Year 1 results of the Dark Energy Survey~\citep{Abbott:2017wau} (DESY1), and also on predictions for DES Year 3 (DESY3). The data is divided into four tomographic redshift bins spanning the interval $0.20 - 1.30$, which gives us 10 bin combinations, each one containing 20 angular bins between 2.5 and 250 arcmin. We thus have 200 data points for each $\xi_+(\theta)$ and $\xi_-(\theta)$, giving us 400 in total. 
+	
+	We apply the angular cuts described in ~\citep{Abbott:2018cms}, which removes the scales most sensitive to baryonic effects; this leaves us with 167 points for $\xi_+(\theta)$ and 60 for $\xi_-(\theta)$ (for which baryonic interactions are more relevant), resulting in 227 data, which correspond to a $227 \times 227$ covariance matrix.
+	
+	The two codes employed here for computing the covariance matrices are {\tt Cosmolike}~\citep{Krause:2016jvl} and a simpler version of the code used to analyze the KiDS-450 survey~\citep{Kohlinger:2017sxk}, hereafter referred to as CL and BJ, respectively. To perform cosmological parameter inference we use the {\tt CosmoSIS}~\citep{ZUNTZ201545} pipeline, while employing the {\tt MultiNest}~\citep{nested:feroz09} sampler to explore the parameter space, with 500 {\tt livepoints}, {\tt efficiency} set to 0.3, {\tt tolerance} to 0.1 and {\tt constant efficiency} set to False.
+	
+	\begin{table}
+		\centering
+		\begin{tabular} { l c} 
+			\hline
+			\hline
+			Parameter							& Prior	\\ \hline
+			Cosmological & \\ [1ex]
+			$\Omega_m$						& $\mathcal{U}(0.1, 0.9)$		\\
+			$A_s \times 10^9$					& $\mathcal{U}(0.5, 5)$		\\
+			$H_0 \mathrm{(km s^{-1} Mpc^{-1})}$	& $\mathcal{U}(55, 91)$		\\
+			$\Omega_b$						& $\mathcal{U}(0.03, 0.07)$	\\
+			$\Omega_\nu h^2$					& $\mathcal{U}(0.0005, 0.01)$	\\
+			$n_s$							& $\mathcal{U}(0.87, 1.07)$	\\ [1ex]
+			\hline
+			Astrophysical & \\ [1ex]
+			$A$								& $\mathcal{U}(-5, 5)$ \\
+			$\eta$							& $\mathcal{U}(-5, 5)$ \\ [1ex]
+			\hline
+			Systematic & \\ [1ex]
+			$m^i$							& $\mathcal{G}(0.012, 0.023)$	 \\
+			$\Delta z^1$						& $\mathcal{G}(-0.001, 0.016)$	 \\
+			$\Delta z^2$						& $\mathcal{G}(-0.019, 0.013)$	 \\
+			$\Delta z^3$						& $\mathcal{G}(0.009, 0.011)$	 \\
+			$\Delta z^4$						& $\mathcal{G}(-0.018, 0.022)$	 \\ [1ex]
+			\hline
+			\hline
+		\end{tabular}
+		\caption{List of the priors used in the analysis for parameter constraints. For the cosmological parameters, we fixed $w = -1.0$, $\Omega_k =  0.0$ and $\tau =  0.08$. The astrophysical parameters are associated with the intrinsic alignment, they follow the relation $A(z) = A[(1+z)/1.62]^{\eta}$, we have also $z_0 = 0.62$. Lastly, for systematics we have $m^i$ corresponding to the shear calibration, and  $\Delta z^i$ for the source photo-$z$ shift, with $i = 1, 4$ in both cases. The lens photo-$z$ shift parameters $\Delta z^i$, $i = 1, 5$ were fixed to zero.}
+		\label{tab:constraints}
+	\end{table}
+	
+	\subsection{One-to-one Comparison}
+	
+	This is a simple matter of comparing elements of a covariance matrix, usually starting with diagonal elements. \figref{xipmscatter} shows an example.
+	
+	\begin{figure}
+		\includegraphics[width=0.9\columnwidth]{xipmscatter.png}
+		\caption{A simple scatter plot of elements of covariance matrices produced by two separate halo model codes. \label{fig:xipmscatter}}
+	\end{figure}
+	
+	% ----------------------------------------------------------------------
+	
+	\subsection{Eigenvalues}
+	
+	An intuitive approach to identifying the most contributing elements of a covariance matrix is to look at its eigenvalues, since we can associate them to the variance. The lowest eigenvalues would correspond to the least variance and therefore hold the most information, whereas the highest eigenvalues would implicate larger error and thus contribute significantly less, which means that the most important elements of the matrix would be those with the lowest eigenvalues. To verify this assumption, we need to look at the parameter constraints: removing the elements with the highest eigenvalues should not alter our results; the opposite, however, should give us a broader constraints. Our procedure consists of first diagonalising the covariance matrix in order to calculate its eigenvalues and then replacing the eigenvalues of interest with numbers of about nine orders of magnitude higher, thus removing their effective contribution; we then obtain a new covariance matrix with the modified eigenvalues. Finally, we perform a cosmological analysis with the new covariances matrices, to constrain the parameters of our model. 
+	
+	% ----------------------------------------------------------------------
+	
+	\subsection{Signal to noise}
+	
+	Another way of analysing covariance matrices is by obtaining the signal-to-noise ratio (SNR). A simple way of achieving this is to note that the total SNR squared is
+	
+	%Since the values of the data points vary by many orders of magnitude, the range of eigenvalues in Figure~\rf{evector} is a bit misleading. In addition, it is not clear which eigenvectors should be dropped: should it be chose with large eigenvalues (noise) or small ones (the noise is noisy)? Ideally, what we would like is to create a list of eigenvectors ordered in some way and drop the least important. This ties into the section below on Shrinkage. A very simple way to do this is to note that the total signal to noise squared is
+	\be
+	\left(\frac{S}{N}\right)^2 = \sum_{ij} D_i C^{-1}_{ij} D_j\
+	,\ee
+	where $D_i$ and $D_j$ are the data points and $C$ the covariance matrix. If $C$ were diagonal, then the eigenvectors would simply be the data points themselves, and we could estimate the SNR squared expected in each mode by simply computing $T_i^2/C_{ii}$ where $T_i$ is the theoretical prediction. Then we could throw out the modes with the lowest SNR. Since $C$ is not diagonal, we have to first diagonalise it and then order the values. So, we write the expected SNR squared as
+	%to do things a bit differently. Let's first define re-scaled data points
+	\bea
+	\left(\frac{S}{N}\right)^2 &=& \sum_{ij} T_i  C^{-1}_{ij} T_j\nonumber\\
+	&=& \sum_{i} \frac{v_i^2}{\lambda_i}
+	,\eea
+	where $\lambda_i$ are the eigenvalues of the covariance matrix, which is diagonalised with the unitary matrix $U$, and the eigenvectors are 
+	\be
+	v_i\equiv U_{ij}^t T_j
+	\ee
+	This makes it very clear which modes should be kept and which should be dropped. Modes $v_i$ for which $v_i^2/\lambda_i$ is very small can be discarded. 
+	
+	After obtaining the SNR for our covariance matrix, we proceed to set the 50 lowest values to seven orders of magnitude lower, which is equivalent to increasing the noise (or decreasing the signal) of these modes. We then obtain a new covariance matrix with the corresponding modified SNR values. 
+	
+	% ----------------------------------------------------------------------
+	
+	\subsection{Shrinkage}
+	
+	%There have been several methods proposed in the literature to compress the data vectors, extracting as much information as possible. Here we consider two: first compression at the map level~\citep{Alonso:2017hhj}, where linear combination of the tomographic maps are used. If there are 4 tomographic bins, an uncompressed analysis would require ten separate 2-point functions (or 20 for cosmic shear), whereas a compression scheme leads to just a few uncorrelated maps. If there were 3 such maps, then only three 2-point functions would need to be used for the likelihood analysis.
+	
+	In order to compare covariance matrices and to extract the most important elements, we need to shrink the data vectors and their corresponding covariance matrices. There have been several methods proposed in the literature to compress the data vectors, extracting as much information as possible. Here we consider two: first compression at the map level~\citep{Alonso:2017hhj}, where linear combination of the tomographic maps are used to gain maximum signal to noise ratio. Then we transfer this compression scheme into real-space to compress the two point function. The second method directly operates in the real-space~\citep{Zablocki:2015zcm}, where modes that maximize the Fisher infomation for each of the cosmological parameters are taken to compress the data vector and the covariance matrices.
+	
+	Shrinking data vector and its covariance matrix is equivalent to projecting the data vector onto a subspace of the original vector space. For example, if our data have a length of $n$ and we want to compress it to a lower dimension $m\leq n$, we need to come up with a basis transformation matrix $W_{m\times n}$ that has orthonormal row vectors, or mathmatically speaking, $<W_{xi} \cdot W_{yi}>=\delta_{xy}$. Once we come up with a basis transformation matrix $W_{m\times n}$, we can compress the data vector $y$ and covariance matrix $C$ into filter data $\Tilde{y}$ and $\Tilde{C}$
+	
+	\bea
+	\Tilde{y} &=& W y\\\nonumber
+	\Tilde{C} &=&<\Tilde{y}  \Tilde{y}^T>\\
+	&=&W<y y^T> W^T= W C W^T
+	\eea
+	
+	For a data vector with length m, there are $m(m+1)/2$ elements in the covariance matrices to be evaluated. Once the data vector is shrunk to length n, elements in covariance matrices will shrink quadratically. Therefore, shrinking the covariance matrices is a effective way of comparing them.
+	
+	Here, we will demonstrate the two mentioned method to compress the covariance matrices. In both methods, the data vector is shrunk by 90 percent, so the covariance matrices are shrunk by 99 percent. 
+	
+	\subsubsection{Tomographic Compression}
+	
+	The first method we applied to compress the data vector is based on Karhunen-Lo\'eve decomposition for the shear power spectrum suggested by ~\citep{Alonso:2017hhj} and later applied to real space two-point function by ~\citep{Bel:2017hhj} for CFHTLens survey. This method generally finds an eigenmode with most of the signal-to-noise ratio contribution in the power spectrum, and then it can transform the two point function in real space based on this eigenmode.
+	
+	With  {\tt CosmoSIS}, we can generate the shear power spectrum $C_l$ of convergence $a_{lm}$ for a fiducial cosmology. The fiducial cosmology we choose is the best fit value of the DES Year 1 shear only results. With the shear power spectrum $C_l=S_l+N_l$ and its shape noise $N_l$, we can calculate the KL modes matrix $E^p_l$ by a general eigenvalue problem:
+	
+	\be
+	C_l E^p_l = \lambda ^p N_l E^p_l
+	\ee
+	
+	And the new observable $b_{lm} = E_p \cdot N^{-1} a_{lm}$. We should notice that $C_l$ is the power spectrum of the convergence of the weak lensing, and $E_p$ is the transformation of basis for the convergence. We should also notice that these eigenmodes are uncorrelated, so the power spectrum of the new observable $D_l$ will be a diagonal matrix, with 1+signal-noise-ratio of the corresponding eigenmodes on the diagonal elements.
+	
+	\be
+	D_l = <b_{lm} b_{lm}^T> = E^p_l N^{-1} C_l N^{-1} E^{pT}_l
+	\ee
+	
+	Or, if we denote $E^p_l N^{-1}$ as $R_l$, we can write the compression in one simple linear combination of the $C_l$
+	
+	\be
+	D_l = R_l^i C_l^{ij} R_l^j = W_l^{ij} C_l^{ij}
+	\ee
+	
+	
+	
+	The double summation weight $W_l^{ij}$ is the weight we want to perform tomographic compression. Since the KL decomposed modes of shear power spectrum are un-correlated, we can make a compression here by only taking the first one or two modes with the highest S/N. By doing so, we compressed 10 tomographic combinations to 1 or 2.
+	
+	However, we want to evantually compress the two point function data vector of DESY1. A possible way is to calculate the two point function of the KL mode of the shear power spectrum. We can calculate the two point function from the shear power spectrum by
+	
+	\be
+	\xi_{+/-}^{ij}(\theta) = \int \frac{ldl}{2\pi}J_{0/4}(l\theta) C^{ij}(l)
+	\ee
+	
+	In order to compress the two-point function based on the compression of the $C_l$, we need to make sure that the compression scheme for $C_l$ is $l$-independent, that is to say, the two point correlation function of $D_l$ $\Tilde{\xi}_{+/-}(\theta)$ can be directly calculated from other two-point functions.
+	
+	\bea
+	\nonumber\Tilde{\xi}_{+/-}(\theta) &=& \int \frac{ldl}{2\pi}J_{0/4}(l\theta) D(l)\\\nonumber
+	&=&\int \frac{ldl}{2\pi}J_{0/4}(l\theta) W^{ij}C^{ij}(l)\\
+	&=&W^{ij}\xi_{+/-}^{ij}(\theta)
+	\eea
+	
+	Where $W^{ij}$, the $l$-independent compression weight is calculated by 
+	
+	\be
+	W^{ij} = \frac{\int_{l_{min}}^{l_{max}} (2l+1) W^{ij}_l}{\int_{l_{min}}^{l_{max}} (2l+1)}
+	\ee
+	
+	We make a more conservative angular cut than the angular cut discussed in [ref]. We make sure that the cut for both $\xi_{+/-}$ are uniform regarding tomographic combinations. For $\xi_+$, we considered an angular scale from 7.195 degree to 250.0 degree. For $\xi_-$, the angular scale is from 90.579 to 250.0. Therefore, for the purpose of demostrating KL-transform, the raw data vector has a length of 190, and by shrinking 10 tomographic combinations for each angle into 1 KL-mode, the data is shrunk to 19. Therefore the number of elements in the covariance matrices are shrunk by 99 \%.
+	
+	
+	
+	
+	
+	
+	
+	%We characterize a given element in the data vector by its angular and tomographic indices: $a_i = a_{lm,\alpha}$ where $l,m$ denote the indices corresponding to given spherical harmonics and $\alpha$ is a given tomographic bin, or equivalently $a_i = a_\alpha(\vec\theta)$ in real space. The compression occurs in terms of tomographic bins, so that 
+	%\be
+	%b_\mu(\vec\theta) = \sum_{\alpha} F_{\mu\alpha} a_\alpha(\theta)
+	%\ee
+	%where the $F$'s are chosen \footnote{Note that this definition of $F$ differs from that in \citep{Alonso:2017hhj} in that it includes the inverse of the noise matrix.} so that the correlation functions of the $b$'s are diagonal in tomographic space:
+	%\bea
+	%w_{\mu\nu}(\theta) &=& \langle b_\mu(\vec\theta_1) b_\nu(\vec\theta_2)\rangle\vert_{\vert\vec\theta_1-\vec\theta_2\vert\in\theta}
+	%\svs
+	% &=& \delta_{\mu,\nu} w_{\mu}(\theta).
+	%\eea
+	%Usually with $N_t$ tomographic bins, one must consider $N_t(N_t+1)/2$ correlation functions, but -- due to the transformation that diagonalizes the elements -- there are only $N_t$ correlation functions to consider (for a given $\theta$). Even better, these can be ordered by the information they contain, so fewer than $N_t$can be used. In the example used in ~\citep{Alonso:2017hhj}, 16 tomographic bins were assumed, so that the standard treatment would require 136 correlation functions, but only 3 were needed in order to extract accurate constraints. 
+	
+	%This method suggests a way of extracting the most important pieces of the full covariance matrix $C$. We simply compute the covariance matrix of the $w_{\mu}$ in terms of $C$ and keep only the most important terms. That is,
+	%\bea
+	%C^b_{\mu\nu} &\equiv& \langle (w_{\mu} -\bar w_\mu)\,(w_{\nu} -\bar w_\nu)\rangle
+	%\svs
+	% &=& \sum_{\alpha\alpha'\beta\beta'} F_{\mu\alpha}F_{\mu\alpha'}\, F_{\nu\beta}F_{\nu\beta'}\, C_{\alpha\alpha'\beta\beta'} .
+	%\eea
+	%Here the angular indices have been suppressed (there are two of them, one for each $w_\mu$), but the full tomographic complexity has been retained. The covariance matrix on the right includes a total of $N_t^2 \times N_t^2$ terms (some of which are equal because of symmetry) corresponding to all possible pairs of two-point functions. But $C^b$ on the right contains only $N_t^2$ elements, and again these are ordered, so we can use only a subset of them. In the simplest case, where only one linear combination is needed so $\mu=\nu=1$, a single number (for each pair of angular bins) captures all the relevant information from the full covariance matrix.
+	
+	\subsubsection{2-Point Correlation Function}
+	
+	The second compression takes place at the 2-point level~\citep{Zablocki:2015zcm}, with the compressed data vector containing linear combinations of the many 2-point functions. In principle, this might work with only $N_p$ 2-point functions where $N_p$ is the number of parameters varied, and each mode, or linear combination, contains all the information necessary about the parameter of interest. 
+	
+	For each parameter $p_\alpha$ that is varied, one captures a single linear mode
+	\be
+	y_\alpha = U_{\alpha i} D_i
+	\ee
+	where $D_i$ are the data points and the coefficients are defined as
+	\be \label{eq:compression_scheme}
+	U_{\alpha i} \equiv \frac{\partial T_j}{\partial p_\alpha} \, C^{-1}{}_{ji}
+	\ee
+	where $T_j$ is the theoretical prediction for the data point $D_j$.
+	The now much smaller data set $\{y_\alpha\}$, which contains as few as $N_p$ data points, carries with it its own covariance matrix, with which the $\chi^2$ can be computed for each point in parameter space. Propagating through shows that this covariance matrix is related to the original $C_{ij}$ via
+	\be
+	C_{\alpha\beta} = U_{\alpha i} C_{ij} U^t_{j\beta}.
+	\ee
+	To take an example from the full DESY1 for cosmic shear, $C_{ij}$ is a $400 \times 400$ matrix, while the number of parameters needed to specify the model is only 16, so $C_{\alpha\beta}$ is a $16\times 16$ matrix. We have apparently captured from the initial set of $(400 \times 401)/2 = 80,200$ independent elements of the covariance matrix a small subset (only 136 in this case) of linear combinations of these 80k elements that really matter. If two covariance matrices give the same set of $C_{\alpha\beta}$, we do not care whether any of the other eighty thousand elements differ from one another.
+	
+	In our case, our covariance matrix is  $227 \times 227$, which we then reduce to $16 \times 16$ elements. Figure \textcolor{red}{include figure} compares the constraints obtained for the compressed covariance and data with the full one, for $\Omega_m$ and $\sigma_8$.  \textcolor{red}{Include plots and talk about constraints.} While this compression does not speed up calculations, it is encouraging to see that we can compress matrices of any size without losing a significant amount of information on the parameters of our models. 
+	
+	One relevant point in this analysis is at which point to take the derivative of each parameter. When we wish to compare the results of our compression scheme with those obtained with the full covariance matrix and data set, it is important to derivate each parameter at their respective mean value (obtained by performing the analysis with the full covariance matrix). The shape and variance of the posterior is not dependent on the derivative, but the best fit value shifts according to the point where the derivative was taken.
+	
+	We also apply this methodology to comparing the covariance matrices of interest, i. e. CL and BJ. In order to do this, we take two different approaches: first, we assume that $U_{\alpha, i}$ is the same for both covariance matrices and we calculate it with BJ. The second approach is that each compression scheme must use the original covariance matrix that will be compressed, so that $U_{\alpha, i}$ will be different for each covariance matrix. Figure~\rf{correlation} was obtained for the first method, it shows the correlation matrix for BJ and CL, and that of the difference between them; we find this figure important because we can clearly see the difference between the two matrices by simply looking at only $(16 \times 17)/2$ elements, as opposed to having to analyse the larger correlation matrix for the full covariance matrices. It is also crucial that the matrices used for comparison here are those obtained via the same compression scheme, so that we can be sure that their differences are indeed only related to the differences in the original matrices.
+	
+	\subsubsection{Invertible Transformation}
+	
+	While the compression scheme is \textcolor{red}{good?}, it is not devoid of problems, the most concerning one being that we cannot recover the original covariance matrix the compressed one. Our motivation is to have an invertible transformation so that we are able to switch between a compressed and the full covariance. In order to do this, we start off with the compression scheme presented in Eq. \ref{eq:compression_scheme}, which will serve as the basis for a rotation matrix $W_\alpha$. We then use the Gram-Schmidt decomposition to create $227 - N_p$ vectors orthonormal to $U_{\alpha}$, thus obtaining a unitary $227 \times 227$ matrix. We then have,
+	\be
+	C'_{\alpha\beta} = W_{\alpha i} C_{ij} W^t_{j\beta}.
+	\ee
+	When this transformation is applied to the original matrix, $C_{ij}$, the first $N_p \times N_p$ elements of the new matrix will be the same as we had in $C_{\alpha\beta}$. Since our transformation spreads out the information contained in the compressed matrix, the relevant values for parameter estimation will be contained in the first $N_p$ rows and columns of the new covariance matrix. This means that we will have $N_p \left( 2 \times 227 - N_p \right)$ important elements, which is about an order of magnitude less than in the case of the full covariance matrix.
+	
+	*******************************
+	
+	In the last section, we shrunk the data vector and covariance matrices and find the most cosmological-informative modes in the data vector. However, in order to make a tolerence testing of each element in the covariance, we not only need the cosmological-informative modes but also the uninformative modes. Suppose we have found the informative set of modes for cosmology, those modes that are orthogonal to the informative set, or the complementary set of the informative set, form a set of modes that are cosmological-uninformative. We can use Gram-Schmidt decomposition to find these orthogonal modes.
+	
+	\begin{figure}[]
+		\includegraphics[width=0.45\columnwidth]{data_transformation.png}
+		
+		\bigskip
+		
+		\includegraphics[width=0.99\columnwidth]{CM_transformation.png}
+		\caption{\textbf{Top:} Illustration of transformation of data; \textbf{Bottom:} Transformation of the covariance matrix. Detail of each section in the transformed data and covariance are described below. \label{fig:illu-trans}}
+	\end{figure}
+	
+	With this inverseable transformation W shown in Figure~\rf{illu-trans}, the data vector and covariance matrix are transformed into sectional blocks. We will describe the meaning of each blocks here. The data vector is split into two blocks. D1 is the block of transformed data points that are sensitive to the changes in cosmological parameter set, that is, the cosmological-sensitive data. D2 is generated by the modes that are orthogonal to the cosmological sensitive mode, they will in priciple stays relatively constant when cosmological parameter changes, and are uninformative for parameter constraints.
+	
+	The transformed covariance matrix is split into 4 blocks, with the off-diagonal blocks being the transpose of each other, there are 3 different blocks. Block C1 is the variance and covariance of the cosmological informative data,or D1. This block contribute almost everything to the $\chi^2$ calculation. C1 describes how well the cosmological-sensitive data is measured, so the value in this block will affect the parameter constraints. Block C2 is the variance and covariance of the uninformative data,or D2. It plays an minor role in the $\chi^2$, so it will affect the parameter constraints less. C3 is the cross-correlation between D1 and D2, and it will affect the parameter constraints because it describe how D1 is affected by the uncertainty of D2.
+	
+	By making the transformation described above, we will be able to reorganize the covariance matrices into cosmological infomative blocks and uninformative blocks. Intrinsiclly, we can tolerate more errors in the uninformative blocks and have a stronger requirement on the informative blocks. This will put a lot of simulation time into more valuable work.
+	
+	The gold of the invertibility of the transformation is that we can first assign higher tolerence to C2 and assign lower tolerence to C1 and C3, then use the transformation matrix to recover the covariance matrices in the original basis. Then, we can compare the recoverd matrix with the original one, and check out how much tolerence is allowed on each element. Without invertibility, we cannot accomplish this task, which allows us to precisely quantify the tolerence on each element in the covariance matrices.
+	
+	*****************
+	
+	\begin{table}
+		\centering
+		\begin{tabular} { l c} 
+			\hline
+			\hline
+			Added error	& Standard deviation 	\\ \hline \\
+			$0 - 20 \% $		& 	$< 5$	\\
+			$20 - 40 \% $		& 	$< 20$	\\
+			$> 50 \% $		& 	$> 20$	\\ [1ex]
+			\hline
+			\hline
+		\end{tabular}
+		\caption{The first column is the introduced error to the relevant elements of the rotated covariance matrix for $\Omega_m$. The introduced error corresponds to the an arbitrary increase in each element in the first row and first column of the rotated covariance matrix }
+		\label{tab:error_budget}
+	\end{table}
+	
+	% ----------------------------------------------------------------------
+	
+	\subsection{Tolerence testing}
+	
+	
+	In this section, we will introduce the methodology of tolerence testing on the covariance matrices in the new basis. We will show that after the basis transformation, we need to compare tremendously less elements from two covariance matrices.
+	
+	Generally speaking, the parameter constraints will get wider when part of the covariance matrix gets larger, because this means that the data is worse measured. In the normal basis, each data points varies with the parameter set, so the change of each element in the covariance matrix will affect the constraints. However, since we have found a basis where some of the data points change with parameter set while others do not, the elements that matters to the cosmological constraints will also shrink. To be specific, the C1 and C2 blocks in Figure~\rf{illu-trans} are the only parts that impact the parameter constraints. 
+	
+	In order to illustrate this statement, we will first perform a sanity check. We will make each of the blocks in the covariance matrices a large number and run a chain with that covariance. We run 3 tests by making
+	1) C3,  
+	2) C2, 
+	3) C1 and C2,
+	100 times of itself/themselves. In principle, we should see that the constraints for test 1 will not change, but will get wider for test 2 and will totally blow up for test 3.
+	
+	Furthermore, we want to know how minor uncertainty on the informative elements of the covariance matrix will affect the cosmological constraints. 
+	
+	
+	
+	\begin{figure}
+		\includegraphics[width=0.9\columnwidth]{Correlation_compression.pdf}
+		\caption{The upper right and lower left plots display the correlation matrix for BJ and CL respectively, while the lower right is the difference between the two. \label{fig:correlation}}
+	\end{figure}
+	
+	
+	% ----------------------------------------------------------------------
+	% ----------------------------------------------------------------------
+	
+	\section{Results}
+	\label{sec:results}
+	
+	Ultimately, what matters is how well the likelihood does at extracting parameter constraints. Since most analyses assume a Gaussian likelihood, this boils down to how well the contours in parameter space agree when computing the $\chi^2$ using two different covariance matrices.
+	
+	\subsection{One-to-One Comparison}
+	
+	*Put previous result of One-to-one comparison here and describe*
+	
+	% ----------------------------------------------------------------------
+	
+	\subsection{Eigenvalues}
+	
+	We perform two different analysis: the first consist of modifying the fifty lowest eigenvalues, and for the second, we take the fifty highest. The results of both approaches are compared to those obtained with the original covariance matrix, in Figure  \figref{eigenvalues}, where, for brevity, we show only $\Omega_m$ and $\sigma_8$. We can see in the Posterior Density Functions (pdfs) that the mean values of both parameters are well within the $2\sigma$ interval, the same is true for all the fourteen parameters; the size of the constraints is also within less than 5\% of each other for almost all of the parameters. Since the constraints are similar for both approaches, it becomes clear that ranking eigenvalues is not the most efficient way of evaluating where the most contributing elements of the covariance matrix lie.
+	
+	
+	\begin{figure}
+		\includegraphics[width=0.9\columnwidth]{Eigenvalues.pdf}
+		\caption{Constraints on cosmological parameters $\Omega_m$ and $\sigma_8$ for the original DESY1 covariance matrix (in purple) and for two new covariance matrices obtained by setting the fifty highest eigenvalues of the original matrix to nine orders of magnitude higher (in blue), and by replacing the fifty lowest eigenvalues to nine order of magnitude lower (in magenta). \label{fig:eigenvalues}}
+	\end{figure}
+	
+	Next, we wish to compare matrices using their eigenvalues. We plot the results obtained for constraints on $\Omega_m$ and $\sigma_8$ for BJ and CL in Figure~\rf{y3-comparison}, where we can see that, while their best fit values agree within a $2 \sigma$ interval, the constraints are up to $25 \%$ broader for the latter. This is also true for the other parameters, where, on average, constraints obtained with CL are about $18 \%$ wider. To see if we can identify these differences in the eigenvalues of the covariance matrices, we plot Figure~\rf{coveigen}. At a first glance, both curves show reasonable agreement, with values differing only by an average of $\approx 15 \%$, but we should keep in mind that the order of magnitude of the values vary greatly, which makes it difficult to compare them efficiently with this methodology. Furthermore, from our previous analysis it is not clear which elements are most important.
+	
+	
+	\begin{figure}
+		\includegraphics[width=0.9\columnwidth]{Y3-comparison.pdf}
+		\caption{Constraints on cosmological parameters $\Omega_m$ and $\sigma_8$ for two covariance matrices produced for cosmic shear for DESY3. The purple curve is for CL while the blue is for BJ. The constraints are about $18 \%$ broader for the former, indicating that the two matrices have quantifiable differences between them. \label{fig:y3-comparison}}
+	\end{figure}
+	
+	\begin{figure}
+		\includegraphics[width=0.9\columnwidth]{coveigen_BJ-CL.png}
+		\caption{A log plot showing the $227$ eigenvalues of two covariance matrices produced for cosmic shear for the Year 3 projection of the Dark Energy Survey. The blue curve is for CL and the orange one is for BJ. \label{fig:coveigen}}
+	\end{figure}
+	
+	\figref{evector} shows an example of one of the eigenvectors, the one associated with the smallest eigenvalue. This low-eigenvalue mode picks up the differences between the correlation function at different angular scales (each vertical line delineates between two-point functions of shears in different tomographic bin pairs).
+	
+	\begin{figure}
+		\includegraphics[width=0.9\columnwidth]{evector.png}
+		\caption{A simple scatter plot of elements of covariance matrices produced by two separate halo model codes. \label{fig:evector}}
+	\end{figure}
+	
+	% ----------------------------------------------------------------------
+	
+	\subsection{Signal-to-noise ratio}
+	
+	The parameter constraints for this method are shown in Figure~\rf{signalnoise}, where we note that the mean values are shifted about 12\% and 5\% for $\Omega_m$ and $\sigma_8$, respectively, with 17\% broader constraints for the former, when compared to the results with the original covariance, which tells us that the modes removed were essential for obtaining better constraints on these parameters. 
+	
+	Another aspect that we must consider when applying this procedure is that the highest modes do not necessarily hold the most information for all of the parameters; this is evident when we analyse the SNR for each parameter individually. To illustrate this we take
+	\bea
+	\left(\frac{\partial S/\partial p_\alpha}{N}\right)^2 = \sum_{i} \frac{(\partial v_i / \partial p_\alpha)^2}{\lambda_i}
+	,\eea
+	with
+	\be
+	v_i^\alpha \equiv U_{ij}^t \frac{\partial T_j}{\partial p_\alpha}
+	,\ee
+	where $\partial /\partial p_\alpha$ is the derivative with respect to each parameter $\theta$. This produces the SNR for each parameter of interest. The importance of this procedure is illustrated in Figure~\rf{signalnoise_cuts}, where we can see that while the highest SNR for all the parameters does indeed correspond to those that hold most information for parameters $\Omega_m$ and $A_s$, this is not the case, however, for the intrinsic alignment parameters $A$ and $\eta$. As a result, we may end up losing constraining power over these parameters when we modify the lowest values of SNR. While this is apparent in the aforementioned figure, it is not very clear when looking at the resulting constraints on these parameters because the constraining power of the data over these parameters is not very strong (errors of about $100 \%$). As such, these results do not encourage us to use this method for identifying the most important elements of the covariance matrix.
+	
+	\begin{figure}
+		\includegraphics[width=0.9\columnwidth]{SN.pdf}
+		\caption{Constraints on cosmological parameters $\Omega_m$ and $A_s$ for the original DESY1 covariance matrix (in purple) and for a covariance matrix (in blue) obtained by setting fifty elements corresponding to the lowest SNR to a value seven orders of magnitude lower, in order to evaluate their contribution to parameter constraints. \label{fig:signalnoise}}
+	\end{figure}
+	
+	\begin{figure}
+		\includegraphics[width=1\columnwidth]{SNR_cuts.pdf}
+		\caption{Scatter plot for the relation between the signal to noise obtained with the covariance matrix for DESY1 for each parameter (x-axis) against that for the full set of parameters (y-axis). The derivatives are shown with respect to cosmological parameters $\Omega_m$ (blue) and $A_s$ (orange), and for the intrinsic alignment parameters $A$ (green) and $\eta$ (red). The purple rectangle spreads until the fiftieth lowest value of SNR, which corresponds to the values that were modified for parameter constraints. \label{fig:signalnoise_cuts}}
+	\end{figure}
+	
+	% ----------------------------------------------------------------------
+	
+	\subsection{Shrinkage}
+	
+	In this part, we will show the result of our covariance shrinkage, including the weighting function and the compressed covariance matrices.
+	
+	\subsubsection{Tomographic Compression}
+	
+	With  {\tt CosmoSIS}, we calculated the shear power spectrum $C_l$ of DES Year 1 with a fiducial cosmology at the best fit parameters. The $l$-range we consider is $2-5000$. On the left of Figure~\rf{ClDl}, we show the diagonal elements of the signal part and the noise part of $C_l$. 
+	
+	On the right of Figure~\rf{ClDl} shows the KL-transformed eigenmode $D_l$ of $C_l$. We can see that the first KL mode contains most of the S/N contrinbution to the power spectrum. If we want to recover most infomation, we can also include the second mode.
+	
+	\begin{figure}
+		\includegraphics[width=0.48\columnwidth]{Cl_pst.png}
+		\includegraphics[width=0.48\columnwidth]{Dl_pst.png}
+		\caption{\textbf{Left:} Sheer power spectrum of DESY1. Solid lines are diagonal elements of the signal matrix $S_l$, and dashed lines are the diagonal elements of noise matrix $N_l$; \textbf{Right:} Signal to noise ratio matrix $D_l$ of KL-modes of the power spectrum on the left. \label{fig:ClDl}}
+	\end{figure}
+	
+	In Figure~\rf{kl-mode}, we plot the normalized KL-eigenmode $E_l^i$ of $C_l$ and its corresponding $W^{ij}_l=E_l^i E_l^j$. Modes with different $l$ are plotted with different depth of the color. We can see that the KL-modes do not depend a lot on scale factor $l$ by a large portion, so we take the weighted average of the eigenmodes $E_l^p$ and its quadratic form $W_l$ over $l$s and plot them with black lines. 
+	
+	\begin{figure}
+		\includegraphics[width=0.42\columnwidth]{epi.png}
+		\includegraphics[width=0.53\columnwidth]{Wij.png}
+		\caption{\textbf{Left:} Normalized KL-eigenmodes $E_L^P$ of the shear power spectrum $C_l$, darkness of the color is representing different $l$; \textbf{Right:} Transformation on tomographic bin combination $W_{ij}$ constructed by the KL-eigenmodes. Black lines are the weighted average of each mode. \label{fig:kl-mode}}
+	\end{figure}
+	
+	For different $l$, the KL-modes do varies by a slight amount. We also observed that tomographic bins with higher redshift gains more weight than those with low redshift. This is also shown by the weight on tomographci combination that the combination of bin 3 and bin 4 gains most of the weight to maximize signal to noise ratio. This agrees with the fact that the diagonal elements$Cl$ for low redshift is much less than those with high redshift. *Is my $N_l$ actually right?*
+	
+	We take the first KL mode and compressed the tomographic combination for each angle $\theta$. As a result, 190 data points for 19 angles are compressed into 19 numbers.  We then shrink the CL and BJ covariance matrices with the same compression scheme generated. The compressed CL and BJ covariance matrices are plotted in Figure~\rf{comp-cov}
+	
+	\begin{figure}
+		\includegraphics[width=0.34\columnwidth]{kl_comp_cl.png}
+		\includegraphics[width=0.34\columnwidth]{kl_comp_bj.png}
+		\includegraphics[width=0.27\columnwidth]{kl_scatter.png}
+		\caption{\textbf{Left:} CL covariance matrix compressed by the first KL-mode; \textbf{Mid:} BJ covariance matrix compressed by the first KL-mode;\textbf{Right:} One-to-One scatter of the two compressed matrices \label{fig:comp-cov}}
+	\end{figure}
+	
+	If we now again make a one-to-one comparison of these two compressed covariance matrices. We can easily notice that the huge clump at the bottom right for scatter of original matrices, which represent elements with great difference, are gone in the compressed covariance. Instead, the two covariance matrices just have a relative constant difference because of the different model they use. This shows that the divergence between CL and BJ covariance does not affect the overall signal to noise ratio a lot.
+	
+	
+	
+	%\subsection{Cosmological Constraints}
+	
+	%In this part, we will focus on the result of cosmological constraints that both CL and BJ give us. We also want to show the result of constraints that the compressed data and covariance. We want to compare the constraints and check if the compression works well in the cosmology sense.
+	
+	%*put results of cosmological constraints for each method in this section*
+	
+	\subsection{Constraints of Tomographic Compression}
+	
+	
+	
+	
+	
+	\subsection{Tolerence Testing}
+	
+	
+	
+	
+	% ----------------------------------------------------------------------
+	% ----------------------------------------------------------------------
+	
+	\section{Discussion}
+	\label{sec:discussion}
+	
+	
+	% ----------------------------------------------------------------------
+	% ----------------------------------------------------------------------
+	
+	\section{Conclusion}
+	\label{sec:conclusion}
+	
+	
+	% ----------------------------------------------------------------------
+	% ----------------------------------------------------------------------
+	
+	\subsection*{Acknowledgments}
+	
+	%%% Here is where you should add your specific acknowledgments, remembering that some standard thanks will be added via the \code{desc-tex/ack/*.tex} and \code{contributions.tex} files.
+	
+	%This paper has undergone internal review in the LSST Dark Energy Science Collaboration. % REQUIRED if true
+	
+	\input{contributions} % Standard papers only: author contribution statements. For examples, see http://blogs.nature.com/nautilus/2007/11/post_12.html
+	
+	% This work used TBD kindly provided by Not-A-DESC Member and benefitted from comments by Another Non-DESC person.
+	
+	% Standard papers only: A.B.C. acknowledges support from grant 1234 from ...
+	
+	\input{desc-tex/ack/standard} % also available: key standard_short
+	
+	% This work used some telescope which is operated/funded by some agency or consortium or foundation ...
+	
+	% We acknowledge the use of An-External-Tool-like-NED-or-ADS.
+	
+	%{\it Facilities:} \facility{LSST}
+	
+	% Include both collaboration papers and external citations:
+	\bibliography{main,lsstdesc}
+	
+\end{document}
+
+% ======================================================================
+>>>>>>> b6a583d7860c03ad80afb9937ec3da805f553a19
