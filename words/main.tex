@@ -358,10 +358,13 @@ In this section, we will introduce the methodology of tolerence testing on the c
 
  Generally speaking, the parameter constraints will get wider when part of the covariance matrix gets larger, because this means that the data is worse measured. In the normal basis, each data points varies with the parameter set, so the change of each element in the covariance matrix will affect the constraints. However, since we have found a basis where some of the data points change with parameter set while others do not, the elements that matters to the cosmological constraints will also shrink. To be specific, the C1 and C2 blocks in Figure~\rf{illu-trans} are the only parts that impact the parameter constraints. 
  
- In order to illustrate this statement, we will first perform a sanity check. We will make each of the blocks in the covariance matrices a large number and run a chain with that covariance. 
-
-
-
+ In order to illustrate this statement, we will first perform a sanity check. We will make each of the blocks in the covariance matrices a large number and run a chain with that covariance. We run 3 tests by making
+ 1) C3,  
+ 2) C2, 
+ 3) C1 and C2,
+ 100 times of itself/themselves. In principle, we should see that the constraints for test 1 will not change, but will get wider for test 2 and will totally blow up for test 3.
+ 
+Furthermore, we want to know how minor uncertainty on the informative elements of the covariance matrix will affect the cosmological constraints. 
 
 
 

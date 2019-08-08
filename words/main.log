@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.1.16)  7 AUG 2019 17:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.1.16)  7 AUG 2019 20:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -366,35 +366,35 @@ File: ./figures/Correlation_compression.pdf Graphic file (type pdf)
 
 <use ./figures/Correlation_compression.pdf>
 Package pdftex.def Info: ./figures/Correlation_compression.pdf used on input li
-ne 369.
+ne 375.
 (pdftex.def)             Requested size: 221.3985pt x 191.70422pt.
-
-<./figures/Eigenvalues.pdf, id=42, 235.59271pt x 235.59271pt>
+ [5 <./figures/Correlation_compression.pdf>] <./figures/Eigenvalues.pdf, id=69,
+ 235.59271pt x 235.59271pt>
 File: ./figures/Eigenvalues.pdf Graphic file (type pdf)
 
 <use ./figures/Eigenvalues.pdf>
-Package pdftex.def Info: ./figures/Eigenvalues.pdf used on input line 394.
+Package pdftex.def Info: ./figures/Eigenvalues.pdf used on input line 400.
 (pdftex.def)             Requested size: 221.3985pt x 221.41043pt.
- [5 <./figures/Correlation_compression.pdf>]
+
 <./figures/Y3-comparison.pdf, id=70, 235.59271pt x 235.59271pt>
 File: ./figures/Y3-comparison.pdf Graphic file (type pdf)
 
 <use ./figures/Y3-comparison.pdf>
-Package pdftex.def Info: ./figures/Y3-comparison.pdf used on input line 402.
+Package pdftex.def Info: ./figures/Y3-comparison.pdf used on input line 408.
 (pdftex.def)             Requested size: 221.3985pt x 221.41043pt.
 
 <./figures/coveigen_BJ-CL.png, id=71, 397.485pt x 250.41554pt>
 File: ./figures/coveigen_BJ-CL.png Graphic file (type png)
 
 <use ./figures/coveigen_BJ-CL.png>
-Package pdftex.def Info: ./figures/coveigen_BJ-CL.png used on input line 407.
+Package pdftex.def Info: ./figures/coveigen_BJ-CL.png used on input line 413.
 (pdftex.def)             Requested size: 221.3985pt x 139.48282pt.
 
 <./figures/evector.png, id=72, 450.9648pt x 314.3745pt>
 File: ./figures/evector.png Graphic file (type png)
 
 <use ./figures/evector.png>
-Package pdftex.def Info: ./figures/evector.png used on input line 414.
+Package pdftex.def Info: ./figures/evector.png used on input line 420.
 (pdftex.def)             Requested size: 221.3985pt x 154.34225pt.
  [6 <./figures/Eigenvalues.pdf> <./figures/Y3-comparison.pdf
 
@@ -408,66 +408,66 @@ LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
 <./figures/SN.pdf, id=132, 233.90082pt x 235.59271pt>
 File: ./figures/SN.pdf Graphic file (type pdf)
  <use ./figures/SN.pdf>
-Package pdftex.def Info: ./figures/SN.pdf used on input line 435.
+Package pdftex.def Info: ./figures/SN.pdf used on input line 441.
 (pdftex.def)             Requested size: 221.3985pt x 223.00653pt.
 
 <./figures/SNR_cuts.pdf, id=133, 530.98375pt x 380.42125pt>
 File: ./figures/SNR_cuts.pdf Graphic file (type pdf)
 
 <use ./figures/SNR_cuts.pdf>
-Package pdftex.def Info: ./figures/SNR_cuts.pdf used on input line 440.
+Package pdftex.def Info: ./figures/SNR_cuts.pdf used on input line 446.
 (pdftex.def)             Requested size: 246.0pt x 176.24971pt.
 
 <./figures/Cl_pst.png, id=134, 412.54124pt x 384.43625pt>
 File: ./figures/Cl_pst.png Graphic file (type png)
 
 <use ./figures/Cl_pst.png>
-Package pdftex.def Info: ./figures/Cl_pst.png used on input line 457.
+Package pdftex.def Info: ./figures/Cl_pst.png used on input line 463.
 (pdftex.def)             Requested size: 118.07895pt x 110.03474pt.
 
 <./figures/Dl_pst.png, id=135, 393.47pt x 381.425pt>
 File: ./figures/Dl_pst.png Graphic file (type png)
 
 <use ./figures/Dl_pst.png>
-Package pdftex.def Info: ./figures/Dl_pst.png used on input line 458.
+Package pdftex.def Info: ./figures/Dl_pst.png used on input line 464.
 (pdftex.def)             Requested size: 118.07895pt x 114.46329pt.
 
 <./figures/epi.png, id=136, 398.48875pt x 376.40625pt>
 File: ./figures/epi.png Graphic file (type png)
  <use ./figures/epi.png>
-Package pdftex.def Info: ./figures/epi.png used on input line 465.
+Package pdftex.def Info: ./figures/epi.png used on input line 471.
 (pdftex.def)             Requested size: 103.31955pt x 97.59337pt.
 
 <./figures/Wij.png, id=137, 510.90875pt x 376.40625pt>
 File: ./figures/Wij.png Graphic file (type png)
  <use ./figures/Wij.png>
-Package pdftex.def Info: ./figures/Wij.png used on input line 466.
+Package pdftex.def Info: ./figures/Wij.png used on input line 472.
 (pdftex.def)             Requested size: 130.3797pt x 96.05411pt.
 
 <./figures/kl_comp_cl.png, id=138, 334.24875pt x 264.99pt>
 File: ./figures/kl_comp_cl.png Graphic file (type png)
 
 <use ./figures/kl_comp_cl.png>
-Package pdftex.def Info: ./figures/kl_comp_cl.png used on input line 475.
+Package pdftex.def Info: ./figures/kl_comp_cl.png used on input line 481.
 (pdftex.def)             Requested size: 83.6391pt x 66.30798pt.
 
 <./figures/kl_comp_bj.png, id=139, 334.24875pt x 264.99pt>
 File: ./figures/kl_comp_bj.png Graphic file (type png)
 
 <use ./figures/kl_comp_bj.png>
-Package pdftex.def Info: ./figures/kl_comp_bj.png used on input line 476.
+Package pdftex.def Info: ./figures/kl_comp_bj.png used on input line 482.
 (pdftex.def)             Requested size: 83.6391pt x 66.30798pt.
 
 <./figures/kl_scatter.png, id=140, 403.5075pt x 392.46625pt>
 File: ./figures/kl_scatter.png Graphic file (type png)
 
 <use ./figures/kl_scatter.png>
-Package pdftex.def Info: ./figures/kl_scatter.png used on input line 477.
+Package pdftex.def Info: ./figures/kl_scatter.png used on input line 483.
 (pdftex.def)             Requested size: 66.42105pt x 64.60442pt.
  [7 <./figures/evector.png> <./figures/SN.pdf>]
 
 LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
- on input line 482.
+ on input line 486.
 
 (./contributions.tex) (./desc-tex/ack/standard.tex) (./main.bbl [8 <./figures/S
 NR_cuts.pdf
@@ -486,10 +486,10 @@ Package natbib Warning: There were undefined citations.
 
 [9] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 5187 strings out of 493014
- 68417 string characters out of 6133351
- 167289 words of memory out of 5000000
- 8643 multiletter control sequences out of 15000+600000
+ 5188 strings out of 493014
+ 68428 string characters out of 6133351
+ 169289 words of memory out of 5000000
+ 8644 multiletter control sequences out of 15000+600000
  8103 words of font info for 30 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  38i,10n,37p,1143b,303s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -518,7 +518,7 @@ e/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2016/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2016/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on main.pdf (9 pages, 1202119 bytes).
+Output written on main.pdf (9 pages, 1202296 bytes).
 PDF statistics:
  279 PDF objects out of 1000 (max. 8388607)
  203 compressed objects within 3 object streams
