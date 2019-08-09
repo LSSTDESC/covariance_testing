@@ -2,60 +2,54 @@ This is BibTeX, Version 0.99d (TeX Live 2016)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: main.aux
 I couldn't open database file lsstdesc.bib
----line 51 of file main.aux
+---line 62 of file main.aux
  : \bibdata{mainNotes,main,lsstdesc
  :                                 }
 I'm skipping whatever remains of this command
 The style file: apj.bst
 Database file #1: mainNotes.bib
 Database file #2: main.bib
-I was expecting a `,' or a `}'---line 82 of file main.bib
- :  
- :  eprint         = "1903.04957",
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
-Warning--empty journal in Abbott:2017wau
 Warning--empty journal in Bellini:2019ssw
-You've used 9 entries,
+You've used 11 entries,
             3085 wiz_defined-function locations,
-            704 strings with 5849 characters,
-and the built_in function-call counts, 3785 in all, are:
-= -- 334
-> -- 208
-< -- 7
-+ -- 67
-- -- 68
-* -- 282
-:= -- 711
-add.period$ -- 9
-call.type$ -- 9
-change.case$ -- 49
-chr.to.int$ -- 9
-cite$ -- 11
-duplicate$ -- 168
-empty$ -- 259
-format.name$ -- 89
-if$ -- 771
+            730 strings with 6469 characters,
+and the built_in function-call counts, 4878 in all, are:
+= -- 429
+> -- 292
+< -- 6
++ -- 96
+- -- 102
+* -- 383
+:= -- 912
+add.period$ -- 11
+call.type$ -- 11
+change.case$ -- 67
+chr.to.int$ -- 11
+cite$ -- 12
+duplicate$ -- 206
+empty$ -- 317
+format.name$ -- 121
+if$ -- 987
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 9
-newline$ -- 31
-num.names$ -- 36
-pop$ -- 51
+missing$ -- 11
+newline$ -- 37
+num.names$ -- 44
+pop$ -- 70
 preamble$ -- 1
-purify$ -- 49
+purify$ -- 67
 quote$ -- 0
-skip$ -- 151
+skip$ -- 182
 stack$ -- 0
-substring$ -- 199
+substring$ -- 248
 swap$ -- 0
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 81
-warning$ -- 2
-while$ -- 33
+type$ -- 99
+warning$ -- 1
+while$ -- 42
 width$ -- 0
-write$ -- 90
-(There were 2 error messages)
+write$ -- 112
+(There was 1 error message)
