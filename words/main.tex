@@ -148,15 +148,13 @@
 	
 	\subsection{One-to-one Comparison}
 	
-	This is a simple matter of comparing the parameters constraints obtained for two different covariance matrices with the same dataset. 
-	
-	We also plot the elements of these two matrices against one another; this will be particularly useful later on when talking about compression schemes.
+	This is a simple matter of comparing plotting the elements of two covariance matrices against each other to explain the differences in the parameter contraints. This will also be useful later on when talking about compressed covariances.
 	
 	% ----------------------------------------------------------------------
 	
 	\subsection{Eigenvalues}
 	
-	An intuitive approach to identifying the most contributing elements of a covariance matrix is to look at its eigenvalues, since we can associate them to the variance. The lowest eigenvalues would correspond to the least variance and therefore hold the most information, whereas the highest eigenvalues would implicate larger error and thus contribute significantly less, which means that the most important elements of the matrix would be those with the lowest eigenvalues. To verify this assumption, we need to look at the parameter constraints: removing the elements with the highest eigenvalues should not alter our results; the opposite, however, should give us broader constraints. Our procedure consists of first diagonalizing the covariance matrix in order to calculate its eigenvalues and then replacing the eigenvalues of interest with numbers of about nine orders of magnitude higher, thus removing their effective contribution; we then obtain a new covariance matrix with the modified eigenvalues. Finally, we perform a cosmological analysis with the new covariance matrix, to constrain the parameters of our model. 
+	An intuitive approach to identifying the most contributing elements of a covariance matrix is to look at its eigenvalues, since we can associate them to the variance. The lowest eigenvalues would correspond to the least variance and therefore hold the most information, whereas the highest eigenvalues would implicate larger error and thus contribute significantly less, which implies that the most important elements of the matrix are those with the lowest eigenvalues. To verify this assumption, we need to look at the parameter constraints: removing the elements with the highest eigenvalues should not alter our results; the opposite, however, should give us broader constraints. Our procedure consists of first diagonalizing the covariance matrix in order to calculate its eigenvalues and then replacing the eigenvalues of interest with numbers of about nine orders of magnitude higher, thus removing their effective contribution; we then obtain a new covariance matrix with the modified eigenvalues. Finally, we perform a cosmological analysis with the new covariance matrix, to constrain the parameters of our model. 
 	
 	% ----------------------------------------------------------------------
 	
@@ -453,7 +451,19 @@
 	
 	\subsubsection{Tolerance Testing}
 	
-\textcolor{red}{Include new plots and talk about the constraints.}
+	Given that the Block C1 contains the most relevant elements, it was expected that any changes to it would also modify the parameter constraints. It is clear in 	\figref{tolerance1000} that this was not the case. Multiplying the elements of Blocs C1 and C3 did not alter the constraints, whereas changes made to Blocks C2 and C1+C2 did. To explain this, we need to look at what happens to $\chi^2$ when using the transformed dataset and covariance matrix. We have,
+		\be
+	v_i^\alpha \equiv U_{ij}^T \frac{\partial T_j}{\partial p_\alpha}
+	,\ee
+	
+	
+	
+	\begin{figure}
+		\includegraphics[width=0.9\columnwidth]{Multiply_error.pdf}
+		\caption{The upper right and lower left plots display the correlation matrix for BJ and CL respectively, while the lower right is the difference between the two. \label{fig:tolerance1000}}
+	\end{figure}
+	
+	
 	
 	
 	% ----------------------------------------------------------------------
