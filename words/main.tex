@@ -206,15 +206,15 @@ Our procedure consists of first diagonalizing the covariance matrix in order to 
 	
 	\section{Signal-to-noise ratio}
 	
-	Another way of analysing covariance matrices is by obtaining the signal-to-noise ratio (SNR). A simple way of achieving this is to note that the total SNR squared is
+	Instead of looking only at the ``noise'' -- or the eigenvalues of the covariance matrix -- a better way to assess the importance of modes is to consider the signal as well. We can define the expected signal-to-noise ratio (SNR) as
 	%Since the values of the data points vary by many orders of magnitude, the range of eigenvalues in \figref{evector} is a bit misleading. In addition, it is not clear which eigenvectors should be dropped: should it be those with large eigenvalues (noise) or small ones (the noise is noisy)? Ideally, what we would like is to create a list of eigenvectors ordered in some way and drop the least important. This ties into the section below on Shrinkage. A very simple way to do this is to note that the total signal to noise squared is
 	\be
-	\left(\frac{S}{N}\right)^2 = \sum_{ij} D_i C^{-1}_{ij} D_j\
+	\left(\frac{S}{N}\right)^2 = \sum_{ij} T_i C^{-1}_{ij} T_j\
 	,\ee
-	where $D_i$ and $D_j$ are the data points and $C$ the covariance matrix. If $C$ were diagonal, then the eigenvectors would simply be the data points themselves, and we could estimate the SNR squared expected in each mode by simply computing $T_i^2/C_{ii}$ where $T_i$ is the theoretical prediction. Then we could throw out the modes with the lowest SNR. Since $C$ is not diagonal, we have to first diagonalize it and then order the values. So, we write the expected SNR squared as
+	where $T_i$ and are the predicted theoretical signal for the $i^{th}$ data point and $C$ is the covariance matrix. If $C$ were diagonal, then the eigenvectors would simply be the data points themselves, and we could estimate the SNR squared expected in each mode by simply computing $T_i^2/C_{ii}$. Then we could throw out the modes with the lowest SNR. Since $C$ is not diagonal, we have to first diagonalize it and then order the values. So, we write the expected SNR squared as
 	%to do things a bit differently. Let's first define re-scaled data points
 	\bea
-	\left(\frac{S}{N}\right)^2 &=& \sum_{ij} T_i  C^{-1}_{ij} T_j\nonumber\\
+	\left(\frac{S}{N}\right)^2 %&=& %\sum_{ij} T_i  C^{-1}_{ij} T_j\nonumber\\
 	&=& \sum_{i} \frac{v_i^2}{\lambda_i}
 	,\eea
 	where $\lambda_i$ are the eigenvalues of the covariance matrix, which is diagonalized with the unitary matrix $U$, and the eigenvectors are 
