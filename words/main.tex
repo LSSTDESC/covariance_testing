@@ -100,18 +100,14 @@
 	\section{Introduction}
 	\label{sec:intro}
 	
-	
-	% ----------------------------------------------------------------------
-	% ----------------------------------------------------------------------
-	
-	\section{Methodology}
+Almost all analyses of cosmological data use a likelihood function that requires a covariance matrix. If the data set has $N$ data points, the covariance matrix is a symmetric $N\times N$ and captures the errors in the measurements, including those that are correlated from one point to another. As data sets grow, the number of elements in the covariance matrix is becoming too large to verify each individual element. For example, we will focus on cosmic shear measurements from the Dark Energy Survey (DES)~\cite{Troxel:2017xyo}; in that case, the data vector has 227 elements, varying with angular separation, and different pairs of tomographic redshift bins. In this case, then, the number of independent elements of the covariance matrix is $227\times 228/2=25,878$. Which of these are most important to get right? What should the tolerance be when comparing different techniques or even different codes using the same technique? How many simulations need to be run in order to obtain accurate enough covariance matrices? 
+
+Here attempt to address these questions by considering several increasingly complex methods of identifying the elements of the covariance matrix that are most relevant. Although we will consider only the one example of DES cosmic shear measurements and projections, we think that our conclusions will be useful more generally.
+		
+	\section{DES Cosmic Shear: Data and Analysis}
 	\label{sec:methods}
 	
-	In this section, we explain the methodology used for each of the tests carried out for the analysis and comparison of the covariance matrices. 
-	
-	Our analysis is carried out using cosmic shear statistics $\xi_\pm(\theta)$, focusing for the most part on the Year 1 results of the Dark Energy Survey \citep{Abbott:2018cms} (DESY1), and also on predictions for DES Year 3 (DESY3). The data is divided into four tomographic redshift bins spanning the interval $0.20 - 1.30$, which gives us 10 bin combinations, each one containing 20 angular bins between 2.5 and 250 arcmin. We thus have 200 data points for each $\xi_+(\theta)$ and $\xi_-(\theta)$, giving us 400 in total. 
-	
-	We apply the angular cuts described in \citep{Abbott:2018cms}, which removes the scales most sensitive to baryonic effects; this leaves us with 167 points for $\xi_+(\theta)$ and 60 for $\xi_-(\theta)$, resulting in 227 data, which correspond to a $227 \times 227$ covariance matrix.
+	In this section, we explain the methodology used for each of the tests carried out for the analysis and comparison of the covariance matrices. Our analysis is carried out using cosmic shear statistics $\xi_\pm(\theta)$, focusing on the Year 1 results of the Dark Energy Survey \citep{Troxel:2017xyo,Abbott:2018cms} (DESY1) and also on predictions for DES Year 3 (DESY3). The data is divided into four tomographic redshift bins spanning the interval $0.20 < z < 1.30$, which yields 10 bin-pair combinations, each one containing 20 angular bins between 2.5 and 250 arcmin. We thus begin with 200 data points for each $\xi_+(\theta)$ and $\xi_-(\theta)$, giving 400 in total. We then apply the angular cuts described in \citep{Abbott:2018cms}, which removes the scales most sensitive to baryonic effects; this leaves 167 points for $\xi_+(\theta)$ and 60 for $\xi_-(\theta)$, resulting in 227 data points, which corresponds to a aforementioned $227 \times 227$ covariance matrix.
 	
 	The covariance matrices are obtained using two different codes: {\tt Cosmolike} \citep{Krause:2016jvl} and a simpler version of the code used to analyse the KiDS-450 survey \citep{Kohlinger:2017sxk}, hereafter referred to as CL and BJ, respectively. To perform cosmological parameter inference we use the {\tt CosmoSIS} \citep{Zuntz:2015med} pipeline, while employing the {\tt MultiNest} \citep{Feroz:2009fhb} sampler to explore the parameter space, with 500 {\tt livepoints}, {\tt efficiency} set to 0.3, {\tt tolerance} to 0.1 and {\tt constant efficiency} set to False.
 	
