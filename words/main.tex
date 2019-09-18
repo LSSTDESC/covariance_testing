@@ -248,7 +248,7 @@ Table~\ref{tab:constraints} shows the 16 parameters varied and the priors placed
 
 	% ----------------------------------------------------------------------
 	
-	\subsection{Shrinkage}
+	\section{Shrinkage}
 	\label{subsec:shrinkage}
 	
 	%There have been several methods proposed in the literature to compress the data vectors, extracting as much information as possible. Here we consider two: first compression at the map level \citep{Alonso:2017hhj}, where linear combination of the tomographic maps is used. If there are 4 tomographic bins, an uncompressed analysis would require ten separate 2-point functions (or 20 for cosmic shear), whereas a compression scheme leads to just a few uncorrelated maps. If there were 3 such maps, then only three 2-point functions would need to be used for the likelihood analysis.
@@ -265,7 +265,7 @@ Table~\ref{tab:constraints} shows the 16 parameters varied and the priors placed
 	
 	Here, we will demonstrate these two methods to compress the covariance matrices. In both cases, the data vector is shrunk by 90\%, which correspond to the covariance matrices being reduced by 99\%. 
 	
-	\subsubsection{Tomographic Compression}
+	\subsection{Tomographic Compression}
 	
 	This compression method is based on Karhunen-Lo\'eve decomposition for the shear power spectrum suggested by \citep{Alonso:2017hhj} and later applied to real space 2-point function in \citep{Bellini:2019ssw} for CFHTLens survey. This method generally finds the eigenmode with most of the signal-to-noise ratio contribution to the power spectrum, and then transforms the 2-point function in real space based on this eigenmode.
 	
@@ -319,94 +319,7 @@ Table~\ref{tab:constraints} shows the 16 parameters varied and the priors placed
 	%\eea
 	%Here the angular indices have been suppressed (there are two of them, one for each $w_\mu$), but the full tomographic complexity has been retained. The covariance matrix on the right includes a total of $N_t^2 \times N_t^2$ terms (some of which are equal because of symmetry) corresponding to all possible pairs of 2-point functions. But $C^b$ on the right contains only $N_t^2$ elements, and again these are ordered, so we can use only a subset of them. In the simplest case, where only one linear combination is needed so $\mu=\nu=1$, a single number (for each pair of angular bins) captures all the relevant information from the full covariance matrix.
 	
-	\subsubsection{2-Point Correlation Function}
-	
-	The compression here  takes place at the 2-point level \citep{Zablocki:2015zcm}, with the compressed data vector containing linear combinations of the many 2-point functions. In principle, this might work with only $N_p$ 2-point functions where $N_p$ is the number of free parameters, and each mode, or linear combination, contains all the information necessary about the parameter of interest. 
-	
-	For each parameter $p_\alpha$ that is varied, one captures a single linear mode
-	\be
-	y_\alpha = U_{\alpha i} D_i\
-	,\ee
-	where $D_i$ are the data points and the coefficients are defined as
-	\be \label{eq:compression_scheme}
-	U_{\alpha i} \equiv \frac{\partial T_j}{\partial p_\alpha} \, C^{-1}{}_{ji}\
-	,\ee
-	with $T_j$ being the theoretical prediction for the data point $D_j$.
-	The now much smaller data set $\{y_\alpha\}$, which contains as few as $N_p$ data points, carries with it its own covariance matrix, with which the $\chi^2$ can be computed for each point in parameter space. Propagating through shows that this covariance matrix is related to the original $C_{ij}$ via
-	\be
-	C_{\alpha\beta} = U_{\alpha i} C_{ij} U^T_{j\beta}.
-	\ee
-	In our case, our covariance matrix is  $227 \times 227$, while the number of parameters needed to specify the model is only 16, so $C_{\alpha\beta}$ is a $16\times 16$ matrix. We have apparently captured from the initial set of $(227 \times 228)/2 = 25,878$ independent elements of the covariance matrix a small subset (only 136 in this case) of linear combinations of these 25k elements that really matter. If two covariance matrices give the same set of $C_{\alpha\beta}$, it should not matter whether any of the other eighty thousand elements differ from one another.
-	
-	
-	\subsubsection{Invertible Transformation and Tolerance Testing}
-	
-	In the last section, we shrink the data vector and covariance matrices and find the most cosmological-informative modes in both. However, in order to make a tolerance testing of each element in the covariance, we not only need the cosmological-informative modes but also the uninformative modes. Suppose we find the informative set of modes for cosmology, the modes that are orthogonal to them, or the complementary set of the informative one, form a set of modes that are cosmological-uninformative. 
-	
-	To find these modes, we start off with the compression scheme presented in Eq. \ref{eq:compression_scheme}, which will serve as the basis for a rotation matrix $W_\alpha$. We then use the Gram-Schmidt decomposition to create $227 - N_p$ vectors orthonormal to $U_{\alpha}$, thus obtaining a unitary $227 \times 227$ matrix. We then have,
-	\be
-	C'_{\alpha\beta} = W_{\alpha i} C_{ij} W^T_{j\beta}.
-	\ee
-	%When this transformation is applied to the original matrix, $C_{ij}$, the first $N_p \times N_p$ elements of the new matrix will be the same as we had in $C_{\alpha\beta}$. Since our transformation spreads out the information contained in the compressed matrix, the relevant values for parameter estimation will be contained in the first $N_p$ rows and columns of the new covariance matrix. This means that we will have $N_p \left( 2 \times 227 - N_p \right)$ important elements, which is about an order of magnitude less than in the case of the full covariance matrix.
-	
-	\begin{figure}[]
-		\includegraphics[width=0.45\columnwidth]{Transformation_data.pdf}
-		
-		\bigskip
-		
-		\includegraphics[width=0.99\columnwidth]{Transformation_CM.pdf}
-		\caption{Illustration of the invertible transformation, $W$. It's components, $U$ and $U'$ are the compression scheme described in Sections \ref{subsec:shrinkage} and orthogonal components obtained using the Gram-Schmidt decomposition, respectively. \textbf{Top:} Transformation of the data vector, where D1 corresponds to compressed set, and D2 are uninformative for parameter constraints. \textbf{Bottom:} Transformation of the covariance matrix. The last square on the right, $C'$ is divided into four blocks: C1 is the most informative to cosmology, C2 are also relevant to constraints, but on a lower scale, and, finally, C3 is irrelevant to the $\chi^2$ calculation. \label{fig:transformation}}
-	\end{figure}
-	
-	With the invertible transformation $W$, shown in \figref{transformation}, the data vector and covariance matrix are transformed into sectional blocks. We will describe the meaning of each block here. The data vector is split into two blocks: D1 has the transformed data points that are sensitive to changes in the cosmological parameters, that is, the cosmological-sensitive data; D2 is generated by the modes that are orthogonal to D1, they will, in principle, be unaffected by changes to the cosmological parameters, which makes them uninformative for parameter constraints.
-	
-	The transformed covariance matrix is split into 4 blocks, with the off-diagonal ones being the transpose of each other. Block C1 is the variance and covariance of the cosmological-sensitive data, D1, it describes how well the cosmological-sensitive data is measured, and is, therefore, the one that contributes most to the $\chi^2$ calculation, and, consequently, to parameter constraints. Block C2 is the cross-correlation between D1 and D2, it is important for parameter constraints because it describe how D1 is affected by the uncertainty of D2.  Finally, C3 relates to the uninformative data, D2; it plays a minor role to $\chi^2$, so it affects the parameter constraints least.
-	
-	%With this invertible transformation W shown in \figref{illu-trans}, the data vector and covariance matrix are transformed into sectional blocks. We will describe the meaning of each blocks here. The data vector is split into two blocks. D1 is the block of transformed data points that are sensitive to the changes in cosmological parameter set, that is, the cosmological-sensitive data. D2 is generated by the modes that are orthogonal to the cosmological sensitive mode, they will in principle stays relatively constant when cosmological parameter changes and are uninformative for parameter constraints.
-	
-	%The transformed covariance matrix is split into 4 blocks, with the off-diagonal blocks being the transpose of each other, there are 3 different blocks. Block C1 is the variance and covariance of the cosmological informative data, or D1. This block contributes almost everything to the $\chi^2$ calculation. C1 describes how well the cosmological-sensitive data is measured, so the value in this block will affect the parameter constraints. Block C2 is the variance and covariance of the uninformative data, or D2. It plays a minor role in the $\chi^2$, so it will affect the parameter constraints less. C3 is the cross-correlation between D1 and D2, and it will affect the parameter constraints because it describes how D1 is affected by the uncertainty of D2.
-	
-	The next step is then to test the tolerance of different parts of the transformed covariance matrix. We first compare the results of increasing the error of each block separately by a factor of 100 and compare the results to constraints with the unmodified covariance, then we start by introducing smaller errors to the relevant blocks, C1 and C2 and analyse the corresponding increase in the parameter constraints.
-	
-%		In this section, we will introduce the methodology of tolerance testing on the covariance matrices in the new basis. We will show that after the basis transformation, we need to compare tremendously less elements from two covariance matrices.
-	
-%	Generally speaking, the parameter constraints will get wider when part of the covariance matrix gets larger, because this means that the data is worse measured. In the normal basis, each data points varies with the parameter set, so the change of each element in the covariance matrix will affect the constraints. However, since we have found a basis where some of the data points change with parameter set while others do not, the elements that matters to the cosmological constraints will also shrink. To be specific, the C1 and C2 blocks in Figure~\rf{illu-trans} are the only parts that impact the parameter constraints. 
-	
-%	In order to illustrate this statement, we will first perform a sanity check. We will make each of the blocks in the covariance matrices a large number and run a chain with that covariance. We run 3 tests by making
-%	1) C3,  
-%	2) C2, 
-%	3) C1 and C2,
-%	100 times of itself/themselves. In principle, we should see that the constraints for test 1 will not change, but will get wider for test 2 and will totally blow up for test 3.
-	
-%	Furthermore, we want to know how minor uncertainty on the informative elements of the covariance matrix will affect the cosmological constraints.
-	
-	
-	% ----------------------------------------------------------------------
-	% ----------------------------------------------------------------------
-	
-	\section{Results}
-	\label{sec:results}
-	
-	Ultimately, what matters is how well the likelihood does at extracting parameter constraints. Since most analyses assume a Gaussian likelihood, this boils down to how well the contours in parameter space agree when computing the $\chi^2$ using two different covariance matrices.
-	
-	For brevity, we show only constraints on $\Omega_m$ and $\sigma_8$.
-	
-	
-	%\figref{evector} shows an example of one of the eigenvectors, the one associated with the smallest eigenvalue. This low-eigenvalue mode picks up the differences between the correlation function at different angular scales (each vertical line delineates between 2-point functions of shears in different tomographic bin pairs).
-	
-	%	\begin{figure}
-	%		\includegraphics[width=0.9\columnwidth]{evector.png}
-	%		\caption{A simple scatter plot of elements of covariance matrices produced by two separate halo model codes. \label{fig:evector}}
-	%	\end{figure}
-	
-	% ----------------------------------------------------------------------
-	
-		
-	\subsection{Shrinkage}
-	
-	\subsubsection{Tomographic Compression}
-	
-	With  {\tt CosmoSIS}, we calculate the shear power spectrum $C_{\ell}$ of DES Year 1 with a fiducial cosmology at the best-fit parameters, and $\ell$-range $2-5000$. The left plot in \figref{ClDl}, shows the diagonal elements of the signal part and the noise part of $C_{\ell}$, while the right one shows the KL-transformed eigenmode $D_{\ell}$ of $C_{\ell}$. We can see that the first KL mode contains most of the SNR contribution to the power spectrum. If we want to recover most information, we can also include the second mode.
+		With  {\tt CosmoSIS}, we calculate the shear power spectrum $C_{\ell}$ of DES Year 1 with a fiducial cosmology at the best-fit parameters, and $\ell$-range $2-5000$. The left plot in \figref{ClDl}, shows the diagonal elements of the signal part and the noise part of $C_{\ell}$, while the right one shows the KL-transformed eigenmode $D_{\ell}$ of $C_{\ell}$. We can see that the first KL mode contains most of the SNR contribution to the power spectrum. If we want to recover most information, we can also include the second mode.
 	
 	\begin{figure*}
 		\includegraphics[width=0.7\columnwidth]{Cl_pst.png}
@@ -435,8 +348,49 @@ Table~\ref{tab:constraints} shows the 16 parameters varied and the priors placed
 	\end{figure*}
 	
 	If we now again make a one-to-one comparison of these two compressed covariance matrices. We can easily notice that the elevated clump at the bottom right for scatter of original matrices, which represent elements with great difference, are gone in the compressed covariance. Instead, the two covariance matrices just have a relative constant difference because of the different model they use. This shows that the divergence between CL and BJ covariance does not affect the overall signal to noise ratio a lot.
+
 	
-	\subsubsection{2-Point Correlation Function}
+	\subsection{Linear combinations of the data vector}
+	
+	The compression here  takes place at the 2-point level \citep{Zablocki:2015zcm}, with the compressed data vector containing linear combinations of the many 2-point functions. In principle, this might work with only $N_p$ 2-point functions where $N_p$ is the number of free parameters, and each mode, or linear combination, contains all the information necessary about the parameter of interest. 
+	
+	For each parameter $p_\alpha$ that is varied, one captures a single linear mode
+	\be
+	y_\alpha = U_{\alpha i} D_i\
+	,\ee
+	where $D_i$ are the data points and the coefficients are defined as
+	\be \label{eq:compression_scheme}
+	U_{\alpha i} \equiv \frac{\partial T_j}{\partial p_\alpha} \, C^{-1}{}_{ji}\
+	,\ee
+	with $T_j$ being the theoretical prediction for the data point $D_j$.
+	The now much smaller data set $\{y_\alpha\}$, which contains as few as $N_p$ data points, carries with it its own covariance matrix, with which the $\chi^2$ can be computed for each point in parameter space. Propagating through shows that this covariance matrix is related to the original $C_{ij}$ via
+	\be
+	C_{\alpha\beta} = U_{\alpha i} C_{ij} U^T_{j\beta}.
+	\ee
+	In our case, our covariance matrix is  $227 \times 227$, while the number of parameters needed to specify the model is only 16, so $C_{\alpha\beta}$ is a $16\times 16$ matrix. We have apparently captured from the initial set of $(227 \times 228)/2 = 25,878$ independent elements of the covariance matrix a small subset (only 136 in this case) of linear combinations of these 25k elements that really matter. If two covariance matrices give the same set of $C_{\alpha\beta}$, it should not matter whether any of the other eighty thousand elements differ from one another.
+	
+	
+	\section{Results}
+	\label{sec:results}
+	
+	Ultimately, what matters is how well the likelihood does at extracting parameter constraints. Since most analyses assume a Gaussian likelihood, this boils down to how well the contours in parameter space agree when computing the $\chi^2$ using two different covariance matrices.
+	
+	For brevity, we show only constraints on $\Omega_m$ and $\sigma_8$.
+	
+	
+	%\figref{evector} shows an example of one of the eigenvectors, the one associated with the smallest eigenvalue. This low-eigenvalue mode picks up the differences between the correlation function at different angular scales (each vertical line delineates between 2-point functions of shears in different tomographic bin pairs).
+	
+	%	\begin{figure}
+	%		\includegraphics[width=0.9\columnwidth]{evector.png}
+	%		\caption{A simple scatter plot of elements of covariance matrices produced by two separate halo model codes. \label{fig:evector}}
+	%	\end{figure}
+	
+	% ----------------------------------------------------------------------
+	
+		
+	
+	
+	
 	
 	\figref{compressiony1} compares the constraints obtained for the compressed covariance and dataset with the full one. The mean values agree at the $2 \sigma$ level, with the exception of $\eta$, which is not very well constrained in either analysis. The results for the compressed covariance are about 0.5\% broader, which shows that the information loss is negligible. 
 	
@@ -455,20 +409,6 @@ Table~\ref{tab:constraints} shows the 16 parameters varied and the priors placed
 		\caption{The upper right and lower left plots display the correlation matrix for BJ and CL respectively, while the lower right is the difference between the two. \label{fig:correlation}}
 	\end{figure}
 	
-	
-	\subsubsection{Tolerance Testing}
-	
-	Given that the Block C1 contains the most relevant elements, it was expected that any changes to it would also modify the parameter constraints. It is clear in 	\figref{tolerance1000} that this was not the case. Multiplying the elements of Blocs C1 and C3 did not alter the constraints, whereas changes made to Blocks C2 and C1+C2 did. To explain this, we need to look at what happens to $\chi^2$ when using the transformed dataset and covariance matrix. We have,
-		\be
-	v_i^\alpha \equiv U_{ij}^T \frac{\partial T_j}{\partial p_\alpha}
-	,\ee
-	
-	
-	
-	\begin{figure}
-		\includegraphics[width=0.9\columnwidth]{Multiply_error.pdf}
-		\caption{The upper right and lower left plots display the correlation matrix for BJ and CL respectively, while the lower right is the difference between the two. \label{fig:tolerance1000}}
-	\end{figure}
 	
 	
 	
@@ -511,6 +451,68 @@ Table~\ref{tab:constraints} shows the 16 parameters varied and the priors placed
 	
 	\textcolor{red}{Need to thank CAPES as well.}
 	
+	\appendix
+		\section{Invertible Transformation and Tolerance Testing}
+	
+	In the last section, we shrink the data vector and covariance matrices and find the most cosmological-informative modes in both. However, in order to make a tolerance testing of each element in the covariance, we not only need the cosmological-informative modes but also the uninformative modes. Suppose we find the informative set of modes for cosmology, the modes that are orthogonal to them, or the complementary set of the informative one, form a set of modes that are cosmological-uninformative. 
+	
+	To find these modes, we start off with the compression scheme presented in Eq. \ref{eq:compression_scheme}, which will serve as the basis for a rotation matrix $W_\alpha$. We then use the Gram-Schmidt decomposition to create $227 - N_p$ vectors orthonormal to $U_{\alpha}$, thus obtaining a unitary $227 \times 227$ matrix. We then have,
+	\be
+	C'_{\alpha\beta} = W_{\alpha i} C_{ij} W^T_{j\beta}.
+	\ee
+	%When this transformation is applied to the original matrix, $C_{ij}$, the first $N_p \times N_p$ elements of the new matrix will be the same as we had in $C_{\alpha\beta}$. Since our transformation spreads out the information contained in the compressed matrix, the relevant values for parameter estimation will be contained in the first $N_p$ rows and columns of the new covariance matrix. This means that we will have $N_p \left( 2 \times 227 - N_p \right)$ important elements, which is about an order of magnitude less than in the case of the full covariance matrix.
+	
+	\begin{figure}[]
+		\includegraphics[width=0.45\columnwidth]{Transformation_data.pdf}
+		
+		\bigskip
+		
+		\includegraphics[width=0.99\columnwidth]{Transformation_CM.pdf}
+		\caption{Illustration of the invertible transformation, $W$. It's components, $U$ and $U'$ are the compression scheme described in Sections \ref{subsec:shrinkage} and orthogonal components obtained using the Gram-Schmidt decomposition, respectively. \textbf{Top:} Transformation of the data vector, where D1 corresponds to compressed set, and D2 are uninformative for parameter constraints. \textbf{Bottom:} Transformation of the covariance matrix. The last square on the right, $C'$ is divided into four blocks: C1 is the most informative to cosmology, C2 are also relevant to constraints, but on a lower scale, and, finally, C3 is irrelevant to the $\chi^2$ calculation. \label{fig:transformation}}
+	\end{figure}
+	
+	With the invertible transformation $W$, shown in \figref{transformation}, the data vector and covariance matrix are transformed into sectional blocks. We will describe the meaning of each block here. The data vector is split into two blocks: D1 has the transformed data points that are sensitive to changes in the cosmological parameters, that is, the cosmological-sensitive data; D2 is generated by the modes that are orthogonal to D1, they will, in principle, be unaffected by changes to the cosmological parameters, which makes them uninformative for parameter constraints.
+	
+	The transformed covariance matrix is split into 4 blocks, with the off-diagonal ones being the transpose of each other. Block C1 is the variance and covariance of the cosmological-sensitive data, D1, it describes how well the cosmological-sensitive data is measured, and is, therefore, the one that contributes most to the $\chi^2$ calculation, and, consequently, to parameter constraints. Block C2 is the cross-correlation between D1 and D2, it is important for parameter constraints because it describe how D1 is affected by the uncertainty of D2.  Finally, C3 relates to the uninformative data, D2; it plays a minor role to $\chi^2$, so it affects the parameter constraints least.
+	
+	%With this invertible transformation W shown in \figref{illu-trans}, the data vector and covariance matrix are transformed into sectional blocks. We will describe the meaning of each blocks here. The data vector is split into two blocks. D1 is the block of transformed data points that are sensitive to the changes in cosmological parameter set, that is, the cosmological-sensitive data. D2 is generated by the modes that are orthogonal to the cosmological sensitive mode, they will in principle stays relatively constant when cosmological parameter changes and are uninformative for parameter constraints.
+	
+	%The transformed covariance matrix is split into 4 blocks, with the off-diagonal blocks being the transpose of each other, there are 3 different blocks. Block C1 is the variance and covariance of the cosmological informative data, or D1. This block contributes almost everything to the $\chi^2$ calculation. C1 describes how well the cosmological-sensitive data is measured, so the value in this block will affect the parameter constraints. Block C2 is the variance and covariance of the uninformative data, or D2. It plays a minor role in the $\chi^2$, so it will affect the parameter constraints less. C3 is the cross-correlation between D1 and D2, and it will affect the parameter constraints because it describes how D1 is affected by the uncertainty of D2.
+	
+	The next step is then to test the tolerance of different parts of the transformed covariance matrix. We first compare the results of increasing the error of each block separately by a factor of 100 and compare the results to constraints with the unmodified covariance, then we start by introducing smaller errors to the relevant blocks, C1 and C2 and analyse the corresponding increase in the parameter constraints.
+		\section{Tolerance Testing}
+	
+	Given that the Block C1 contains the most relevant elements, it was expected that any changes to it would also modify the parameter constraints. It is clear in 	\figref{tolerance1000} that this was not the case. Multiplying the elements of Blocs C1 and C3 did not alter the constraints, whereas changes made to Blocks C2 and C1+C2 did. To explain this, we need to look at what happens to $\chi^2$ when using the transformed dataset and covariance matrix. We have,
+		\be
+	v_i^\alpha \equiv U_{ij}^T \frac{\partial T_j}{\partial p_\alpha}
+	,\ee
+	
+	
+	
+	\begin{figure}
+		%\includegraphics[width=0.9\columnwidth]{Multiply_error.pdf}
+		\caption{The upper right and lower left plots display the correlation matrix for BJ and CL respectively, while the lower right is the difference between the two. \label{fig:tolerance1000}}
+	\end{figure}
+	
+
+	
+%		In this section, we will introduce the methodology of tolerance testing on the covariance matrices in the new basis. We will show that after the basis transformation, we need to compare tremendously less elements from two covariance matrices.
+	
+%	Generally speaking, the parameter constraints will get wider when part of the covariance matrix gets larger, because this means that the data is worse measured. In the normal basis, each data points varies with the parameter set, so the change of each element in the covariance matrix will affect the constraints. However, since we have found a basis where some of the data points change with parameter set while others do not, the elements that matters to the cosmological constraints will also shrink. To be specific, the C1 and C2 blocks in Figure~\rf{illu-trans} are the only parts that impact the parameter constraints. 
+	
+%	In order to illustrate this statement, we will first perform a sanity check. We will make each of the blocks in the covariance matrices a large number and run a chain with that covariance. We run 3 tests by making
+%	1) C3,  
+%	2) C2, 
+%	3) C1 and C2,
+%	100 times of itself/themselves. In principle, we should see that the constraints for test 1 will not change, but will get wider for test 2 and will totally blow up for test 3.
+	
+%	Furthermore, we want to know how minor uncertainty on the informative elements of the covariance matrix will affect the cosmological constraints.
+	
+	
+	% ----------------------------------------------------------------------
+	% ----------------------------------------------------------------------
+	
+
 	% This work used some telescope which is operated/funded by some agency or consortium or foundation ...
 	
 	% We acknowledge the use of An-External-Tool-like-NED-or-ADS.
