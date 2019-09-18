@@ -107,9 +107,11 @@ Here attempt to address these questions by considering several increasingly comp
 	\section{DES Cosmic Shear: Data and Analysis}
 	\label{sec:methods}
 	
-	In this section, we explain the methodology used for each of the tests carried out for the analysis and comparison of the covariance matrices. Our analysis is carried out using cosmic shear statistics $\xi_\pm(\theta)$, focusing on the Year 1 results of the Dark Energy Survey \citep{Troxel:2017xyo,Abbott:2018cms} (DESY1) and also on predictions for DES Year 3 (DESY3). The data is divided into four tomographic redshift bins spanning the interval $0.20 < z < 1.30$, which yields 10 bin-pair combinations, each one containing 20 angular bins between 2.5 and 250 arcmin. We thus begin with 200 data points for each $\xi_+(\theta)$ and $\xi_-(\theta)$, giving 400 in total. We then apply the angular cuts described in \citep{Abbott:2018cms}, which removes the scales most sensitive to baryonic effects; this leaves 167 points for $\xi_+(\theta)$ and 60 for $\xi_-(\theta)$, resulting in 227 data points, which corresponds to a aforementioned $227 \times 227$ covariance matrix.
+	In this section, we explain the methodology used for each of the tests carried out for the analysis and comparison of the covariance matrices. Our analysis is carried out using cosmic shear statistics $\xi_\pm(\theta)$, focusing on the Year 1 results of the Dark Energy Survey \citep{Troxel:2017xyo,Abbott:2018cms} (DESY1) and also on predictions for DES Year 3 (DESY3). The data is divided into four tomographic redshift bins spanning the interval $0.20 < z < 1.30$, which yields 10 bin-pair combinations, each one containing 20 angular bins between 2.5 and 250 arcmin. We thus begin with 200 data points for each $\xi_+(\theta)$ and $\xi_-(\theta)$, giving 400 in total. We then apply the angular cuts described in \citep{Abbott:2018cms}, which removes the scales most sensitive to baryonic effects; this leaves 167 points for $\xi_+(\theta)$ and 60 for $\xi_-(\theta)$, resulting in 227 data points, which corresponds to the aforementioned $227 \times 227$ covariance matrix. 
+		
+Table~\ref{tab:constraints} shows the 16 parameters varied and the priors placed on them. To perform cosmological parameter inference we use the {\tt CosmoSIS} \citep{Zuntz:2015med} pipeline, while employing the {\tt MultiNest} \citep{Feroz:2009fhb} sampler to explore the parameter space, with 500 {\tt livepoints}, {\tt efficiency} set to 0.3, {\tt tolerance} to 0.1 and {\tt constant efficiency} set to False.
+
 	
-	The covariance matrices are obtained using two different codes: {\tt Cosmolike} \citep{Krause:2016jvl} and a simpler version of the code used to analyse the KiDS-450 survey \citep{Kohlinger:2017sxk}, hereafter referred to as CL and BJ, respectively. To perform cosmological parameter inference we use the {\tt CosmoSIS} \citep{Zuntz:2015med} pipeline, while employing the {\tt MultiNest} \citep{Feroz:2009fhb} sampler to explore the parameter space, with 500 {\tt livepoints}, {\tt efficiency} set to 0.3, {\tt tolerance} to 0.1 and {\tt constant efficiency} set to False.
 	
 	\begin{table}
 		\centering
@@ -138,11 +140,16 @@ Here attempt to address these questions by considering several increasingly comp
 			\hline
 			\hline
 		\end{tabular}
-		\caption{List of the priors used in the analysis for parameter constraints. For the cosmological parameters, we fix $w = -1.0$, $\Omega_k =  0.0$ and $\tau =  0.08$. The astrophysical parameters are associated with the intrinsic alignment, they follow the relation $A(z) = A[(1+z)/1.62]^{\eta}$, we have also $z_0 = 0.62$. Lastly, for systematics we have $m^i$ corresponding to the shear calibration, and  $\Delta z^i$ for the source photo-$z$ shift, with $i = 1, 4$ in both cases. The lens photo-$z$ shift parameters $\Delta z^i$, $i = 1, 5$ are fixed to zero.}
+		\caption{List of the priors used in the analysis for parameter constraints ($\mathcal{U}$ denotes flat in the given range and $\mathcal{G}$ is gaussian with mean equal to its first argument and dispersion equal to its second). For the cosmological parameters, we fix $w = -1.0$, $\Omega_k =  0.0$ and $\tau =  0.08$. The astrophysical parameters are associated with the intrinsic alignment, they follow the relation $A(z) = A[(1+z)/1.62]^{\eta}$. Lastly, for systematics we have $m^i$ corresponding to the shear calibration and  $\Delta z^i$ for the source photo-$z$ shift, with $i = 1, 4$ in both cases.}
 		\label{tab:constraints}
 	\end{table}
 	
-	\subsection{One-to-one Comparison}
+	The covariance matrices are obtained using two different codes: 
+	\begin{itemize}
+	\item {\tt Cosmolike} \citep{Krause:2016jvl} (CL) was used in the initial DESY1 analysis and here we simply take the Y1 covariance and divide by the ratio of the Y3/Y1 areas (roughly a factor of 3) to generate a Y3 covariance matrix
+	\item We ran the code used to analyse the KiDS-450 survey \citep{Kohlinger:2017sxk} (BJ) using DESY3 parameters and tomographic bins (all taken to be the same as Y1 apart from the area), but using only the gaussian part. 
+	\end{itemize}
+	Thus, throughout, the covariance labels CL and BJ differ for several reasons: first, they are two independent codes and, second, BJ was run with very simple settings. To be clear, the BJ code does contain all the functionality in CL, but we did not make use of that in order to accentuate the differences. This will help us assess different validation techniques.
 	
 	This is a simple matter of comparing plotting the elements of two covariance matrices against each other to explain the differences in the parameter contraints. This will also be useful later on when talking about compressed covariances.
 	
