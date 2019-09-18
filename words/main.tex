@@ -67,7 +67,7 @@
 
 % Custom commands from LSST DESC, see texmf/styles/lsstdesc_macros.sty
 \usepackage{lsstdesc_macros}
-
+\newcommand\scott[1]{{\bf [Scott: #1]}}
 \usepackage{graphicx}
 \graphicspath{{./}{./figures/}}
 \bibliographystyle{apj}
@@ -151,8 +151,8 @@ Table~\ref{tab:constraints} shows the 16 parameters varied and the priors placed
 	\end{itemize}
 	Thus, throughout, the covariance labels CL and BJ differ for several reasons: first, they are two independent codes and, second, BJ was run with very simple settings. To be clear, the BJ code does contain all the functionality in CL, but, in order to accentuate the differences, we ran with the simplest settings. The ensuing larger differences will help us assess different validation techniques.
 	
-\figref{y3-comparison} shows the results for the cosmological constraints, where we can see that, while the best-fit values agree within a $2 \sigma$ interval, the constraints are up to $25\%$ broader for $\sigma_8$. This is also true for the other parameters, where, on average, constraints obtained with CL are about $18\%$ wider.
-	
+\figref{y3-comparison} shows the results for the projected cosmological constraints for DESY3. These projections use the same data vector and cuts as was used for Y1, but the two different covariance matrices. The best-fit values agree within 1-$\sigma$ but the constraints are up to $25\%$ broader when the CL covariance matrix is used. \scott{not sure this is clear: can we simply quote the 1-sigma errors?}
+This is also true for the other parameters, where, on average, constraints obtained with CL are about $18\%$ wider.	
 		
 	\begin{figure}
 		\includegraphics[width=0.9\columnwidth]{Y3-comparison.pdf}
@@ -163,23 +163,21 @@ Table~\ref{tab:constraints} shows the 16 parameters varied and the priors placed
 	
 \section{Element-by-element comparison}
 
-	This is a simple matter of comparing plotting the elements of two covariance matrices against each other to explain the differences in the parameter constraints. This will also be useful later on when talking about compressed covariances.
-	
-	
-	Using the same data vector, we compare the constraints obtained for two different covariance matrices: CL and BJ.  	We make a scatter plot of the elements of the two matrices in \figref{one-to-one}, where we can see that the elements of CL are, in general, much larger than BJ's, differing in up to 3 orders of magnitude. This is in accordance to what we see in the parameter constraints: more variance in the covariance matrix translates to less constraining power.
+	If there was only a single data point, then the covariance matrix would contain only a single number, and comparing two covariance matrices to try to understand why they get different constraints would be as simple as comparing these two numbers. 
+The simplest generalization of this is to do an element-by-element comparison of the two covariance matrices.
+We make a scatter plot of the elements of the two matrices in \figref{one-to-one}, where we can see that the elements of CL are, in general, larger than BJ's, differing by up to 3 orders of magnitude. In some ways, this is useful and reassuring, as it aligns with what we see in the parameter constraints: larger elements in the covariance matrix translates to less constraining power.
 	
 	\begin{figure}
 		\includegraphics[width=0.9\columnwidth]{One-to-one-Y3_BJ-CL.pdf}
-		\caption{Scatter plot of the elements of the covariance matrices BJ and CL.
+		\caption{Scatter plot of the elements of the covariance matrices BJ and CL. \scott{Explain color coding; also, see comment in text.}
 			\label{fig:one-to-one}}
 	\end{figure}
 	
-	% ----------------------------------------------------------------------
-	% ----------------------------------------------------------------------
+\scott{Can we identify the diagonal elements? Can we show where in the 227x227 space the ones with the biggest differences live?}
 	
 \section{Eigenvalues}
 	
-	An intuitive approach to identifying the most contributing elements of a covariance matrix is to look at its eigenvalues, since we can associate them to the variance. The lowest eigenvalues would correspond to the least variance and therefore hold the most information, whereas the highest eigenvalues would implicate larger error and thus contribute significantly less, which implies that the most important elements of the matrix are those with the lowest eigenvalues. To verify this assumption, we need to look at the parameter constraints: removing the elements with the highest eigenvalues should not alter our results; the opposite, however, should give us broader constraints. Our procedure consists of first diagonalizing the covariance matrix in order to calculate its eigenvalues and then replacing the eigenvalues of interest with numbers of about nine orders of magnitude higher, thus removing their effective contribution; we then obtain a new covariance matrix with the modified eigenvalues. Finally, we perform a cosmological analysis with the new covariance matrix, to constrain the parameters of our model. 
+	The next simplest thing to try is to explore the eigenvalues of the covariance matrix. Each is associated with a linear combination of the data vector, or a \emph{mode}, and it is possible that identifying the modes that have the most discrepant eigenvalues will give guidance on how to reconcile differences.  We plot the eigenvalues for these matrices in \figref{coveigen}. At a first glance, both curves show reasonable agreement, with values differing only by an average of $\approx 15\%$, but we should keep in mind that the order of magnitude of the values vary greatly, which makes it difficult to compare them efficiently with this methodology, furthermore, it is not clear which elements are most important.
 	
 
 	\begin{figure}
@@ -187,10 +185,12 @@ Table~\ref{tab:constraints} shows the 16 parameters varied and the priors placed
 		\caption{A log plot showing the $227$ eigenvalues of CL (blue) and BJ (orange). \label{fig:coveigen}}
 	\end{figure}
 
+
+	
+	The lowest eigenvalues would correspond to the least variance and therefore hold the most information, whereas the highest eigenvalues would implicate larger error and thus contribute significantly less, which implies that the most important elements of the matrix are those with the lowest eigenvalues. To verify this assumption, we need to look at the parameter constraints: removing the elements with the highest eigenvalues should not alter our results; the opposite, however, should give us broader constraints. Our procedure consists of first diagonalizing the covariance matrix in order to calculate its eigenvalues and then replacing the eigenvalues of interest with numbers of about nine orders of magnitude higher, thus removing their effective contribution; we then obtain a new covariance matrix with the modified eigenvalues. Finally, we perform a cosmological analysis with the new covariance matrix, to constrain the parameters of our model. 
+	
 		
 	We perform two different analysis: the first consist of modifying the fifty lowest eigenvalues, and for the second, we take the fifty highest.  \figref{eigenvalues} shows the results of both approaches compared to constraints for the original covariance matrix. We can see in the Posterior Density Functions (pdfs) that the mean values of both parameters are well within the $2\sigma$ interval, which is also true for all the other parameters. As for the constraining power, the sizes of the constraints are within less than 5\% of each other for almost all of the parameters. Since the results are similar for both approaches, it becomes clear that ranking eigenvalues is not the most efficient way of evaluating where the most contributing elements of the covariance matrix lie.
-	
-	The eigenvalues are also used to try to identify the differences in parameter constraints for CL and BJ shown in the previous section. We plot the eigenvalues for these matrices in \figref{coveigen}. At a first glance, both curves show reasonable agreement, with values differing only by an average of $\approx 15\%$, but we should keep in mind that the order of magnitude of the values vary greatly, which makes it difficult to compare them efficiently with this methodology, furthermore, it is not clear which elements are most important.
 	
 	
 	\begin{figure}
