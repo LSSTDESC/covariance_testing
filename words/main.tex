@@ -383,10 +383,6 @@ constraining power.
 	\ee
 	In our case, our covariance matrix is  $227 \times 227$, while the number of parameters needed to specify the model is only 16, so $C_{\alpha\beta}$ is a $16\times 16$ matrix. We have apparently captured from the initial set of $(227 \times 228)/2 = 25,878$ independent elements of the covariance matrix a small subset (only 136 in this case) of linear combinations of these 25k elements that really matter. If two covariance matrices give the same set of $C_{\alpha\beta}$, it should not matter whether any of the other eighty thousand elements differ from one another.
 	
-	
-	\section{Results}
-	\label{sec:results}
-	
 	Ultimately, what matters is how well the likelihood does at extracting parameter constraints. Since most analyses assume a Gaussian likelihood, this boils down to how well the contours in parameter space agree when computing the $\chi^2$ using two different covariance matrices.
 	
 	For brevity, we show only constraints on $\Omega_m$ and $\sigma_8$.
@@ -410,7 +406,7 @@ constraining power.
 	
 	\begin{figure}
 		\includegraphics[width=0.9\columnwidth]{Compression/CompressionY1_wm-sigma8.pdf}
-		\caption{Constraints on cosmological parameters $\Omega_m$ and $\sigma_8$ for the original DESY1 covariance matrix (in purple) and for the compressed one (in blue). \label{fig:compressiony1}}
+		\caption{Constraints on cosmological parameters $\Omega_m$ and $\sigma_8$ for the original DESY1 covariance matrix (in purple) \scott{Purple looks much broader, which doesn't make sense since the compressed data vector has to have less information.} and for the compressed one (in blue). \label{fig:compressiony1}}
 	\end{figure}
 	
 	One relevant point in this analysis is at which point to take the derivative of each parameter. When we wish to compare the results of our compression scheme with those obtained with the full covariance matrix and data set, it is important to derivate each parameter at their respective mean value (obtained by performing the analysis with the full covariance matrix). The shape and variance of the posterior is not dependent on the derivative, but the best-fit value shifts according to the point where the derivative is taken.
@@ -420,7 +416,7 @@ constraining power.
 	
 	\begin{figure}
 		\includegraphics[width=0.9\columnwidth]{Correlation_compression.pdf}
-		\caption{The upper right and lower left plots display the correlation matrix for BJ and CL respectively, while the lower right is the difference between the two. \label{fig:correlation}}
+		\caption{The upper right and lower left plots display the correlation matrix for BJ and CL respectively, while the lower right is the difference between the two. \scott{Since the correlation matrices are similar, can you add a panel that compares the diagonal elements? The differences there might explain the differences in the constraints.} \label{fig:correlation}}
 	\end{figure}
 	
 	
