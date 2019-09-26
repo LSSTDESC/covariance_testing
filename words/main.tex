@@ -156,7 +156,7 @@ This is also true for the other parameters, where, on average, constraints obtai
 		
 	\begin{figure}
 		\includegraphics[width=0.9\columnwidth]{Y3-comparison.pdf}
-		\caption{Constraints on cosmological parameters $\Omega_m$ and $\sigma_8$ for two covariance matrices produced for cosmic shear for DESY3. The purple curve is for CL while the blue is for BJ. The constraints are about $18\%$ larger for the former, indicating that the two matrices have quantifiable differences between them. \label{fig:y3-comparison}}
+		\caption{\textcolor{red}{These plots will be replaced.} Constraints on cosmological parameters $\Omega_m$ and $\sigma_8$ for two covariance matrices produced for cosmic shear for DESY3. The purple curve is for CL while the blue is for BJ. The constraints are about $18\%$ larger for the former, indicating that the two matrices have quantifiable differences between them. \label{fig:y3-comparison}}
 	\end{figure}
 	
 
@@ -168,8 +168,8 @@ The simplest generalization of this is to do an element-by-element comparison of
 We make a scatter plot of the elements of the two matrices in \figref{one-to-one}, where we can see that the elements of CL are, in general, larger than BJ's, differing by up to 3 orders of magnitude. In some ways, this is useful and reassuring, as it aligns with what we see in the parameter constraints: larger elements in the covariance matrix translates to less constraining power.
 	
 	\begin{figure}
-		\includegraphics[width=0.9\columnwidth]{One-to-one-Y3_BJ-CL.pdf}
-		\caption{Scatter plot of the elements of the covariance matrices BJ and CL. \scott{Explain color coding; also, see comment in text.}
+		\includegraphics[width=0.9\columnwidth]{One-to-one-Y1_DES-BJ.pdf}
+		\caption{Scatter plot of the elements of the covariance matrices BJ and DES. The reddish tint identifies the diagonal elements. \scott{Explain color coding; also, see comment in text.}
 			\label{fig:one-to-one}}
 	\end{figure}
 	
@@ -189,24 +189,30 @@ We make a scatter plot of the elements of the two matrices in \figref{one-to-one
 	
 	The lowest eigenvalues correspond to modes with the smallest variance but since they are not normalized, it is unclear how this variance compares to the signal in the mode. Let us nonetheless explore the possibility that the modes with the lowest variance provide the most information and therefore dropping the modes with the largest eigenvalues would not affect the final result.
 Our procedure consists of first diagonalizing the covariance matrix in order to calculate its eigenvalues and then replacing the large eigenvalues with numbers much larger (nine orders of magnitude higher), thus removing their effective contribution; we then rotate back to the original basis and perform a cosmological analysis with the new covariance matrix, to constrain the parameters of our model. 
+
+\figref{eig_snr} shows the results obtained after "removing'' the 200 modes with the largest eigenvalues (by multiplying those eigenvalues by a very large number). 
+\textcolor{red}{
+The constraints widen at the 10\% level. This is consistent with the fact that we are throwing away about 20\% of the data. However, it is inconsistent with the notion that this 20\% is irrelevant. On the contrary, the modes with the largest variance seem to contribute as much information as the rest of the modes.  \figref{eigenvalues} also shows the results when the modes with the smallest eigenvalues are removed. Counterintuitively, this does not broaden the constraints much \scott{Maybe good to quote error bars here especially on $S_8\equiv \sigma_8 (\Omega_m/0.3)^{0.5}$.} We see that the modes with the smallest eigenvalues carry less information. Clearly, a different way of ordering the modes, other than simply looking at the eigenvalues, is called for.}
+
 	
 	
- \figref{eigenvalues} shows the results obtained after ``removing'' the 50 modes with the largest eigenvalues (by multiplying those eigenvalues by a very large number). The constraints widen at the 10\% level. This is consistent with the fact that we are throwing away about 20\% of the data. However, it is inconsistent with the notion that this 20\% is irrelevant. On the contrary, the modes with the largest variance seem to contribute as much information as the rest of the modes.  \figref{eigenvalues} also shows the results when the modes with the smallest eigenvalues are removed. Counterintuitively, this does not broaden the constraints much \scott{Maybe good to quote error bars here especially on $S_8\equiv \sigma_8 (\Omega_m/0.3)^{0.5}$.} We see that the modes with the smallest eigenvalues carry less information. Clearly, a different way of ordering the modes, other than simply looking at the eigenvalues, is called for.
+ %\figref{eigenvalues} shows the results obtained after ``removing'' the 50 modes with the largest eigenvalues (by multiplying those eigenvalues by a very large number). The constraints widen at the 10\% level. This is consistent with the fact that we are throwing away about 20\% of the data. However, it is inconsistent with the notion that this 20\% is irrelevant. On the contrary, the modes with the largest variance seem to contribute as much information as the rest of the modes.  \figref{eigenvalues} also shows the results when the modes with the smallest eigenvalues are removed. Counterintuitively, this does not broaden the constraints much \scott{Maybe good to quote error bars here especially on $S_8\equiv \sigma_8 (\Omega_m/0.3)^{0.5}$.} We see that the modes with the smallest eigenvalues carry less information. Clearly, a different way of ordering the modes, other than simply looking at the eigenvalues, is called for.
  
  
 % both approaches compared to constraints for the original covariance matrix. We can see in the Posterior Density Functions (pdfs) that the mean values of both parameters are well within the $2\sigma$ interval, which is also true for all the other parameters. As for the constraining power, the sizes of the constraints are within less than 5\% of each other for almost all of the parameters. Since the results are similar for both approaches, it becomes clear that ranking eigenvalues is not the most efficient way of evaluating where the most contributing elements of the covariance matrix lie.
 	
-	
 	\begin{figure}
-		\includegraphics[width=0.9\columnwidth]{Eigenvalues/Eigenvalues_wm-sigma8.pdf}
-		\caption{Constraints on cosmological parameters $\Omega_m$ and $\sigma_8$ for the original DESY1 covariance matrix (in purple) and for two new covariance matrices obtained by setting the fifty highest eigenvalues of the original matrix to nine orders of magnitude higher (in blue), and by replacing the fifty lowest eigenvalues to nine order of magnitude lower (in magenta). \label{fig:eigenvalues}}
+		\includegraphics[width=0.9\columnwidth]{Parameters-200.pdf}
+		\caption{Constraints on cosmological parameters $\Omega_m$ and $\sigma_8$ for the original DESY1 covariance matrix (in purple) and for two new covariance matrices obtained by setting the 200 highest eigenvalues of the original matrix to nine orders of magnitude higher (in blue), and by replacing the 200 lowest values of the SNR to seven order of magnitude lower (in magenta). \label{fig:eig_snr}}
+%		\includegraphics[width=0.9\columnwidth]{Eigenvalues/Eigenvalues_wm-sigma8.pdf}
+%		\caption{Constraints on cosmological parameters $\Omega_m$ and $\sigma_8$ for the original DESY1 covariance matrix (in purple) and for two new covariance matrices obtained by setting the fifty highest eigenvalues of the original matrix to nine orders of magnitude higher (in blue), and by replacing the fifty lowest eigenvalues to nine order of magnitude lower (in magenta). \label{fig:eigenvalues}}
 	\end{figure}
 	
 	% ----------------------------------------------------------------------
 	
 	\section{Signal-to-noise ratio}
 	
-	Instead of looking only at the ``noise'' -- or the eigenvalues of the covariance matrix -- a better way to assess the importance of modes is to consider the signal as well. We can define the expected signal-to-noise ratio (SNR) as
+	Instead of looking only at the "noise'' -- or the eigenvalues of the covariance matrix -- a better way to assess the importance of modes is to consider the signal as well. We can define the expected signal-to-noise ratio (SNR) as
 	%Since the values of the data points vary by many orders of magnitude, the range of eigenvalues in \figref{evector} is a bit misleading. In addition, it is not clear which eigenvectors should be dropped: should it be those with large eigenvalues (noise) or small ones (the noise is noisy)? Ideally, what we would like is to create a list of eigenvectors ordered in some way and drop the least important. This ties into the section below on Shrinkage. A very simple way to do this is to note that the total signal to noise squared is
 	\be
 	\left(\frac{S}{N}\right)^2 = \sum_{ij} T_i C^{-1}_{ij} T_j\
