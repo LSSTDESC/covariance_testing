@@ -11,45 +11,45 @@ Database file #1: mainNotes.bib
 Database file #2: main.bib
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Warning--empty journal in Bellini:2019ssw
-You've used 11 entries,
+You've used 12 entries,
             3085 wiz_defined-function locations,
-            730 strings with 6469 characters,
-and the built_in function-call counts, 4878 in all, are:
-= -- 429
-> -- 292
-< -- 6
-+ -- 96
-- -- 102
-* -- 383
-:= -- 912
-add.period$ -- 11
-call.type$ -- 11
-change.case$ -- 67
-chr.to.int$ -- 11
-cite$ -- 12
-duplicate$ -- 206
-empty$ -- 317
-format.name$ -- 121
-if$ -- 987
+            739 strings with 6655 characters,
+and the built_in function-call counts, 5323 in all, are:
+= -- 471
+> -- 314
+< -- 7
++ -- 103
+- -- 109
+* -- 414
+:= -- 993
+add.period$ -- 12
+call.type$ -- 12
+change.case$ -- 72
+chr.to.int$ -- 12
+cite$ -- 13
+duplicate$ -- 225
+empty$ -- 348
+format.name$ -- 131
+if$ -- 1082
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 11
-newline$ -- 37
-num.names$ -- 44
-pop$ -- 70
+missing$ -- 12
+newline$ -- 40
+num.names$ -- 48
+pop$ -- 73
 preamble$ -- 1
-purify$ -- 67
+purify$ -- 72
 quote$ -- 0
-skip$ -- 182
+skip$ -- 203
 stack$ -- 0
-substring$ -- 248
+substring$ -- 278
 swap$ -- 0
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 99
+type$ -- 108
 warning$ -- 1
-while$ -- 42
+while$ -- 46
 width$ -- 0
-write$ -- 112
+write$ -- 122
 (There was 1 error message)
