@@ -358,7 +358,7 @@ constraining power.
 		\includegraphics[width=0.68\columnwidth]{kl_comp_cl.png}
 		\includegraphics[width=0.68\columnwidth]{kl_comp_bj.png}
 		\includegraphics[width=0.54\columnwidth]{kl_scatter.png}
-		\caption{\textbf{Left:} CL covariance matrix compressed by the first KL-mode. \textbf{Middle:} BJ covariance matrix compressed by the first KL-mode. \textbf{Right:} One-to-One scatter of the two compressed matrices \label{fig:comp-cov}}
+		\caption{\textbf{Left:} CL covariance matrix compressed by the first KL-mode. \textbf{Middle:} BJ covariance matrix compressed by the first KL-mode. \textbf{Right:} \scott{update plot} One-to-One scatter of the two compressed matrices \label{fig:comp-cov}}
 	\end{figure*}
 	
 	If we now again make a one-to-one comparison of these two compressed covariance matrices. We can easily notice that the elevated clump at the bottom right for scatter of original matrices \scott{not sure what this refers to}, which represent elements with great difference, are gone in the compressed covariance. Instead, the two covariance matrices just have a relative constant difference because of the different model they use. This shows that the divergence between CL and BJ covariance does not affect the overall signal to noise ratio a lot. \scott{Shouldn't we make the point that CL is larger and that explains the broader constraints? Is this for Y1 or Y3? Do we know what the constraints look like when running with only this single KL mode?}.
