@@ -100,16 +100,18 @@
 	\section{Introduction}
 	\label{sec:intro}
 	
-Almost all analyses of cosmological data use a likelihood function that requires a covariance matrix. If the data set has $N$ data points, the covariance matrix is a symmetric $N\times N$ and captures the errors in the measurements, including those that are correlated from one point to another. As data sets grow, the number of elements in the covariance matrix is becoming too large to verify each individual element. For example, we will focus on cosmic shear measurements from the Dark Energy Survey (DES)~\cite{Troxel:2017xyo}; in that case, the data vector has 227 elements, varying with angular separation, and different pairs of tomographic redshift bins. In this case, then, the number of independent elements of the covariance matrix is $227\times 228/2=25,878$. Which of these are most important to get right? What should the tolerance be when comparing different techniques or even different codes using the same technique? How many simulations need to be run in order to obtain accurate enough covariance matrices? 
+	Almost all analyses of cosmological data use a likelihood function that requires a covariance matrix. If the data set has $N$ data points, the covariance matrix is a symmetric $N\times N$ and captures the errors in the measurements, including those that are correlated from one point to another. As data sets grow, the number of elements in the covariance matrix is becoming too large to verify each individual element. For example, we will focus on cosmic shear measurements from the Dark Energy Survey (DES)~\cite{Troxel:2017xyo}; in that case, the data vector has 227 elements, varying with angular separation, and different pairs of tomographic redshift bins. In this case, then, the number of independent elements of the covariance matrix is $227\times 228/2=25,878$. Which of these are most important to get right? What should the tolerance be when comparing different techniques or even different codes using the same technique? How many simulations need to be run in order to obtain accurate enough covariance matrices? 
 
-Here attempt to address these questions by considering several increasingly complex methods of identifying the elements of the covariance matrix that are most relevant. Although we will consider only the one example of DES cosmic shear measurements and projections, we think that our conclusions will be useful more generally. In \S\ref{sec:methods}, we describe the data set used and the pair of covariance matrices constructed in order to test different validation schemes. The next 3 sections walk through increasingly complex ways of comparing these two matrices. Before diving in, we comment that a very simple way to compare two covariance matrices is to see whether they obtain the same final parameter constraints. We will use this metric a bit throughout but want to emphasize here that our goals are a bit more ambitious: simply finding out that two covariance matrices give different results is a black-box approach. One cannot identify the source of the disagreement. The methods described here aim to go a bit deeper to try to understand where the key differences arise and which differences are most important.
+	Here we attempt to address these questions by considering several increasingly complex methods of identifying the elements of the covariance matrix that are most relevant. Although we will consider only the one example of DES cosmic shear measurements and projections, we think that our conclusions will be useful more generally. In \S\ref{sec:methods}, we describe the data set used and the pair of covariance matrices constructed in order to test different validation schemes. The next 3 sections walk through increasingly complex ways of comparing these two matrices. Before diving in, we comment that a very simple way to compare two covariance matrices is to see whether they obtain the same final parameter constraints. We will use this metric a bit throughout but want to emphasize here that our goals are a bit more ambitious: simply finding out that two covariance matrices give different results is a black-box approach. One cannot identify the source of the disagreement. The methods described here aim to go a bit deeper to try to understand where the key differences arise and which differences are most important.
+
+	Another goal of this work is to reduce the number of relevant elements of the covariance matrices to about 10\% their original size. We first do this by ``throwing away" 200 modes of the covariance matrix associated with the highest eigenvalues, then those with lowest signal-to-noise ratio, and, finally, we apply a lossless compression scheme capable of reducing the dimension to the number of free parameters, leaving us with a $16 \times 16$ covariance matrix.
 		
 	\section{DES Cosmic Shear: Data and Analysis}
 	\label{sec:methods}
 	
-	In this section, we explain the methodology used for each of the tests carried out for the analysis and comparison of the covariance matrices. Our analysis is carried out using cosmic shear statistics $\xi_\pm(\theta)$, focusing on the Year 1 results of the Dark Energy Survey \citep{Troxel:2017xyo,Abbott:2018cms} (DESY1) and also on predictions for DES Year 3 (DESY3). The data is divided into four tomographic redshift bins spanning the interval $0.20 < z < 1.30$, which yields 10 bin-pair combinations, each one containing 20 angular bins between 2.5 and 250 arcmin. We thus begin with 200 data points for each $\xi_+(\theta)$ and $\xi_-(\theta)$, giving 400 in total. We then apply the angular cuts described in \citep{Abbott:2018cms}, which removes the scales most sensitive to baryonic effects; this leaves 167 points for $\xi_+(\theta)$ and 60 for $\xi_-(\theta)$, resulting in 227 data points, which corresponds to the aforementioned $227 \times 227$ covariance matrix. 
+	In this section, we explain the methodology used for each of the tests carried out for the analysis and comparison of the covariance matrices. Our analysis is carried out using cosmic shear statistics $\xi_\pm(\theta)$, focusing on the Year 1 results of the Dark Energy Survey \citep{Troxel:2017xyo,Abbott:2018cms} (DESY1). The data is divided into four tomographic redshift bins spanning the interval $0.20 < z < 1.30$, which yields 10 bin-pair combinations, each one containing 20 angular bins between 2.5 and 250 arcmin. We thus begin with 200 data points for each $\xi_+(\theta)$ and $\xi_-(\theta)$, giving 400 in total. We then apply the angular cuts described in \citep{Abbott:2018cms}, which removes the scales most sensitive to baryonic effects; this leaves 167 points for $\xi_+(\theta)$ and 60 for $\xi_-(\theta)$, resulting in 227 data points corresponding to the aforementioned $227 \times 227$ covariance matrix. 
 		
-Table~\ref{tab:constraints} shows the 16 parameters varied and the priors placed on them. To perform cosmological parameter inference we use the {\tt CosmoSIS} \citep{Zuntz:2015med} pipeline, while employing the {\tt MultiNest} \citep{Feroz:2009fhb} sampler to explore the parameter space, with 500 {\tt livepoints}, {\tt efficiency} set to 0.3, {\tt tolerance} to 0.1 and {\tt constant efficiency} set to False.
+	Table~\ref{tab:constraints} shows the 16 parameters varied and the priors placed on them. To perform cosmological parameter inference we use the {\tt CosmoSIS} \citep{Zuntz:2015med} pipeline, while employing the {\tt MultiNest} \citep{Feroz:2009fhb} sampler to explore the parameter space, with 500 {\tt livepoints}, {\tt efficiency} set to 0.3, {\tt tolerance} to 0.1 and {\tt constant efficiency} set to False.
 
 	
 	
@@ -121,7 +123,7 @@ Table~\ref{tab:constraints} shows the 16 parameters varied and the priors placed
 			Parameter							& Prior	\\ \hline
 			Cosmological & \\ [1ex]
 			$\Omega_m$						& $\mathcal{U}(0.1, 0.9)$		\\
-			$A_s \times 10^9$					& $\mathcal{U}(0.5, 5)$		\\
+			$\log A_s$					& $\mathcal{U}(3.0, 3.1)$		\\
 			$H_0 \mathrm{(km s^{-1} Mpc^{-1})}$	& $\mathcal{U}(55, 91)$		\\
 			$\Omega_b$						& $\mathcal{U}(0.03, 0.07)$	\\
 			$\Omega_\nu h^2$					& $\mathcal{U}(0.0005, 0.01)$	\\
@@ -146,13 +148,13 @@ Table~\ref{tab:constraints} shows the 16 parameters varied and the priors placed
 	
 	The covariance matrices are obtained using two different codes: 
 	\begin{itemize}
-	\item {\tt Cosmolike} \citep{Krause:2016jvl} (CL) was used in the initial DESY1 analysis and here we simply take the Y1 covariance and divide by the ratio of the Y3/Y1 areas (roughly a factor of 3) to generate a Y3 covariance matrix
-	\item We ran the code used to analyse the KiDS-450 survey \citep{Kohlinger:2017sxk} (BJ) using DESY3 parameters and tomographic bins (all taken to be the same as Y1 apart from the area), but using only the gaussian part. 
+	\item {\tt Cosmolike} \citep{Krause:2016jvl} (CL) was used in the initial DESY1 analysis;
+	\item we ran the code used to analyse the KiDS-450 survey \citep{Kohlinger:2017sxk} (BJ) using DESY1 parameters and tomographic bins, but using only the gaussian part. 
 	\end{itemize}
 	Thus, throughout, the covariance labels CL and BJ differ for several reasons: first, they are two independent codes and, second, BJ was run with very simple settings. To be clear, the BJ code does contain all the functionality in CL, but, in order to accentuate the differences, we ran with the simplest settings. The ensuing larger differences will help us assess different validation techniques.
 	
-\figref{y3-comparison} shows the results for the projected cosmological constraints for DESY3. These projections use the same data vector and cuts as was used for Y1, but the two different covariance matrices. The best-fit values agree within 1-$\sigma$ but the constraints are up to $25\%$ broader when the CL covariance matrix is used. \scott{not sure this is clear: can we simply quote the 1-sigma errors?}
-This is also true for the other parameters, where, on average, constraints obtained with CL are about $18\%$ wider.	
+	\figref{y3-comparison} shows the results for the projected cosmological constraints for DESY1. These projections use the same data vector and cuts, but the two different covariance matrices. \textcolor{red}{The best-fit values agree within 1-$\sigma$ but the constraints are up to $25\%$ broader when the CL covariance matrix is used. \scott{not sure this is clear: can we simply quote the 1-sigma errors?}
+	This is also true for the other parameters, where, on average, constraints obtained with CL are about $18\%$ wider.}
 		
 	\begin{figure}
 		\includegraphics[width=0.9\columnwidth]{Y3-comparison.pdf}
@@ -163,36 +165,36 @@ This is also true for the other parameters, where, on average, constraints obtai
 	
 \section{Element-by-element comparison}
 
-	If there was only a single data point, then the covariance matrix would contain only a single number, and comparing two covariance matrices to try to understand why they get different constraints would be as simple as comparing these two numbers. 
-The simplest generalization of this is to do an element-by-element comparison of the two covariance matrices.
-We make a scatter plot of the elements of the two matrices in \figref{one-to-one}, where we can see that the elements of CL are, in general, larger than BJ's, differing by up to 3 orders of magnitude. In some ways, this is useful and reassuring, as it aligns with what we see in the parameter constraints: larger elements in the covariance matrix translates to less constraining power.
+	If there was only a single data point, then the covariance matrix would contain only a single number, and comparing two covariance matrices to try to understand why they get different constraints would be as simple as comparing these two numbers.  The simplest generalization of this is to do an element-by-element comparison of the two covariance matrices.
+	We make a scatter plot of the elements of the two matrices in \figref{one-to-one}, where we can see that the elements of CL are, in general, larger than BJ's, differing by up to 3 orders of magnitude. In some ways, this is useful and reassuring, as it aligns with what we see in the parameter constraints: larger elements in the covariance matrix translates to less constraining power.
 	
 	\begin{figure}
 		\includegraphics[width=0.9\columnwidth]{One-to-one-Y1_DES-BJ.pdf}
-		\caption{Scatter plot of the elements of the covariance matrices BJ and DES. The reddish tint identifies the diagonal elements. \scott{Explain color coding; also, see comment in text.}
+		\caption{Scatter plot of the positive elements of the covariance matrices BJ and CL. The reddish tint identifies the diagonal elements and the colour bar varies according to the number of elements in one hexagonal bin, where the darkest blue colour corresponds to only one element, and the brightest yellow shade to 1100. %\scott{Explain color coding; also, see comment in text.}
 			\label{fig:one-to-one}}
 	\end{figure}
 	
-\scott{Can we identify the diagonal elements? Can we show where in the 227x227 space the ones with the biggest differences live?} The limitations of this brute-force method is that it remains unclear which of differences are driving the final differences in parameter constraints. This difficulty is a outgrowth of the increasing size of the data sets and hence the increasing numbers of elements of the covariance matrix that any two codes are likely to disagree on. However, this element-by-element comparison would prove much more useful if we could first identify which are the important elements. Towards that end, we first turn to the eigenvalues.
+\scott{Can we identify the diagonal elements? Can we show where in the 227x227 space the ones with the biggest differences live?} The limitations of this brute-force method is that it remains unclear which of the differences are driving the final differences in parameter constraints. This difficulty is an outgrowth of the increasing size of the data sets and hence the growing number of elements of the covariance matrix that any two codes are likely to disagree on. However, this element-by-element comparison would prove much more useful if we could first identify which are the important elements. Towards that end, we start by turning to the eigenvalues.
 	
 \section{Eigenvalues}
 	
-	The next simplest thing to try is to explore the eigenvalues of the covariance matrix. Each is associated with a linear combination of the data vector, or a \emph{mode}, and it is possible that identifying the modes that have the most discrepant eigenvalues will give guidance on how to reconcile differences.  We plot the eigenvalues for these matrices in \figref{coveigen}. At a first glance, both curves show reasonable agreement, with values differing only by an average of $\approx 15\%$.
+	The next simplest thing to try is to explore the eigenvalues of the covariance matrix. Each is associated with a linear combination of the data vector, or a \emph{mode}, and it is possible that identifying the modes that have the most discrepant eigenvalues will give guidance on how to reconcile differences.  We plot the eigenvalues for these matrices in \figref{coveigen}. At a first glance, both curves show reasonable agreement, with values differing only by an average of $\approx 13\%$.
 	
 
 	\begin{figure}
-		\includegraphics[width=0.9\columnwidth]{Eigenvalues/Eigenvalues_Y3_BJ-CL.pdf}
+		\includegraphics[width=0.9\columnwidth]{Eigenvalues/Eigenvalues_Y1_BJ-DES.pdf}
 		\caption{A log plot showing the $227$ eigenvalues of CL (blue) and BJ (orange). \label{fig:coveigen}}
 	\end{figure}
 
 
 	
 	The lowest eigenvalues correspond to modes with the smallest variance but since they are not normalized, it is unclear how this variance compares to the signal in the mode. Let us nonetheless explore the possibility that the modes with the lowest variance provide the most information and therefore dropping the modes with the largest eigenvalues would not affect the final result.
-Our procedure consists of first diagonalizing the covariance matrix in order to calculate its eigenvalues and then replacing the large eigenvalues with numbers much larger (nine orders of magnitude higher), thus removing their effective contribution; we then rotate back to the original basis and perform a cosmological analysis with the new covariance matrix, to constrain the parameters of our model. 
+	
+	Our procedure consists of first diagonalizing the covariance matrix in order to calculate its eigenvalues and then replacing the large eigenvalues with numbers much larger (nine orders of magnitude higher), thus removing their effective contribution; we then rotate back to the original basis and perform a cosmological analysis with the new covariance matrix, to constrain the parameters of our model. 
 
-\figref{eig_snr} shows the results obtained after "removing'' the 200 modes with the largest eigenvalues (by multiplying those eigenvalues by a very large number). 
-\textcolor{red}{
-The constraints widen at the 10\% level. This is consistent with the fact that we are throwing away about 20\% of the data. However, it is inconsistent with the notion that this 20\% is irrelevant. On the contrary, the modes with the largest variance seem to contribute as much information as the rest of the modes.  \figref{eigenvalues} also shows the results when the modes with the smallest eigenvalues are removed. Counterintuitively, this does not broaden the constraints much \scott{Maybe good to quote error bars here especially on $S_8\equiv \sigma_8 (\Omega_m/0.3)^{0.5}$.} We see that the modes with the smallest eigenvalues carry less information. Clearly, a different way of ordering the modes, other than simply looking at the eigenvalues, is called for.}
+	\figref{eig_snr} shows the results obtained after ``removing" the 200 modes with the largest eigenvalues (we multiply those eigenvalues by a very large number).  The constraints are significantly broader for the three parameters shown. This is consistent with the fact that we are throwing away about 90\% of the information. However, it is inconsistent with the notion that these modes are irrelevant, in fact, constraints on $S_8\equiv \sigma_8 (\Omega_m/0.3)^{0.5}$ for the original covariance matrix are $0.782^{+ 0.044}_{- 0.04}$, whereas, for this procedure, we obtain $0.692^{+ 0.194}_{- 0.288}$, showing an increase in almost 500\% . It is then clear that a different way of ordering the modes, other than simply looking at the eigenvalues, is called for.
+	
+	%The constraints widen at the 10\% level. This is consistent with the fact that we are throwing away about 20\% of the data. However, it is inconsistent with the notion that this 20\% is irrelevant. On the contrary, the modes with the largest variance seem to contribute as much information as the rest of the modes.  \figref{eigenvalues} also shows the results when the modes with the smallest eigenvalues are removed. Counterintuitively, this does not broaden the constraints much \scott{Maybe good to quote error bars here especially on $S_8\equiv \sigma_8 (\Omega_m/0.3)^{0.5}$.} We see that the modes with the smallest eigenvalues carry less information. Clearly, a different way of ordering the modes, other than simply looking at the eigenvalues, is called for.
 
 	
 	
@@ -203,7 +205,7 @@ The constraints widen at the 10\% level. This is consistent with the fact that w
 	
 	\begin{figure}
 		\includegraphics[width=0.9\columnwidth]{Parameters-200.pdf}
-		\caption{Constraints on cosmological parameters $\Omega_m$ and $\sigma_8$ for the original DESY1 covariance matrix (in purple) and for two new covariance matrices obtained by setting the 200 highest eigenvalues of the original matrix to nine orders of magnitude higher (in blue), and by replacing the 200 lowest values of the SNR to seven order of magnitude lower (in magenta). \label{fig:eig_snr}}
+		\caption{Constraints on cosmological parameters $\Omega_m$, $S_8$ and the instrinsic aligment parameter $A$ for the original DESY1 covariance matrix (in purple) and for two new covariance matrices obtained by setting the 200 highest eigenvalues of the original matrix to nine orders of magnitude higher (in blue), and by replacing the 200 lowest values of the SNR to seven order of magnitude lower (in magenta). \label{fig:eig_snr}}
 %		\includegraphics[width=0.9\columnwidth]{Eigenvalues/Eigenvalues_wm-sigma8.pdf}
 %		\caption{Constraints on cosmological parameters $\Omega_m$ and $\sigma_8$ for the original DESY1 covariance matrix (in purple) and for two new covariance matrices obtained by setting the fifty highest eigenvalues of the original matrix to nine orders of magnitude higher (in blue), and by replacing the fifty lowest eigenvalues to nine order of magnitude lower (in magenta). \label{fig:eigenvalues}}
 	\end{figure}
@@ -212,7 +214,7 @@ The constraints widen at the 10\% level. This is consistent with the fact that w
 	
 	\section{Signal-to-noise ratio}
 	
-	Instead of looking only at the "noise'' -- or the eigenvalues of the covariance matrix -- a better way to assess the importance of modes is to consider the signal as well. We can define the expected signal-to-noise ratio (SNR) as
+	Instead of looking only at the ``noise'' -- or the eigenvalues of the covariance matrix -- a better way to assess the importance of modes is to consider the signal as well. We can define the expected signal-to-noise ratio (SNR) as
 	%Since the values of the data points vary by many orders of magnitude, the range of eigenvalues in \figref{evector} is a bit misleading. In addition, it is not clear which eigenvectors should be dropped: should it be those with large eigenvalues (noise) or small ones (the noise is noisy)? Ideally, what we would like is to create a list of eigenvectors ordered in some way and drop the least important. This ties into the section below on Shrinkage. A very simple way to do this is to note that the total signal to noise squared is
 	\be
 	\left(\frac{S}{N}\right)^2 = \sum_{ij} T_i C^{-1}_{ij} T_j\
@@ -229,20 +231,12 @@ The constraints widen at the 10\% level. This is consistent with the fact that w
 	.\ee
 	This makes it very clear which modes should be kept and which should be dropped. Modes $v_i$ for which $v_i^2/\lambda_i$ is very small can be discarded. 
 	
-	After obtaining the SNR for the covariance matrix, we proceed to set the 50 lowest values to seven orders of magnitude lower, which is equivalent to increasing the noise (or decreasing the signal) of these modes. We then obtain a new covariance matrix with the corresponding modified SNR values. 
+	After obtaining the SNR for the covariance matrix, we proceed to set the 200 lowest values to seven orders of magnitude lower, which is equivalent to increasing the noise (or decreasing the signal) of these modes. We then obtain a new covariance matrix with the corresponding modified SNR values. 
 	
-	
-	The parameter constraints for this method are shown in \figref{signalnoise}, where we note that the mean values are different about 10\% and 4\% for $\Omega_m$ and $\sigma_8$, respectively, with 17\% broader constraints for the former, when compared to the results with the original covariance. This broadening suggests that the modes removed do indeed carry some information. This surprising since the modes removed were identified as those that had the lowest SNR.
+	The parameter constraints for this method are shown in \figref{eig_snr}, where we note that only $\Omega_m$ is well constrained (in agreement with those obtained with the original covariance matrix to within a $2\sigma$ interval). The constraining power on $A$ and $S_8$, on the other hand, is very much decreased, which suggests that the modes removed do indeed carry some information. This is surprising since these were identified as those that had the lowest SNR.
 	%tells us that the modes removed are essential for obtaining better constraints on these parameters. 
-
-	\begin{figure}
-		\includegraphics[width=0.9\columnwidth]{SNR/SNR_wm-sigma8.pdf}
-		\caption{Constraints on cosmological parameters $\Omega_m$ and $A_s$ for the original DESY1 covariance matrix (in purple) and for a covariance matrix (in blue) obtained by setting fifty elements corresponding to the lowest SNR to a value seven orders of magnitude lower, in order to evaluate their contribution to parameter constraints. \label{fig:signalnoise}}
-	\end{figure}
 	
-
-
-Resolving this requires us to tweak our understanding of which modes carry information. The ``signal'' these modes are ordered by is the amplitude of the data points.  The parameters though are sensitive to the shape as well as the amplitude.
+	Resolving this requires us to tweak our understanding of which modes carry information. The ``signal'' these modes are ordered by is the amplitude of the data points.  The parameters though are sensitive to the shape as well as the amplitude.
 To address this, we can identify the SNR for each parameter individually. To illustrate this, we take
 	\bea
 	\left(\frac{\partial S/\partial p_\alpha}{N}\right)^2 = \sum_{i} \frac{(\partial v_i / \partial p_\alpha)^2}{\lambda_i}
@@ -251,13 +245,14 @@ To address this, we can identify the SNR for each parameter individually. To ill
 %	\be
 %	v_i^\alpha \equiv U_{ij}^T \frac{\partial T_j}{\partial p_\alpha}
 %	,\ee
-	where $\partial /\partial p_\alpha$ is the derivative with respect to each parameter. This produces the SNR for each parameter of interest. The importance of this procedure is illustrated in \figref{signalnoise_cuts}, which shows the vanilla SNR for a given mode on the $x$-axis and the SNR for each parameter for the same mode. The shaded region is the one excluded in the previous analysis, but clearly there are some low SNR modes there that contain information about the parameters. This is particularly true for the intrinsic alignment parameters $A$ and $\eta$. As a result, simply cutting on raw SNR loses 
-constraining power. 
+	where $\partial /\partial p_\alpha$ is the derivative with respect to each parameter. This produces the SNR for each parameter of interest. The importance of this procedure is illustrated in \figref{signalnoise_cuts}, which shows the normalised vanilla SNR for a given mode on the $x$-axis and the SNR for each parameter for the same mode, for brevity, we show only for $\Omega_m$ and $A$. The shaded region is the one excluded in the previous analysis, but clearly there are some low SNR modes there that contain information about the parameters. This is particularly true for the intrinsic alignment parameter $A$, which seems to explain the poor constraints shown in \figref{eig_snr}. As a result, simply cutting on raw SNR loses constraining power. 
 %While this is apparent in the aforementioned figure, it is not very clear when looking at the resulting constraints on these parameters because the constraining power of the data over these parameters is not very strong (errors of about $100\%$). As such, these results do not encourage us to use this method for identifying the most important elements of the covariance matrix.
 	
 	\begin{figure}
-		\includegraphics[width=1\columnwidth]{SNR/SNR_cuts.pdf}
-		\caption{Scatter plot for the relation between the signal to noise obtained with the covariance matrix for DESY1 for each parameter (x-axis) against that for the full set of parameters (y-axis). The derivatives are shown with respect to cosmological parameters $\Omega_m$ (blue) and $A_s$ (orange), and for the intrinsic alignment parameters $A$ (green) and $\eta$ (red). The purple rectangle spreads until the fiftieth lowest value of SNR, which corresponds to the values that are modified for parameter constraints. \label{fig:signalnoise_cuts}}
+		\includegraphics[width=1\columnwidth]{SNR/SNR_200_omA.pdf}
+		\caption{Scatter plot for the relation between the signal to noise obtained with the covariance matrix for DESY1 for each parameter (x-axis) against that for the full set of parameters (y-axis). The derivatives are shown with respect to $\Omega_m$ (blue circle) and for the intrinsic alignment parameters $A$ (orange triangle). The purple rectangle spreads until the two hundredth lowest value of SNR, which corresponds to the values that are modified for parameter constraints. \label{fig:signalnoise_cuts}}
+		%\includegraphics[width=1\columnwidth]{SNR/SNR_200.pdf}
+		%\caption{Scatter plot for the relation between the signal to noise obtained with the covariance matrix for DESY1 for each parameter (x-axis) against that for the full set of parameters (y-axis). The derivatives are shown with respect to cosmological parameters $\Omega_m$ (blue circle) and $A_s$ (orange circle), and for the intrinsic alignment parameters $A$ (green square) and $\eta$ (red triangle). The purple rectangle spreads until the fiftieth lowest value of SNR, which corresponds to the values that are modified for parameter constraints. \label{fig:signalnoise_cuts}}
 	\end{figure}
 	
 	% ----------------------------------------------------------------------
@@ -269,9 +264,9 @@ constraining power.
 	
 	%There have been several methods proposed in the literature to compress the data vectors, extracting as much information as possible. Here we consider two: first compression at the map level \citep{Alonso:2017hhj}, where linear combination of the tomographic maps is used. If there are 4 tomographic bins, an uncompressed analysis would require ten separate 2-point functions (or 20 for cosmic shear), whereas a compression scheme leads to just a few uncorrelated maps. If there were 3 such maps, then only three 2-point functions would need to be used for the likelihood analysis.
 	
-	Since the simplest methods of identifying the most relevant modes are flawed, we turn to more sophisticated methods \citep{Tegmark:1997maa, Joachimi:2017mnr,Gualdi:2018gmj} that have been been shown to reduce the number of modes significantly but still retain the relevant information.First, there is compression at the map level \citep{Alonso:2017hhj}, where linear combinations of the tomographic maps are used to retain as much information as possible. Compression at the map level then significantly reduces the size of the data vector of two-point functions. For example, we will see that most of the information in the four tomographic bins used by DES can be compressed into a single linear combination of those bins. Therefore, instead of $4\times5/2$ two-point functions for each angular bin, we need include only one: the compression in the size of the data vector by a factor of 10 means that there are a hundred fewer elements of the covariance matrix to study.
+	Since the simplest methods of identifying the most relevant modes are flawed, we turn to more sophisticated methods \citep{Tegmark:1997maa, Joachimi:2017mnr,Gualdi:2018gmj} that have been been shown to reduce the number of modes significantly but still retain the relevant information. First, there is compression at the map level \citep{Alonso:2017hhj}, where linear combinations of the tomographic maps are used to retain as much information as possible. Compression at the map level then significantly reduces the size of the data vector of two-point functions. For example, we will see that most of the information in the four tomographic bins used by DES can be compressed into a single linear combination of those bins. Therefore, instead of $4\times5/2$ two-point functions for each angular bin, we need include only one: the compression in the size of the data vector by a factor of 10 means that there are a hundred fewer elements of the covariance matrix to study.
 	
-	The second method directly operates on the two-point functions themselves \citep{Zablocki:2015zcm}, where the modes used are those that maximize the Fisher information for each of the cosmological parameters. Here the size of the data vector is just the number of parameters used to fit the data (16), so the compression eliminates even more modes than the tomographic compression. Roughly, though, the numbers are the same: a data vector reduced by a factor of ten and the number of elements in the covariance matrix reduced by a factor of 100.
+	The second method directly operates on the two-point functions themselves \citep{Zablocki:2015zcm}, where the modes used are those that maximize the Fisher information for each of the cosmological parameters. Here the size of the data vector is just the number of parameters used to fit the data (i.e. 16), so the compression eliminates even more modes than the tomographic compression. Roughly, though, the numbers are the same: a data vector reduced by a factor of ten and the number of elements in the covariance matrix reduced by a factor of 100.
 	
 %	Shrinking the data vector and its covariance matrix is equivalent to projecting the data vector onto a subspace of the original vector space. For example, if our data have a length of $n$ and we want to compress it into a lower dimension $m\leq n$, we need to come up with a basis transformation matrix $U_{m\times n}$ that has orthonormal row vectors, or mathematically speaking, $<U_{xi} \cdot U_{yi}>=\delta_{xy}$. Once we have a basis transformation matrix $U_{m\times n}$, we can compress the data vector $y$ and covariance matrix $C$ into filter data $\Tilde{y}$ and $\Tilde{C}$
 %	\bea
@@ -389,10 +384,7 @@ constraining power.
 	\ee
 	In our case, our covariance matrix is  $227 \times 227$, while the number of parameters needed to specify the model is only 16, so $C_{\alpha\beta}$ is a $16\times 16$ matrix. We have apparently captured from the initial set of $(227 \times 228)/2 = 25,878$ independent elements of the covariance matrix a small subset (only 136 in this case) of linear combinations of these 25k elements that really matter. If two covariance matrices give the same set of $C_{\alpha\beta}$, it should not matter whether any of the other eighty thousand elements differ from one another.
 	
-	Ultimately, what matters is how well the likelihood does at extracting parameter constraints. Since most analyses assume a Gaussian likelihood, this boils down to how well the contours in parameter space agree when computing the $\chi^2$ using two different covariance matrices.
-	
-	For brevity, we show only constraints on $\Omega_m$ and $\sigma_8$.
-	
+	Ultimately, what matters is how well the likelihood does at extracting parameter constraints. Since most analyses assume a Gaussian likelihood, this boils down to how well the contours in parameter space agree when computing the $\chi^2$ using two different covariance matrices.	
 	
 	%\figref{evector} shows an example of one of the eigenvectors, the one associated with the smallest eigenvalue. This low-eigenvalue mode picks up the differences between the correlation function at different angular scales (each vertical line delineates between 2-point functions of shears in different tomographic bin pairs).
 	
@@ -403,16 +395,11 @@ constraining power.
 	
 	% ----------------------------------------------------------------------
 	
-		
-	
-	
-	
-	
-	\figref{compressiony1} compares the constraints obtained for the compressed covariance and dataset with the full one. The mean values agree at the $2 \sigma$ level, with the exception of $\eta$, which is not very well constrained in either analysis. The results for the compressed covariance are about 0.5\% broader, which shows that the information loss is negligible. 
+	\figref{compressiony1} compares the constraints obtained for the compressed covariance and dataset with the full one. The two curves agree extremely well for both $\Omega_m$ and $S_8$. This is also true for all the other cosmological and intrinsic aligment parameters, where their mean values agree at the $2 \sim 3 \sigma$ level. While the volume of the constrained parameter space does increase by about 13\%, for most parameters, the constraints are less than 4\% broader, which shows that the information loss is negligible. 
 	
 	\begin{figure}
-		\includegraphics[width=0.9\columnwidth]{Compression/CompressionY1_wm-sigma8.pdf}
-		\caption{Constraints on cosmological parameters $\Omega_m$ and $\sigma_8$ for the original DESY1 covariance matrix (in purple) \scott{Purple looks much broader, which doesn't make sense since the compressed data vector has to have less information.} and for the compressed one (in blue). \label{fig:compressiony1}}
+		\includegraphics[width=0.9\columnwidth]{Compression/Compressed_om-S8.pdf}
+		\caption{Constraints on cosmological parameters $\Omega_m$ and $S_8$ for the original DESY1 covariance matrix (in purple) and for the compressed one (in blue). \label{fig:compressiony1}}
 	\end{figure}
 	
 	One relevant point in this analysis is at which point to take the derivative of each parameter. When we wish to compare the results of our compression scheme with those obtained with the full covariance matrix and data set, it is important to derivate each parameter at their respective mean value (obtained by performing the analysis with the full covariance matrix). The shape and variance of the posterior is not dependent on the derivative, but the best-fit value shifts according to the point where the derivative is taken.
