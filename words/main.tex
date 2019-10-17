@@ -401,6 +401,7 @@
 	We also apply this methodology to comparing the covariance matrices of interest, i. e. CL and BJ. In order to do this, we take two different approaches: first, we assume that $U_{\alpha, i}$ is the same for both covariance matrices and we calculate it with BJ. The second approach is that each compression scheme must use the original covariance matrix that will be compressed, so that $U_{\alpha, i}$ will be different for each covariance matrix. We find that the mean values of the parameter constraints for the two methods agree to $1 \sigma$, which shows that they are equivalent to each other. \figref{correlation} is obtained for the first method, which will be the one adopted from here on, it shows the correlation matrix for BJ and CL, and that of the difference between them; we find this figure important because we can clearly see the difference between the two matrices by simply looking at only $(16 \times 17)/2$ elements, as opposed to having to analyse the larger correlation matrix for the full covariance matrices. It is also crucial that the matrices used for comparison here are those obtained via the same compression scheme, so that we can be sure that their differences are indeed only related to the differences in the original matrices.
 	
 	
+<<<<<<< HEAD
 	\begin{figure}
 		\includegraphics[width=0.9\columnwidth]{Correlation_compression.pdf}
 		\caption{The upper right and lower left plots display the correlation matrix for BJ and CL respectively, while the lower right is the difference between the two. \scott{Since the correlation matrices are similar, can you add a panel that compares the diagonal elements? The differences there might explain the differences in the constraints.} \label{fig:correlation}}
@@ -414,6 +415,114 @@
 	\label{sec:tolerance}
 	
 	Now that we have shown that we are indeed able to compress the covariance matrix into a much simpler and considerably smaller one, our next step is to analyse the amount of error the elements can tolerate while reproducing compatible parameter constraints. In the next sections we test two different ways of perturbing the covariance matrix: first we consider an error to the elements themselves, and then we follow a similar procedure to study the effects of introducing error to the eigenvalues.
+=======
+%	Shrinking the data vector and its covariance matrix is equivalent to projecting the data vector onto a subspace of the original vector space. For example, if our data have a length of $n$ and we want to compress it into a lower dimension $m\leq n$, we need to come up with a basis transformation matrix $U_{m\times n}$ that has orthonormal row vectors, or mathematically speaking, $<U_{xi} \cdot U_{yi}>=\delta_{xy}$. Once we have a basis transformation matrix $U_{m\times n}$, we can compress the data vector $y$ and covariance matrix $C$ into filter data $\Tilde{y}$ and $\Tilde{C}$
+%	\bea
+%	\Tilde{y} &=& U y\\\nonumber
+%	\Tilde{C} &=&<\Tilde{y}  \Tilde{y}^T>\\
+%	&=&U<y y^T> U^T= U C U^T\
+%	.\eea
+%	For a data vector with length $m$, there are $m(m+1)/2$ elements in the covariance matrix to be evaluated. Once the data vector is shrunk to length $n$, elements in covariance matrices will shrink quadratically. Therefore, shrinking the covariance matrices is an effective way of comparing them.
+%	
+%	Here, we will demonstrate these two methods to compress the covariance matrices. In both cases, the data vector is shrunk by 90\%, which correspond to the covariance matrices being reduced by 99\%. 
+\subsection{Tomographic Compression}
+
+This compression method is based on Karhunen-Lo\'eve decomposition for the shear power spectrum suggested by \citep{Alonso:2017hhj} and later applied to real space 2-point function in \citep{Bellini:2019ssw} for CFHTLens survey. This method generally finds the eigenmode with most of the signal-to-noise ratio contribution to the power spectrum, and then transforms the 2-point function in real space based on this eigenmode.
+
+With  {\tt CosmoSIS}, we can generate the shear power spectrum $C_{\ell}^{ij}$ \scott{Is $C_l$ here the same as $C^{ij}(l)$ in equations 7 and 8?} of convergence $a_{\ell m}$ for a fiducial cosmology. The cosmology we choose is the best-fit value of the DES Year 1 results for cosmic shear only. With the shear power spectrum $C_{\ell}=S_{\ell}+N_{\ell}$ and its shape noise $N_{\ell}$, we can calculate the Karhunen-Lo\'eve (KL) modes matrix $E_{\ell}$ via a general eigenvalue problem \scott{This isn't clear to me. What is the superscript $^p$? Where is the tomographic bin index? Is the thing after the arrow correct? If so, please change and edit the next paragraph or two.}
+\be
+C^{ij}_{\ell} E^j_{\ell} = \lambda^i_{\ell} N^{ij}_{\ell} E^j_{\ell}
+.\ee
+
+Each roll in $E_{\ell}$ correspond to a KL-mode of $C_{\ell}$. The new observable $b_{\ell m} = E_{\ell} \cdot N_{\ell}^{-1} a_{\ell m}$. We should note that $C_{\ell}$ is the power spectrum of the convergence of the weak lensing, and $E_{\ell}$ is the transformation of basis for the convergence. We can now calculate the power spectrum $D_{\ell}$ for the new observable $b_{\ell m}$ 
+\be
+D_{\ell} =\ <b_{\ell m} b_{\ell m}^T>\ = E_{\ell} N^{-1} C_{\ell} N^{-1} E^{T}_{\ell}\
+,\ee
+or, if we denote $E_{\ell} N^{-1}$ as $R_{\ell}$, we can write the compression in one simple linear combination of the $C_{\ell}$,
+\be
+D_{\ell} = R_{\ell}^i C_{\ell}^{ij} R_{\ell}^j = U_{\ell}^{ij} C_{\ell}^{ij}\
+.\ee
+The double summation weight $U_{\ell}^{ij}$ is what we use to perform tomographic compression. We should point out that these eigenmodes are uncorrelated, so the power spectrum of the new observable $D_{\ell}$ is a diagonal matrix, with 1+SNR of the corresponding eigenmodes on the diagonal elements. Since the KL-decomposed modes of shear power spectrum are uncorrelated, we can make a compression here by only taking the first one or two modes with the highest SNR. By doing so, we compress 10 tomographic combinations to 1 or 2.
+
+We want, however, to eventually compress the 2-point function data vector of DESY1. One possible way is to calculate the 2-point function of the KL mode of the shear power spectrum. We can calculate the 2-point function from the shear power spectrum by
+\be
+\xi_{\pm}^{ij}(\theta) = \int \frac{\ell d \ell }{2\pi}J_{0/4}(\ell \theta) C^{ij}(\ell)\
+.\ee
+In order to compress the 2-point function based on the compression of the $C_{\ell}$, we need to make sure that the scheme for $C_{\ell}$ is $\ell$-independent, that is to say, the 2-point correlation function of $D_{\ell}$, $\Tilde{\xi}_{\pm}(\theta)$, can be directly calculated from other 2-point functions. We then have,
+\bea
+\nonumber\Tilde{\xi}_{\pm}(\theta) &=& \int \frac{\ell d \ell }{2\pi}J_{0/4}(\ell \theta) D(\ell)\\\nonumber
+&=&\int \frac{\ell d \ell }{2\pi}J_{0/4}(\ell \theta) U^{ij}C^{ij}(\ell)\\
+&=&U^{ij}\xi_{\pm}^{ij}(\theta)\
+,\eea
+where $U^{ij}$, the $\ell$-independent compression weight is calculated by 
+\be
+U^{ij} = \frac{\int_{\ell _{\mathrm{min}}}^{\ell _{\mathrm{max}}} (2 \ell +1) U^{ij}_{\ell}}{\int_{\ell _{\mathrm{min}}}^{\ell _{\mathrm{max}}} (2 \ell +1)}\
+.\ee
+We make a more conservative angular cut than the angular cut discussed in \cite{Troxel:2017xyo}, making sure that the cut for both $\xi_{\pm}$ are uniform in regard to tomographic combinations. For $\xi_+$, we consider an angular scale from $7.195^{\circ}$ to $250.0^{\circ}$. For $\xi_-$, the angular scale is from $90.579^{\circ}$ to $250.0^{\circ}$. Therefore, for the purpose of demonstrating KL-transform, the raw data vector has a length of 190, and by shrinking 10 tomographic combinations for each angle into 1 KL-mode, the data is shrunk to 19, and so the number of elements in the covariance matrices are reduced by 99\%.
+
+%We characterize a given element in the data vector by its angular and tomographic indices: $a_i = a_{\ell m,\alpha}$ where $l,m$ denote the indices corresponding to given spherical harmonics and $\alpha$ is a given tomographic bin, or equivalently $a_i = a_\alpha(\vec\theta)$ in real space. The compression occurs in terms of tomographic bins, so that 
+%\be
+%b_\mu(\vec\theta) = \sum_{\alpha} F_{\mu\alpha} a_\alpha(\theta)
+%\ee
+%where the $F$'s are chosen \footnote{Note that this definition of $F$ differs from that in \citep{Alonso:2017hhj} in that it includes the inverse of the noise matrix.} so that the correlation functions of the $b$'s are diagonal in tomographic space:
+%\bea
+%w_{\mu\nu}(\theta) &=& \langle b_\mu(\vec\theta_1) b_\nu(\vec\theta_2)\rangle\vert_{\vert\vec\theta_1-\vec\theta_2\vert\in\theta}
+%\svs
+% &=& \delta_{\mu,\nu} w_{\mu}(\theta).
+%\eea
+%Usually with $N_t$ tomographic bins, one must consider $N_t(N_t+1)/2$ correlation functions, but -- due to the transformation that diagonalizes the elements -- there are only $N_t$ correlation functions to consider (for a given $\theta$). Even better, these can be ordered by the information they contain, so fewer than $N_t$can be used. In the example used in \citep{Alonso:2017hhj}, 16 tomographic bins were assumed, so that the standard treatment would require 136 correlation functions, but only 3 were needed in order to extract accurate constraints. 
+
+%This method suggests a way of extracting the most important pieces of the full covariance matrix $C$. We simply compute the covariance matrix of the $w_{\mu}$ in terms of $C$ and keep only the most important terms. That is,
+%\bea
+%C^b_{\mu\nu} &\equiv& \langle (w_{\mu} -\bar w_\mu)\,(w_{\nu} -\bar w_\nu)\rangle
+%\svs
+% &=& \sum_{\alpha\alpha'\beta\beta'} F_{\mu\alpha}F_{\mu\alpha'}\, F_{\nu\beta}F_{\nu\beta'}\, C_{\alpha\alpha'\beta\beta'} .
+%\eea
+%Here the angular indices have been suppressed (there are two of them, one for each $w_\mu$), but the full tomographic complexity has been retained. The covariance matrix on the right includes a total of $N_t^2 \times N_t^2$ terms (some of which are equal because of symmetry) corresponding to all possible pairs of 2-point functions. But $C^b$ on the right contains only $N_t^2$ elements, and again these are ordered, so we can use only a subset of them. In the simplest case, where only one linear combination is needed so $\mu=\nu=1$, a single number (for each pair of angular bins) captures all the relevant information from the full covariance matrix.
+
+With  {\tt CosmoSIS}, we calculate the shear power spectrum $C_{\ell}$ of DES Year 1 with a fiducial cosmology at the best-fit parameters, and $\ell$-range $2-5000$. The left plot in \figref{ClDl}, shows the diagonal elements of the signal part and the noise part of $C_{\ell}$, while the right one shows the KL-transformed eigenmode $D_{\ell}$ of $C_{\ell}$. We can see that the first KL mode contains most of the SNR contribution to the power spectrum. If we want to recover most information, we can also include the second mode.
+
+\begin{figure*}
+	\includegraphics[width=0.7\columnwidth]{Cl_pst.png}
+	\qquad \qquad \qquad
+	\includegraphics[width=0.7\columnwidth]{Dl_pst.png}
+	\caption{\textbf{Left:} Shear power spectrum of DESY1. Solid lines are diagonal elements of the signal matrix $S_{\ell}$, and dashed lines are the diagonal elements of noise matrix $N_{\ell}$.
+		\textbf{Right:} Signal to noise ratio matrix $D_\ell$ of KL-modes of the power spectrum on the left.  \label{fig:ClDl}}
+\end{figure*}
+
+In \figref{kl-mode}, we plot the normalized KL-eigenmode $E_\ell^i$ of $C_{\ell}$ and its corresponding $W^{ij}_\ell=E_\ell^i E_\ell^j$. Modes with different $\ell$ are plotted with different depth of the color. We can see that the KL-modes do not depend a lot on scale factor $\ell$ by a large portion, so we take the weighted average of the eigenmodes $E_\ell^p$ and its quadratic form $W_\ell$ over $\ell$'s and plot them with black lines. 
+
+\begin{figure*}
+	\includegraphics[width=0.80\columnwidth]{epi.png}
+	\includegraphics[width=1.02\columnwidth]{Wij.png}
+	\caption{\textbf{Left:} Normalized KL-eigenmodes $E_\ell^p$ of the shear power spectrum $C_{\ell}$, darkness of the color is representing different $\ell$. \textbf{Right:} Transformation on tomographic bin combination $W_{ij}$ constructed by the KL-eigenmodes. Black lines are the weighted average of each mode. \label{fig:kl-mode}}
+\end{figure*}
+
+For different $\ell$, the KL-modes do vary by a slight amount. We also observe that tomographic bins with higher redshift gains more weight than those with low redshift. This is also shown by the weight on tomographic combination that the combination of bin 3 and bin 4 gains most of the weight to maximize signal to noise ratio. This agrees with the fact that the diagonal elements $C_\ell$ for low redshift is much less than those with high redshift. 
+
+We use only the first KL-mode to compress the tomographic combination for each angle $\theta$, i.e., 190 data points for 19 angles are compressed into 19 numbers.  This compression scheme is also used to compress the CL and BJ covariance matrices, and we plot them in \figref{comp-cov}.
+
+\begin{figure*}
+	\includegraphics[width=0.68\columnwidth]{kl_comp_cl.png}
+	\includegraphics[width=0.68\columnwidth]{kl_comp_bj.png}
+	\includegraphics[width=0.54\columnwidth]{kl_scatter.png}
+	\caption{\textbf{Left:} CL covariance matrix compressed by the first KL-mode. \textbf{Middle:} BJ covariance matrix compressed by the first KL-mode. \textbf{Right:}  One-to-One scatter of the two compressed matrices \label{fig:comp-cov}}
+\end{figure*}
+
+If we now again make a one-to-one comparison of the compressed BJ and CL covariance matrices in \figref{comp-cov}. We can easily notice that the elevated clump at the bottom right for scatter of original matrices, which represent elements with great difference, are gone in the compressed covariance. Instead, the two covariance matrices just have a relative constant difference because of the different model they use. This shows that the divergence between CL and BJ covariance does not affect the overall signal to noise ratio a lot. \scott{Shouldn't we make the point that CL is larger and that explains the broader constraints? Is this for Y1 or Y3? Do we know what the constraints look like when running with only this single KL mode?}.
+
+We run the likelihood analysis using only one KL-mode, meaning that we compress the 10 tomographic combinations for each angle into one number.  This data vector has a length of 19 data points by the 10-to-1 tomographic compression. And we show the constraints on the $\Omega_m - \sigma_8$ plane in \figref{kl-constaints}. We can see that after the compression, the cosmological constraints gets broader. This confirm the fact thata the first KL-mode does not contain all the information in the data.
+
+\begin{figure}
+	\includegraphics[width=0.8\columnwidth]{kl_constraint1.png}
+	\caption{ Cosmological constraints marginalized over all-16 parameters for the original CL covariance matrix and that compressed by the first KL-mode.\label{fig:kl-constaints}}
+\end{figure}
+
+
+
+
+
+>>>>>>> 97962f6a6e0f3b8c87a32a3e0aba29e45543908e
 	
 	One of the issues that arises when arbitrarily modifying the elements of the covariance matrix is that the new one does not necessarily remain positive definite. In this analysis, we take an extra step to ensure that this characteristic is retained.
 	
