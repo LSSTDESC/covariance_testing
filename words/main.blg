@@ -2,7 +2,7 @@ This is BibTeX, Version 0.99d (TeX Live 2016)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: main.aux
 I couldn't open database file lsstdesc.bib
----line 62 of file main.aux
+---line 60 of file main.aux
  : \bibdata{mainNotes,main,lsstdesc
  :                                 }
 I'm skipping whatever remains of this command
@@ -11,45 +11,45 @@ Database file #1: mainNotes.bib
 Database file #2: main.bib
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Warning--empty journal in Bellini:2019ssw
-You've used 12 entries,
+You've used 19 entries,
             3085 wiz_defined-function locations,
-            739 strings with 6655 characters,
-and the built_in function-call counts, 5323 in all, are:
-= -- 471
-> -- 314
-< -- 7
-+ -- 103
-- -- 109
-* -- 414
-:= -- 993
-add.period$ -- 12
-call.type$ -- 12
-change.case$ -- 72
-chr.to.int$ -- 12
-cite$ -- 13
-duplicate$ -- 225
-empty$ -- 348
-format.name$ -- 131
-if$ -- 1082
+            799 strings with 8604 characters,
+and the built_in function-call counts, 8788 in all, are:
+= -- 751
+> -- 585
+< -- 9
++ -- 195
+- -- 209
+* -- 721
+:= -- 1653
+add.period$ -- 19
+call.type$ -- 19
+change.case$ -- 118
+chr.to.int$ -- 19
+cite$ -- 20
+duplicate$ -- 357
+empty$ -- 545
+format.name$ -- 237
+if$ -- 1763
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 12
-newline$ -- 40
-num.names$ -- 48
-pop$ -- 73
+missing$ -- 19
+newline$ -- 61
+num.names$ -- 76
+pop$ -- 123
 preamble$ -- 1
-purify$ -- 72
+purify$ -- 118
 quote$ -- 0
-skip$ -- 203
+skip$ -- 310
 stack$ -- 0
-substring$ -- 278
+substring$ -- 423
 swap$ -- 0
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 108
+type$ -- 171
 warning$ -- 1
-while$ -- 46
+while$ -- 71
 width$ -- 0
-write$ -- 122
+write$ -- 193
 (There was 1 error message)
