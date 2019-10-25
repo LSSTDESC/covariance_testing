@@ -2,7 +2,7 @@ This is BibTeX, Version 0.99d (TeX Live 2016)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: main.aux
 I couldn't open database file lsstdesc.bib
----line 60 of file main.aux
+---line 66 of file main.aux
  : \bibdata{mainNotes,main,lsstdesc
  :                                 }
 I'm skipping whatever remains of this command

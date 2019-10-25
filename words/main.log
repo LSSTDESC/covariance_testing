@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.1.16)  24 OCT 2019 16:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.5.13)  25 OCT 2019 12:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -446,6 +446,10 @@ File: ./figures/kl_scatter.png Graphic file (type png)
 Package pdftex.def Info: ./figures/kl_scatter.png used on input line 356.
 (pdftex.def)             Requested size: 132.83835pt x 122.73582pt.
 
+
+LaTeX Warning: Reference `fig:kl-constraints' on page 6 undefined on input line
+ 362.
+
 <./figures/om_s8_A_full_1st_2nd.png, id=189, 416.9979pt x 416.9979pt>
 File: ./figures/om_s8_A_full_1st_2nd.png Graphic file (type png)
 
@@ -455,7 +459,7 @@ Package pdftex.def Info: ./figures/om_s8_A_full_1st_2nd.png used on input line
 (pdftex.def)             Requested size: 196.80075pt x 196.80348pt.
  [6 <./figures/Cl_pst.png> <./figures/Dl_pst.png> <./figures/epi.png> <./figure
 s/Wij.png>]
-<./figures/Compression/Compressed_omS8A.pdf, id=197, 327.73697pt x 327.73697pt>
+<./figures/Compression/Compressed_omS8A.pdf, id=198, 327.73697pt x 327.73697pt>
 File: ./figures/Compression/Compressed_omS8A.pdf Graphic file (type pdf)
 <use ./figures/Compression/Compressed_omS8A.pdf>
 Package pdftex.def Info: ./figures/Compression/Compressed_omS8A.pdf used on inp
@@ -467,7 +471,7 @@ ut line 405.
 LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
  on input line 410.
 
-<./figures/Correlation_compression.pdf, id=206, 573.72345pt x 496.77972pt>
+<./figures/Correlation_compression.pdf, id=207, 573.72345pt x 496.77972pt>
 File: ./figures/Correlation_compression.pdf Graphic file (type pdf)
 
 <use ./figures/Correlation_compression.pdf>
@@ -475,7 +479,7 @@ Package pdftex.def Info: ./figures/Correlation_compression.pdf used on input li
 ne 414.
 (pdftex.def)             Requested size: 221.3985pt x 191.70422pt.
 
-<./figures/Weights.pdf, id=207, 1065.44656pt x 196.21304pt>
+<./figures/Weights.pdf, id=208, 1065.44656pt x 196.21304pt>
 File: ./figures/Weights.pdf Graphic file (type pdf)
 
 <use ./figures/Weights.pdf>
@@ -487,20 +491,18 @@ sion.pdf
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./figures/Correlation_compre
 ssion.pdf): PDF inclusion: multiple pdfs with page group included in a single p
 age
->] <./figures/Tolerance_errors.pdf, id=252, 722.7pt x 289.08pt>
+>] <./figures/Tolerance_errors.pdf, id=253, 722.7pt x 289.08pt>
 File: ./figures/Tolerance_errors.pdf Graphic file (type pdf)
 
 <use ./figures/Tolerance_errors.pdf>
 Package pdftex.def Info: ./figures/Tolerance_errors.pdf used on input line 453.
 
 (pdftex.def)             Requested size: 246.0pt x 98.40057pt.
- (./contributions.tex)
-(./desc-tex/ack/standard.tex) [9 <./figures/Weights.pdf> <./figures/Tolerance_e
-rrors.pdf
+ [9 <./figures/Weights.pdf> <./figures/Tolerance_errors.pdf
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./figures/Tolerance_errors.p
 df): PDF inclusion: multiple pdfs with page group included in a single page
->] (./main.bbl
+>] (./contributions.tex) (./desc-tex/ack/standard.tex) (./main.bbl
 ! Misplaced alignment tab character &.
 l.42 ...d, K., Guy, J., {et~al.} 2009, Astronomy &
                                                    Astrophysics,
@@ -511,43 +513,48 @@ up above has ended a previous alignment prematurely,
 you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
-) [10] (./main.aux) ) 
+) [10] (./main.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 5266 strings out of 493014
- 70261 string characters out of 6133351
- 167122 words of memory out of 5000000
- 8706 multiletter control sequences out of 15000+600000
- 8141 words of font info for 30 fonts, out of 8000000 for 9000
+ 5270 strings out of 493014
+ 70307 string characters out of 6133351
+ 170107 words of memory out of 5000000
+ 8709 multiletter control sequences out of 15000+600000
+ 8449 words of font info for 31 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,10n,37p,1292b,306s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmbx9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmex10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmmi12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmmi6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mmi8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
-i9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10
-.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.p
-fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb
-></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></
-usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr
-/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/lo
-cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local
-/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/te
-xlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/local/tex
-live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texl
-ive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texliv
-e/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/
-2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/20
-16/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/201
-6/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on main.pdf (10 pages, 1503059 bytes).
+ 38i,10n,37p,1588b,306s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></
+usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></u
+sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
+r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr
+/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/l
+ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/loc
+al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local
+/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/t
+exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/tex
+live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texli
+ve/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive
+/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/20
+16/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2016/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2016/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/local/texlive/2016/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2016/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/font
+s/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2016/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmtt10.pfb>
+Output written on main.pdf (10 pages, 1514094 bytes).
 PDF statistics:
- 357 PDF objects out of 1000 (max. 8388607)
- 247 compressed objects within 3 object streams
+ 361 PDF objects out of 1000 (max. 8388607)
+ 250 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
  91 words of extra memory for PDF output out of 10000 (max. 10000000)
 
