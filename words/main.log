@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.5.13)  25 OCT 2019 12:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.5.13)  25 OCT 2019 18:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -320,63 +320,67 @@ e
 ))
 \openout3 = `mainNotes.bib'.
 
+Missing character: There is no ‚ in font cmr9!
+Missing character: There is no Ä in font cmr9!
+Missing character: There is no ú in font cmr9!
+Missing character: There is no ‚ in font cmr9!
+Missing character: There is no Ä in font cmr9!
+Missing character: There is no ù in font cmr9!
 
 (./authors.tex)
 
-Class revtex4-1 Warning: Assuming \noaffiliation for authors.
+Class revtex4-1 Warning: Assuming \noaffiliation for collaboration.
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 105.
+Missing character: There is no √ in font cmti9!
+Missing character: There is no ≠ in font cmti9!
+Missing character: There is no √ in font cmti9!
+Missing character: There is no ≥ in font cmti9!
+Missing character: There is no √ in font cmti9!
+Missing character: There is no ≠ in font cmti9!
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 108.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 105.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 108.
  [1{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-
-LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
- on input line 153.
-
-<./figures/Y1_Comparison/Y1_om-S8A.pdf, id=15, 327.73697pt x 327.73697pt>
+<./figures/Y1_Comparison/Y1_om-S8A.pdf, id=17, 327.73697pt x 327.73697pt>
 File: ./figures/Y1_Comparison/Y1_om-S8A.pdf Graphic file (type pdf)
 
 <use ./figures/Y1_Comparison/Y1_om-S8A.pdf>
 Package pdftex.def Info: ./figures/Y1_Comparison/Y1_om-S8A.pdf used on input li
-ne 158.
+ne 161.
 (pdftex.def)             Requested size: 221.3985pt x 221.39793pt.
-
-<./figures/One-to-one-Y1_CL-BJ.pdf, id=16, 435.22523pt x 377.35103pt>
+ [2 <./figures/Y1_Comparison/Y1_om-S8A.pdf>] <./figures/One-to-one-Y1_CL-BJ.pdf
+, id=63, 435.22523pt x 377.35103pt>
 File: ./figures/One-to-one-Y1_CL-BJ.pdf Graphic file (type pdf)
 
 <use ./figures/One-to-one-Y1_CL-BJ.pdf>
 Package pdftex.def Info: ./figures/One-to-one-Y1_CL-BJ.pdf used on input line 1
-70.
+73.
 (pdftex.def)             Requested size: 221.3985pt x 191.95705pt.
 
-<./figures/ratio_scatter.png, id=17, 404.51125pt x 402.50375pt>
+<./figures/ratio_scatter.png, id=64, 404.51125pt x 402.50375pt>
 File: ./figures/ratio_scatter.png Graphic file (type png)
 
 <use ./figures/ratio_scatter.png>
-Package pdftex.def Info: ./figures/ratio_scatter.png used on input line 171.
+Package pdftex.def Info: ./figures/ratio_scatter.png used on input line 174.
 (pdftex.def)             Requested size: 196.80075pt x 195.82825pt.
 
-<./figures/Eigenvalues/Eigenvalues_Y1_BJ-DES.pdf, id=19, 402.08342pt x 254.4060
+<./figures/Eigenvalues/Eigenvalues_Y1_BJ-DES.pdf, id=66, 402.08342pt x 254.4060
 8pt>
 File: ./figures/Eigenvalues/Eigenvalues_Y1_BJ-DES.pdf Graphic file (type pdf)
  <use ./figures/Eigenvalues/Eigenvalues_Y1_BJ-DES.pdf>
 Package pdftex.def Info: ./figures/Eigenvalues/Eigenvalues_Y1_BJ-DES.pdf used o
-n input line 185.
+n input line 188.
 (pdftex.def)             Requested size: 221.3985pt x 140.08293pt.
- [2 <./figures/Y1_Comparison/Y1_om-S8A.pdf>]
-
-LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
- on input line 188.
 
 <./figures/Parameters.pdf, id=67, 327.73697pt x 327.73697pt>
 File: ./figures/Parameters.pdf Graphic file (type pdf)
 
 <use ./figures/Parameters.pdf>
-Package pdftex.def Info: ./figures/Parameters.pdf used on input line 202.
+Package pdftex.def Info: ./figures/Parameters.pdf used on input line 205.
 (pdftex.def)             Requested size: 221.3985pt x 221.39793pt.
  [3 <./figures/One-to-one-Y1_CL-BJ.pdf> <./figures/ratio_scatter.png> <./figure
 s/Eigenvalues/Eigenvalues_Y1_BJ-DES.pdf
@@ -384,125 +388,123 @@ s/Eigenvalues/Eigenvalues_Y1_BJ-DES.pdf
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./figures/Eigenvalues/Eigenv
 alues_Y1_BJ-DES.pdf): PDF inclusion: multiple pdfs with page group included in 
 a single page
->]
-
-LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
- on input line 224.
-
-<./figures/SNR/SNR_200_omA.pdf, id=121, 698.90224pt x 325.59288pt>
+>] <./figures/SNR/SNR_200_omA.pdf, id=121, 698.90224pt x 325.59288pt>
 File: ./figures/SNR/SNR_200_omA.pdf Graphic file (type pdf)
 
 <use ./figures/SNR/SNR_200_omA.pdf>
-Package pdftex.def Info: ./figures/SNR/SNR_200_omA.pdf used on input line 247.
+Package pdftex.def Info: ./figures/SNR/SNR_200_omA.pdf used on input line 250.
 (pdftex.def)             Requested size: 246.0pt x 114.6001pt.
- [4 <./figures/Parameters.pdf> <./figures/SNR/SNR_200_omA.pdf
+ [4 <./figures/Parameters.pdf>]
 
-pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./figures/SNR/SNR_200_omA.pd
-f): PDF inclusion: multiple pdfs with page group included in a single page
->] <./figures/Cl_pst.png, id=178, 430.60875pt x 393.47pt>
+LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
+ on input line 266.
+
+[5 <./figures/SNR/SNR_200_omA.pdf>]
+<./figures/Cl_pst.png, id=184, 430.60875pt x 393.47pt>
 File: ./figures/Cl_pst.png Graphic file (type png)
 
 <use ./figures/Cl_pst.png>
-Package pdftex.def Info: ./figures/Cl_pst.png used on input line 334.
+Package pdftex.def Info: ./figures/Cl_pst.png used on input line 337.
 (pdftex.def)             Requested size: 172.19925pt x 157.34918pt.
 
-<./figures/Dl_pst.png, id=179, 405.515pt x 389.455pt>
+<./figures/Dl_pst.png, id=185, 405.515pt x 389.455pt>
 File: ./figures/Dl_pst.png Graphic file (type png)
 
 <use ./figures/Dl_pst.png>
-Package pdftex.def Info: ./figures/Dl_pst.png used on input line 336.
+Package pdftex.def Info: ./figures/Dl_pst.png used on input line 339.
 (pdftex.def)             Requested size: 172.19925pt x 165.38246pt.
 
-<./figures/epi.png, id=180, 412.54124pt x 384.43625pt>
+<./figures/epi.png, id=186, 412.54124pt x 384.43625pt>
 File: ./figures/epi.png Graphic file (type png)
  <use ./figures/epi.png>
-Package pdftex.def Info: ./figures/epi.png used on input line 344.
+Package pdftex.def Info: ./figures/epi.png used on input line 347.
 (pdftex.def)             Requested size: 196.80075pt x 183.39516pt.
 
-<./figures/Wij.png, id=181, 524.96124pt x 384.43625pt>
+<./figures/Wij.png, id=187, 524.96124pt x 384.43625pt>
 File: ./figures/Wij.png Graphic file (type png)
  <use ./figures/Wij.png>
-Package pdftex.def Info: ./figures/Wij.png used on input line 345.
+Package pdftex.def Info: ./figures/Wij.png used on input line 348.
 (pdftex.def)             Requested size: 250.92105pt x 183.75298pt.
 
-[5] <./figures/kl_comp_cl.png, id=186, 343.2825pt x 270.00874pt>
+<./figures/kl_comp_cl.png, id=188, 343.2825pt x 270.00874pt>
 File: ./figures/kl_comp_cl.png Graphic file (type png)
 
 <use ./figures/kl_comp_cl.png>
-Package pdftex.def Info: ./figures/kl_comp_cl.png used on input line 354.
+Package pdftex.def Info: ./figures/kl_comp_cl.png used on input line 357.
 (pdftex.def)             Requested size: 167.2782pt x 131.57207pt.
 
-<./figures/kl_comp_bj.png, id=187, 343.2825pt x 269.005pt>
+<./figures/kl_comp_bj.png, id=189, 343.2825pt x 269.005pt>
 File: ./figures/kl_comp_bj.png Graphic file (type png)
 
 <use ./figures/kl_comp_bj.png>
-Package pdftex.def Info: ./figures/kl_comp_bj.png used on input line 355.
+Package pdftex.def Info: ./figures/kl_comp_bj.png used on input line 358.
 (pdftex.def)             Requested size: 167.2782pt x 131.08296pt.
 
-<./figures/kl_scatter.png, id=188, 435.6275pt x 402.50375pt>
+<./figures/kl_scatter.png, id=190, 435.6275pt x 402.50375pt>
 File: ./figures/kl_scatter.png Graphic file (type png)
 
 <use ./figures/kl_scatter.png>
-Package pdftex.def Info: ./figures/kl_scatter.png used on input line 356.
+Package pdftex.def Info: ./figures/kl_scatter.png used on input line 359.
 (pdftex.def)             Requested size: 132.83835pt x 122.73582pt.
 
 
 LaTeX Warning: Reference `fig:kl-constraints' on page 6 undefined on input line
- 362.
+ 365.
 
-<./figures/om_s8_A_full_1st_2nd.png, id=189, 416.9979pt x 416.9979pt>
+<./figures/om_s8_A_full_1st_2nd.png, id=191, 416.9979pt x 416.9979pt>
 File: ./figures/om_s8_A_full_1st_2nd.png Graphic file (type png)
 
 <use ./figures/om_s8_A_full_1st_2nd.png>
 Package pdftex.def Info: ./figures/om_s8_A_full_1st_2nd.png used on input line 
-365.
+368.
 (pdftex.def)             Requested size: 196.80075pt x 196.80348pt.
- [6 <./figures/Cl_pst.png> <./figures/Dl_pst.png> <./figures/epi.png> <./figure
-s/Wij.png>]
-<./figures/Compression/Compressed_omS8A.pdf, id=198, 327.73697pt x 327.73697pt>
+ [6] [7 <./figures/Cl_pst.png> <./figures/Dl_pst.png> <./figures/epi.png> <./fi
+gures/Wij.png> <./figures/kl_comp_cl.png> <./figures/kl_comp_bj.png> <./figures
+/kl_scatter.png>]
+
+LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
+ on input line 406.
+
+
+<./figures/Compression/Compressed_omS8A.pdf, id=207, 327.73697pt x 327.73697pt>
 File: ./figures/Compression/Compressed_omS8A.pdf Graphic file (type pdf)
 <use ./figures/Compression/Compressed_omS8A.pdf>
 Package pdftex.def Info: ./figures/Compression/Compressed_omS8A.pdf used on inp
-ut line 405.
+ut line 408.
 (pdftex.def)             Requested size: 221.3985pt x 221.39793pt.
- [7 <./figures/kl_comp_cl.png> <./figures/kl_comp_bj.png> <./figures/kl_scatter
-.png> <./figures/om_s8_A_full_1st_2nd.png>]
 
-LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
- on input line 410.
+<./figures/Correlation_compressed3.pdf, id=208, 565.05103pt x 481.44243pt>
+File: ./figures/Correlation_compressed3.pdf Graphic file (type pdf)
 
-<./figures/Correlation_compression.pdf, id=207, 573.72345pt x 496.77972pt>
-File: ./figures/Correlation_compression.pdf Graphic file (type pdf)
+<use ./figures/Correlation_compressed3.pdf>
+Package pdftex.def Info: ./figures/Correlation_compressed3.pdf used on input li
+ne 417.
+(pdftex.def)             Requested size: 221.3985pt x 188.63599pt.
 
-<use ./figures/Correlation_compression.pdf>
-Package pdftex.def Info: ./figures/Correlation_compression.pdf used on input li
-ne 414.
-(pdftex.def)             Requested size: 221.3985pt x 191.70422pt.
-
-<./figures/Weights.pdf, id=208, 1065.44656pt x 196.21304pt>
+<./figures/Weights.pdf, id=209, 1065.44656pt x 196.21304pt>
 File: ./figures/Weights.pdf Graphic file (type pdf)
 
 <use ./figures/Weights.pdf>
-Package pdftex.def Info: ./figures/Weights.pdf used on input line 419.
+Package pdftex.def Info: ./figures/Weights.pdf used on input line 422.
 (pdftex.def)             Requested size: 492.0pt x 90.60638pt.
- [8 <./figures/Compression/Compressed_omS8A.pdf> <./figures/Correlation_compres
-sion.pdf
+ [8 <./figures/om_s8_A_full_1st_2nd.png> <./figures/Compression/Compressed_omS8
+A.pdf> <./figures/Correlation_compressed3.pdf
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./figures/Correlation_compre
-ssion.pdf): PDF inclusion: multiple pdfs with page group included in a single p
+ssed3.pdf): PDF inclusion: multiple pdfs with page group included in a single p
 age
->] <./figures/Tolerance_errors.pdf, id=253, 722.7pt x 289.08pt>
+>] <./figures/Tolerance_errors.pdf, id=254, 722.7pt x 289.08pt>
 File: ./figures/Tolerance_errors.pdf Graphic file (type pdf)
 
 <use ./figures/Tolerance_errors.pdf>
-Package pdftex.def Info: ./figures/Tolerance_errors.pdf used on input line 453.
+Package pdftex.def Info: ./figures/Tolerance_errors.pdf used on input line 456.
 
 (pdftex.def)             Requested size: 246.0pt x 98.40057pt.
  [9 <./figures/Weights.pdf> <./figures/Tolerance_errors.pdf
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./figures/Tolerance_errors.p
 df): PDF inclusion: multiple pdfs with page group included in a single page
->] (./contributions.tex) (./desc-tex/ack/standard.tex) (./main.bbl
+>] (./contributions.tex) (./desc-tex/ack/standard.tex) (./main.bbl [10]
 ! Misplaced alignment tab character &.
 l.42 ...d, K., Guy, J., {et~al.} 2009, Astronomy &
                                                    Astrophysics,
@@ -513,19 +515,19 @@ up above has ended a previous alignment prematurely,
 you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
-) [10] (./main.aux)
+) [11] (./main.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 5270 strings out of 493014
- 70307 string characters out of 6133351
- 170107 words of memory out of 5000000
- 8709 multiletter control sequences out of 15000+600000
+ 5268 strings out of 493014
+ 70288 string characters out of 6133351
+ 184506 words of memory out of 5000000
+ 8707 multiletter control sequences out of 15000+600000
  8449 words of font info for 31 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,10n,37p,1588b,306s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,10n,37p,1712b,306s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></
@@ -550,11 +552,12 @@ fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2016/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/font
 s/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2016/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmtt10.pfb>
-Output written on main.pdf (10 pages, 1514094 bytes).
+ype1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2016/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmtt10.pfb>
+Output written on main.pdf (11 pages, 1533454 bytes).
 PDF statistics:
- 361 PDF objects out of 1000 (max. 8388607)
- 250 compressed objects within 3 object streams
+ 368 PDF objects out of 1000 (max. 8388607)
+ 256 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
  91 words of extra memory for PDF output out of 10000 (max. 10000000)
 
