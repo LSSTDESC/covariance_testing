@@ -194,16 +194,9 @@
 	
 	\figref{eig_snr} shows the results obtained after ``removing" the 200 modes with the largest eigenvalues by following the method described above.  The constraints are significantly broader for the three parameters shown. This is consistent with the fact that we are throwing away about 90\% of the information. However, it is inconsistent with the notion that these modes are irrelevant, in fact, constraints on $S_8\equiv \sigma_8 (\Omega_m/0.3)^{0.5}$ for the original covariance matrix are $0.784^{+ 0.200}_{- 0.171}$, whereas, for this procedure, we obtain $0.679^{+ 0.533}_{- 0.505}$, showing an increase in almost 200\%. It is then clear that a different way of ordering the modes, other than simply looking at the eigenvalues, is called for.	
 	
-	%\figref{eigenvalues} shows the results obtained after ``removing'' the 50 modes with the largest eigenvalues (by multiplying those eigenvalues by a very large number). The constraints widen at the 10\% level. This is consistent with the fact that we are throwing away about 20\% of the data. However, it is inconsistent with the notion that this 20\% is irrelevant. On the contrary, the modes with the largest variance seem to contribute as much information as the rest of the modes.  \figref{eigenvalues} also shows the results when the modes with the smallest eigenvalues are removed. Counterintuitively, this does not broaden the constraints much \scott{Maybe good to quote error bars here especially on $S_8\equiv \sigma_8 (\Omega_m/0.3)^{0.5}$.} We see that the modes with the smallest eigenvalues carry less information. Clearly, a different way of ordering the modes, other than simply looking at the eigenvalues, is called for.
-	
-	
-	% both approaches compared to constraints for the original covariance matrix. We can see in the Posterior Density Functions (pdfs) that the mean values of both parameters are well within the $2\sigma$ interval, which is also true for all the other parameters. As for the constraining power, the sizes of the constraints are within less than 5\% of each other for almost all of the parameters. Since the results are similar for both approaches, it becomes clear that ranking eigenvalues is not the most efficient way of evaluating where the most contributing elements of the covariance matrix lie.
-	
 	\begin{figure}
 		\includegraphics[width=0.9\columnwidth]{Parameters.pdf}
 		\caption{Constraints on cosmological parameters $\Omega_m$, $S_8$ and the intrinsic alignment parameter $A$ for the original CL covariance matrix (in purple) and for two new covariance matrices obtained by setting the 200 highest eigenvalues of the original matrix to nine orders of magnitude higher (in blue), and by replacing the 200 lowest values of the SNR to seven order of magnitude lower (in magenta). \label{fig:eig_snr}}
-		%		\includegraphics[width=0.9\columnwidth]{Eigenvalues/Eigenvalues_wm-sigma8.pdf}
-		%		\caption{Constraints on cosmological parameters $\Omega_m$ and $\sigma_8$ for the original DESY1 covariance matrix (in purple) and for two new covariance matrices obtained by setting the fifty highest eigenvalues of the original matrix to nine orders of magnitude higher (in blue), and by replacing the fifty lowest eigenvalues to nine order of magnitude lower (in magenta). \label{fig:eigenvalues}}
 	\end{figure}
 	
 	% ----------------------------------------------------------------------
@@ -211,12 +204,10 @@
 	\section{Signal-to-noise ratio}
 	
 	Instead of looking only at the ``noise'' -- or the eigenvalues of the covariance matrix -- a better way to assess the importance of modes is to consider the signal as well. We can define the expected signal-to-noise ratio (SNR) as
-	%Since the values of the data points vary by many orders of magnitude, the range of eigenvalues in \figref{evector} is a bit misleading. In addition, it is not clear which eigenvectors should be dropped: should it be those with large eigenvalues (noise) or small ones (the noise is noisy)? Ideally, what we would like is to create a list of eigenvectors ordered in some way and drop the least important. This ties into the section below on Shrinkage. A very simple way to do this is to note that the total signal to noise squared is
 	\be
 	\left(\frac{S}{N}\right)^2 = \sum_{ij} T_i C^{-1}_{ij} T_j\
 	,\ee
 	where $T_i$ and are the predicted theoretical signal for the $i^{th}$ data point and $C$ is the covariance matrix. If $C$ were diagonal, then the eigenvectors would simply be the data points themselves, and we could estimate the SNR squared expected in each mode by simply computing $T_i^2/C_{ii}$. Then we could throw out the modes with the lowest SNR. Since $C$ is not diagonal, we have to first diagonalize it and then order the values. So, we write the expected SNR squared as
-	%to do things a bit differently. Let's first define re-scaled data points
 	\bea
 	\left(\frac{S}{N}\right)^2 %&=& %\sum_{ij} T_i  C^{-1}_{ij} T_j\nonumber\\
 	&=& \sum_{i} \frac{v_i^2}{\lambda_i}
@@ -229,8 +220,7 @@
 	
 	After obtaining the SNR for the covariance matrix, we proceed to set the 200 lowest values to seven orders of magnitude lower, which is equivalent to increasing the noise (or decreasing the signal) of these modes. We then obtain a new covariance matrix with the corresponding modified SNR values. 
 	
-	The parameter constraints for this method are shown in \figref{eig_snr}, where we note that only $\Omega_m$ is well constrained (in agreement with those obtained with the original covariance matrix to within a $2\sigma$ interval). The constraining power on $A$ and $S_8$, on the other hand, is very much lost, which suggests that the modes removed do indeed carry relevant information for these parameters. This is surprising since these were identified as those that had the lowest SNR.
-	%tells us that the modes removed are essential for obtaining better constraints on these parameters. 
+	The parameter constraints for this method are shown in \figref{eig_snr}, where we note that only $\Omega_m$ is well constrained (in agreement with those obtained with the original covariance matrix to within a $2\sigma$ interval). The constraining power on $A$ and $S_8$, on the other hand, is very much lost, which suggests that the modes removed do indeed carry relevant information for these parameters. This is surprising since these were identified as those that had the lowest SNR. 
 	
 	Resolving this requires us to tweak our understanding of which modes carry information. The ``signal'' these modes are ordered by is the amplitude of the data points.  The parameters though are sensitive to the shape as well as the amplitude.
 	To address this, we can identify the SNR for each parameter individually. To illustrate this, we take
@@ -241,14 +231,11 @@
 	%	\be
 	%	v_i^\alpha \equiv U_{ij}^T \frac{\partial T_j}{\partial p_\alpha}
 	%	,\ee
-	where $\partial /\partial p_\alpha$ is the derivative with respect to each parameter. This produces the SNR for each parameter of interest. The importance of this procedure is illustrated in \figref{signalnoise_cuts}, which shows the normalised vanilla SNR for a given mode on the $x$-axis and the SNR for each parameter for the same mode, for brevity, we show only for $\Omega_m$ and $A$. The shaded region is the one excluded in the previous analysis, but clearly there are some low SNR modes there that contain information about the parameters. This is particularly true for the intrinsic alignment parameter $A$, which seems to explain the poor constraints shown in \figref{eig_snr}. As a result, simply cutting on raw SNR loses constraining power. 
-	%While this is apparent in the aforementioned figure, it is not very clear when looking at the resulting constraints on these parameters because the constraining power of the data over these parameters is not very strong (errors of about $100\%$). As such, these results do not encourage us to use this method for identifying the most important elements of the covariance matrix.
+	where $\partial /\partial p_\alpha$ is the derivative with respect to each parameter. This produces the SNR for each parameter of interest. The importance of this procedure is illustrated in \figref{signalnoise_cuts}, which shows the normalised vanilla SNR for a given mode on the $x$-axis and the SNR for each parameter for the same mode, for brevity, we show only for $\Omega_m$ and $A$. The shaded region is the one excluded in the previous analysis, but clearly there are some low SNR modes there that contain information about the parameters. This is particularly true for the intrinsic alignment parameter $A$, which seems to explain the poor constraints shown in \figref{eig_snr}. As a result, simply cutting on raw SNR loses constraining power.
 	
 	\begin{figure}
 		\includegraphics[width=1\columnwidth]{SNR/SNR_200_omA.pdf}
 		\caption{Scatter plot for the relation between the signal to noise obtained with the covariance matrix for CL for each parameter (x-axis) against that for the full set of parameters (y-axis). The derivatives are shown with respect to $\Omega_m$ (blue circle) and for the intrinsic alignment parameters $A$ (orange triangle). The purple rectangle spreads until the two hundredth lowest value of SNR, which corresponds to the values that are modified for parameter constraints. \label{fig:signalnoise_cuts}}
-		%\includegraphics[width=1\columnwidth]{SNR/SNR_200.pdf}
-		%\caption{Scatter plot for the relation between the signal to noise obtained with the covariance matrix for DESY1 for each parameter (x-axis) against that for the full set of parameters (y-axis). The derivatives are shown with respect to cosmological parameters $\Omega_m$ (blue circle) and $A_s$ (orange circle), and for the intrinsic alignment parameters $A$ (green square) and $\eta$ (red triangle). The purple rectangle spreads until the fiftieth lowest value of SNR, which corresponds to the values that are modified for parameter constraints. \label{fig:signalnoise_cuts}}
 	\end{figure}
 	
 	% ----------------------------------------------------------------------
@@ -258,21 +245,9 @@
 	\section{Shrinkage}
 	\label{subsec:shrinkage}
 	
-	%There have been several methods proposed in the literature to compress the data vectors, extracting as much information as possible. Here we consider two: first compression at the map level \citep{Alonso:2017hhj}, where linear combination of the tomographic maps is used. If there are 4 tomographic bins, an uncompressed analysis would require ten separate 2-point functions (or 20 for cosmic shear), whereas a compression scheme leads to just a few uncorrelated maps. If there were 3 such maps, then only three 2-point functions would need to be used for the likelihood analysis.
-	
 	Since the simplest methods of identifying the most relevant modes are flawed, we turn to more sophisticated methods \citep{Tegmark:1997maa, Joachimi:2017mnr,Gualdi:2018gmj} that have been shown to reduce the number of modes significantly but still retain the relevant information. First, there is compression at the map level \citep{Alonso:2017hhj}, where linear combinations of the tomographic maps are used to retain as much information as possible. Compression at the map level then significantly reduces the size of the data vector of two-point functions. For example, we will see that most of the information in the four tomographic bins used by DESY1 can be compressed into a single linear combination of those bins. Therefore, instead of $(4\times5)/2$ two-point functions for each angular bin, we need include only one: the compression in the size of the data vector by a factor of 10 means that there are a hundred fewer elements of the covariance matrix to study.
 	
-	The second method directly operates on the two-point functions themselves \citep{Zablocki:2015zcm}, where the modes used are those that maximize the Fisher information for each of the cosmological parameters. Here the size of the data vector is just the number of parameters used to fit the data (i.e. 16), so the compression eliminates even more modes than the tomographic compression. Roughly, though, the numbers are the same: a data vector reduced by a factor of ten and the number of elements in the covariance matrix reduced by a factor of 100.
-	
-	%	Shrinking the data vector and its covariance matrix is equivalent to projecting the data vector onto a subspace of the original vector space. For example, if our data have a length of $n$ and we want to compress it into a lower dimension $m\leq n$, we need to come up with a basis transformation matrix $U_{m\times n}$ that has orthonormal row vectors, or mathematically speaking, $<U_{xi} \cdot U_{yi}>=\delta_{xy}$. Once we have a basis transformation matrix $U_{m\times n}$, we can compress the data vector $y$ and covariance matrix $C$ into filter data $\Tilde{y}$ and $\Tilde{C}$
-	%	\bea
-	%	\Tilde{y} &=& U y\\\nonumber
-	%	\Tilde{C} &=&<\Tilde{y}  \Tilde{y}^T>\\
-	%	&=&U<y y^T> U^T= U C U^T\
-	%	.\eea
-	%	For a data vector with length $m$, there are $m(m+1)/2$ elements in the covariance matrix to be evaluated. Once the data vector is shrunk to length $n$, elements in covariance matrices will shrink quadratically. Therefore, shrinking the covariance matrices is an effective way of comparing them.
-	%	
-	%	Here, we will demonstrate these two methods to compress the covariance matrices. In both cases, the data vector is shrunk by 90\%, which correspond to the covariance matrices being reduced by 99\%. 
+	The second method directly operates on the two-point functions themselves \citep{Zablocki:2015zcm}, where the modes used are those that maximize the Fisher information for each of the cosmological parameters. Here the size of the data vector is just the number of parameters used to fit the data (i.e. 16), so the compression eliminates even more modes than the tomographic compression. Roughly, though, the numbers are the same: a data vector reduced by a factor of ten and the number of elements in the covariance matrix reduced by a factor of 100. 
 	
 	\subsection{Tomographic Compression}
 	
@@ -282,7 +257,6 @@
 	\be
 	C^{ij}_{\ell} E^j_{\ell} = \lambda^i_{\ell} N^{ij}_{\ell} E^j_{\ell}
 	.\ee
-	
 	Each row in $E_{\ell}$ corresponds to a KL-mode of $C_{\ell}$. Using the Cholesky decomposition, $N_{\ell} = L L^{\dagger}$, the new observable can be expressed as $b_{\ell m} = E_{\ell} \cdot L^{-1} a_{\ell m}$. We should note that $C_{\ell}$ is the power spectrum of the convergence of the weak lensing, and $E_{\ell}$ is the transformation of basis for the convergence. So, we can now calculate the power spectrum $D_{\ell}$ for the new observable $b_{\ell m}$ 
 	\be
 	D_{\ell} =\ <b_{\ell m} b_{\ell m}^T>\ = E_{\ell} L^{-1} C_{\ell} L^{-1} E^{T}_{\ell}\
@@ -374,7 +348,7 @@
 	\be \label{eq:compression_scheme}
 	U_{\alpha i} \equiv \frac{\partial T_j}{\partial p_\alpha} \, C^{-1}{}_{ji}\
 	,\ee
-	with $T_j$ being the theoretical prediction for the data point $D_j$. An illustration of the matrix $U_{\alpha i}$ is shown in \figref{weight2pt}, constraining the weighting vector for parameters $\Omega_m$, $\sigma_8$ and $A$.
+	with $T_j$ being the theoretical prediction for the data point $D_j$. An illustration of the matrix $U_{\alpha i}$ is shown in \figref{weight2pt}, constraining the weighting vector for parameters $\Omega_m$, $S_8$ and $A$.
 	
 	The now much smaller data set $\{y_\alpha\}$, which contains as few as $N_p$ data points, carries with it its own covariance matrix, with which the $\chi^2$ can be computed for each point in parameter space. Propagating through shows that this covariance matrix is related to the original $C_{ij}$ via
 	\be
@@ -383,13 +357,6 @@
 	In our case, our covariance matrix is  $227 \times 227$, while the number of parameters needed to specify the model is only 16, so $C_{\alpha\beta}$ is a $16\times 16$ matrix. We have apparently captured from the initial set of $(227 \times 228)/2 = 25,878$ independent elements of the covariance matrix a small subset (only 136 in this case) of linear combinations of these 25k elements that really matter. If two covariance matrices give the same set of $C_{\alpha\beta}$, it should not matter whether any of the other eighty thousand elements differ from one another.
 	
 	Ultimately, what matters is how well the likelihood does at extracting parameter constraints. Since most analyses assume a Gaussian likelihood, this boils down to how well the contours in parameter space agree when computing the $\chi^2$ using two different covariance matrices.	
-	
-	%\figref{evector} shows an example of one of the eigenvectors, the one associated with the smallest eigenvalue. This low-eigenvalue mode picks up the differences between the correlation function at different angular scales (each vertical line delineates between 2-point functions of shears in different tomographic bin pairs).
-	
-	%	\begin{figure}
-	%		\includegraphics[width=0.9\columnwidth]{evector.png}
-	%		\caption{A simple scatter plot of elements of covariance matrices produced by two separate halo model codes. \label{fig:evector}}
-	%	\end{figure}
 	
 	% ----------------------------------------------------------------------
 	
@@ -411,7 +378,7 @@
 	
 	\begin{figure*}
 		\includegraphics[width=2\columnwidth]{Weights.pdf}
-		\caption{An illustration of the 227 values of the weights corresponding to $\Omega_m$, $\sigma_8$ and $A$ used for compressing the covariance matrices. Note that the largest values for $\sigma_8$ and $A$ correspond to the last 60 elements, i.e. these will be used to compress the part of the covariance matrix that holds information for $\xi_-$.} \label{fig:weight2pt}
+		\caption{An illustration of the 227 values of the weights corresponding to $\Omega_m$, $S_8$ and $A$ used for compressing the covariance matrices. Note how similar the weighing vectors for $S_8$ and $A$, and that the largest values for correspond to the last 60 elements, i.e. these will be used to compress the part of the covariance matrix that holds information for $\xi_-$.} \label{fig:weight2pt}
 	\end{figure*}
 	
 	
@@ -422,16 +389,6 @@
 	\label{sec:tolerance}
 	
 	Now that we have shown that we are indeed able to compress the covariance matrix into a much simpler and considerably smaller one, our next step is to analyse the amount of error the elements can tolerate while reproducing compatible parameter constraints. In the next sections we test two different ways of perturbing the covariance matrix: first we consider an error to the elements themselves, and then we follow a similar procedure to study the effects of introducing error to the eigenvalues.
-	
-	%	Shrinking the data vector and its covariance matrix is equivalent to projecting the data vector onto a subspace of the original vector space. For example, if our data have a length of $n$ and we want to compress it into a lower dimension $m\leq n$, we need to come up with a basis transformation matrix $U_{m\times n}$ that has orthonormal row vectors, or mathematically speaking, $<U_{xi} \cdot U_{yi}>=\delta_{xy}$. Once we have a basis transformation matrix $U_{m\times n}$, we can compress the data vector $y$ and covariance matrix $C$ into filter data $\Tilde{y}$ and $\Tilde{C}$
-	%	\bea
-	%	\Tilde{y} &=& U y\\\nonumber
-	%	\Tilde{C} &=&<\Tilde{y}  \Tilde{y}^T>\\
-	%	&=&U<y y^T> U^T= U C U^T\
-	%	.\eea
-	%	For a data vector with length $m$, there are $m(m+1)/2$ elements in the covariance matrix to be evaluated. Once the data vector is shrunk to length $n$, elements in covariance matrices will shrink quadratically. Therefore, shrinking the covariance matrices is an effective way of comparing them.
-	%	
-	%	Here, we will demonstrate these two methods to compress the covariance matrices. In both cases, the data vector is shrunk by 90\%, which correspond to the covariance matrices being reduced by 99\%. 
 	
 	One of the issues that arises when arbitrarily modifying the elements of the covariance matrix is that the new one does not necessarily remain positive definite. In this analysis, we take an extra step to ensure that this characteristic is retained.
 	
@@ -457,11 +414,6 @@
 	where $\Lambda = \lambda I$, with $\lambda$ being the eigenvalues and $I$ the identity matrix; and $Q$ is a square matrix whose columns are composed of the eigenvectors of $C_{\alpha \beta}$. The eigenvalues are then perturbed as described in Eq. \ref{eq:tolerance}, with an extra step to guarantee $\delta > 1$, then $\lambda^{\mathrm{new}} > 0$, thus keeping the matrix positive definite.
 	
 	The results for this method are also plotted in Fig. \rf{tolerance}, in blue, for $\Omega_m$ and $S_8$. In general, we find that we are not able to reproduce significant changes to the parameter constraints, even with $30\%$ errors, as the resulting constraints are all within $5\%$ of the original one. As such, it is not clear that the results obtained using this procedure is equivalent to modifying the actual elements of the covariance matrix. 
-	
-	
-	
-	
-	
 	
 	% ----------------------------------------------------------------------
 	% ----------------------------------------------------------------------
@@ -502,10 +454,7 @@
 	
 	\input{desc-tex/ack/standard} % also available: key standard_short
 	
-	
-	
 	%	\input{Appendix}
-	
 	
 	% ----------------------------------------------------------------------
 	% ----------------------------------------------------------------------
