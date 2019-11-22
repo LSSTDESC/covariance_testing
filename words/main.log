@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.5.13)  29 OCT 2019 22:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.5.13)  21 NOV 2019 22:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -347,12 +347,12 @@ Package pdftex.def Info: ./figures/Y1_Comparison/Y1_om-S8A.pdf used on input li
 ne 161.
 (pdftex.def)             Requested size: 221.3985pt x 221.39793pt.
  [2 <./figures/Y1_Comparison/Y1_om-S8A.pdf>] <./figures/Scatter_CL-BJ.pdf, id=6
-3, 523.19592pt x 704.73413pt>
+3, 523.19592pt x 759.29797pt>
 File: ./figures/Scatter_CL-BJ.pdf Graphic file (type pdf)
 
 <use ./figures/Scatter_CL-BJ.pdf>
 Package pdftex.def Info: ./figures/Scatter_CL-BJ.pdf used on input line 175.
-(pdftex.def)             Requested size: 221.3985pt x 298.223pt.
+(pdftex.def)             Requested size: 221.3985pt x 321.31285pt.
 
 <./figures/Eigenvalues/Eigenvalues_Y1_BJ-DES.pdf, id=64, 402.08342pt x 254.4060
 8pt>
@@ -377,7 +377,7 @@ a single page
 >]
 
 LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
- on input line 209.
+ on input line 207.
 
 <./figures/SNR/SNR_200_omA.pdf, id=119, 698.90224pt x 325.59288pt>
 File: ./figures/SNR/SNR_200_omA.pdf Graphic file (type pdf)
@@ -535,7 +535,7 @@ xlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texl
 ive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texli
 ve/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive
 /2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on main.pdf (11 pages, 1607957 bytes).
+Output written on main.pdf (11 pages, 1624170 bytes).
 PDF statistics:
  365 PDF objects out of 1000 (max. 8388607)
  256 compressed objects within 3 object streams
