@@ -250,6 +250,7 @@
 	The second method directly operates on the two-point functions themselves \citep{Zablocki:2015zcm}, where the modes used are those that maximize the Fisher information for each of the cosmological parameters. Here the size of the data vector is just the number of parameters used to fit the data (i.e. 16), so the compression eliminates even more modes than the tomographic compression. Roughly, though, the numbers are the same: a data vector reduced by a factor of ten and the number of elements in the covariance matrix reduced by a factor of 100. 
 	
 	\subsection{Tomographic Compression}
+	\label{subsec:tomographic_compression}
 	
 	This compression method is based on Karhunen-Lo\'eve (KL) decomposition for the shear power spectrum suggested by \citep{Alonso:2017hhj} and later applied to real space 2-point function in \citep{Bellini:2019ssw} for CFHTLens survey. This method generally finds the eigenmode with most of the signal-to-noise ratio contribution to the power spectrum, and then transforms the 2-point function in real space based on this eigenmode.
 	
@@ -324,23 +325,25 @@
 	\begin{figure}
 	\includegraphics[width=0.48\columnwidth]{kl_scatter.png}
 	\includegraphics[width=0.45\columnwidth]{comp_ratio_kl.png}
-	\caption{ \textbf{Left:}  One-to-One scatter of the two compressed matrices;\textbf{Right:}  One-to-One scatter of the ratio of CL over BJ and the CL elements. \label{fig:comp-cov}}
+	\caption{ \textbf{Left:}  One-to-one scatter of the two compressed matrices following the procedure described in Section \ref{subsec:tomographic_compression}.  \textbf{Right:}  One-to-one scatter of the ratio of CL over BJ and the CL elements. \label{fig:comp-cov}}
 	\end{figure}
 
 	\begin{figure}
 	\includegraphics[width=0.8\columnwidth]{corr_diag_kl.png}
-	\caption{ The correlation matrix of BJ(up-right) and CL(bottom-left), and there difference (bottom-right) in the elements \label{fig:kl_corr}}
+	\caption{The correlation matrix of BJ (upper right) and CL (bottom left), and their difference (bottom right) in the elements \label{fig:kl_corr}}
 	\end{figure}
 	
 	We perform KL-compression with the first mode and with the first two modes separately. In \figref{comp-cov}, we plot the compressed covariance matrices for CL and BJ with the first mode only, and show a one-to-one comparison of the covariance matrices. Looking back at the bottom plot in \figref{one-to-one}, we can easily notice that the large regions containing the elements with greater difference are now gone. Instead, the two covariance matrices just have a relative constant difference, because, unlike CL, BJ does not include the non-gaussian effects. This shows that the divergence between CL and BJ covariance does not considerably affect the overall SNR. 
 	
 	\begin{figure}
-		\includegraphics[width=0.8\columnwidth]{om_s8_A_full_1st_2nd.png}
-		\caption{ Cosmological constraints marginalized over all-16 parameters for the original CL covariance matrix and that compressed by the first KL-mode and the first two KL-modes.\label{fig:kl-constraints}}
+		\includegraphics[width=0.8\columnwidth]{om_s8_A_full_1st_2nd.pdf}
+		\caption{Cosmological constraints marginalized over all 16 parameters for the original $190 \times 190$ CL covariance matrix and that compressed by the first KL-mode and the first two KL-modes.\label{fig:kl-constraints}}
 	\end{figure}
 	We run the likelihood analysis with the first KL-mode and the first two KL-modes, which correspond to a 10-to-1 and 10-to-3 compression, respectively, and show the parameter constraints on the $\Omega_m - S_8 - A$ plane in \figref{kl-constraints}. We can see in the figure that the first KL-mode is generally not enough to recover the information in the data vector. Since the first two modes contain most of the SNR contribution on the map level, we were able to recover the $\Omega_m$ constraints. However, the recovery on the $S_8$ and $A$ is not desirable. This could be due to the fact that the SNR-prioritized modes are not the sensitive direction for these parameters, as was also the case in \figref{signalnoise_cuts}. Indeed, the $S_8 - A$ plane shows a strong correlation between these two parameters. This could explain why the $S_8$ constraints got wider: the KL-modes fail to break the degeneracy on $A$, which is mostly contained in the modes that are insensitive to cosmic shear.
 	
 	\subsection{Linear combinations of the data vector}
+	\label{subsec:2pt_compression}
+	
 	
 	The compression here  takes place at the two-point level \citep{Zablocki:2015zcm}, with the compressed data vector containing linear combinations of the many two-point functions. In principle, this might work with only $N_p$ two-point functions where $N_p$ is the number of free parameters, and each mode, or linear combination, contains all the information necessary about the parameter of interest. 
 	
@@ -376,8 +379,13 @@
 	We also apply this methodology to comparing the covariance matrices of interest, i. e. CL and BJ. In order to do this, we take two different approaches: first, we assume that $U_{\alpha, i}$ is the same for both covariance matrices and we calculate it with CL. The second approach is that each compression scheme must use the original covariance matrix that will be compressed, so that $U_{\alpha, i}$ will be different for each covariance matrix. We find that the mean values of the parameter constraints for the two methods agree to $1 \sigma$, which shows that they are equivalent to each other. \figref{correlation} is obtained for the first method, which will be the one adopted from here on, it shows the correlation matrix for BJ and CL, and the difference between the diagonal elements. We find this figure important because we can clearly see the difference between the two matrices by simply looking at only $(16 \times 17)/2$ elements, as opposed to having to analyse the larger correlation matrix for the full covariance matrices. It is also crucial that the matrices used for comparison here are those obtained via the same compression scheme, so that we can be sure that their differences are indeed only related to the differences in the original matrices.
 	
 	\begin{figure}
+		\includegraphics[width=\columnwidth]{Comp_CL-BJ.pdf}
+		\caption{ \textbf{Left:}  One-to-one scatter of the two compressed matrices following the procedure described in Section \ref{subsec:2pt_compression}.  \textbf{Right:}  One-to-one scatter of the ratio of CL over BJ and the CL elements. \label{fig:comp-cov_2pt}}
+	\end{figure}
+	
+	\begin{figure}
 		\includegraphics[width=0.9\columnwidth]{Correlation_compressed.pdf}
-		\caption{The upper right and lower left plots display the correlation matrix for BJ and CL respectively, and the difference between them, $\Delta r_{ij}$, is shown on the lower right. The ratio between the diagonal elements is in the upper left plot, which shows values larger than 0.85. \label{fig:correlation}}
+		\caption{The upper right and lower left plots display the correlation matrix for BJ and CL respectively, and the difference between them, $\Delta r_{ij}$, is shown on the lower right. \label{fig:correlation}}
 	\end{figure}
 	
 	\begin{figure*}
