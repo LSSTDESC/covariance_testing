@@ -1,0 +1,8 @@
+is_auto = True
+nbin = 4
+nbin_a = 4
+nbin_b = 4
+sample_a = u'source'
+sample_b = u'source'
+save_name = u''
+sep_name = u'ell'

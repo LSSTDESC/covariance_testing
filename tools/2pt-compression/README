@@ -1,0 +1,17 @@
+First step is to run:
+
+$ cosmosis params_derivative.ini
+
+This will create the folder "derivative-values", which will later be used in the
+compression.
+
+Next, run:
+
+python get_coeff.py
+
+This is where the compression happens. It will compress the covariance in the
+.fits file in this folder.
+The parameter values in get_coeff.py should be the same as those in
+values-derivative.ini.
+
+These files were created by Niyani Chen and modified accordingly for our needs.
