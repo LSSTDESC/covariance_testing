@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.5.13)  6 MAR 2020 14:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.5.13)  9 MAR 2020 16:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -417,26 +417,28 @@ File: ./figures/Wij.png Graphic file (type png)
 Package pdftex.def Info: ./figures/Wij.png used on input line 337.
 (pdftex.def)             Requested size: 250.92105pt x 183.75298pt.
 
-<./figures/kl_scatter.png, id=163, 435.6275pt x 402.50375pt>
-File: ./figures/kl_scatter.png Graphic file (type png)
+<./figures/kl_scatter_updated.png, id=163, 435.6275pt x 402.50375pt>
+File: ./figures/kl_scatter_updated.png Graphic file (type png)
 
-<use ./figures/kl_scatter.png>
-Package pdftex.def Info: ./figures/kl_scatter.png used on input line 342.
+<use ./figures/kl_scatter_updated.png>
+Package pdftex.def Info: ./figures/kl_scatter_updated.png used on input line 34
+2.
 (pdftex.def)             Requested size: 118.07895pt x 109.0951pt.
 
-<./figures/comp_ratio_kl.png, id=164, 404.51125pt x 402.50375pt>
-File: ./figures/comp_ratio_kl.png Graphic file (type png)
+<./figures/comp_ratio_kl_updated.png, id=164, 404.51125pt x 402.50375pt>
+File: ./figures/comp_ratio_kl_updated.png Graphic file (type png)
 
-<use ./figures/comp_ratio_kl.png>
-Package pdftex.def Info: ./figures/comp_ratio_kl.png used on input line 343.
+<use ./figures/comp_ratio_kl_updated.png>
+Package pdftex.def Info: ./figures/comp_ratio_kl_updated.png used on input line
+ 343.
 (pdftex.def)             Requested size: 110.69925pt x 110.14532pt.
 
-<./figures/corr_diag_kl.png, id=165, 560.0925pt x 490.83376pt>
-File: ./figures/corr_diag_kl.png Graphic file (type png)
+<./figures/corr_diag_kl.pdf, id=165, 566.83768pt x 497.6994pt>
+File: ./figures/corr_diag_kl.pdf Graphic file (type pdf)
 
-<use ./figures/corr_diag_kl.png>
-Package pdftex.def Info: ./figures/corr_diag_kl.png used on input line 348.
-(pdftex.def)             Requested size: 196.80075pt x 172.46843pt.
+<use ./figures/corr_diag_kl.pdf>
+Package pdftex.def Info: ./figures/corr_diag_kl.pdf used on input line 348.
+(pdftex.def)             Requested size: 196.80075pt x 172.79245pt.
 
 <./figures/om_s8_A_full_1st_2nd.pdf, id=166, 327.73697pt x 327.73697pt>
 File: ./figures/om_s8_A_full_1st_2nd.pdf Graphic file (type pdf)
@@ -453,7 +455,8 @@ Package pdftex.def Info: ./figures/Compression/Compressed_omS8A.pdf used on inp
 ut line 389.
 (pdftex.def)             Requested size: 221.3985pt x 221.39793pt.
  [6] [7 <./figures/Cl_pst.png> <./figures/Dl_pst.png> <./figures/epi.png> <./fi
-gures/Wij.png> <./figures/kl_scatter.png> <./figures/comp_ratio_kl.png>]
+gures/Wij.png> <./figures/kl_scatter_updated.png> <./figures/comp_ratio_kl_upda
+ted.png>]
 
 LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
  on input line 396.
@@ -479,7 +482,7 @@ File: ./figures/Weights.pdf Graphic file (type pdf)
 <use ./figures/Weights.pdf>
 Package pdftex.def Info: ./figures/Weights.pdf used on input line 408.
 (pdftex.def)             Requested size: 492.0pt x 90.60638pt.
- [8 <./figures/corr_diag_kl.png> <./figures/om_s8_A_full_1st_2nd.pdf> <./figure
+ [8 <./figures/corr_diag_kl.pdf> <./figures/om_s8_A_full_1st_2nd.pdf> <./figure
 s/Compression/Compressed_omS8A.pdf
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./figures/Compression/Compre
@@ -494,7 +497,7 @@ DF inclusion: multiple pdfs with page group included in a single page
 LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
  on input line 423.
 
-<./figures/Tolerance_errors.pdf, id=256, 722.7pt x 289.08pt>
+<./figures/Tolerance_errors.pdf, id=268, 722.7pt x 289.08pt>
 File: ./figures/Tolerance_errors.pdf Graphic file (type pdf)
 
 <use ./figures/Tolerance_errors.pdf>
@@ -527,7 +530,7 @@ might try typing `S' now just to see what is salvageable.
 ) [11] (./main.aux) ) 
 Here is how much of TeX's memory you used:
  5275 strings out of 493014
- 70367 string characters out of 6133351
+ 70447 string characters out of 6133351
  172074 words of memory out of 5000000
  8715 multiletter control sequences out of 15000+600000
  8141 words of font info for 30 fonts, out of 8000000 for 9000
@@ -559,10 +562,10 @@ ve/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive
 6/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2016/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on main.pdf (11 pages, 1501533 bytes).
+Output written on main.pdf (11 pages, 3416246 bytes).
 PDF statistics:
- 387 PDF objects out of 1000 (max. 8388607)
- 308 compressed objects within 4 object streams
+ 399 PDF objects out of 1000 (max. 8388607)
+ 312 compressed objects within 4 object streams
  0 named destinations out of 1000 (max. 500000)
  91 words of extra memory for PDF output out of 10000 (max. 10000000)
 
