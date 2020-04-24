@@ -73,8 +73,8 @@
 \graphicspath{{./}{./figures/}}
 \bibliographystyle{apj}
 
-\usepackage{lineno}
-\linenumbers
+%\usepackage{lineno}
+%\linenumbers
 
 % Add your own macros here:
 
@@ -107,28 +107,40 @@
 	\section{Introduction}
 	\label{sec:intro}
 	
-	Cosmic shear is a weak lensing effect caused by the large-scale structure of the universe, and is an important tool for constraining cosmology. Here, we will deal with its covariance matrix, which is an essential component in the analysis of the cosmic shear data. For a data vector of length $N$, the covariance matrix is a symmetric $N\times N$ matrix with $N\times (N+1)/2$ individual elements that capture the auto and cross-correlation of the data vector. As data sets increase, the number of elements in the covariance matrix grows quadratically and becomes harder to analyse. In this paper, we will focus on cosmic shear measurements from the Dark Energy Survey (DES)~\cite{Troxel:2017xyo} Year 1 release; the data vector has 227 elements, varying with angular separation, and different pairs of tomographic redshift bins. In this case, then, the number of independent elements of the covariance matrix is $25,878$. 
+	Cosmic shear is a weak lensing effect caused by the large-scale structure of the universe, and is an important tool for constraining cosmology. Here, we will deal with its covariance matrix, which is an essential component in the analysis of the cosmic shear data. For a data vector of length $N$, the covariance matrix is a symmetric $N\times N$ matrix with $N\times (N+1)/2$ individual elements that capture the auto and cross-correlation of the data vector. As data sets increase, the number of elements in the covariance matrix grows quadratically and becomes harder to analyse. One could potentially speed up computations and provide a simpler method of analysing the covariance matrix by using compression schemes capable of significantly reducing the size of the matrix while still retaining relevant information about the parameters of interest. One way of obtaining this is to use the Massively Optimized Parameter Estimation and Data (MOPED) algorithm, in which, if the noise in the data does not depend on the model parameters, the compression is truly lossless \cite{Heavens:2000hjl, Tegmark:1997maa}. MOPED has been widely used in literature for a variety of topics, like, for example, analysing CMB data \cite{Zablocki:2015zcm}, for redshift space galaxy power spectrum and bispectrum \cite{Gualdi:2018mjl}, for parameter-dependent covariance matrices \cite{Heavens:2017smv}, and, more recently, for compressing the Planck 2015 temperature likelihood \cite{Heather:2019d}.
+	
+	We will focus on cosmic shear measurements from the Dark Energy Survey (DES)~\cite{Troxel:2017xyo} Year 1 release; the data vector has 227 elements, varying with angular separation, and different pairs of tomographic redshift bins. Since our parameter space consists of 16 free parameters, we can use MOPED to reduce the $25,878$ independent elements of the covariance matrix, to only $136$.
+	
+	Apart from MOPED, we will also be employing other compression methods, like ``discarting" the modes associated with the highest eigenvalues, then those with the lowest signal-to-noise ratio. In an effort to reducing the covariance matrix to about $10\%$ its original size, we remove 200 such modes.
+	
+	Finally, we apply the map-level compression \citep{Alonso:2017hhj}, where linear combinations of the tomographic maps are used to retain as much information as possible. Compression of the tomographic bin pairs then considerably reduces the size of the data vector of the two-point functions. For example, we will see that most of the information in the four tomographic bins used by DESY1 can be compressed into a single linear combination of those bins. Therefore, instead of $(4\times5)/2$ two-point functions for each angular bin, we need include only one. %: the compression in the size of the data vector by a factor of ten means that there are a hundred fewer elements of the covariance matrix to study.
+	For this purpose, the tomographic bins will have the same length, and so the angular cuts to the dataset and covariance matrix will be different from the ones used in the aforementioned DESY1 papers. The resulting covariance matrix has a dimension of $190 \times 190$, and so, for one eigenmode, the compressed matrix will have 190 independent elements.
 	
 	%There are multiple codes that are able to generate the cosmic shear covariance matrix. In particular, we are considering two of them \citep{Krause:2016jvl} \citep{Kohlinger:2017sxk}, which will be discussed in detail in \rsec{methods}.
 	
-	In this paper, we try to achieve the following goals: 
-	\begin{itemize}	
-	\item Among the vast number of elements in the covariance matrix, identify the most important ones. 	
-	\item  Explore methods to shrink the covariance matrix. % once identify the more important elements, using the technique developed by Alonso \citep{Alonso:2017hhj} and by Zablocki and Dodelson \citep{Zablocki:2015zcm}.	
-	\item  Introduce noise to the elements in order to test their tolerance by quantifying responses in the likelihood analysis.
+	The main goals of this paper are as follows:
+	\begin{itemize}
+		%\item Among the vast number of elements in the covariance matrix, identify the most important ones. 	
+		\item Apply compression schemes to the DESY1 Cosmic Shear.
+		\item Use MOPED for comparing two covariance matrices.
+		%\item  Explore methods to shrink the covariance matrix. % once identify the more important elements, using the technique developed by Alonso \citep{Alonso:2017hhj} and by Zablocki and Dodelson \citep{Zablocki:2015zcm}.	
+		\item Introduce noise to the elements in order to test their tolerance by quantifying responses in the likelihood analysis.
 	\end{itemize}
 	
-%	$\bullet$ Quantify responses of the likelihood analysis under the noise in the covariance matrices. In other word, test the tolerance of the covariance matrices. 
+	%We accomplish these by considering several methods of identifying the elements of the covariance matrix that are most relevant. %Although we will consider only the one example of DES cosmic shear measurements and projections, we think that our conclusions will be generalised. 
+	In \rsec{methods}, we start by describing the dataset and the pair of covariance matrices used. We then proceed to review each compression scheme and apply them to DESY1 Cosmic Shear.  We validate our findings by comparing them with the constraints obtained with the unmodified covariance matrix. The matrices compressed using MOPED are compared in \rsec{comparison}. Our tolerance test is described in \rsec{tolerance}, where we compare what happens to the parameter constraints when we introduce noise to elements and eigenvalues separately. Finally, our conclusions are summarised in \rsec{conclusion}.
 	
-	We accomplish these by considering several methods of identifying the elements of the covariance matrix that are most relevant. %Although we will consider only the one example of DES cosmic shear measurements and projections, we think that our conclusions will be generalised. 
-	In \rsec{methods}, we describe the data set and the pair of covariance matrices used. The next three sections walk through increasingly complex ways of determining the most important parts of these matrices: we start with an element by element comparison of  the two covariance matrices in \rsec{one-to-one}, then move on to look at the eigenvalues in \rsec{eigen}, and, finally we use the signal-to-noise ratio in \rsec{snr}. We validate our findings by comparing them with the constraints obtained with the unmodified covariance matrix. %In \rsec{one-to-one}, we compare element by element of the two covariance matrices . In \rsec{eigen},  we use eigenvalue as a way to compare the covariance matrices. In \rsec{snr}, we calculate the signal-to-noise ratio and use it to compare the covariance matrices. %We will use this metric a bit throughout but want to  here that our goals is to simply finding out that two covariance matrices give different results is a black-box approach. One cannot identify the source of the disagreement. The methods described here aim to be a bit deeper to try to understand where the key differences arise and which differences are most important. (this is ambiguous)
+	%The next three sections walk through increasingly complex ways of determining the most important parts of these matrices: we start with an element by element comparison of  the two covariance matrices in \rsec{one-to-one}, then move on to look at the eigenvalues in \rsec{eigen}, and, finally we use the signal-to-noise ratio in \rsec{snr}. We validate our findings by comparing them with the constraints obtained with the unmodified covariance matrix. %In \rsec{one-to-one}, we compare element by element of the two covariance matrices . In \rsec{eigen},  we use eigenvalue as a way to compare the covariance matrices. In \rsec{snr}, we calculate the signal-to-noise ratio and use it to compare the covariance matrices. %We will use this metric a bit throughout but want to  here that our goals is to simply finding out that two covariance matrices give different results is a black-box approach. One cannot identify the source of the disagreement. The methods described here aim to be a bit deeper to try to understand where the key differences arise and which differences are most important. (this is ambiguous)
 	
-	A simple compression method is applied in both \rsec{eigen} and \rsec{sec:snr}, where we discard 200 modes of the covariance matrix associated with the highest eigenvalues, then those with lowest signal-to-noise ratio, respectively. We apply more complicated compression schemes in  \rsec{sec:shrinkage}, using techniques developed by Alonso \citep{Alonso:2017hhj} and by Tegmark and Heavens \citep{Tegmark:1997maa}, capable of reducing the dimension to the number of free parameters, thus obtaining  a compression ratio of 1\%. Our tolerance test is described in \rsec{tolerance}, where we compare what happens to the parameter constraints when we introduce noise to elements and eigenvalues separately. Finally, our conclusions are summarised in \rsec{conclusion}.
+	%A simple compression method is applied in both \rsec{eigen} and \rsec{sec:snr}, where we discard 200 modes of the covariance matrix associated with the highest eigenvalues, then those with lowest signal-to-noise ratio, respectively. We apply more complicated compression schemes in  \rsec{sec:shrinkage}, using techniques developed by Alonso \citep{Alonso:2017hhj} and by Tegmark and Heavens \citep{Tegmark:1997maa}, capable of reducing the dimension to the number of free parameters, thus obtaining  a compression ratio of 1\%. Our tolerance test is described in \rsec{tolerance}, where we compare what happens to the parameter constraints when we introduce noise to elements and eigenvalues separately. Finally, our conclusions are summarised in \rsec{conclusion}.
 	
 	%Another goal of this work is to explore the shrinkage of the covariance matrices. In \rsec{eigen} and \rsec{snr}, we discard 200 modes of the covariance matrix associated with the highest eigenvalues, then those with lowest signal-to-noise ratio. In \rsec{eigen}, we tested two novel compression scheme and manage to apply a lossless compression scheme capable of reducing the dimension to the number of free parameters, achieving a compression ratio of 1\% for the covariance matrices.
 	
-	\section{DES Cosmic Shear: Data and Analysis}
+	\section{Methods}
 	\label{sec:methods}
+	
+	\subsection{DES Cosmic Shear: Data and Analysis}
+	\label{subsec:data}
 	
 	In this section, we introduce the data and covariance matrices that are used in this work. Our tests are carried out using cosmic shear statistics $\xi_\pm(\theta)$, focusing on the Year 1 results of the Dark Energy Survey \citep{Troxel:2017xyo,Abbott:2018cms} (DESY1). The data is divided into four tomographic redshift bins spanning the interval $0.20 < z < 1.30$, which yields 10 bin-pair combinations, each one containing 20 angular bins between 2.5 and 250 arcmin. We thus begin with 200 data points for each $\xi_+(\theta)$ and $\xi_-(\theta)$, giving 400 in total. We then apply the angular cuts described in \citep{Abbott:2018cms}, which removes the scales most sensitive to baryonic effects; this leaves 167 points for $\xi_+(\theta)$ and 60 for $\xi_-(\theta)$, resulting in 227 data points corresponding to the aforementioned $227 \times 227$ covariance matrix. 
 	
@@ -149,8 +161,8 @@
 			$n_s$							& $\mathcal{U}(0.87, 1.07)$	\\ [1ex]
 			\hline
 			Astrophysical & \\ [1ex]
-			$A$								& $\mathcal{U}(-5, 5)$ \\
-			$\eta$							& $\mathcal{U}(-5, 5)$ \\ [1ex]
+			$A_{\mathrm{IA}}$								& $\mathcal{U}(-5, 5)$ \\
+			$\eta_{\mathrm{IA}}$							& $\mathcal{U}(-5, 5)$ \\ [1ex]
 			\hline
 			Systematic & \\ [1ex]
 			$m^i$							& $\mathcal{G}(0.012, 0.023)$	 \\
@@ -172,39 +184,23 @@
 	\end{itemize}
 	Thus, throughout, the covariance labels CL and Gaussian differ for several reasons: first, they are two independent codes and, second, although the code for the KiDS-450 survey does contain all the functionality in CL, we ran with the simplest settings in order to accentuate the differences, as a result, the resulting matrix does not contain the non-Gaussian parts. The ensuing larger differences will help us assess various validation techniques. Where not otherwise stated, the analysis and constraints will be performed on the CL covariance matrix.
 	
-	\figref{y3-comparison} shows the results for the projected cosmological constraints for CL. These projections use the same data vector and cuts, but the two different covariance matrices. The $2\sigma$ constraints are as follows: for CL: $\Omega_m= 0.306^{+ 0.073}_{- 0.060}$, $A = 0.852^{+ 1.005}_{- 1.086}$ and $S_8 = 0.784^{+ 0.200}_{- 0.171}$; and for the Gaussian one: $\Omega_m = 0.309^{+ 0.073}_{- 0.058}$, 	$A = 0.948^{+ 0.916}_{- 0.985}$ and $S_8 = 0.787^{+ 0.196}_{- 0.166}$. This shows that the differences we have introduced to the calculation of the two matrices are mensurable in the parameter constraints.
+	\figref{y3-comparison} shows the results for the projected cosmological constraints for CL and the Gaussian covariance matrix, using the same data vector and cuts. The $2\sigma$ constraints are as follows: for CL: $\Omega_m= 0.306^{+ 0.073}_{- 0.060}$, $A = 0.852^{+ 1.005}_{- 1.086}$ and $S_8 = 0.784^{+ 0.200}_{- 0.171}$; and for the Gaussian one: $\Omega_m = 0.309^{+ 0.073}_{- 0.058}$, 	$A = 0.948^{+ 0.916}_{- 0.985}$ and $S_8 = 0.787^{+ 0.196}_{- 0.166}$. This shows that the differences we have introduced to the calculation of the two matrices are mensurable in the parameter constraints.
 	%The best-fit values agree within 1-$\sigma$ but the constraints are up to $25\%$ broader when the DES covariance matrix is used. \scott{not sure this is clear: can we simply quote the 1-sigma errors?} This is also true for the other parameters, where, on average, constraints obtained with DES are about $18\%$ wider.
 	
 	\begin{figure}
 		\includegraphics[width=0.9\columnwidth]{Y1_Comparison/Y1_om-S8A.pdf}
-		\caption{Constraints on cosmological parameters $\Omega_m$ and $S_8$ and intrinsic alignment parameter $A$ for two covariance matrices produced for cosmic shear. The purple curve is for CL while the blue is for the Gaussian. In the 16 parameter space, the volume of the posterior is about $22\%$ larger for the former. \label{fig:y3-comparison}}
+		\caption{Constraints on cosmological parameters $\Omega_m$ and $S_8$ and intrinsic alignment parameter $A_{\mathrm{IA}}$ for two covariance matrices produced for cosmic shear. The purple curve is for CL while the blue is for the Gaussian. In the 16 parameter space, the volume of the posterior is about $22\%$ larger for the former. \label{fig:y3-comparison}}
 	\end{figure}
 	
+	\subsection{Eigenvalues}
+	\label{subsec:eigen}
 	
+	Let us start with the easy task of analysing the eigenvalues of the covariance matrix. Each eigenvalue is associated with a linear combination of the data vector, or a \emph{mode}.% , and it is possible that identifying the modes that have the most discrepant eigenvalues will give guidance on how to reconcile differences.  We plot the eigenvalues for these matrices in \figref{coveigen}. At a first glance, both curves show reasonable agreement, with values differing only by an average of $\approx 13\%$.
 	
-	\section{Element-by-element comparison}
-	\label{sec:one-to-one}
-	In this section, we perform an element-by-element comparison between the two covariance matrices. If there were only a single data point, then the covariance matrix would be one number and comparing two covariance matrices to try to understand why they give different constraints would be as simple as comparing these two numbers.  The simplest generalisation is then to do an element-by-element comparison. We make a scatter plot of the elements of the two matrices in the bottom panel of \figref{one-to-one}, where we can see that the elements of CL are, in general, larger than the Gaussian's, differing by up to 4 orders of magnitude. In some ways, this is useful and reassuring, as it aligns with what we see in the parameter constraints, in Figure \rf{y3-comparison}: larger elements in the covariance matrix translates to less constraining power.
-	
-	The limitation of this method is that it remains unclear which of the differences are driving the final discrepancies in parameter constraints. This difficulty is an outgrowth of the increasing size of the data sets and hence the growing number of elements of the covariance matrix that any two codes are likely to disagree on. This element-by-element comparison, however, would prove much more useful if we could first determine the important elements. Towards that end, we start by turning to the eigenvalues.
-	
-	\begin{figure}
-		\includegraphics[width=0.9\columnwidth]{Scatter_CL-BJ.pdf}
-		\caption{In both plots, the red points refer to the diagonal elements, and the colour bar varies according to the number of elements in one hexagonal bin, where the darkest blue colour corresponds to only one element, and the brightest yellow shade to 2000. \textbf{Top:} Scatter plot of the ratio of the elements of CL and the Gaussian one vs the Gaussian value. For illustrative purposes, we draw a black, horizontal line at CL/Gaussian = 1. \textbf{Bottom:} Density of the scatter plot of the positive elements of the covariance matrices Gaussian and CL, with the black line showing $x=y$.
-			\label{fig:one-to-one}}
-	\end{figure}
-	
-	\section{Eigenvalues}
-	\label{sec:eigen}
-	
-	The next attempt is to explore the eigenvalues of the covariance matrix. Each eigenvalue is associated with a linear combination of the data vector, or a \emph{mode}, and it is possible that identifying the modes that have the most discrepant eigenvalues will give guidance on how to reconcile differences.  We plot the eigenvalues for these matrices in \figref{coveigen}. At a first glance, both curves show reasonable agreement, with values differing only by an average of $\approx 13\%$.
-	
-	
-	\begin{figure}
-		\includegraphics[width=0.9\columnwidth]{Eigenvalues/Eigenvalues_Y1_BJ-DES.pdf}
-		\caption{A log plot showing the $227$ eigenvalues of CL (blue) and the Gaussian (orange) covariance matrices. \label{fig:coveigen}}
-	\end{figure}
-	
+	%\begin{figure}
+	%	\includegraphics[width=0.9\columnwidth]{Eigenvalues/Eigenvalues_Y1_BJ-DES.pdf}
+	%	\caption{A log plot showing the $227$ eigenvalues of CL (blue) and the Gaussian (orange) covariance matrices. \label{fig:coveigen}}
+	%\end{figure}
 	
 	The lowest eigenvalues correspond to modes with the smallest variance but since they are not normalised, it is unclear how this variance compares to the signal in the mode. Let us nonetheless explore the possibility that the modes with the lowest variance provide the most information and therefore dropping the ones with the largest eigenvalues would not affect the final result.
 	
@@ -214,13 +210,11 @@
 	
 	\begin{figure}
 		\includegraphics[width=0.9\columnwidth]{Parameters.pdf}
-		\caption{Constraints on cosmological parameters $\Omega_m$, $S_8$ and the intrinsic alignment parameter $A$ for the original CL covariance matrix (in purple) and for two new covariance matrices obtained by setting the 200 highest eigenvalues of the original matrix to nine orders of magnitude higher (in blue), and by replacing the 200 lowest values of the SNR to seven order of magnitude lower (in magenta). \label{fig:eig_snr}}
+		\caption{Constraints on cosmological parameters $\Omega_m$, $S_8$ and the intrinsic alignment parameter $A_{\mathrm{IA}}$ for the original CL covariance matrix (in purple) and for two new covariance matrices obtained by setting the 200 highest eigenvalues of the original matrix to nine orders of magnitude higher (in blue), and by replacing the 200 lowest values of the SNR to seven order of magnitude lower (in magenta). \label{fig:eig_snr}}
 	\end{figure}
 	
-	% ----------------------------------------------------------------------
-	
-	\section{Signal-to-noise ratio}
-	\label{sec:snr}
+	\subsection{Signal-to-noise ratio}
+	\label{subsec:snr}
 	
 	Instead of looking only at the ``noise'' -- or the eigenvalues of the covariance matrix -- a better way to assess the importance of modes is to consider the signal as well. We can define the expected signal-to-noise ratio (SNR) as
 	\be
@@ -239,34 +233,20 @@
 	
 	After obtaining the SNR for the covariance matrix, we proceed to set the 200 lowest values to seven orders of magnitude lower, which is equivalent to increasing the noise (or decreasing the signal) of these modes. We then obtain a new covariance matrix with the corresponding modified SNR values. 
 	
-	The parameter constraints for this method are shown in \figref{eig_snr}, where we note that only $\Omega_m$ is well constrained (in agreement with those obtained with the original covariance matrix to within a $2\sigma$ interval). The constraining power on $A$ and $S_8$, on the other hand, is very much lost, which suggests that the modes removed do indeed carry relevant information for these parameters.
+	The parameter constraints for this method are shown in \figref{eig_snr}, where we note that only $\Omega_m$ is well constrained (in agreement with those obtained with the original covariance matrix to within a $2\sigma$ interval). The constraining power on $A_{\mathrm{IA}}$ and $S_8$, on the other hand, is very much lost, which suggests that the modes removed do indeed carry relevant information for these parameters.
 	
 	We can investigate this loss by tweaking our understanding of which modes carry information. The ``signal'' these modes are ordered by is the amplitude of the data points.  The parameters , however, are sensitive to the shape as well as the amplitude.
 	To address this, we can identify the SNR for each parameter individually by taking
 	\bea
 	\left(\frac{\partial S/\partial p_\alpha}{N}\right)^2 = \sum_{i} \frac{(\partial v_i / \partial p_\alpha)^2}{\lambda_i}
 	\eea
-	%	with
-	%	\be
-	%	v_i^\alpha \equiv U_{ij}^T \frac{\partial T_j}{\partial p_\alpha}
-	%	,\ee
-	where $\partial /\partial p_\alpha$ is the derivative with respect to each parameter. This produces the SNR for each parameter of interest. The importance of this procedure is illustrated in \figref{signalnoise_cuts}, which shows the normalised vanilla SNR for a given mode on the $x$-axis and the SNR for each parameter for the same mode, for brevity, we show only for $\Omega_m$ and $A$. The shaded region is the one excluded in the previous analysis, but clearly there are some low SNR modes there that contain information about the parameters. This is particularly true for the intrinsic alignment parameter $A$, which seems to explain the poor constraints shown in \figref{eig_snr}. As a result, simply cutting on raw SNR loses constraining power.
+	where $\partial /\partial p_\alpha$ is the derivative with respect to each parameter. This produces the SNR for each parameter of interest. The importance of this procedure is illustrated in \figref{signalnoise_cuts}, which shows the normalised vanilla SNR for a given mode on the $x$-axis and the SNR for each parameter for the same mode, for brevity, we show only for $\Omega_m$ and $A_{\mathrm{IA}}$. The shaded region is the one excluded in the previous analysis, but clearly there are some low SNR modes there that contain information about the parameters. This is particularly true for the intrinsic alignment parameter $A_{\mathrm{IA}}$, which seems to explain the poor constraints shown in \figref{eig_snr}. As a result, simply cutting on raw SNR loses constraining power.
 	
 	\begin{figure}
 		\includegraphics[width=1\columnwidth]{SNR/SNR_200_omA.pdf}
-		\caption{Scatter plot for the relation between the signal to noise obtained with the covariance matrix for CL for each parameter (x-axis) against that for the full set of parameters (y-axis). The derivatives are shown with respect to $\Omega_m$ (blue circle) and for the intrinsic alignment parameters $A$ (orange triangle). The purple rectangle spreads until the two hundredth lowest value of SNR, which corresponds to the values that are modified for parameter constraints. \label{fig:signalnoise_cuts}}
+		\caption{Scatter plot for the relation between the signal to noise obtained with the covariance matrix for CL for each parameter (x-axis) against that for the full set of parameters (y-axis). The derivatives are shown with respect to $\Omega_m$ (blue circle) and for the intrinsic alignment parameters $A_{\mathrm{IA}}$ (orange triangle). The purple rectangle spreads until the two hundredth lowest value of SNR, which corresponds to the values that are modified for parameter constraints. \label{fig:signalnoise_cuts}}
 	\end{figure}
 	
-	% ----------------------------------------------------------------------
-	
-	% ----------------------------------------------------------------------
-	
-	\section{Shrinkage}
-	\label{sec:shrinkage}
-	
-	Since the simplest methods of identifying the most relevant modes are imperfect, we turn to more sophisticated methods \citep{Tegmark:1997maa, Joachimi:2017mnr,Gualdi:2018gmj} that have been shown to reduce the number of modes significantly while preserving the cosmological information. First, there is the map-level compression \citep{Alonso:2017hhj}, where linear combinations of the tomographic maps are used to retain as much information as possible. Compression of the tomographic bin-pairs then considerably reduces the size of the data vector of two-point functions. For example, we will see that most of the information in the four tomographic bins used by DESY1 can be compressed into a single linear combination of those bins. Therefore, instead of $(4\times5)/2$ two-point functions for each angular bin, we need include only one: the compression in the size of the data vector by a factor of ten means that there are a hundred fewer elements of the covariance matrix to study.
-	
-	The second method directly operates on the two-point functions themselves \citep{Zablocki:2015zcm}, where the modes used are those that maximise the Fisher information for each of the cosmological parameters. Here, the size of the data vector is just the number of parameters used to fit the data (i.e. sixteen), so the compression eliminates even more modes than the tomographic compression. Roughly speaking, the numbers are the same: a data vector reduced by a factor of ten and the number of elements in the covariance matrix reduced by a factor of a hundred. 
 	
 	\subsection{Tomographic Compression}
 	\label{subsec:tomographic_compression}
@@ -342,23 +322,21 @@
 	\end{figure*}
 	
 	\begin{figure}
-	\includegraphics[width=0.48\columnwidth]{kl_scatter_updated.png}
-	\includegraphics[width=0.45\columnwidth]{comp_ratio_kl_updated.png}
-	\caption{ \textbf{Left:}  One-to-one scatter of the two compressed matrices following the procedure described in \rsec{subsec:tomographic_compression}.  \textbf{Right:}  One-to-one scatter of the ratio of CL over Gaussian and the CL elements. \label{fig:comp-cov}}
-	\end{figure}
-
-	\begin{figure}
-	\includegraphics[width=0.8\columnwidth]{corr_diag_kl.pdf}
-	\caption{The correlation matrix of Gaussian (upper right) and CL (bottom left) covariance matrices, and their difference (bottom right) in the elements \label{fig:kl_corr}}
+		\includegraphics[width=0.48\columnwidth]{kl_scatter_updated.png}
+		\includegraphics[width=0.45\columnwidth]{comp_ratio_kl_updated.png}
+		\caption{ \textbf{Left:}  One-to-one scatter of the two compressed matrices following the procedure described in \rsec{subsec:tomographic_compression}.  \textbf{Right:}  One-to-one scatter of the ratio of CL over Gaussian and the CL elements. \label{fig:comp-cov}}
 	\end{figure}
 	
-	We perform KL-compression with the first mode and with the first two modes separately. In \figref{comp-cov}, we plot the compressed covariance matrices for the CL and the Gaussian covariance with the first mode only, and show a one-to-one comparison of the covariance matrices. By comparing the bottom panel of  \figref{one-to-one} with the left panel of \figref{comp-cov}, we notice that the large regions containing the elements with greater difference are now gone. Instead, the two covariance matrices just have a relative constant difference, because of the fact that we did not include non-gaussian effect in one of them. This shows that the divergence between CL and the Gaussian covariance does not considerably affect the overall SNR. 
+	\begin{figure}
+		\includegraphics[width=0.8\columnwidth]{corr_diag_kl.pdf}
+		\caption{The correlation matrix of Gaussian (upper right) and CL (bottom left) covariance matrices, and their difference (bottom right) in the elements \label{fig:kl_corr}}
+	\end{figure}
 	
 	\begin{figure}
 		\includegraphics[width=0.8\columnwidth]{om_s8_A_full_1st_2nd.pdf}
 		\caption{Cosmological constraints marginalised over all 16 parameters for the  $190 \times 190$ CL covariance matrix and that compressed by the first KL-mode and the first two KL-modes.\label{fig:kl-constraints}}
 	\end{figure}
-	We ran the likelihood analysis with the first KL-mode and the first two KL-modes, which correspond to a 10-to-1 and 10-to-3 compression, respectively, and show the parameter constraints on the $\Omega_m - S_8 - A$ plane in \figref{kl-constraints}. We can see in the figure that the first KL-mode is generally not enough to recover the information in the data vector. Since the first two modes contain most of the SNR contribution on the map level, we were able to recover the $\Omega_m$ constraints. However, the recovery on the $S_8$ and $A$ is not desirable. This could be due to the fact that the SNR-prioritised modes are not the sensitive direction for these parameters, as was also the case in \figref{signalnoise_cuts}. Indeed, the $S_8 - A$ plane shows a strong correlation between these two parameters. This could explain why the $S_8$ constraints got wider: the KL-modes fail to break the degeneracy on $A$, which is mostly contained in the modes that are insensitive to cosmic shear, and are discarded in the compression process.
+	We ran the likelihood analysis with the first KL-mode and the first two KL-modes, which correspond to a 10-to-1 and 10-to-3 compression, respectively, and show the parameter constraints on the $\Omega_m - S_8 - A$ plane in \figref{kl-constraints}. We can see in the figure that the first KL-mode is generally not enough to recover the information in the data vector. Since the first two modes contain most of the SNR contribution on a map level, we were able to recover the $\Omega_m$ constraints. However, the recovery on the $S_8$ and $A_{\mathrm{IA}}$ is not desirable. This could be due to the fact that the SNR-prioritised modes are not the sensitive direction for these parameters, as was also the case in \figref{signalnoise_cuts}. Indeed, the $S_8 - A$ plane shows a strong correlation between these two parameters. This could explain why the $S_8$ constraints got wider: the KL-modes fail to break the degeneracy on $A_{\mathrm{IA}}$, which is mostly contained in the modes that are insensitive to cosmic shear, and are discarded in the compression process.
 	
 	\subsection{Linear combinations of the data vector}
 	\label{subsec:2pt_compression}
@@ -374,28 +352,59 @@
 	\be \label{eq:compression_scheme}
 	U_{\alpha i} \equiv \frac{\partial T_j}{\partial p_\alpha} \, C^{-1}{}_{ji}\
 	,\ee
-	with $T_j$ being the theoretical prediction for the data point $D_j$ for a fiducial cosmology. An illustration of the matrix $U_{\alpha i}$ is shown in \figref{weight2pt}, showing the weighting vector for parameters $\Omega_m$, $S_8$ and $A$.
+	with $T_j$ being the theoretical prediction for the data point $D_j$ for a fiducial cosmology. An illustration of the matrix $U_{\alpha i}$ is shown in \figref{weight2pt}, showing the weighting vector for parameters $\Omega_m$, $S_8$ and $A_{\mathrm{IA}}$.
 	
 	The now much smaller data set $\{y_\alpha\}$, which contains as few as $N_p$ data points, carries its own covariance matrix, with which $\chi^2$ can be computed for each point in parameter space. Propagating through shows that this covariance matrix is related to the original $C_{ij}$ via
 	\be
 	C_{\alpha\beta} = U_{\alpha i} C_{ij} U^T_{j\beta}\ ,
 	\ee
-	which also happens to be identical to the Fisher matrix of our likelihood. In our case, our covariance matrix is  $227 \times 227 = $, while the number of parameters needed to specify the model is only 16, so $C_{\alpha\beta}$ is a $16\times 16$ matrix. We have apparently captured from the initial set of $(227 \times 228)/2 = 25,878$ independent elements of the covariance matrix a small subset (only 136 in this case) of linear combinations of these 25k elements that really matter. If two covariance matrices give the same set of $C_{\alpha\beta}$, it should not matter whether any of the other thousands of elements differ from one another.
+	which also happens to be identical to the Fisher matrix of our likelihood. This compression was first suggested by \citeauthor{Tegmark:1997maa} (1997), and is the basis for the MOPED algorithm \citep{Heavens:2000hjl}, which extended the original procedure for multiple parameters. Note that our weighing vector given by Eq. \ref{eq:compression_scheme} does not carry the normalising factor used in the aforementioned paper, nor are they independent of each other. We find that this does not, however, impact the analysis.
+	
+	In our case, the covariance matrix is  $227 \times 227$, while the number of parameters needed to specify the model is only 16, so $C_{\alpha\beta}$ is a $16\times 16$ matrix. We have apparently captured from the initial set of $(227 \times 228)/2 = 25,878$ independent elements of the covariance matrix a small subset (only 136 in this case) of linear combinations of these 25k elements that really matter. If two covariance matrices give the same set of $C_{\alpha\beta}$, it should not matter whether any of the other thousands of elements differ from one another.
 	
 	Ultimately, what matters is how well the likelihood does at extracting parameter constraints. Since most analyses assume a Gaussian likelihood, this boils down to how well the contours in parameter space agree when computing $\chi^2$ using two different covariance matrices.	
 	
 	% ----------------------------------------------------------------------
 	
-	\figref{compressiony1} compares the constraints obtained for the compressed covariance matrix and data set with results from the full one. The two curves agree extremely well for the parameters shown: $\Omega_m$, $S_8$ and $A$. This is also true for all the other cosmological and intrinsic alignment parameters, where their mean values agree at the $2 \sigma$ confidence level. While the volume of the whole constrained parameter space does increase by about 13\%, the constraints for most parameters are less than 4\% broader, which shows that the information loss is negligible. 
+	\figref{compressiony1} compares the constraints obtained for the compressed covariance matrix and data set with results from the full one. The two curves agree extremely well for the parameters shown: $\Omega_m$, $S_8$ and $A_{\mathrm{IA}}$. This is also true for all the other cosmological and intrinsic alignment parameters, where their mean values agree at the $2 \sigma$ confidence level. While the volume of the whole constrained parameter space does increase by about 13\%, the constraints for most parameters are less than 4\% broader, which shows that the information loss is negligible. 
 	
 	\begin{figure}
 		\includegraphics[width=0.9\columnwidth]{Compression/Compressed_omS8A.pdf}
-		\caption{Constraints on cosmological parameters $\Omega_m$ and $S_8$ and for the intrinsic alignment parameter $A$ for the original CL covariance matrix (in purple) and for the compressed one (in blue). \label{fig:compressiony1}}
+		\caption{Constraints on cosmological parameters $\Omega_m$ and $S_8$ and for the intrinsic alignment parameter $A_{\mathrm{IA}}$ for the original CL covariance matrix (in purple) and for the compressed one (in blue). \label{fig:compressiony1}}
 	\end{figure}
 	
 	One relevant point in this analysis is at which point to take the derivative of each parameter. When we wish to compare the results of our compression scheme with those obtained with the full covariance matrix and data set, it is important to derivate each parameter at their respective mean value (obtained by performing the analysis with the full covariance matrix). The shape and variance of the posterior is not dependent on the derivative, but the best-fit value shifts according to the point where the derivative is taken.
 	
-	We also apply this methodology to comparing the covariance matrices of interest, i.e. CL and Gaussian. In order to do this, we take two different approaches: first, we assume that $U_{\alpha, i}$ is the same for both covariance matrices and we calculate it with CL. The second approach is that each compression scheme must use the original covariance matrix that will be compressed, so that $U_{\alpha, i}$ will be different for each covariance matrix. We find that the mean values of the parameter constraints for the two methods agree to $1 \sigma$, which shows that they are equivalent to each other. \figref{correlation} is obtained for the first method, which will be the one adopted from here on, it shows the correlation matrix for Gaussian and CL, and the difference between the diagonal elements. We find this figure important because we can clearly see the difference between the two matrices by simply looking at only $(16 \times 17)/2$ elements, as opposed to having to analyse the larger correlation matrix for the full covariance matrices. It is also crucial that the matrices used for comparison here are those obtained via the same compression scheme, so that we can be sure that their differences are indeed only related to the differences in the original matrices.
+	\begin{figure*}
+		\includegraphics[width=2\columnwidth]{Weights.pdf}
+		\caption{An illustration of the 227 values of the weights corresponding to $\Omega_m$, $S_8$ and $A_{\mathrm{IA}}$ used for compressing the covariance matrices. Note how similar the weighing vectors for $S_8$ and $A_{\mathrm{IA}}$, and that the largest values for correspond to the last 60 elements, i.e. these will be used to compress the part of the covariance matrix that holds information for $\xi_-$.} \label{fig:weight2pt}
+	\end{figure*}
+	
+	% -------------------------------------------------------------
+	% -------------------------------------------------------------
+	
+	\section{Comparison of Covariance Matrices}
+	\label{sec:comparison}
+	
+	\subsection{Element-by-element comparison}
+	\label{sec:one-to-one}
+	Let us start by performing an element-by-element comparison between the two covariance matrices. If there were only a single data point, then the covariance matrix would be one number and comparing two covariance matrices to try to understand why they give different constraints would be as simple as comparing these two numbers.  The simplest generalisation is then to do an element-by-element comparison. We make a scatter plot of the elements of the two matrices in the bottom panel of \figref{one-to-one}, where we can see that the elements of CL are, in general, larger than the Gaussian's, differing by up to 4 orders of magnitude. In some ways, this is useful and reassuring, as it aligns with what we see in the parameter constraints, in Figure \rf{y3-comparison}: larger elements in the covariance matrix translates to less constraining power.
+	
+	The limitation of this method is that it remains unclear which of the differences are driving the final discrepancies in parameter constraints. This difficulty is an outgrowth of the increasing size of the data sets and hence the growing number of elements of the covariance matrix that any two codes are likely to disagree on. This element-by-element comparison, however, would prove much more useful if we fewer elements to compare. Towards that end, we turn to compressed covariance matrices.
+	%This element-by-element comparison, however, would prove much more useful if we could first determine the important elements. Towards that end, we start by turning to the eigenvalues.
+	
+	\begin{figure}
+		\includegraphics[width=0.9\columnwidth]{Scatter_CL-BJ.pdf}
+		\caption{In both plots, the red points refer to the diagonal elements, and the colour bar varies according to the number of elements in one hexagonal bin, where the darkest blue colour corresponds to only one element, and the brightest yellow shade to 2000. \textbf{Top:} Scatter plot of the ratio of the elements of CL and the Gaussian one vs the Gaussian value. For illustrative purposes, we draw a black, horizontal line at CL/Gaussian = 1. \textbf{Bottom:} Density of the scatter plot of the positive elements of the covariance matrices Gaussian and CL, with the black line showing $x=y$.
+			\label{fig:one-to-one}}
+	\end{figure}
+	
+	\subsection{Compressed Matrices Comparison}
+	\label{subsec:compare_compressed}
+	
+	\subsubsection{Using MOPED}
+	
+	Here, we take two different approaches: first, we assume that $U_{\alpha, i}$ is the same for both covariance matrices and we calculate it with CL. The second approach is that each compression scheme must use the original covariance matrix that will be compressed, so that $U_{\alpha, i}$ will be different for each covariance matrix. We find that the mean values of the parameter constraints for the two methods agree to $1 \sigma$, which shows that they are equivalent to each other. \figref{correlation} is obtained for the first method, which will be the one adopted from here on, it shows the correlation matrix for Gaussian and CL, and the difference between the diagonal elements. We find this figure important because we can clearly see the difference between the two matrices by simply looking at only $(16 \times 17)/2$ elements, as opposed to having to analyse the larger correlation matrix for the full covariance matrices. It is also crucial that the matrices used for comparison here are those obtained via the same compression scheme, so that we can be sure that their differences are indeed only related to the differences in the original matrices.
 	
 	\begin{figure}
 		\includegraphics[width=\columnwidth]{Comp_CL-BJ.pdf}
@@ -407,14 +416,12 @@
 		\caption{The upper right and lower left plots display the correlation matrix for Gaussian and CL respectively, and the difference between them, $\Delta r_{ij}$, is shown on the lower right. \label{fig:correlation}}
 	\end{figure}
 	
-	\begin{figure*}
-		\includegraphics[width=2\columnwidth]{Weights.pdf}
-		\caption{An illustration of the 227 values of the weights corresponding to $\Omega_m$, $S_8$ and $A$ used for compressing the covariance matrices. Note how similar the weighing vectors for $S_8$ and $A$, and that the largest values for correspond to the last 60 elements, i.e. these will be used to compress the part of the covariance matrix that holds information for $\xi_-$.} \label{fig:weight2pt}
-	\end{figure*}
+	\subsubsection{Using map-level compression}
 	
+	In \figref{comp-cov}, we plot the compressed covariance matrices for the CL and the Gaussian covariance with the first mode only, and show a one-to-one comparison of the covariance matrices. By comparing the bottom panel of  \figref{one-to-one} with the left panel of \figref{comp-cov}, we notice that the large regions containing the elements with greater difference are now gone. Instead, the two covariance matrices just have a relative constant difference, because of the fact that we did not include non-gaussian effect in one of them. This shows that the divergence between CL and the Gaussian covariance does not considerably affect the overall SNR. 
 	
-	% ----------------------------------------------------------------------
-	% ----------------------------------------------------------------------
+	% -------------------------------------------------------------
+	% -------------------------------------------------------------
 	
 	\section{Tolerance of the Compressed Matrices}
 	\label{sec:tolerance}
@@ -497,7 +504,7 @@
 	%{\it Facilities:} \facility{LSST}
 	
 	% Include both collaboration papers and external citations:
-	\bibliography{main,lsstdesc}
+	\bibliography{main}
 	
 \end{document}
 
