@@ -189,7 +189,7 @@ Our tolerance test is described in \rsec{tolerance}, where we test what happens 
 	
 	\rf{Y1-constraints_wmS8A} shows the results for the projected cosmological constraints for \full\ and GCM, using the same data vector and cuts. The $2\sigma$ constraints are as follows: for \full: $\Omega_m= 0.306^{+ 0.073}_{- 0.060}$, $A_{\mathrm{IA}} = 0.852^{+ 1.005}_{- 1.086}$ and $S_8 = 0.784^{+ 0.200}_{- 0.171}$; and for GCM: $\Omega_m = 0.309^{+ 0.073}_{- 0.058}$, 	$A_{\mathrm{IA}} = 0.948^{+ 0.916}_{- 0.985}$ and $S_8 = 0.787^{+ 0.196}_{- 0.166}$. This shows that the differences we have introduced to the calculation of the two matrices are measurable in the parameter constraints.
 	
-	\Sfig{Y1-constraints_wmS8A}{Constraints on cosmological parameters $\Omega_m$ and $S_8$ and intrinsic alignment parameter $A_{\mathrm{IA}}$ for two covariance matrices produced for cosmic shear. The purple curve is for \full\ while the blue is for GCM. In the 16 parameter space, the volume of the posterior is about $22\%$ larger for the former.}
+	\Sfig{Y1-constraints_wmS8A}{Constraints on cosmological parameters $\Omega_m$ and $S_8$ and intrinsic alignment parameter $A_{\mathrm{IA}}$ for two covariance matrices produced for cosmic shear. The purple curve is for \full\ while the blue is for GCM. In the 16--dimensional parameter space, the volume of the posterior is about $22\%$ larger for the former.}
 	
 	% -------------------
 	\subsection{Eigenvalues}
@@ -210,7 +210,7 @@ Our tolerance test is described in \rsec{tolerance}, where we test what happens 
 	
 	\Sfig{EigSNR-constraints_wmS8A}{Constraints on cosmological parameters $\Omega_m$, $S_8$ and the intrinsic alignment parameter $A_{\mathrm{IA}}$ for the original CL covariance matrix (in purple) and for the two new covariance matrices obtained in \rssec{eigenvalues} (in blue) and \rssec{snr} (in magenta).}
 	
-	\Svwide{SNR_cuts200}{Scatter plot for the relation between the signal to noise (SNR) obtained with the covariance matrix for CL for each parameter (x-axis) against that for the full set of parameters (y-axis). The derivatives are shown with respect to $\Omega_m$ (blue circle), for $S_8$ (orange \textbf{x}) and for the intrinsic alignment parameter $A_{\mathrm{IA}}$ (green triangle). The purple rectangle spreads until the two hundredth lowest value of SNR, which corresponds to the values that are modified for parameter constraints.}
+	\Svwide{SNR_cuts200}{Scatter plot for the relation between the signal to noise (SNR)  for each parameter \scott{I switched x and y here because i think it was a typo} (y-axis) against that for the full set of parameters (x-axis). The derivatives are shown with respect to $\Omega_m$ (blue circle), for $S_8$ (orange \textbf{x}) and for the intrinsic alignment parameter $A_{\mathrm{IA}}$ (green triangle). The purple rectangle spreads until the two hundred lowest values of SNR, which corresponds to the values that are modified for parameter constraints.}
 	
 	% -------------------
 	\subsection{Signal-to-noise ratio}
@@ -220,7 +220,7 @@ Our tolerance test is described in \rsec{tolerance}, where we test what happens 
 	\be
 	\left(\frac{S}{N}\right)^2 = \sum_{ij} T_i C^{-1}_{ij} T_j\
 	,\ee
-	where $T_i$ and are the predicted theoretical signal for the $i^{th}$ data point, given a fiducial cosmology, and $C$ is the covariance matrix. If $C$ were diagonal, then the eigenvectors would simply be the data points themselves, and we could estimate the SNR squared expected in each mode by just computing $T_i^2/C_{ii}$. Then we could throw out the modes with the lowest SNR. Since $C$ is not diagonal, we have to first diagonalise it and then order the values. So, we write the expected SNR squared as
+	where $T_i$ is the predicted theoretical signal for the $i^{th}$ data point, given a fiducial cosmology, and $C$ is the covariance matrix. If $C$ were diagonal, then the eigenvectors would simply be the data points themselves, and we could estimate the SNR squared expected in each mode by just computing $T_i^2/C_{ii}$. Then we could throw out the modes with the lowest SNR. Since $C$ is not diagonal, we have to first diagonalise it and then order the values. So, we write the expected SNR squared as
 	\bea
 	\left(\frac{S}{N}\right)^2 %&=& %\sum_{ij} T_i  C^{-1}_{ij} T_j\nonumber\\
 	&=& \sum_{i} \frac{v_i^2}{\lambda_i}\
@@ -234,7 +234,7 @@ Our tolerance test is described in \rsec{tolerance}, where we test what happens 
 	After obtaining the SNR for the covariance matrix, we proceed to set the 200 lowest values to seven orders of magnitude lower, which is equivalent to increasing the noise (or decreasing the signal) of these modes. We then obtain a new covariance matrix with the corresponding modified SNR values. 
 	The parameter constraints for this method are shown in \rf{EigSNR-constraints_wmS8A}, where we note that only $\Omega_m$ is well constrained (in agreement with those obtained with the original covariance matrix to within a $2\sigma$ interval). The constraining power on $A_{\mathrm{IA}}$ and $S_8$, on the other hand, is very much lost, which suggests that the modes removed do indeed carry relevant information for these parameters.
 	
-	We can investigate this loss by tweaking our understanding of which modes carry information. The ``signal'' of these modes are ordered by is the amplitude of the data points.  The parameters , however, are sensitive to the shape as well as the amplitude.
+	We can investigate this loss by tweaking our understanding of which modes carry information. The ``signal'' that these modes are ordered by is the amplitude of the data points.  The parameters , however, are sensitive to the shape as well as the amplitude.
 	To address this, we can identify the SNR for each parameter individually by taking
 	\bea
 	\left(\frac{\partial S/\partial p_\alpha}{N}\right)^2 = \sum_{i} \frac{(\partial v_i / \partial p_\alpha)^2}{\lambda_i}\
@@ -253,11 +253,12 @@ Our tolerance test is described in \rsec{tolerance}, where we test what happens 
 			\textbf{Right:} Signal-to-noise ratio matrix $D_\ell$ of KL-modes of the power spectrum on the left.  \label{fig:ClDl}}
 	\end{figure*}
 	
-	This compression method is based on Karhunen-Lo\'eve (KL) decomposition for the shear power spectrum suggested by \citep{Alonso:2017hhj} and later applied to real space two-point function in \citep{Bellini:2019ssw} for CFHTLens survey. This method generally finds the eigenmode with most of the signal-to-noise ratio contribution to the power spectrum, and then transforms the two-point function in real space based on this eigenmode.
+	This compression method is based on a Karhunen-Lo\'eve (KL) decomposition for the shear power spectrum suggested by \citep{Alonso:2017hhj} and later applied to real space two-point function in \citep{Bellini:2019ssw} for CFHTLens survey. This method generally finds the eigenmode --- in this case, a linear combination of the convergence in different tomographic bins --- with most of the signal-to-noise ratio contribution to the power spectrum, and then transforms the two-point function of this eigenmode into real space.
 	
-	With  {\tt CosmoSIS}, we can generate the shear power spectrum $C_{\ell}^{ij}$ of convergence $a_{\ell m}$ for a fiducial cosmology. The cosmology we choose is the best-fit value of the DES Year 1 results for cosmic shear only. With the shear power spectrum $C_{\ell}=S_{\ell}+N_{\ell}$ and its shape noise $N_{\ell}$, we can calculate the Karhunen-Lo\'eve (KL) modes matrix $E_{\ell}$ via a general eigenvalue problem 
+\newcommand\ctot{C^{\rm tot}}
+	With  {\tt CosmoSIS}, we = generate the shear power spectrum $C_{\ell}^{ij}$ of the convergence $\kappa_{\ell m}$ for a fiducial cosmology. The cosmology we choose is the best-fit value of the DES Year 1 results for cosmic shear only. With the total power spectrum $\ctot_{\ell}=C_{\ell}+N_{\ell}$, the sum of the signal and shape noise $N_{\ell}$, we can calculate the Karhunen-Lo\'eve (KL) modes for each $\ell$ via a general eigenvalue problem 
 	\be
-	C_{\ell} E_{\ell} = \Lambda_{\ell} N_{\ell} E_{\ell}\
+	\ctot^{ij} e^j = \Lambda N^{ij} e^j
 	.\ee
 	Each row in $E_{\ell}$ corresponds to a KL-mode of $C_{\ell}$. Using the Cholesky decomposition, $N_{\ell} = L L^{\dagger}$, the new observable can be expressed as $b_{\ell m} = E_{\ell} \cdot L^{-1} a_{\ell m}$. We should note that $C_{\ell}$ is the angular power spectrum of the weak lensing shear, and $E_{\ell}$ is similar to a transformation of basis for the shear. So, we can now calculate the power spectrum $D_{\ell}$ for the new observable $b_{\ell m}$ 
 	\be
