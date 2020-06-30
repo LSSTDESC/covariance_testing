@@ -245,47 +245,53 @@ Our tolerance test is described in \rsec{tolerance}, where we test what happens 
 	\subsection{Tomographic Compression}
 	\label{subsec:tomographic_compression}
 	
-	\begin{figure*}[thbp]
+
+	
+	This compression method is based on a Karhunen-Lo\'eve (KL) decomposition for the shear power spectrum suggested by \citep{Alonso:2017hhj} and later applied to real space two-point function in \citep{Bellini:2019ssw} for CFHTLens survey. This method generally finds the eigenmode --- in this case, a linear combination of the convergence in different tomographic bins --- with most of the signal-to-noise ratio contribution to the power spectrum, and then transforms the two-point function of this eigenmode into real space.
+	
+
+\newcommand\ctot{\mathcal{C}}
+
+	Before delving into the derivation, it is worth summarizing the results. With {\tt CosmoSIS}, we calculate the shear power spectrum $C_{\ell}$ of the convergence $\kappa^i$ in the 4 tomographic bins probed by DES Year 1 with a fiducial cosmology at the best-fit parameters. \scott{This figure should go from $l\simeq 10\rightarrow \sim 2500$; we should also think why the plot has a large S/N at low $\ell$: there is no information there because of finite sky coverage; are you including an $f_{sky}$ factor?} With 4 bins, there are $4\times 5/2=10$ pairs of bins for which we can compute spectra. The left plot in \rf{ClDl}, shows the diagonal elements of the signal part and the noise part of the spectrum. The right-hand panel shows the spectrum of the modes with the largest signal to noise. That is, we identify a mode as $b_{\ell m} = \sum_i w_i \kappa_{\ell m}^i$, where the sum is over the 4 bins with a weighting factor that we will discuss below. For each $\ell$, the right panel shows the top KL-transformed eigenmodes, which we will call $D_{\ell}$. We can see that the first KL mode contains most of the SNR contribution to the power spectrum. However, if we want to recover more information, we also should include the second and the cross mode between the first and second KL-mode.
+	
+		\begin{figure*}[thbp]
 		\includegraphics[width=0.7\columnwidth]{Cl_pst.png}
 		\qquad \qquad \qquad
 		\includegraphics[width=0.7\columnwidth]{Dl_pst.png}
 		\caption{\textbf{Left:} Shear power spectrum of CL. Solid lines are diagonal elements of the signal matrix $S_{\ell}$, and dashed lines are the diagonal elements of noise matrix $N_{\ell}$.
 			\textbf{Right:} Signal-to-noise ratio matrix $D_\ell$ of KL-modes of the power spectrum on the left.  \label{fig:ClDl}}
 	\end{figure*}
-	
-	This compression method is based on a Karhunen-Lo\'eve (KL) decomposition for the shear power spectrum suggested by \citep{Alonso:2017hhj} and later applied to real space two-point function in \citep{Bellini:2019ssw} for CFHTLens survey. This method generally finds the eigenmode --- in this case, a linear combination of the convergence in different tomographic bins --- with most of the signal-to-noise ratio contribution to the power spectrum, and then transforms the two-point function of this eigenmode into real space.
-	
-\newcommand\ctot{C^{\rm tot}}
-	With  {\tt CosmoSIS}, we = generate the shear power spectrum $C_{\ell}^{ij}$ of the convergence $\kappa_{\ell m}$ for a fiducial cosmology. The cosmology we choose is the best-fit value of the DES Year 1 results for cosmic shear only. With the total power spectrum $\ctot_{\ell}=C_{\ell}+N_{\ell}$, the sum of the signal and shape noise $N_{\ell}$, we can calculate the Karhunen-Lo\'eve (KL) modes for each $\ell$ via a general eigenvalue problem 
+
+
+	\scott{This paragraph is not clear; I tried to rewrite but afraid I will mess things up. It might be simplest if you drop the $l$ subscripts throughout as everything is done at fixed $l$ and focus on the tomographic indices, which I think we are calling $i,j$. Also, I changed from $S\rightarrow C$ so things are consistent.} With  {\tt CosmoSIS}, we generate the shear power spectrum $C_{\ell}^{ij}$ of the convergence $\kappa^i_{\ell m}$ for a fiducial cosmology. The cosmology we choose is the best-fit value of the DES Year 1 results for cosmic shear only. With the total power spectrum $\ctot_{\ell}=C_{\ell}+N_{\ell}$, the sum of the signal and shape noise $N_{\ell}$, we can calculate the Karhunen-Lo\'eve (KL) modes for each $\ell$ (so we drop the $\ell$ subscript) )via a general eigenvalue problem 
 	\be
-	\ctot^{ij} e^j = \Lambda N^{ij} e^j
+	\ctot^{ij} e^j_p = \Lambda_p N^{ij} e^j_p
 	.\ee
-	Each row in $E_{\ell}$ corresponds to a KL-mode of $C_{\ell}$. Using the Cholesky decomposition, $N_{\ell} = L L^{\dagger}$, the new observable can be expressed as $b_{\ell m} = E_{\ell} \cdot L^{-1} a_{\ell m}$. We should note that $C_{\ell}$ is the angular power spectrum of the weak lensing shear, and $E_{\ell}$ is similar to a transformation of basis for the shear. So, we can now calculate the power spectrum $D_{\ell}$ for the new observable $b_{\ell m}$ 
+		The index $p$ in $e_p^i$ corresponds to a KL-mode of $\ctot$. Using Cholesky decomposition, $N = L L^{\dagger}$, the new observable can be expressed as $b_p = e_p^i  L^{-1}_{ij} \kappa_{j}$\scott{is that the right set of indices?}. We should note that $C_{\ell}$ is the angular power spectrum of the weak lensing shear, and $E_{\ell}$ is similar to a transformation of basis for the shear. So, we can now calculate the power spectrum $D_{\ell}$ for the new observable $b_{\ell m}$ 
 	\be
-	D_{\ell} =\ \langle b_{\ell m} b_{\ell m}^T \rangle \ = E_{\ell} L^{-1} C_{\ell} L^{-1} E^{T}_{\ell}\
+	D_{\ell} =\ \langle b_{\ell m} b_{\ell m}^T \rangle \ = E_{\ell} L^{-1} \ctot_{\ell} L^{-1} E^{T}_{\ell}\
 	,\ee
 	or, if we denote $E_{\ell} N^{-1}$ as $R_{\ell}$ and further denote $U_{\ell}^{ij}=R^i_{\ell} R^j_{\ell}$, we can write the compression in one simple linear combination of the $C_{\ell}$,
 	\be
-	D_{\ell} = R_{\ell}^i C_{\ell}^{ij} R_{\ell}^j = U_{\ell}^{ij} C_{\ell}^{ij}\
+	D_{\ell} = R_{\ell}^i C_{\ell}^{ij} R_{\ell}^j = U_{\ell}^{ij} \ctot_{\ell}^{ij}\
 	.\ee
 	$U_{\ell}^{ij}$ is the weight on the tomographic bin-pair, which we can later use to compress the two-point functions. We should point out that these KL-modes are uncorrelated, so the power spectrum of the new observable $D_{\ell}$ is a diagonal matrix, with 1+SNR of the corresponding eigenmodes on the diagonal elements. Since the KL-decomposed modes of shear power spectrum are uncorrelated, we can make a compression here by taking only the first one or two modes with the highest SNR. By doing so, we compress ten tomographic bin-pairs to one or two.
 	
-	We want, however, to eventually compress the two-point function data vector of DESY1, which is calculated by the integration of the angular power spectrum $C_{\ell}$
+	We want, however, to eventually compress the two-point function data vector of DESY1, which is measured is real space and related to the angular power spectrum $C_{\ell}$ via
 	\begin{equation*}
 	\xi_{\pm}^{ij}(\theta) = \int \frac{\ell d \ell }{2\pi}J_{0/4}(\ell \theta) C^{ij}(\ell)\ 
-	,\end{equation*}
-
-	we need to make sure that our scheme is $\ell$-independent, that is to say, the two-point correlation function of $D_{\ell}$, $\Tilde{\xi}_{\pm}(\theta)$, can be directly calculated from other two-point functions. In \rf{kl-mode}, we showed that compression matrices $U^{ij}(\ell)$ are generally $\ell$-independent, which is usually the case for weak lensing shear. Therefore, we have, 
+	.\end{equation*}
+	In order to use only a linear combination of all the tomographic bins, we need to make sure that the combination is $\ell$-independent, that is to say, the two-point correlation function corresponding to $D_{\ell}$, $\Tilde{\xi}_{\pm}(\theta)$, can be directly calculated from other two-point functions. In \rf{kl-mode}, we show that compression matrices $U^{ij}(\ell)$ are generally $\ell$-independent, which is usually the case for weak lensing shear. Therefore, we have, 
 	\bea
 	\nonumber\Tilde{\xi}_{\pm}(\theta) &=& \int \frac{\ell d \ell }{2\pi}J_{0/4}(\ell \theta) D(\ell)\\\nonumber
-	&=&\int \frac{\ell d \ell }{2\pi}J_{0/4}(\ell \theta) U^{ij}C^{ij}(\ell)\\
+	&=&\int \frac{\ell d \ell }{2\pi}J_{0/4}(\ell \theta) U^{ij})\ell C^{ij}(\ell)\\
 	&=&U^{ij}\xi_{\pm}^{ij}(\theta)\
 	,\eea
-	where the $U^{ij}$ is the average $U^{ij}_{\ell}$ weighted by the number of eigenmodes for each $\ell$ that is $2\ell+1$
+	where $U^{ij}$ is the average $U^{ij}_{\ell}$ weighted by the number of eigenmodes for each $\ell$ that is $2\ell+1$
 	\be
-	U^{ij} = \frac{\int_{\ell _{\mathrm{min}}}^{\ell _{\mathrm{max}}} (2 \ell +1) U^{ij}_{\ell}}{\int_{\ell _{\mathrm{min}}}^{\ell _{\mathrm{max}}} (2 \ell +1)}\
+	U^{ij} = \frac{\int_{\ell _{\mathrm{min}}}^{\ell _{\mathrm{max}}} d\ell\, (2 \ell +1) U^{ij}_{\ell}}{\int_{\ell _{\mathrm{min}}}^{\ell _{\mathrm{max}}} d\ell\, (2 \ell +1)}\
 	.\ee
-	We make a more conservative angular cut than the one discussed in \cite{Troxel:2017xyo}, making sure that both $\xi_{\pm}$ are uniform in regard to tomographic combinations. We consider an angular scale for  $\xi_+$ from $7.195'$ to $250.0'$, and for $\xi_-$ from $90.579'$ to $250.0'$. Therefore, for the purpose of demonstrating KL-transform, the raw data vector has a length of 190, and by shrinking 10 tomographic combinations for each angle into 1 KL-mode, the data is shrunk to 19, and so the number of elements in the covariance matrices are reduced by 99\%.
+	We make a more conservative angular cut than the one discussed in \cite{Troxel:2017xyo}, making sure that both $\xi_{\pm}$ are uniform in regard to tomographic combinations. We consider an angular scale for  $\xi_+$ from $7.195'$ to $250.0'$, and for $\xi_-$ from $90.579'$ to $250.0'$. Therefore, for the purpose of exploring the KL-transform, the raw data vector has a length of 190. By shrinking10 tomographic combinations for each angle into 1 KL-mode, the data vector is shrunk to length 19, and so the number of elements in the covariance matrices are reduced by 99\%.
 	
 	\begin{figure*}[thbp]
 		\includegraphics[width=0.80\columnwidth]{epi.png}
@@ -313,7 +319,6 @@ Our tolerance test is described in \rsec{tolerance}, where we test what happens 
 	%\eea
 	%Here the angular indices have been suppressed (there are two of them, one for each $w_\mu$), but the full tomographic complexity has been retained. The covariance matrix on the right includes a total of $N_t^2 \times N_t^2$ terms (some of which are equal because of symmetry) corresponding to all possible pairs of two-point functions. But $C^b$ on the right contains only $N_t^2$ elements, and again these are ordered, so we can use only a subset of them. In the simplest case, where only one linear combination is needed so $\mu=\nu=1$, a single number (for each pair of angular bins) captures all the relevant information from the full covariance matrix.
 	
-	With  {\tt CosmoSIS}, we calculate the shear power spectrum $C_{\ell}$ of DES Year 1 with a fiducial cosmology at the best-fit parameters, and $\ell$-range $2-2500$. The left plot in \rf{ClDl}, shows the diagonal elements of the signal part and the noise part of $C_{\ell}$, while the right one shows the KL-transformed eigenmode $D_{\ell}$ of $C_{\ell}$. We can see that the first KL mode contains most of the SNR contribution to the power spectrum. However, if we want to recover more information, we also should include the second and the cross mode between the first and second KL-mode.
 	
 	In \rf{kl-mode}, we plot the normalised KL-eigenmode $E_\ell^i$ of $C_{\ell}$ and its corresponding $U^{ij}_\ell=R_\ell^i R_\ell^j$. Modes with increasing $\ell$ are plotted in increasing darkness of the colour. We can see that the KL-modes do not depend significantly on the scale factor $\ell$, so we also take the weighted average of the eigenmodes $E_\ell^p$ and its quadratic form $U_\ell$ over $\ell$'s and plot them with black lines. 	We see that for different $\ell$, the KL-modes do vary by a slight amount. For the first KL-mode, the tomographic bins with higher redshift gain more weight than those with low redshift. This is also shown by the weight on tomographic combination that the combination of bin 3 and bin 4 gains most of the weight to maximise the signal-to-noise ratio. This agrees with the fact that the diagonal elements of $C_\ell$ that correspond to low redshift bins are less than those with high redshift shown in Figure \ref{fig:ClDl}, which indicating that the higher redshift bins have more signal contribution to the weak lensing shear data .
 	
