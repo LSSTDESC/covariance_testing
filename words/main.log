@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.5.13)  7 JUL 2020 19:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.5.13)  15 JUL 2020 13:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -235,14 +235,31 @@ Package graphics Info: Driver file: pdftex.def on input line 96.
 \Gin@req@height=\dimen113
 \Gin@req@width=\dimen114
 )
+(/usr/local/texlive/2016/texmf-dist/tex/latex/lineno/lineno.sty
+Package: lineno 2005/11/02 line numbers on paragraphs v4.41
+\linenopenalty=\count112
+\output=\toks22
+\linenoprevgraf=\count113
+\linenumbersep=\dimen115
+\linenumberwidth=\dimen116
+\c@linenumber=\count114
+\c@pagewiselinenumber=\count115
+\c@LN@truepage=\count116
+\c@internallinenumber=\count117
+\c@internallinenumbers=\count118
+\quotelinenumbersep=\dimen117
+\bframerule=\dimen118
+\bframesep=\dimen119
+\bframebox=\box43
+LaTeX Info: Redefining \\ on input line 3056.
+)
 Class revtex4-1 Info: Patching LaTeX tabular. on input line 86.
 Class revtex4-1 Info: Robustifying \LaTeX's \boldmath command on input line 86.
 
 Class revtex4-1 Info: cite was not loaded (OK!) on input line 86.
 Class revtex4-1 Info: mcite was not loaded (OK!) on input line 86.
 Class revtex4-1 Info: multicol was not loaded (OK!) on input line 86.
-
-(./main.aux)
+ (./main.aux)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 86.
@@ -260,17 +277,17 @@ LaTeX Font Info:    ... okay on input line 86.
 
 (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count112
-\scratchdimen=\dimen115
-\scratchbox=\box43
-\nofMPsegments=\count113
-\nofMParguments=\count114
-\everyMPshowfont=\toks22
-\MPscratchCnt=\count115
-\MPscratchDim=\dimen116
-\MPnumerator=\count116
-\makeMPintoPDFobject=\count117
-\everyMPtoPDFconversion=\toks23
+\scratchcounter=\count119
+\scratchdimen=\dimen120
+\scratchbox=\box44
+\nofMPsegments=\count120
+\nofMParguments=\count121
+\everyMPshowfont=\toks23
+\MPscratchCnt=\count122
+\MPscratchDim=\dimen121
+\MPnumerator=\count123
+\makeMPintoPDFobject=\count124
+\everyMPtoPDFconversion=\toks24
 ) (/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2016/05/10 v0.21 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -318,8 +335,12 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
+Class revtex4-1 Info: Overriding lineo.sty, restoring output routine, on input 
+line 86.
+Class revtex4-1 Info: Reinvoke \linenumbers on input line 86.
 \openout3 = `mainNotes.bib'.
 
+Class revtex4-1 Info: Overriding \@LN@LLerror on input line 86.
 
 (./authors.tex)
 
@@ -339,7 +360,7 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 131.
  [1{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-<./figures/../figures/Y1-constraints_wmS8A.pdf, id=18, 327.73697pt x 327.73697p
+<./figures/../figures/Y1-constraints_wmS8A.pdf, id=19, 327.73697pt x 327.73697p
 t>
 File: ./figures/../figures/Y1-constraints_wmS8A.pdf Graphic file (type pdf)
  <use ./figures/../figures/Y1-constraints_wmS8A.pdf>
@@ -347,7 +368,7 @@ Package pdftex.def Info: ./figures/../figures/Y1-constraints_wmS8A.pdf used on
 input line 194.
 (pdftex.def)             Requested size: 246.0pt x 245.99715pt.
  [2 <./figures/../figures/Y1-constraints_wmS8A.pdf>]
-<./figures/../figures/EigSNR-constraints_wmS8A.pdf, id=63, 324.22385pt x 324.22
+<./figures/../figures/EigSNR-constraints_wmS8A.pdf, id=64, 324.22385pt x 324.22
 385pt>
 File: ./figures/../figures/EigSNR-constraints_wmS8A.pdf Graphic file (type pdf)
 
@@ -358,55 +379,54 @@ Package pdftex.def Info: ./figures/../figures/EigSNR-constraints_wmS8A.pdf used
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 213.
 
-<./figures/../figures/SNR_cuts200.pdf, id=64, 1329.82956pt x 398.46878pt>
+<./figures/../figures/SNR_cuts200.pdf, id=65, 1329.82956pt x 398.46878pt>
 File: ./figures/../figures/SNR_cuts200.pdf Graphic file (type pdf)
 
 <use ./figures/../figures/SNR_cuts200.pdf>
 Package pdftex.def Info: ./figures/../figures/SNR_cuts200.pdf used on input lin
 e 215.
 (pdftex.def)             Requested size: 510.0pt x 152.81206pt.
- [3 <./figures/../figures/EigSNR-constraints_wmS8A.pdf>] <./figures/Cl_pst.png,
- id=93, 430.60875pt x 393.47pt>
-File: ./figures/Cl_pst.png Graphic file (type png)
+ [3 <./figures/../figures/EigSNR-constraints_wmS8A.pdf>] <figures/Cl_newrange.p
+ng, id=94, 421.575pt x 393.47pt>
+File: figures/Cl_newrange.png Graphic file (type png)
 
-<use ./figures/Cl_pst.png>
-Package pdftex.def Info: ./figures/Cl_pst.png used on input line 260.
-(pdftex.def)             Requested size: 172.19925pt x 157.34918pt.
+<use figures/Cl_newrange.png>
+Package pdftex.def Info: figures/Cl_newrange.png used on input line 260.
+(pdftex.def)             Requested size: 196.80075pt x 183.68211pt.
 
-<./figures/Dl_pst.png, id=95, 405.515pt x 389.455pt>
-File: ./figures/Dl_pst.png Graphic file (type png)
+<figures/Dl_newrange.png, id=96, 409.53pt x 389.455pt>
+File: figures/Dl_newrange.png Graphic file (type png)
 
-<use ./figures/Dl_pst.png>
-Package pdftex.def Info: ./figures/Dl_pst.png used on input line 262.
-(pdftex.def)             Requested size: 172.19925pt x 165.38246pt.
+<use figures/Dl_newrange.png>
+Package pdftex.def Info: figures/Dl_newrange.png used on input line 262.
+(pdftex.def)             Requested size: 196.80075pt x 187.15614pt.
  [4 <./figures/../figures/SNR_cuts200.pdf>]
-<./figures/epi.png, id=124, 412.54124pt x 384.43625pt>
-File: ./figures/epi.png Graphic file (type png)
- <use ./figures/epi.png>
-Package pdftex.def Info: ./figures/epi.png used on input line 299.
+<figures/epi.png, id=124, 412.54124pt x 384.43625pt>
+File: figures/epi.png Graphic file (type png)
+ <use figures/epi.png>
+Package pdftex.def Info: figures/epi.png used on input line 299.
 (pdftex.def)             Requested size: 196.80075pt x 183.39516pt.
 
-<./figures/Wij.png, id=125, 524.96124pt x 384.43625pt>
-File: ./figures/Wij.png Graphic file (type png)
- <use ./figures/Wij.png>
-Package pdftex.def Info: ./figures/Wij.png used on input line 300.
+<figures/Wij.png, id=125, 524.96124pt x 384.43625pt>
+File: figures/Wij.png Graphic file (type png)
+ <use figures/Wij.png>
+Package pdftex.def Info: figures/Wij.png used on input line 300.
 (pdftex.def)             Requested size: 250.92105pt x 183.75298pt.
 
-[5 <./figures/Cl_pst.png> <./figures/Dl_pst.png>]
-<./figures/CompKL-constraints_wmS8A.pdf, id=132, 324.22385pt x 324.22385pt>
+<./figures/CompKL-constraints_wmS8A.pdf, id=126, 324.22385pt x 324.22385pt>
 File: ./figures/CompKL-constraints_wmS8A.pdf Graphic file (type pdf)
 
 <use ./figures/CompKL-constraints_wmS8A.pdf>
 Package pdftex.def Info: ./figures/CompKL-constraints_wmS8A.pdf used on input l
 ine 328.
 (pdftex.def)             Requested size: 246.0pt x 246.00206pt.
-
+ [5 <./figures/Cl_newrange.png> <./figures/Dl_newrange.png>]
 <./figures/../figures/Weights_2pt.pdf, id=133, 1064.46658pt x 201.47285pt>
 File: ./figures/../figures/Weights_2pt.pdf Graphic file (type pdf)
 
 <use ./figures/../figures/Weights_2pt.pdf>
 Package pdftex.def Info: ./figures/../figures/Weights_2pt.pdf used on input lin
-e 345.
+e 343.
 (pdftex.def)             Requested size: 510.0pt x 96.53062pt.
  [6 <./figures/epi.png> <./figures/Wij.png> <./figures/CompKL-constraints_wmS8A
 .pdf>]
@@ -416,7 +436,7 @@ File: ./figures/../figures/Comp2pt-constraints_wmS8A.pdf Graphic file (type pdf
 )
  <use ./figures/../figures/Comp2pt-constraints_wmS8A.pdf>
 Package pdftex.def Info: ./figures/../figures/Comp2pt-constraints_wmS8A.pdf use
-d on input line 370.
+d on input line 368.
 (pdftex.def)             Requested size: 246.0pt x 246.00206pt.
  [7 <./figures/../figures/Weights_2pt.pdf> <./figures/../figures/Comp2pt-constr
 aints_wmS8A.pdf
@@ -429,17 +449,21 @@ File: ./figures/../figures/Y1-scatter.pdf Graphic file (type pdf)
 
 <use ./figures/../figures/Y1-scatter.pdf>
 Package pdftex.def Info: ./figures/../figures/Y1-scatter.pdf used on input line
- 390.
+ 388.
 (pdftex.def)             Requested size: 246.0pt x 369.29878pt.
 
 <./figures/Comp2pt-scatter.pdf, id=209, 425.87813pt x 721.94241pt>
 File: ./figures/Comp2pt-scatter.pdf Graphic file (type pdf)
 
 <use ./figures/Comp2pt-scatter.pdf>
-Package pdftex.def Info: ./figures/Comp2pt-scatter.pdf used on input line 399.
+Package pdftex.def Info: ./figures/Comp2pt-scatter.pdf used on input line 397.
 (pdftex.def)             Requested size: 209.1015pt x 354.4599pt.
+ [8 <./figures/../figures/Y1-scatter.pdf> <./figures/Comp2pt-scatter.pdf
 
-<./figures/../figures/Comp2pt-correlation.pdf, id=210, 571.61363pt x 496.49678p
+pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./figures/Comp2pt-scatter.pd
+f): PDF inclusion: multiple pdfs with page group included in a single page
+>]
+<./figures/../figures/Comp2pt-correlation.pdf, id=249, 571.61363pt x 496.49678p
 t>
 File: ./figures/../figures/Comp2pt-correlation.pdf Graphic file (type pdf)
  <use ./figures/../figures/Comp2pt-correlation.pdf>
@@ -447,14 +471,7 @@ Package pdftex.def Info: ./figures/../figures/Comp2pt-correlation.pdf used on i
 nput line 410.
 (pdftex.def)             Requested size: 246.0pt x 213.67126pt.
 
-<./figures/kl_scatter.png, id=211, 435.6275pt x 726.715pt>
-File: ./figures/kl_scatter.png Graphic file (type png)
-
-<use ./figures/kl_scatter.png>
-Package pdftex.def Info: ./figures/kl_scatter.png used on input line 417.
-(pdftex.def)             Requested size: 196.80075pt x 328.29393pt.
-
-<./figures/../figures/Tolerance_constraints.pdf, id=212, 1062.17372pt x 337.385
+<./figures/../figures/Tolerance_constraints.pdf, id=250, 1062.17372pt x 337.385
 71pt>
 File: ./figures/../figures/Tolerance_constraints.pdf Graphic file (type pdf)
  <use ./figures/../figures/Tolerance_constraints.pdf>
@@ -463,25 +480,15 @@ Package pdftex.def Info: ./figures/../figures/Tolerance_constraints.pdf used on
 (pdftex.def)             Requested size: 510.0pt x 161.99477pt.
 
 Underfull \hbox (badness 2529) in paragraph at lines 425--425
-[]\OT1/cmr/m/n/9 FIG. 13. An er-ror plot show-ing the changes to the con-strain
+[]\OT1/cmr/m/n/9 FIG. 12. An er-ror plot show-ing the changes to the con-strain
 ts for $
 []$, $\OML/cmm/m/it/9 S[]$ \OT1/cmr/m/n/9 and $\OML/cmm/m/it/9 A[]$ \OT1/cmr/m/
 n/9 for er-rors added at
  []
 
-[8 <./figures/../figures/Y1-scatter.pdf>]
-
-LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
- on input line 426.
-
-[9 <./figures/Comp2pt-scatter.pdf> <./figures/../figures/Comp2pt-correlation.pd
-f
-
-pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./figures/../figures/Comp2pt
--correlation.pdf): PDF inclusion: multiple pdfs with page group included in a s
-ingle page
-> <./figures/kl_scatter.png>] [10 <./figures/../figures/Tolerance_constraints.p
-df>] (./contributions.tex) (./desc-tex/ack/standard.tex) (./main.bbl [11]
+[9 <./figures/../figures/Comp2pt-correlation.pdf>] [10 <./figures/../figures/To
+lerance_constraints.pdf>] (./contributions.tex) (./desc-tex/ack/standard.tex)
+(./main.bbl
 Underfull \hbox (badness 2359) in paragraph at lines 23--25
  []\OT1/cmr/m/n/9 Feroz, F., Hob-son, M. P., & Bridges, M. 2009,
  []
@@ -501,46 +508,46 @@ Underfull \hbox (badness 10000) in paragraph at lines 84--86
  \OT1/cmr/m/n/9 pu-ta-tional Statis-tics and Data Anal-y-sis, 52,
  []
 
-) [12] (./main.aux) ) 
+) [11] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 5274 strings out of 493014
- 70653 string characters out of 6133351
- 192432 words of memory out of 5000000
- 8725 multiletter control sequences out of 15000+600000
- 8449 words of font info for 31 fonts, out of 8000000 for 9000
+ 5449 strings out of 493014
+ 73254 string characters out of 6133351
+ 188835 words of memory out of 5000000
+ 8896 multiletter control sequences out of 15000+600000
+ 8441 words of font info for 31 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,10n,37p,1659b,333s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,10n,37p,1659b,349s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmbx9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmex10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmmi12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmmi6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-mi8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi
-9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.
-pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pf
-b></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb>
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></u
-sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/
-local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/loc
-al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/
-texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/tex
-live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/local/texl
-ive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss17.pfb></usr/local/texli
-ve/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texliv
-e/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/
-2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/20
-16/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2016
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2016/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on main.pdf (12 pages, 1500585 bytes).
+fonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmbx9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmex10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmmi12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmmi6.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mmi8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmm
+i9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10
+.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.p
+fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb
+></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></
+usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr
+/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/lo
+cal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local
+/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/te
+xlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/local/tex
+live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss17.pfb></usr/local/texl
+ive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texliv
+e/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive
+/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2
+016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/201
+6/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2016/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2016/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on main.pdf (11 pages, 1502768 bytes).
 PDF statistics:
- 393 PDF objects out of 1000 (max. 8388607)
- 301 compressed objects within 4 object streams
+ 387 PDF objects out of 1000 (max. 8388607)
+ 299 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
- 76 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 71 words of extra memory for PDF output out of 10000 (max. 10000000)
 

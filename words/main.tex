@@ -76,8 +76,8 @@
 \graphicspath{{./}{./figures/}}
 \bibliographystyle{apj}
 
-%\usepackage{lineno}
-%\linenumbers
+\usepackage{lineno}
+\linenumbers
 
 % Add your own macros here:
 
@@ -254,22 +254,22 @@
 	
 	\newcommand\ctot{\mathcal{C}}
 	
-	Before delving into the derivation, it is worth summarizing the results. With {\tt CosmoSIS}, we calculate the shear power spectrum $C_{\ell}$ of the convergence $\kappa^i$ in the 4 tomographic bins probed by DES Year 1 with a fiducial cosmology at the best-fit parameters. \scott{This figure should go from $l\simeq 10\rightarrow \sim 2500$; we should also think why the plot has a large S/N at low $\ell$: there is no information there because of finite sky coverage; are you including an $f_{sky}$ factor?} With 4 bins, there are $4\times 5/2=10$ pairs of bins for which we can compute spectra. The left plot in \rf{ClDl}, shows the diagonal elements of the signal part and the noise part of the spectrum. The right-hand panel shows the spectrum of the modes with the largest signal to noise. That is, we identify a mode as $b_{\ell m} = \sum_i w_i \kappa_{\ell m}^i$, where the sum is over the 4 bins with a weighting factor that we will discuss below. For each $\ell$, the right panel shows the top KL-transformed eigenmodes, which we will call $D_{\ell}$. We can see that the first KL mode contains most of the SNR contribution to the power spectrum. However, if we want to recover more information, we also should include the second and the cross mode between the first and second KL-mode.
+	Before delving into the derivation, it is worth summarizing the results. With {\tt CosmoSIS}, we calculate the shear power spectrum $C_{\ell}$ of the convergence $\kappa^i$ in the 4 tomographic bins probed by DES Year 1 with a fiducial cosmology at the best-fit parameters. With 4 bins, there are $4\times 5/2=10$ pairs of bins for which we can compute spectra. The left plot in \rf{ClDl} shows the diagonal elements of the signal part and the noise part of the spectrum. The right-hand panel shows the spectrum of the modes with the largest signal to noise, ranging from $\ell = 10$ to $\ell = 2500$. That is, we identify a mode as $b_{\ell m} = \sum_i w_i \kappa_{\ell m}^i$, where the sum is over the 4 bins with a weighting factor that we will discuss below. For each $\ell$, the right panel shows the top KL-transformed eigenmodes, which we will call $D_{\ell}$. We can see that the first KL mode contains most of the SNR contribution to the power spectrum. However, if we want to recover more information, we also should include the second and the cross mode between the first and second KL-mode.
 	
 	\begin{figure*}[thbp]
-		\includegraphics[width=0.7\columnwidth]{Cl_pst.png}
+	    \sfig{figures/Cl_newrange.png}{0.8\columnwidth}
 		\qquad \qquad \qquad
-		\includegraphics[width=0.7\columnwidth]{Dl_pst.png}
+	    \sfig{figures/Dl_newrange.png}{0.8\columnwidth}
 		\caption{\textbf{Left:} Shear power spectrum of \full. Solid lines are diagonal elements of the signal matrix $S_{\ell}$, and dashed lines are the diagonal elements of noise matrix $N_{\ell}$.
-			\textbf{Right:} Signal-to-noise ratio matrix $D_\ell$ of KL-modes of the power spectrum on the left.  \label{fig:ClDl}}
+		\textbf{Right:} Signal-to-noise ratio matrix $D_\ell$ of KL-modes of the power spectrum on the left.  \label{fig:ClDl}}
 	\end{figure*}
 	
 	
-	\scott{This paragraph is not clear; I tried to rewrite but afraid I will mess things up. It might be simplest if you drop the $l$ subscripts throughout as everything is done at fixed $l$ and focus on the tomographic indices, which I think we are calling $i,j$. Also, I changed from $S\rightarrow C$ so things are consistent.} With  {\tt CosmoSIS}, we generate the shear power spectrum $C^{ij}$ of the convergence $\kappa^i$ for the fiducial cosmology, which is the best-fit value of the DES Year 1 results for cosmic shear only. With the total power spectrum $\ctot=C+N$, the sum of the signal and shape noise $N$, we can calculate the Karhunen-Lo\'eve (KL) modes for each $\ell$ (so we drop the $\ell$ subscript) via a general eigenvalue problem 
+	With  {\tt CosmoSIS}, we generate the shear power spectrum $C^{ij}$ of the convergence $\kappa^i$ for the fiducial cosmology, which is the best-fit value of the DES Year 1 results for cosmic shear only. With the total power spectrum $\ctot=C+N$, the sum of the signal and shape noise $N$, we can calculate the Karhunen-Lo\'eve (KL) modes for each $\ell$ (so we drop the $\ell$ subscript) via a general eigenvalue problem 
 	\be
 	\ctot^{ij} e^j_p = \Lambda_p N^{ij} e^j_p
 	.\ee
-	The index $p$ in $e_p^i$ corresponds to the $p^{th}$ KL-mode of $\ctot$. Using Cholesky decomposition, $N = L L^{\dagger}$, the new observable can be expressed as $b_p = e_p^i  L^{-1}_{ij} \kappa_{j}$\scott{is that the right set of indices?}. We should note that $C_{\ell}$ is the angular power spectrum of the weak lensing shear, and $E_{\ell}$ is similar to a transformation of basis so that the shear signal is orthogonalized. Afterwards, we can now calculate the power spectrum $D_{\ell}$ for the new observable $b_{\ell m}$ for each $\ell$
+	The index $p$ in $e_p^i$ corresponds to the $p^{th}$ KL-mode of $\ctot$. Using Cholesky decomposition, $N = L L^{\dagger}$, the new observable can be expressed as $b_p = e_p^i  L^{-1}_{ij} \kappa_{j}$. We should note that $C_{\ell}$ is the angular power spectrum of the weak lensing shear, and $E_{\ell}$ is similar to a transformation of basis so that the shear signal is orthogonalized. Afterwards, we can now calculate the power spectrum $D_{\ell}$ for the new observable $b_{\ell m}$ for each $\ell$
 	\be
 	D_{\ell} =\ \langle b_{\ell m} b_{\ell m}^T \rangle \ = E_{\ell} L^{-1} \ctot_{\ell} L^{-1} E^{T}_{\ell}\
 	,\ee
@@ -283,22 +283,22 @@
 	\begin{equation*}
 	\xi_{\pm}^{ij}(\theta) = \int \frac{\ell d \ell }{2\pi}J_{0/4}(\ell \theta) C^{ij}(\ell)\ 
 	.\end{equation*}
-	In order to use only a linear combination of all the tomographic bins, we need to make sure that the combination is $\ell$-independent, that is to say, the two-point correlation function corresponding to $D_{\ell}$, $\Tilde{\xi}_{\pm}(\theta)$, can be directly calculated from other two-point functions. In \rf{kl-mode}, we show that compression matrices $U^{ij}(\ell)$ are generally $\ell$-independent, which is usually the case for weak lensing shear. Therefore, we have, 
+	In order to use only a linear combination of all the tomographic bins, we need to make sure that the combination is $\ell$-independent, that is to say, the two-point correlation function corresponding to $D_{\ell}$, $\Tilde{\xi}_{\pm}(\theta)$, can be directly calculated from other two-point functions. In \rf{kl-mode}, we show that compression matrices $U^{ij}(\ell)$ are generally $\ell$-independent, except for low $\ell$s, because of the existance of cosmic variance. Therefore, we have, 
 	\bea
 	\nonumber\Tilde{\xi}_{\pm}(\theta) &=& \int \frac{\ell d \ell }{2\pi}J_{0/4}(\ell \theta) D(\ell)\\\nonumber
 	&=&\int \frac{\ell d \ell }{2\pi}J_{0/4}(\ell \theta) U^{ij})\ell C^{ij}(\ell)\\
 	&=&U^{ij}\xi_{\pm}^{ij}(\theta)\
 	,\eea
-	where $U^{ij}$ is the average $U^{ij}_{\ell}$ weighted by the number of eigenmodes for each $\ell$ that is $2\ell+1$
+	where $U^{ij}$ is the average $U^{ij}_{\ell}$ weighted by the number of multipoles for each $\ell$ that is $2\ell+1$
 	\be
 	U^{ij} = \frac{\int_{\ell _{\mathrm{min}}}^{\ell _{\mathrm{max}}} d\ell\, (2 \ell +1) U^{ij}_{\ell}}{\int_{\ell _{\mathrm{min}}}^{\ell _{\mathrm{max}}} d\ell\, (2 \ell +1)}\
 	.\ee
 	We make a more conservative angular cut than the one discussed in \cite{Troxel:2017xyo}, making sure that both $\xi_{\pm}$ are uniform in regard to tomographic combinations. We consider an angular scale for  $\xi_+$ from $7.195'$ to $250.0'$, and for $\xi_-$ from $90.579'$ to $250.0'$. Therefore, for the purpose of exploring the KL-transform, the raw data vector has a length of 190. By shrinking 10 tomographic combinations for each angle into 1 KL-mode, the data vector is shrunk to length 19, and so the number of elements in the covariance matrices are reduced by 99\%.
 	
 	\begin{figure*}[thbp]
-		\includegraphics[width=0.80\columnwidth]{epi.png}
-		\includegraphics[width=1.02\columnwidth]{Wij.png}
-		\caption{\textbf{Left:} Normalised KL-eigenmodes $E_\ell^p$ of the shear power spectrum $C_{\ell}$, the changes in shades represent different $\ell$. \textbf{Right:} Transformation on tomographic bin combination $U_{ij}$ constructed by the KL-eigenmodes. Black lines are the weighted average of each mode. \label{fig:kl-mode}}
+	    \sfig{figures/epi.png}{0.8\columnwidth}
+	    \sfig{figures/Wij.png}{1.02\columnwidth}
+		\caption{\textbf{Left:} Normalised KL-eigenmodes $E_\ell^p$ of the shear power spectrum $C_{\ell}$, the changes in shades represent different $\ell$. \textbf{Right:} Transformation on tomographic bin combination $U_{ij}$ constructed by the KL-eigenmodes. Black lines are the weighted average of each mode. The lightest color for each mode represent $\ell = 10$ and increase by $\Delta \ell = 10$ for each step toward darker color. \label{fig:kl-mode}}
 	\end{figure*}
 	
 	%We characterise a given element in the data vector by its angular and tomographic indices: $a_i = a_{\ell m,\alpha}$ where $l,m$ denote the indices corresponding to given spherical harmonics and $\alpha$ is a given tomographic bin, or equivalently $a_i = a_\alpha(\vec\theta)$ in real space. The compression occurs in terms of tomographic bins, so that 
@@ -339,8 +339,6 @@
 	% -------------------
 	\subsection{Applying MOPED}
 	\label{subsec:2pt_compression}
-	\scott{Isn't this moped? If so, we should rename the section heading and the references.}
-	\tassia{Changed the section heading, the references are just after the whole explanation.}
 	
 	\Svwide{Weights_2pt}{An illustration of the 227 values of the weights corresponding to $\Omega_m$, $S_8$ and $A_{\mathrm{IA}}$ used for compressing the covariance matrices. Note how similar the weighing vectors for $S_8$ and $A_{\mathrm{IA}}$, and that the largest values for correspond to the last 60 elements, i.e. these will be used to compress the part of the covariance matrix that holds information for $\xi_-$.}
 	
@@ -389,16 +387,11 @@
 	
 	\Sfig{Y1-scatter}{In both plots, the red points refer to the diagonal elements, and the colour bar varies according to the number of elements in one hexagonal bin, where the darkest blue colour corresponds to only one element, and the brightest yellow shade to 2000. \textbf{Top:} Scatter plot of the ratio of the elements of \full\ and \gaussian\ vs the \gaussian\ value. For illustrative purposes, we draw a black, horizontal line at \full/\gaussian = 1. \textbf{Bottom:} Density of the scatter plot of the positive elements of the \gaussian\ and \full, with the black line showing \full\ = \gaussian.}
 	
-	\subsubsection{Using map-level compression}
-	
-	\scott{Not sure if it makes sense to include this section, as we know that this compression scheme does not capture all the information.}
-	
-	In \rf{comp-cov}, we plot the compressed covariance matrices for the CL and GCM with the first mode only, and show a one-to-one comparison of the covariance matrices. By comparing the bottom panel of  \rf{Y1-scatter} with the left panel of \rf{comp-cov}, we notice that the large regions containing the elements with greater difference are now gone. Instead, the two covariance matrices just have a relative constant difference, because of the fact that we did not include non-gaussian effect in one of them. This shows that the divergence between CL and GCM does not considerably affect the overall SNR. 
 	% -------------------
 	\subsection{Compressed Matrices Comparison}
 	\label{subsec:compare_compressed}
 	
-	\subsubsection{Using MOPED}
+	%\subsubsection{Using MOPED}
 	
 	\begin{figure}[b]
 		\sfig{Comp2pt-scatter}{0.85\columnwidth}
@@ -408,20 +401,22 @@
 		\label{fig:Comp2pt-scatter}
 	\end{figure}
 	
+	Since we have shown that, among all compression schemes shown here, the only one capable of reproducing the original parameter constraints was MOPED, that is what we will be using in this section.
+	
 	We compress both covariance matrices using the same $U_{\alpha, i}$ (we also tried using different $U$'s for each and obtained similar results).
 	%Here, we take two different approaches: first, we assume that $U_{\alpha, i}$ is the same for both covariance matrices and we calculate it with CL. The second approach is that each compression scheme must use the original covariance matrix that will be compressed, so that $U_{\alpha, i}$ will be different for each covariance matrix. We find that the mean values of the parameter constraints for the two methods both agree to $> 2\sigma$ of the original constraints. It is also crucial that the matrices used for comparison here are those obtained via the same compression scheme, so that we can be sure that their differences are indeed only related to the differences in the original matrices. 
-	Fig.~\rf{Comp2pt-scatter} show a one-to-one scatter plot, which, as expected, exhibits a similar behaviour to that observed in \rf{Y1-scatter}, with the elements of \full\ being larger than those of \gaussian. Here, however, the ratio of the diagonal elements is closer to 1, and the ratio of the diagonal elements goes up to only $\approx 2.3$. Perhaps even more importantly, there are much fewer points on this plot, meaning that MOPED reduces the number of elements that need to be compared. These figures provide a greater insight into the relevant elements for parameter estimation: the dispersion is largely damped, and most of the elements are within $25\%$ of each other, which explains what we see in the parameter constraints. Fig.~\rf{Comp2pt-correlation} shows the correlation matrix for \gaussian\ and \full, and the difference between the normalized off-diagonal elements. The small differences suggest that the root of the slightly looser constraints obtained with \gaussian\ is the larger diagonal elements of the MOPED-reduced covariance matrix. That is, a problem that initially required inspecting hundreds of thousands of elements is reduced to one involving only 16.
+	\rf{Comp2pt-scatter} show a one-to-one scatter plot, which, as expected, exhibits a similar behaviour to that observed in \rf{Y1-scatter}, with the elements of \full\ being larger than those of \gaussian. Here, however, the ratio of the diagonal elements is closer to 1, and the ratio of the diagonal elements goes up to only $\approx 2.3$. Perhaps even more importantly, there are much fewer points on this plot, meaning that MOPED reduces the number of elements that need to be compared. These figures provide a greater insight into the relevant elements for parameter estimation: the dispersion is largely damped, and most of the elements are within $25\%$ of each other, which explains what we see in the parameter constraints. \rf{Comp2pt-correlation} shows the correlation matrix for \gaussian\ and \full, and the difference between the normalized off-diagonal elements. The small differences suggest that the root of the slightly looser constraints obtained with \gaussian\ is the larger diagonal elements of the MOPED-reduced covariance matrix. That is, a problem that initially required inspecting hundreds of thousands of elements is reduced to one involving only 16.
 	
-	\Sfig{Comp2pt-correlation}{The upper right and lower left plots display the correlation matrix for \gaussian\ and \full\ respectively, and the difference between them, $\Delta r_{ij}$, is shown on the lower right.}
+	\Sfig{Comp2pt-correlation}{The upper right and lower left plots display the correlation matrix for \gaussian\ and \full\ respectively, and the difference between them, $\Delta r_{ij}$, is shown on the lower right.} %\tq{Changed the color to blue-green-orange, should be better. Also specify the levels of shade in the caption. }
 	
 	% ---------
-	\subsubsection{Using map-level compression}
-	In \rf{comp-cov}, we plot the compressed covariance matrices for the \full\ and \gaussian\ with the first mode only, and show a one-to-one comparison of the covariance matrices. By comparing the bottom panel of  \rf{Y1-scatter} with the left panel of \rf{comp-cov}, we notice that the large regions containing the elements with greater difference are now gone. Instead, the two covariance matrices just have a relative constant difference, because of the fact that we did not include non-gaussian effect in one of them. This shows that the divergence between \full\ and \gaussian\ does not considerably affect the overall SNR. 
+	%\subsubsection{Using map-level compression}
+	%In \rf{comp-cov}, we plot the compressed covariance matrices for the \full\ and \gaussian\ with the first mode only, and show a one-to-one comparison of the covariance matrices. By comparing the bottom panel of  \rf{Y1-scatter} with the left panel of \rf{comp-cov}, we notice that the large regions containing the elements with greater difference are now gone. Instead, the two covariance matrices just have a relative constant difference, because of the fact that we did not include non-gaussian effect in one of them. This shows that the divergence between \full\ and \gaussian\ does not considerably affect the overall SNR. 
 	
-	\begin{figure}[thbp]
-		\includegraphics[width=0.8\columnwidth]{kl_scatter.png}
-		\caption{ \textbf{Top:} One-to-one scatter of the ratio of \full\ over \gaussian\ and the \full\ elements. \label{fig:comp-cov}   \textbf{Bottom:} One-to-one scatter of the two compressed matrices following the procedure described in \ref{subsec:tomographic_compression}. }
-	\end{figure}
+	%\begin{figure}[thbp]
+	%	\includegraphics[width=0.8\columnwidth]{kl_scatter.png}
+	%	\caption{ \textbf{Top:} One-to-one scatter of the ratio of \full\ over \gaussian\ and the \full\ elements. \label{fig:comp-cov}   \textbf{Bottom:} One-to-one scatter of the two compressed matrices following the procedure described in %\ref{subsec:tomographic_compression}. }
+	%\end{figure}
 	
 	% ----------------------------------------------------------------------
 	\section{Tolerance of the Compressed Matrices}
@@ -446,7 +441,7 @@
 	
 	Once we generate new values for each independent element, following \ec{tolerance}, we check for positive definiteness. Since the resulting matrix is, more often than not, not PD, we correct this by identifying the smallest negative eigenvalue and adding it to the diagonal \cite{Yuan:2008}. We check that, although doing this largely increases the values of the diagonal elements, only less than $40 \%$ have a standard deviation of more than twice the original perturbation. 
 	
-	The constraints for $\Omega_m$, $S_8$ and $A_{\mathrm{IA}}$ are shown in Fig. \rf{Tolerance_constraints}, in purple, where the blue rectangle spans over the constraints for the unchanged compressed covariance matrix. It is interesting to note that, while the relative change in size for the $2\sigma$ interval is $> 8 \%$ for the cosmological parameters, this goes up to $\sim 80 \%$ for the intrinsic alignment parameter $A$.
+	The constraints for $\Omega_m$, $S_8$ and $A_{\mathrm{IA}}$ are shown in \rf{Tolerance_constraints}, in purple, where the blue rectangle spans over the constraints for the unchanged compressed covariance matrix. It is interesting to note that, while the relative change in size for the $2\sigma$ interval is $> 8 \%$ for the cosmological parameters, this goes up to $\sim 80 \%$ for the intrinsic alignment parameter $A$.
 	
 	%We see that errors of up to 25\% translate to $< 10\%$ difference in the constraints. A $30\%$ error, on the other hand, shows differences of up to $33\%$ and $24\%$, respectively. It is worth noting here that we also find that $S_8$ is less sensitive to these noise introduced.
 	
@@ -464,7 +459,7 @@
 	,\ee
 	where $\Lambda = \lambda I$, with $\lambda$ being the eigenvalues and $I$ the identity matrix; and $Q$ is a square matrix whose columns are composed of the eigenvectors of $C_{\alpha \beta}$. The eigenvalues are then perturbed as described in \ec{tolerance}, and the error, $\delta$ is drawn from $\mathcal{G}(0,\frac{x}{100})$, with the requirement that $|\delta| < 1$. We then have $\lambda^{\mathrm{new}} > 0$, and thus the perturbed covariance matrix associated with these new eigenvalues is PD. 
 	
-	The results for this method are also plotted in Fig. \rf{Tolerance_constraints}, in green. Despite the results following the same tendency as those of the last section, we find that about $80\%$ of the elements of the perturbed covariance matrices are within $10\%$ of their original value. This shows that the intrinsic alignment parameter $A$ is very sensitive to errors in the covariance matrix.
+	The results for this method are also plotted in \rf{Tolerance_constraints}, in green. Despite the results following the same tendency as those of the last section, we find that about $80\%$ of the elements of the perturbed covariance matrices are within $10\%$ of their original value. This shows that the intrinsic alignment parameter $A$ is very sensitive to errors in the covariance matrix.
 	
 	% ----------------------------------------------------------------------
 	\section{Conclusion}
@@ -478,6 +473,8 @@
 	
 	Finally, we applied MOPED, which uses linear combinations of the data vector. By transforming the data vector and covariance matrix with a weighting vector that is parameter dependent, we were able to reduce the $227 \times 227$ matrix to a $16 \times 16$, and since the Fisher matrix is identical for both the original and compressed ones, the compression scheme is lossless. This is also clear in the parameter constraints, where we show that we are able to reproduce the similar constraints for the two matrices, for all parameters. On the other hand, we compared the elements of the compressed covariance matrix for \full\ and \gaussian\ and found that the new elements show reasonable agreement, with their correlation matrices being very similar, and the diagonal elements showing a percentage difference of less than $15\%$.
 	
+	Given these results, we successfully show that MOPED is the only compression scheme, out of the ones considered in this work, capable of capturing all the relevant information required to reproduce reliable parameter constraints for the 16 parameters of interest.
+	
 	When looking at \rf{Y1-scatter}, the large variance in the element-by-element comparison suggests that there could be considerable differences in the parameter constraints. We see, however, in \rf{Y1-constraints_wmS8A}, that this is not the case. This becomes clearer when comparing the elements of the compressed covariance matrices, where, while they do follow the same tendency as the full comparison, only a smaller portion of the elements display a greater dispersion.
 	
 	One last step was taken to analyse the error tolerance of the compressed \full. We adopted two ways of doing this, by introducing error taken from a Gaussian distribution for $5 - 45 \%$ of the original 1) element and, 2) eigenvalue of the compressed covariance matrix. For the latter, we checked that only about $20 \%$ of elements of the resulting, perturbed, covariance matrix showed errors within the expected value, while the vast majority had only about a $10\%$ error. In both cases, however, the results were similar: for the cosmological parameters $\Omega_m$ and $S_8$, the $2\sigma$ constraints changed by less than $8\%$, while the constraining power for intrinsic alignment parameter $A_{\mathrm{IA}}$ was largely lost. This result is repeated throughout this work: we find that most modifications made to the covariance matrix greatly affect $A_{\mathrm{IA}}$, with the exception of MOPED. It is, therefore, advised that extra precaution be taken when performing compression methods, if this parameter is to be considered.
@@ -486,7 +483,7 @@
 	% ----------------------------------------------------------------------
 	\subsection*{Acknowledgments}
 	
-	The author wish to thank Sukhdeep Singh and Hung-jin Huang for useful discussions.
+	The authors wish to thank Sukhdeep Singh and Hung-jin Huang for useful discussions.
 	
 	%%% Here is where you should add your specific acknowledgments, remembering that some standard thanks will be added via the \code{desc-tex/ack/*.tex} and \code{contributions.tex} files.
 	
