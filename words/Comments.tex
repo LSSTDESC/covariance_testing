@@ -4,6 +4,8 @@
 \usepackage{lsstdesc_macros}
 \usepackage{xcolor}
 \usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage[margin=1.5in]{geometry}
 
 \newcommand\scott[1]{{\bf {\textcolor{teal}{[Scott: #1]}}}}
 \newcommand\tassia[1]{{\bf {\textcolor{teal}{[Tassia: #1]}}}}
@@ -14,6 +16,79 @@
 
 
 \begin{document}
+
+    {\LARGE\textbf{Review by internal referees}}\\ \\
+
+    {\Large\textbf{Second Reports}}\\
+    
+    \textbf{Alan Heavens, August 4}\\
+
+    With apologies for the delay in getting comments to you, here goes.  This draft is much improved over the first one, and the focus is clearer.  I think in particular the comparison between the field-level (KL-like) compression and summary-stats level (MOPED) is interesting.  The field-level is not the most general one, but if I understood correctly, is Davide’s elegant weighting of tomographic fields.  I am still not convinced of the motivation for the large eigenvalue/small S/N compressions, and I guess the results rather bear that out, but I don’t see much harm in testing some ‘straw person’ cases.  It is possible that a referee will take a different view.\\
+ 
+    \underline{Abstract}
+    
+    The covariance matrix is a four-point function only if the statistics are two-point functions. \done
+
+    It wasn’t immediately clear to me how compression helps identify the significant parts of the covariance matrix.  Does this use the magnitude of the elements in the matrix which translates the original covariance matrix to the compressed one?  This would make sense. \reply{Exactly.}
+
+    In the last line, would ‘inaccuracies’ be more suitable than ‘changes’? \done\\
+
+    \underline{Introduction}
+    
+    In the first paragraph, the analysis only requires a covariance matrix if the likelihood is assumed to be gaussian.  This is a big assumption (and not necessarily always good).  A bit more explanation is needed here. \reply{We reworded this to reflect the more general case.}
+
+    MOPED is not ‘truly’ lossless, but only in the restricted sense that the Fisher matrix of the compressed data is the same as for the full dataset, if certain conditions are met.  For a given data set, this usually makes the likelihood surface near the peak almost identical, and in practice the similarity often extends right into the wings of the distribution, as you find here in Fig. 8. \reply{Fixed this.}
+
+    In the list of applications, can you add Mootoovaloo et al. (\href{https://arxiv.org/pdf/2005.06551.pdf}{arXiv:2005.06551}) for an application to weak lensing?  It is the one I mentioned was coming, in my earlier report. \done\\
+
+    \underline{Section II B}
+    
+    Louca and Sellentin (\href{https://arxiv.org/pdf/2007.07253.pdf}{arXiv:2007.07253}) actually argue for removing the highest S/N modes (to reduce biases).  This is worth referring to. \reply{We did a similar analysis removing the 200 modes with highest SNR and found similar results. We chose not to display those here so as not to produce plots with confusing information. We point out, however, that this might have been different if we had not removed such a large number of modes. We added a paragraph referring to this.}
+
+    “almost 200\%” $\rightarrow$ “the errors of almost 200\%”. \done\\
+
+    \underline{Section II C}
+    
+    The sentence saying that the eigenvalues would be the data points themselves doesn’t make sense to me.  Do you mean they would be the diagonal elements themselves? \reply{We mean that the eigenvectors would simply be the $T_i$s (or on the data the $D_i$’s); i.e., they would not be linear combinations of either.}
+
+    After (3), “Modes...can be discarded” rather pre-empts the conclusion (that in fact they can’t, without losing information).  I’d reword this so it doesn’t suggest that they can. \done\\
+
+    \underline{Section II D}
+    
+    It is worth pointing out that the linear compression is not the most general one, since the weights don’t depend on $l$ or $m$.  As Davide found, it can be very effective nonetheless.
+
+    Typo: existance $\rightarrow$ existence. \done\\
+
+    \underline{Section II E}
+    
+    (After equation 12). In TTH we only considered compression for one parameter for the ‘known covariance matrix’ case.  The extension from one to more than one is not as trivial as it appears (for example, we suggested a recipe for this for the KL ‘known mean’ case, and in fact it is often a very poor solution).  The MOPED paper showed that all elements of the Fisher matrix could be reproduced simultaneously, and not just a single element, or just the diagonal elements.  I’d suggest rewording to ‘This compression was first suggested by Tegmark et al. for a single parameter only’.  The non-trivial extension to multiple parameters, where the full Fisher matrix is reproduced with the compressed data, is the MOPED algorithm.’ \done\\
+    
+    \underline{Section III B}
+    
+    In the top panel of Fig. 10, it would be helpful to plot GCM/FCM, so the top plot resembles more the bottom, rather than being flipped. \reply{We made the changes also to Fig. 9, which has a similar plot.}\\
+    
+    \underline{Section IV}
+    
+    I think I mentioned this before, but one way to ensure that C is positive definite is to perturb the matrix log of C.  It’s worth perhaps offering it as an alternative, and giving the argument (I think you had one) for why you don’t do it this way. \done \\
+    
+    \underline{Section V}
+    
+    In ‘The next step was to shrink...’ I don’t think you decompose the shear power spectrum, but rather the data vector.  i.e. you do this at the field level (albeit its spherical harmonic transform).  1-point, rather than 2-point.
+
+    You might also want to mention in connection with Harry Mootoovaloo’s paper, that to speed up the analysis one needs a fast way to make theoretical predictions for the compressed data (you don’t generally want to generate full data sets and do repeated linear compression, since that is slow, and sometimes as slow as analysing the full data).  Harry used Gaussian processes to generate the compressed theory. \reply{We commented on this in Section II E.} \\  \\
+	
+	
+	\textbf{David Alonso, April 4} \\
+
+    I thank the authors for the revised manuscript. The paper reads much better, and its main results and conclusions are much clearer and useful. Just a couple of minor points:
+
+    I may have missed this in the text (in which case I apologize): is Fig. 12 showing the results for one of the 50 realizations of the covariance matrix? Or the mean of the constraints for all of them? \reply{We generate 50 different covariance matrices with the desired error budget, then take the mean covariance out of those. The parameter constraints are performed only for that covariance matrix.}
+    
+    Do you have any intuition why $A_{\mathrm{IA}}$ seems to be more sensitive to covariance errors than any other parameters? I understand why this is the case in the context of KL transforms, but not in general.
+    
+    \pagebreak
+
+    {\Large\textbf{First Reports}}\\
 	
 	\textbf{Alan Heavens, March 22} \\
 	
@@ -23,7 +98,7 @@
 	
 	\underline{Summary}
 	
-	The executive summary is that the compression side tries a few things, and concludes that the best way is to use MOPED.  Since MOPED is known to be optimal and can’t be beaten in terms of the Fisher matrix (subject to some conditions), this shouldn’t be a surprise.  For suggestions of how to present something new here, see details below.
+    The executive summary is that the compression side tries a few things, and concludes that the best way is to use MOPED.  Since MOPED is known to be optimal and can’t be beaten in terms of the Fisher matrix (subject to some conditions), this shouldn’t be a surprise.  For suggestions of how to present something new here, see details below.
 	
 	For the covariance matrix studies, this is an interesting question to tackle.  The concern I have is that it’s not clear how to do this in a systematic way, and I think that a referee will consider it to be too ad hoc to draw general conclusions from.  This needs to be strengthened.  I suggest a small technical improvement to avoid non-positive definite matrices, but I don’t have any good ideas for a more systematic general approach. \\
 	
