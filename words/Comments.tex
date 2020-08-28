@@ -17,7 +17,7 @@
 
 \begin{document}
 
-    {\LARGE\textbf{Review by internal referees}}\\ \\
+    {\LARGE\textbf{Review by internal referees}}\\ \\ \\
 
     {\Large\textbf{Second Reports}}\\
     
@@ -55,7 +55,7 @@
 
     \underline{Section II D}
     
-    It is worth pointing out that the linear compression is not the most general one, since the weights don’t depend on $l$ or $m$.  As Davide found, it can be very effective nonetheless.
+    It is worth pointing out that the linear compression is not the most general one, since the weights don’t depend on $l$ or $m$.  As Davide found, it can be very effective nonetheless. \done
 
     Typo: existance $\rightarrow$ existence. \done\\
 
@@ -73,7 +73,7 @@
     
     \underline{Section V}
     
-    In ‘The next step was to shrink...’ I don’t think you decompose the shear power spectrum, but rather the data vector.  i.e. you do this at the field level (albeit its spherical harmonic transform).  1-point, rather than 2-point.
+    In ‘The next step was to shrink...’ I don’t think you decompose the shear power spectrum, but rather the data vector.  i.e. you do this at the field level (albeit its spherical harmonic transform).  1-point, rather than 2-point. \done
 
     You might also want to mention in connection with Harry Mootoovaloo’s paper, that to speed up the analysis one needs a fast way to make theoretical predictions for the compressed data (you don’t generally want to generate full data sets and do repeated linear compression, since that is slow, and sometimes as slow as analysing the full data).  Harry used Gaussian processes to generate the compressed theory. \reply{We commented on this in Section II E.} \\  \\
 	
@@ -81,10 +81,22 @@
 	\textbf{David Alonso, April 4} \\
 
     I thank the authors for the revised manuscript. The paper reads much better, and its main results and conclusions are much clearer and useful. Just a couple of minor points:
+    \begin{itemize}
+        \item I may have missed this in the text (in which case I apologize): is Fig. 12 showing the results for one of the 50 realizations of the covariance matrix? Or the mean of the constraints for all of them? \reply{We generate 50 different covariance matrices with the desired error budget, then take the mean covariance out of those. The parameter constraints are performed only for that covariance matrix.}
+        \item Do you have any intuition why $A_{\mathrm{IA}}$ seems to be more sensitive to covariance errors than any other parameters? I understand why this is the case in the context of KL transforms, but not in general. \\  \\
+    \end{itemize}
+	
+	
+	\textbf{Jonathan Blazek, August 16} \\
 
-    I may have missed this in the text (in which case I apologize): is Fig. 12 showing the results for one of the 50 realizations of the covariance matrix? Or the mean of the constraints for all of them? \reply{We generate 50 different covariance matrices with the desired error budget, then take the mean covariance out of those. The parameter constraints are performed only for that covariance matrix.}
-    
-    Do you have any intuition why $A_{\mathrm{IA}}$ seems to be more sensitive to covariance errors than any other parameters? I understand why this is the case in the context of KL transforms, but not in general.
+    My apologies to the authors for this delayed review. I thank the authors for their work in addressing my first round of comments, and I agree with the other reviewers that the paper has been significantly improved. I don't have much to add to the other comments, but here are a few things: 
+    \begin{itemize}
+        \item Related to David's question, it would be great if a bit more insight could be provided into why the $A_{\mathrm{IA}}$ parameter is so sensitive. I suspect this is related to the fact that the covariance has no IA contribution, but I'm not sure how to best test this. In any event, it must be the case that the sensitivity to noise in the elements/eigenvectors is related to the sensitivity to low S/N modes - perhaps there is a simple mathematical way to make this connection.
+        \item line 12: “ways of compression” $\rightarrow$ “compression methods”. \done
+        \item line 539: loss of 200\% of constraining power. This wording is confusing. \reply{We meant that the $2 \sigma$ intervals increased by about $200\%$.}
+        \item Sec IV: (Related to one of Alan's points above) It's not entirely clear (to me) why this method of perturbing the compressed cov matrix is a realistic test of how errors would arise in actual applications. Could this be motivated a bit more? \reply{We believe it may be more applicable when dealing with the compressed covariance matrices themselves. There have been various works where they are used, and people are more and more motivated to finding ways to speed up the compression (like the Gaussian Processes in Mootoovaloo's paper). In that sense, our work shows how well you can constrain the cosmological parameters with a compressed covariance that is different from what it would be, if one were to use the full analysis for finding the fiducial values.}
+    \end{itemize}
+
     
     \pagebreak
 
@@ -220,6 +232,6 @@
 	\item \textbf{L592} The sudden degradation in constraining power when going from $25\%$ to $30\%$ errors is surprising (to me, at least) and an interesting result. Are you able to explain what is going on? \reply{The results shown in the paper had been for only one realization of the perturbed covariance matrix. We redid the analysis for 50 of those, and the results are now different -- the previous results were likely due to statistical fluctuations.}
 	\item \textbf{L595}: What is happening with the eigenvalue noise? Are there interesting lessons from this result? \reply{Introducing noise to the eigenvalues was done in an attempt to ensure positive definiteness of the covariance matrix. The constraints obtained are similar to those obtained when the perturbation is applied to the elements themselves. The interesting lesson is what happens to the $A_{\mathrm{IA}.}$: even though the error in the final elements is small, the constraining power is largely lost for this parameter.}
 
-\end{itemize.}
+\end{itemize}
 
 \end{document}
