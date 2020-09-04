@@ -75,7 +75,7 @@
     
     In ‘The next step was to shrink...’ I don’t think you decompose the shear power spectrum, but rather the data vector.  i.e. you do this at the field level (albeit its spherical harmonic transform).  1-point, rather than 2-point. \done
 
-    You might also want to mention in connection with Harry Mootoovaloo’s paper, that to speed up the analysis one needs a fast way to make theoretical predictions for the compressed data (you don’t generally want to generate full data sets and do repeated linear compression, since that is slow, and sometimes as slow as analysing the full data).  Harry used Gaussian processes to generate the compressed theory. \reply{We commented on this in Section II E.} \\  \\
+    You might also want to mention in connection with Harry Mootoovaloo’s paper, that to speed up the analysis one needs a fast way to make theoretical predictions for the compressed data (you don’t generally want to generate full data sets and do repeated linear compression, since that is slow, and sometimes as slow as analysing the full data).  Harry used Gaussian processes to generate the compressed theory. \done \\  \\
 	
 	
 	\textbf{David Alonso, April 4} \\
@@ -94,7 +94,7 @@
         \item Related to David's question, it would be great if a bit more insight could be provided into why the $A_{\mathrm{IA}}$ parameter is so sensitive. I suspect this is related to the fact that the covariance has no IA contribution, but I'm not sure how to best test this. In any event, it must be the case that the sensitivity to noise in the elements/eigenvectors is related to the sensitivity to low S/N modes - perhaps there is a simple mathematical way to make this connection.
         \item line 12: “ways of compression” $\rightarrow$ “compression methods”. \done
         \item line 539: loss of 200\% of constraining power. This wording is confusing. \reply{We meant that the $2 \sigma$ intervals increased by about $200\%$.}
-        \item Sec IV: (Related to one of Alan's points above) It's not entirely clear (to me) why this method of perturbing the compressed cov matrix is a realistic test of how errors would arise in actual applications. Could this be motivated a bit more? \reply{We believe it may be more applicable when dealing with the compressed covariance matrices themselves. There have been various works where they are used, and people are more and more motivated to finding ways to speed up the compression (like the Gaussian Processes in Mootoovaloo's paper). In that sense, our work shows how well you can constrain the cosmological parameters with a compressed covariance that is different from what it would be, if one were to use the full analysis for finding the fiducial values.}
+        \item Sec IV: (Related to one of Alan's points above) It's not entirely clear (to me) why this method of perturbing the compressed cov matrix is a realistic test of how errors would arise in actual applications. Could this be motivated a bit more?
     \end{itemize}
 
     
