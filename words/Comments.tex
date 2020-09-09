@@ -83,7 +83,7 @@
     I thank the authors for the revised manuscript. The paper reads much better, and its main results and conclusions are much clearer and useful. Just a couple of minor points:
     \begin{itemize}
         \item I may have missed this in the text (in which case I apologize): is Fig. 12 showing the results for one of the 50 realizations of the covariance matrix? Or the mean of the constraints for all of them? \reply{We generate 50 different covariance matrices with the desired error budget, then take the mean covariance out of those. The parameter constraints are performed only for that covariance matrix.}
-        \item Do you have any intuition why $A_{\mathrm{IA}}$ seems to be more sensitive to covariance errors than any other parameters? I understand why this is the case in the context of KL transforms, but not in general. \\  \\
+        \item Do you have any intuition why $A_{\mathrm{IA}}$ seems to be more sensitive to covariance errors than any other parameters? I understand why this is the case in the context of KL transforms, but not in general. \reply{We know that the $A_{\mathrm{IA}}$ is not well constrained by the data (even with the full covariance matrix), this just worsens when we introduce noise to the compressed covariance matrix. We corrected Figure 12, since it was actually showing the $4\sigma$ interval. We find that, while the loss of constraining power for this parameter is more exacerbated than the others, it is not as bad as we originally thought. The increase is only of about $30\%$ (although most are lower than that), an improvement when compared to what was previously reported.}\\  \\
     \end{itemize}
 	
 	
@@ -91,10 +91,10 @@
 
     My apologies to the authors for this delayed review. I thank the authors for their work in addressing my first round of comments, and I agree with the other reviewers that the paper has been significantly improved. I don't have much to add to the other comments, but here are a few things: 
     \begin{itemize}
-        \item Related to David's question, it would be great if a bit more insight could be provided into why the $A_{\mathrm{IA}}$ parameter is so sensitive. I suspect this is related to the fact that the covariance has no IA contribution, but I'm not sure how to best test this. In any event, it must be the case that the sensitivity to noise in the elements/eigenvectors is related to the sensitivity to low S/N modes - perhaps there is a simple mathematical way to make this connection.
+        \item Related to David's question, it would be great if a bit more insight could be provided into why the $A_{\mathrm{IA}}$ parameter is so sensitive. I suspect this is related to the fact that the covariance has no IA contribution, but I'm not sure how to best test this. In any event, it must be the case that the sensitivity to noise in the elements/eigenvectors is related to the sensitivity to low S/N modes - perhaps there is a simple mathematical way to make this connection. \reply{We discuss this in our reply to David's question. We politely ask to refer to that.}
         \item line 12: “ways of compression” $\rightarrow$ “compression methods”. \done
         \item line 539: loss of 200\% of constraining power. This wording is confusing. \reply{We meant that the $2 \sigma$ intervals increased by about $200\%$.}
-        \item Sec IV: (Related to one of Alan's points above) It's not entirely clear (to me) why this method of perturbing the compressed cov matrix is a realistic test of how errors would arise in actual applications. Could this be motivated a bit more?
+        \item Sec IV: (Related to one of Alan's points above) It's not entirely clear (to me) why this method of perturbing the compressed cov matrix is a realistic test of how errors would arise in actual applications. Could this be motivated a bit more? \reply{The perturbations were introduced as a way to imitate the noise from simulations. In that sense, the tolerance tells us how the amount of noise affects the parameter constraints.}
     \end{itemize}
 
     
