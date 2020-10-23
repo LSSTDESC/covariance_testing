@@ -16,91 +16,188 @@
 
 
 \begin{document}
-
-    {\LARGE\textbf{Review by internal referees}}\\ \\ \\
-
-    {\Large\textbf{Second Reports}}\\
-    
-    \textbf{Alan Heavens, August 4}\\
-
-    With apologies for the delay in getting comments to you, here goes.  This draft is much improved over the first one, and the focus is clearer.  I think in particular the comparison between the field-level (KL-like) compression and summary-stats level (MOPED) is interesting.  The field-level is not the most general one, but if I understood correctly, is Davide’s elegant weighting of tomographic fields.  I am still not convinced of the motivation for the large eigenvalue/small S/N compressions, and I guess the results rather bear that out, but I don’t see much harm in testing some ‘straw person’ cases.  It is possible that a referee will take a different view.\\
- 
-    \underline{Abstract}
-    
-    The covariance matrix is a four-point function only if the statistics are two-point functions. \done
-
-    It wasn’t immediately clear to me how compression helps identify the significant parts of the covariance matrix.  Does this use the magnitude of the elements in the matrix which translates the original covariance matrix to the compressed one?  This would make sense. \reply{Exactly.}
-
-    In the last line, would ‘inaccuracies’ be more suitable than ‘changes’? \done\\
-
-    \underline{Introduction}
-    
-    In the first paragraph, the analysis only requires a covariance matrix if the likelihood is assumed to be gaussian.  This is a big assumption (and not necessarily always good).  A bit more explanation is needed here. \reply{We reworded this to reflect the more general case.}
-
-    MOPED is not ‘truly’ lossless, but only in the restricted sense that the Fisher matrix of the compressed data is the same as for the full dataset, if certain conditions are met.  For a given data set, this usually makes the likelihood surface near the peak almost identical, and in practice the similarity often extends right into the wings of the distribution, as you find here in Fig. 8. \reply{Fixed this.}
-
-    In the list of applications, can you add Mootoovaloo et al. (\href{https://arxiv.org/pdf/2005.06551.pdf}{arXiv:2005.06551}) for an application to weak lensing?  It is the one I mentioned was coming, in my earlier report. \done\\
-
-    \underline{Section II B}
-    
-    Louca and Sellentin (\href{https://arxiv.org/pdf/2007.07253.pdf}{arXiv:2007.07253}) actually argue for removing the highest S/N modes (to reduce biases).  This is worth referring to. \reply{We did a similar analysis removing the 200 modes with highest SNR and found similar results. We chose not to display those here so as not to produce plots with confusing information. We point out, however, that this might have been different if we had not removed such a large number of modes. We added a paragraph referring to this.}
-
-    “almost 200\%” $\rightarrow$ “the errors of almost 200\%”. \done\\
-
-    \underline{Section II C}
-    
-    The sentence saying that the eigenvalues would be the data points themselves doesn’t make sense to me.  Do you mean they would be the diagonal elements themselves? \reply{We mean that the eigenvectors would simply be the $T_i$s (or on the data the $D_i$’s); i.e., they would not be linear combinations of either.}
-
-    After (3), “Modes...can be discarded” rather pre-empts the conclusion (that in fact they can’t, without losing information).  I’d reword this so it doesn’t suggest that they can. \done\\
-
-    \underline{Section II D}
-    
-    It is worth pointing out that the linear compression is not the most general one, since the weights don’t depend on $l$ or $m$.  As Davide found, it can be very effective nonetheless. \done
-
-    Typo: existance $\rightarrow$ existence. \done\\
-
-    \underline{Section II E}
-    
-    (After equation 12). In TTH we only considered compression for one parameter for the ‘known covariance matrix’ case.  The extension from one to more than one is not as trivial as it appears (for example, we suggested a recipe for this for the KL ‘known mean’ case, and in fact it is often a very poor solution).  The MOPED paper showed that all elements of the Fisher matrix could be reproduced simultaneously, and not just a single element, or just the diagonal elements.  I’d suggest rewording to ‘This compression was first suggested by Tegmark et al. for a single parameter only’.  The non-trivial extension to multiple parameters, where the full Fisher matrix is reproduced with the compressed data, is the MOPED algorithm.’ \done\\
-    
-    \underline{Section III B}
-    
-    In the top panel of Fig. 10, it would be helpful to plot GCM/FCM, so the top plot resembles more the bottom, rather than being flipped. \reply{We made the changes also to Fig. 9, which has a similar plot.}\\
-    
-    \underline{Section IV}
-    
-    I think I mentioned this before, but one way to ensure that C is positive definite is to perturb the matrix log of C.  It’s worth perhaps offering it as an alternative, and giving the argument (I think you had one) for why you don’t do it this way. \done \\
-    
-    \underline{Section V}
-    
-    In ‘The next step was to shrink...’ I don’t think you decompose the shear power spectrum, but rather the data vector.  i.e. you do this at the field level (albeit its spherical harmonic transform).  1-point, rather than 2-point. \done
-
-    You might also want to mention in connection with Harry Mootoovaloo’s paper, that to speed up the analysis one needs a fast way to make theoretical predictions for the compressed data (you don’t generally want to generate full data sets and do repeated linear compression, since that is slow, and sometimes as slow as analysing the full data).  Harry used Gaussian processes to generate the compressed theory. \done \\  \\
+	
+	{\Large\textbf{Notes from Pub Board}}\\
+	
+	Some of the writing in the abstract/introduction should be polished up, there are grammatical issues throughout and it could do with another pass. For example: “How best to check these crucial ingredients” in the abstract reads poorly, the data vector increasing should be the length of the data vector increasing, and discussion of the length of the tomographic bins should be referring to a data vector rather than a bin. Tidying the language would improve the overall impact of the paper. This is in general true throughout the paper but particularly so in the introduction.
+	
+	I have added more specific comments below, please do let me know if you have any questions or concerns about these. We would like to ask to see an updated draft for a final quick check before submission/posting.\\
+	
+	\underline{Specific comments:}
+	
+	\begin{itemize}
+		
+		\item “the data vector has 227 elements, varying with angular separation, and different pairs of tomographic redshift bins” \\
+		– I would maybe remove the second comma to make it clear that this is 227 total (e.g. varying both with angular separation and with pairs of tomographic redshift bins). \done
+		
+		\item “Apart from MOPED, we will also be analysing the covariance matrix with three other compression methods: the first involves discarding the modes associated with the lowest eigenvalues.” \\ 
+		– presumably first involves performing an eigenmode decomposition and then discarding... \done
+		
+		\item “The chosen covariance matrix has a dimension of $190\times190$, and so, for one eigenmode, we can compress it to 10\% of its original size, yielding 190 independent elements.” \\ 
+		– just to be clear, you’re compressing at the map level and then retaining only the eigenmode with the largest eigenvalue? \reply{Changed to KL mode.}
+		
+		\item “We thus begin with 200 data points for each $\xi_+(\theta)$ and $\xi_-(\theta)$” \\ 
+		– this confuses me because it seems like you have 200 data points for each theta point, when you really mean you have 200 theta points. Perhaps you could say “200 data points for each statistic”. \done
+		
+		\item Line 140: “The 68\% CL constraints are as follows:” \\ 
+		– you have 16 free parameters but have stated the results of three. Perhaps say why these values are chosen as your metric for comparison and if you’re marginalizing over the other parameters or say that these are a selection of the parameters. A full set of constraints in a table might be preferable if you are constraining everything. \reply{We added a paragraph explaining why we're only showing these three parameters.}
+		
+		
+		\item “We first diagonalise the covariance matrix in order to calculate its eigenvalues and sort them in decreasing order. Since the highest eigenvalues are said to be most informative [24], we want to remove the lowest ones. To do that, we replace the lowest eigenvalues with lower values (nine orders of magnitude lower), thus removing their effective contribution; we then transform back to the original basis and perform a cosmological analysis with the new covariance matrix, to constrain the parameters of our model.” \\ 
+		– why are you reducing it by a factor of $10^9$, rather than setting it to zero? Once you’ve transformed back into the original basis are you hitting issues with inversion of the matrix? \reply{Setting the eigenvalues to zero results in a semi-positive definite matrix, which is what we want to avoid.} \\
+		More generally, what does it even mean to have a low eigenvalue in this context? Surely the covariance depends on the amplitude of the signal which means a high signal could give a high covariance which doesn’t tell you where the constraining power is. It would be good to have a statement about this. \reply{We added more information on this. The lowest eigenvalues are usually characterising numerical noise.}
+		
+		\item Paragraph starting 162: “ constraints are significantly broader for the two parameters shown.” \\ 
+		– you haven’t introduced the figure yet and need to specify where they are shown. In fact figure 3 shows 3 parameters. \done \\ 
+		– I also don’t get the discussion about consistency with removing a specific percentage of the data (given that you’re really showing the importance of specific eigenmodes). Are you trying to say that this is consistent with the idea that removing data weakens constraints? While removing data from the covariance matrix weakens the information on the covariance matrix itself, it’s not clear to me that this should necessarily make the constraints broader in all cases. Am I missing something here? \reply{Precisely, we meant that removing those modes meant removing information from the covariance matrix, which would imply larger constraints.}\\ 
+		– “Inconsistent with the notion that they are irrelevant”. Please state what they is. Do you mean the modes with low eigenvalues? \reply{We meant the modes with low eigenvalues.} \\
+		- “this shows another method is called for.” Does this show that? It could simply show that you are not retaining enough of the modes and compressing too far. It is only true that this shows lack of validity in the method in the case that you need to retain exactly 10\% of the data, which seems somewhat arbitrary. \reply{We updated the text stating this.}
+		
+		\item “If C were diagonal, then the eigenvectors would simply be the $T_i$s themselves,” \\ 
+		– do you mean a function of the $T_i$s? \reply{No, we mean the $T_i$s themselves, or the $D_i$s for the data vector.}
+		
+		\item “This analysis was also applied to the 200 modes with the highest SNR, and yielded similar results” \\ 
+		– which analysis? Removing the modes or characterising their dependence on parameters? Why would you expect this to produce similar results, when surely removing the modes with the highest signal to noise should give significantly worse constraints and their dependence on parameters should be different. \reply{We rewrote the paragraph to describe the analysis mentioned. We find that the constraining power is weakened for all three parameters.}
+		
+		
+		\item “The left plot in Figure 4 shows the diagonal elements of the signal part and the noise part of the spectrum. The right-hand panel shows the spectrum of the modes with the largest signal to noise” \\ 
+		– is the right hand plot showing the spectrum or the S/N ratio? the figure axis says S/N as does the caption . \reply{Changed the text to S/N for the right hand plot.}
+		
+		\item Line 255: \\ 
+		– what does the “$i$” refer to in the superscript of $\kappa$? If the bins, then perhaps say 4 tomographic bins “$I$” \reply{It refers to the bins, we made it clearer in the text.}
+		
+		\item Figure 4: according to the text the left hand plot shows the tomographic bins and the right hand plot shows the KL modes, but they’re labelled in the same way. Is this correct? This should also be detailed in the figure captions. \reply{We labelled it differently.}
+		
+		\item Line 273: what does $j$ refer to? If this is the cross-spectrum between bins $I$ and $j$ this should be specified here. \reply{Yes, it refers to the cross-spectrum, we made it clearer in the text.}
+		
+		\item Line 284: You have not introduced the concept of $E$ before this point. I was entirely unclear that this symbol refers to the KL eigenmode until it was described on the next page. \done
+		
+		\item Figure 5: \\ 
+		– what exactly are the “row vectors of R”? Can you specify that this is $E/N$ if this is the case? \reply{It is now specified it in the caption}
+		
+		\item Line 313 vs e.g. 305: Inconsistent use of eta vs eta(theta) throughout the paper. \reply{We believe the reviewer meant $\xi$, and have corrected for that.}
+		\item Line 294: \\ 
+		– so the power spectrum of the new observable $D_\ell$. This makes it sound like the new observable is $D_\ell$ not $b_{lm}$. \done
+		
+		\item “We should point out that these KL-modes are uncorrelated, so the power spectrum of the new observable $D_\ell$ is a diagonal matrix, with 1+SNR of the corresponding eigenmodes on the diagonal elements. Since the KL decomposed modes of shear power spectrum are uncorrelated, we can make a compression here by taking only the first one or two modes with the highest SNR. By doing so, we compress ten tomographic bin-pairs to one or two” \\ 
+		– Can I assume here that you are actually computing $D^{ab}_\ell$ for the correlation between mode $a$ and $b$ of this decomposition and it is in this space that you mean this is a diagonal matrix? This treatment of different modes of the decomposition hasn’t been made clear in the notation or text to me if so. I think this refers back to the “$p$” values so perhaps the notation $D^{p p’}_\ell$ would make this clearer exactly what the superscripts in Figure 4 and the discussion here is referring to. \reply{This is true, we changed to $D^{pp'}_{\ell}$}
+		
+		\item Figure 5: You discussed previously that it’s important to use the 1st mode, the 2nd mode and the cross-correlation of the 1st and 2nd mode. Why is that cross-correlation not shown here in favour of the 3rd mode? \reply{We believed it would be more informative to show that, for each mode, the curves follow roughly the same tendency, independent of $\ell$.} %\reply{We added on Line 334: ``We do not include the third and fourth KL mode because they barely contain any signal to noise ratio."}
+		
+		\item Line 322: is $E$ normalised or not, and are you plotting $E$ or $E/N$? \\ 
+		– Also it may be better to say “increasing opacity” rather than “increasing darkness” of the colour. \done
+		
+		\item Line 338: likelihood analysis \\ 
+		– suggest “as detailed in section A” as it’s been a while and the reader might need referring back. \done
+		
+		\item Line 358:\\
+		- rather than saying “the compression here ...” I would strongly advise saying “the MOPED compression scheme ...” \done
+		
+		\item Line 389:
+		“We have apparently captured from the initial set of $(227 \times 228)/2 = 25, 878$ independent elements of the covariance matrix a small subset (only 136) of linear combinations of these 26k elements that really matter. If two covariance matrices give the same set of $C_{\alpha \beta}$, it should not matter whether any of the other thousands of elements differ from one another.” \\ 
+		– This is a very strong statement. Isn’t it more true that it should not matter in estimating the Fisher matrix, but it can still make a difference to the likelihood contours? \reply{This statement is true. We are able to reproduce different covariance matrices from the same C (by tweaking the compression scheme to make it invertible) and they all give similar constraints.}
+		
+		\item Perhaps even more importantly, there are much fewer points on this plot, meaning that MOPED reduces the number of elements that need to be compared \\ 
+		– this is true by design however? Is this not a statement of methods rather than a result? \reply{It's a statement, we changed it slight to reflect that.}
+		
+		\item Line 489: \\ 
+		– may be worthwhile to add here if $\delta$ is a single number for all elements, or if it is computed elementwise. \done
+		
+		\item Eq. 14:
+		where is the $\alpha$, $\beta$ in the RHS of the equation? \reply{We removed the subscript.}
+		
+		\item Line 604:
+		“since the Fisher matrix is identical for both the original and compressed ones, the compression scheme is lossless." \\
+		– it came up in the previous referee reports that this is not technically true. (see Alan Heaven’s second referee report) \reply{We removed this sentence.}
+	\end{itemize}
+	
+	
+	\pagebreak
+	
+	{\LARGE\textbf{Review by internal referees}}\\ \\ \\
+	
+	{\Large\textbf{Second Reports}}\\
+	
+	\textbf{Alan Heavens, August 4}\\
+	
+	With apologies for the delay in getting comments to you, here goes.  This draft is much improved over the first one, and the focus is clearer.  I think in particular the comparison between the field-level (KL-like) compression and summary-stats level (MOPED) is interesting.  The field-level is not the most general one, but if I understood correctly, is Davide’s elegant weighting of tomographic fields.  I am still not convinced of the motivation for the large eigenvalue/small S/N compressions, and I guess the results rather bear that out, but I don’t see much harm in testing some ‘straw person’ cases.  It is possible that a referee will take a different view.\\
+	
+	\underline{Abstract}
+	
+	The covariance matrix is a four-point function only if the statistics are two-point functions. \done
+	
+	It wasn’t immediately clear to me how compression helps identify the significant parts of the covariance matrix.  Does this use the magnitude of the elements in the matrix which translates the original covariance matrix to the compressed one?  This would make sense. \reply{Exactly.}
+	
+	In the last line, would ‘inaccuracies’ be more suitable than ‘changes’? \done\\
+	
+	\underline{Introduction}
+	
+	In the first paragraph, the analysis only requires a covariance matrix if the likelihood is assumed to be gaussian.  This is a big assumption (and not necessarily always good).  A bit more explanation is needed here. \reply{We reworded this to reflect the more general case.}
+	
+	MOPED is not ‘truly’ lossless, but only in the restricted sense that the Fisher matrix of the compressed data is the same as for the full dataset, if certain conditions are met.  For a given data set, this usually makes the likelihood surface near the peak almost identical, and in practice the similarity often extends right into the wings of the distribution, as you find here in Fig. 8. \reply{Fixed this.}
+	
+	In the list of applications, can you add Mootoovaloo et al. (\href{https://arxiv.org/pdf/2005.06551.pdf}{arXiv:2005.06551}) for an application to weak lensing?  It is the one I mentioned was coming, in my earlier report. \done\\
+	
+	\underline{Section II B}
+	
+	Louca and Sellentin (\href{https://arxiv.org/pdf/2007.07253.pdf}{arXiv:2007.07253}) actually argue for removing the highest S/N modes (to reduce biases).  This is worth referring to. \reply{We did a similar analysis removing the 200 modes with highest SNR and found similar results. We chose not to display those here so as not to produce plots with confusing information. We point out, however, that this might have been different if we had not removed such a large number of modes. We added a paragraph referring to this.}
+	
+	“almost 200\%” $\rightarrow$ “the errors of almost 200\%”. \done\\
+	
+	\underline{Section II C}
+	
+	The sentence saying that the eigenvalues would be the data points themselves doesn’t make sense to me.  Do you mean they would be the diagonal elements themselves? \reply{We mean that the eigenvectors would simply be the $T_i$s (or on the data the $D_i$’s); i.e., they would not be linear combinations of either.}
+	
+	After (3), “Modes...can be discarded” rather pre-empts the conclusion (that in fact they can’t, without losing information).  I’d reword this so it doesn’t suggest that they can. \done\\
+	
+	\underline{Section II D}
+	
+	It is worth pointing out that the linear compression is not the most general one, since the weights don’t depend on $l$ or $m$.  As Davide found, it can be very effective nonetheless. \done
+	
+	Typo: existance $\rightarrow$ existence. \done\\
+	
+	\underline{Section II E}
+	
+	(After equation 12). In TTH we only considered compression for one parameter for the ‘known covariance matrix’ case.  The extension from one to more than one is not as trivial as it appears (for example, we suggested a recipe for this for the KL ‘known mean’ case, and in fact it is often a very poor solution).  The MOPED paper showed that all elements of the Fisher matrix could be reproduced simultaneously, and not just a single element, or just the diagonal elements.  I’d suggest rewording to ‘This compression was first suggested by Tegmark et al. for a single parameter only’.  The non-trivial extension to multiple parameters, where the full Fisher matrix is reproduced with the compressed data, is the MOPED algorithm.’ \done\\
+	
+	\underline{Section III B}
+	
+	In the top panel of Fig. 10, it would be helpful to plot GCM/FCM, so the top plot resembles more the bottom, rather than being flipped. \reply{We made the changes also to Fig. 9, which has a similar plot.}\\
+	
+	\underline{Section IV}
+	
+	I think I mentioned this before, but one way to ensure that C is positive definite is to perturb the matrix log of C.  It’s worth perhaps offering it as an alternative, and giving the argument (I think you had one) for why you don’t do it this way. \done \\
+	
+	\underline{Section V}
+	
+	In ‘The next step was to shrink...’ I don’t think you decompose the shear power spectrum, but rather the data vector.  i.e. you do this at the field level (albeit its spherical harmonic transform).  1-point, rather than 2-point. \done
+	
+	You might also want to mention in connection with Harry Mootoovaloo’s paper, that to speed up the analysis one needs a fast way to make theoretical predictions for the compressed data (you don’t generally want to generate full data sets and do repeated linear compression, since that is slow, and sometimes as slow as analysing the full data).  Harry used Gaussian processes to generate the compressed theory. \done \\  \\
 	
 	
 	\textbf{David Alonso, April 4} \\
-
-    I thank the authors for the revised manuscript. The paper reads much better, and its main results and conclusions are much clearer and useful. Just a couple of minor points:
-    \begin{itemize}
-        \item I may have missed this in the text (in which case I apologize): is Fig. 12 showing the results for one of the 50 realizations of the covariance matrix? Or the mean of the constraints for all of them? \reply{We generate 50 different covariance matrices with the desired error budget, then take the mean covariance out of those. The parameter constraints are performed only for that covariance matrix.}
-        \item Do you have any intuition why $A_{\mathrm{IA}}$ seems to be more sensitive to covariance errors than any other parameters? I understand why this is the case in the context of KL transforms, but not in general. \reply{We know that the $A_{\mathrm{IA}}$ is not well constrained by the data (even with the full covariance matrix), this just worsens when we introduce noise to the compressed covariance matrix. We corrected Figure 12, since it was actually showing the $4\sigma$ interval. We find that, while the loss of constraining power for this parameter is more exacerbated than the others, it is not as bad as we originally thought. The increase is only of about $30\%$ (although most are lower than that), an improvement when compared to what was previously reported.}\\  \\
-    \end{itemize}
+	
+	I thank the authors for the revised manuscript. The paper reads much better, and its main results and conclusions are much clearer and useful. Just a couple of minor points:
+	\begin{itemize}
+		\item I may have missed this in the text (in which case I apologize): is Fig. 12 showing the results for one of the 50 realizations of the covariance matrix? Or the mean of the constraints for all of them? \reply{We generate 50 different covariance matrices with the desired error budget, then take the mean covariance out of those. The parameter constraints are performed only for that covariance matrix.}
+		\item Do you have any intuition why $A_{\mathrm{IA}}$ seems to be more sensitive to covariance errors than any other parameters? I understand why this is the case in the context of KL transforms, but not in general. \reply{We know that the $A_{\mathrm{IA}}$ is not well constrained by the data (even with the full covariance matrix), this just worsens when we introduce noise to the compressed covariance matrix. We corrected Figure 12, since it was actually showing the $4\sigma$ interval. We find that, while the loss of constraining power for this parameter is more exacerbated than the others, it is not as bad as we originally thought. The increase is only of about $30\%$ (although most are lower than that), an improvement when compared to what was previously reported.}\\  \\
+	\end{itemize}
 	
 	
 	\textbf{Jonathan Blazek, August 16} \\
-
-    My apologies to the authors for this delayed review. I thank the authors for their work in addressing my first round of comments, and I agree with the other reviewers that the paper has been significantly improved. I don't have much to add to the other comments, but here are a few things: 
-    \begin{itemize}
-        \item Related to David's question, it would be great if a bit more insight could be provided into why the $A_{\mathrm{IA}}$ parameter is so sensitive. I suspect this is related to the fact that the covariance has no IA contribution, but I'm not sure how to best test this. In any event, it must be the case that the sensitivity to noise in the elements/eigenvectors is related to the sensitivity to low S/N modes - perhaps there is a simple mathematical way to make this connection. \reply{We discuss this in our reply to David's question. We politely ask to refer to that.}
-        \item line 12: “ways of compression” $\rightarrow$ “compression methods”. \done
-        \item line 539: loss of 200\% of constraining power. This wording is confusing. \reply{We meant that the $2 \sigma$ intervals increased by about $200\%$.}
-        \item Sec IV: (Related to one of Alan's points above) It's not entirely clear (to me) why this method of perturbing the compressed cov matrix is a realistic test of how errors would arise in actual applications. Could this be motivated a bit more? \reply{The perturbations were introduced as a way to imitate the noise from simulations. In that sense, the tolerance tells us how the amount of noise affects the parameter constraints.}
-    \end{itemize}
-
-    
-    \pagebreak
-
-    {\Large\textbf{First Reports}}\\
+	
+	My apologies to the authors for this delayed review. I thank the authors for their work in addressing my first round of comments, and I agree with the other reviewers that the paper has been significantly improved. I don't have much to add to the other comments, but here are a few things: 
+	\begin{itemize}
+		\item Related to David's question, it would be great if a bit more insight could be provided into why the $A_{\mathrm{IA}}$ parameter is so sensitive. I suspect this is related to the fact that the covariance has no IA contribution, but I'm not sure how to best test this. In any event, it must be the case that the sensitivity to noise in the elements/eigenvectors is related to the sensitivity to low S/N modes - perhaps there is a simple mathematical way to make this connection. \reply{We discuss this in our reply to David's question. We politely ask to refer to that.}
+		\item line 12: “ways of compression” $\rightarrow$ “compression methods”. \done
+		\item line 539: loss of 200\% of constraining power. This wording is confusing. \reply{We meant that the $2 \sigma$ intervals increased by about $200\%$.}
+		\item Sec IV: (Related to one of Alan's points above) It's not entirely clear (to me) why this method of perturbing the compressed cov matrix is a realistic test of how errors would arise in actual applications. Could this be motivated a bit more? \reply{The perturbations were introduced as a way to imitate the noise from simulations. In that sense, the tolerance tells us how the amount of noise affects the parameter constraints.}
+	\end{itemize}
+	
+	
+	\pagebreak
+	
+	{\Large\textbf{First Reports}}\\
 	
 	\textbf{Alan Heavens, March 22} \\
 	
@@ -110,7 +207,7 @@
 	
 	\underline{Summary}
 	
-    The executive summary is that the compression side tries a few things, and concludes that the best way is to use MOPED.  Since MOPED is known to be optimal and can’t be beaten in terms of the Fisher matrix (subject to some conditions), this shouldn’t be a surprise.  For suggestions of how to present something new here, see details below.
+	The executive summary is that the compression side tries a few things, and concludes that the best way is to use MOPED.  Since MOPED is known to be optimal and can’t be beaten in terms of the Fisher matrix (subject to some conditions), this shouldn’t be a surprise.  For suggestions of how to present something new here, see details below.
 	
 	For the covariance matrix studies, this is an interesting question to tackle.  The concern I have is that it’s not clear how to do this in a systematic way, and I think that a referee will consider it to be too ad hoc to draw general conclusions from.  This needs to be strengthened.  I suggest a small technical improvement to avoid non-positive definite matrices, but I don’t have any good ideas for a more systematic general approach. \\
 	
@@ -126,9 +223,9 @@
 	
 	A suggestion for the covariance matrix study, to ensure that the perturbed matrix is positive definite, is to take the matrix log of the fiducial covariance matrix, and then to modify the elements of the log matrix in some way (how to do this systematically, I’m not sure).  Taking the matrix exponential will then give a positive-definite matrix for sure. It’s still a bit ad hoc, but avoids that particular problem. 
 	\reply{One of the issues here is how to introduce an error to the log matrix that would be similar to what we expect to see in the original matrix. A naive assumption would be that 
-	$$C^{new}_{\alpha \beta} = (1 + \delta)C^{old}_{\alpha \beta}$$
-	$$\rightarrow log \left( C^{new}_{\alpha \beta}\right) = log(1 + \delta) + log \left( C^{old}_{\alpha \beta} \right)\ .$$ We know this to be wrong, since obtaining the matrix logarithm is not as simple as that, so this approach would be incorrect. Also, applying error to the elements of the log matrix (like a $10\%$ error) produces a covariance matrix with elements several orders of magnitude larger than the original one. This would work if we diagonalised the matrix and applied the transformation to the $log$ of its eigenvalues, but since we already have a section for modifying the eigenvalues, we fear this would be repetitive.}\\
-
+		$$C^{new}_{\alpha \beta} = (1 + \delta)C^{old}_{\alpha \beta}$$
+		$$\rightarrow log \left( C^{new}_{\alpha \beta}\right) = log(1 + \delta) + log \left( C^{old}_{\alpha \beta} \right)\ .$$ We know this to be wrong, since obtaining the matrix logarithm is not as simple as that, so this approach would be incorrect. Also, applying error to the elements of the log matrix (like a $10\%$ error) produces a covariance matrix with elements several orders of magnitude larger than the original one. This would work if we diagonalised the matrix and applied the transformation to the $log$ of its eigenvalues, but since we already have a section for modifying the eigenvalues, we fear this would be repetitive.}\\
+	
 	\underline{Smaller points are:}
 	
 	The comparison of the elements in Fig. 2 is a bit misleading (or rather, the conclusions are).  Assuming that the small elements (which show the biggest fractional difference) are off-diagonals, then it probably doesn’t much matter if they are $10^{-4}$ or $10^{-8}$ of the diagonal elements – they are effectively zero.  If they are on the diagonal, then it’s a different matter, so it is worth checking. \reply{We added a more thorough investigation into these differences, pointing out that the biggest difference are in the smallest elements and correspond to off-diagonal terms.}
@@ -146,33 +243,33 @@
 	
 	Beyond this, I have a number of specific comments. Here they are in order:
 	\begin{itemize}
-	\item \textbf{L32} Individual $\rightarrow$ independent? \done
-	\item \textbf{L43} I'd remove this paragraph from the introduction. \done
-	\item \textbf{L47} You seem to use the present continuous a lot “we are trying”. I think I'd go for the present simple. \done
-	\item \textbf{L113} Could you explain in a bit more detail what the differences are between the two covariances? I.e. is it that one is missing the non-Gaussian parts? \reply{We explain this better in the text now. The Gaussian Covariance Matrix (GCM) only consists of the Gaussian parts.}
-	\item \textbf{Eq. 1} Does $T$ here contain the noise bias contribution? I imagine not, but I wanted to check. \reply{This is just the formal definition.}
-	\item In both sections IV and V you seem to arbitrarily choose 200 as the number of modes to throw away. Can you justify this? \reply{We modified the text to make this clearer. This is done to achieve a reduction of about $90\%$ of the covariance matrix, so we have a “fairer” comparison between these methods and the other, more complicated compression schemes.}
-	\item \textbf{Fig. 5} This would benefit from larger labels and legend. You could even consider making it a double-column figure. \done
-	\item \textbf{L249} “compression at the ell space” - I think I'd say “map-level compression”. \done
-	\item \textbf{Eq. 6} Use $\langle$ and $\rangle$ instead of $<$ and $>$. \done
-	\item \textbf{L314} It is worth justifying that ell-independent $U^{ij}$ is a good approximation (which it usually is for cosmic shear). \reply{Low ell spread is because of the cosmic variance, and is also lower weighted by the weighted average, high ell shows great consistency in Figure 5.}
-	\item \textbf{Eq. 10} It'd be good to justify the 2ell+1 weighting. \reply{Justified by the number of modes for each ell.}
-	\item \textbf{Fig. 7} I think $W_{ij}$ should be $U^{ij}$ in the caption. \done
-	\item \textbf{L354} is $\rightarrow$ are \done
-	\item \textbf{L354} The result also makes sense in terms of the cumulative nature of lensing (i.e. the further away the source, the more lensed it is), although the thinning out of the galaxy density at higher redshifts makes the 4th bin have a lower weight than the 3rd one. \done
-	\item \textbf{Fig. 8} This plot is tiny! Do you need the right panel? \done
-	\item \textbf{Fig. 10} Seems to appear in the text before Fig. 9. Actually, I'm not sure you discuss figure 9. \reply{This was removed.}
-	\item \textbf{Eq. 12} The transformation is parameter-dependent. I assume you perform it at a fiducial cosmological model? \reply{We do indeed. We used the best-fit results from the full cosmological analysis and take those to be our fiducial cosmology everywhere.}
-	\item \textbf{Eq. 13} Probably worth emphasizing that this is the Fisher matrix of your likelihood. \done
-	\item \textbf{L415} Where does “eighty thousand” come from? \reply{We were referring to the elements of the covariance matrix. We fixed this in the text.}
-	\item “The shape and variance of the posterior is not dependent on the derivative, but the best-fit value shifts according to the point where the derivative is taken.” I'm a bit confused by this. Can you justify this statement? \reply{We've removed this paragraph from the paper. The point of it was to explain that we needed a cosmological analysis had to be done first, in order to get the bestfit values.}
-	\item You should try to reorganize the figures so they appear a bit closer to where they are discussed. \done
-	\item \textbf{L449} “We find that the mean values of the parameter constraints for the two methods agree to $1 \sigma$, which shows that they are equivalent to each other.” I don't understand this statement in the context in which it appears (the comparison between covariance matrices). \reply{Since we are comparing the two compressed covariance matrices, there are two ways of doing this: we can either compress them using the same weight (remember that the inverse of the covariance matrix is used for this result), or with a different weight for each (the weight would be obtained with the corresponding covariance matrix). We wanted to check how different weights impact the parameter constraints and found the differences to be small (as compared to the difference between the constraints for the two matrices).}
-	\item \textbf{L496} The qualitative jump between $25\%$ and $30\%$ errors is hard to digest. What is the cause of this? Also, did you do this for a single realization of the noisy covariance or for several of them? \reply{We redid the analysis with 50 realizations of the covariance matrix. The “jump” was most likely due to a large fluctuation, which was corrected with more realizations. The new analysis brought new aspects to light, which are pointed out in the new draft.}
-	\item \textbf{L510} Do you mean $\delta > -1$? \reply{We meant $|\delta| < 1$.} \\
+		\item \textbf{L32} Individual $\rightarrow$ independent? \done
+		\item \textbf{L43} I'd remove this paragraph from the introduction. \done
+		\item \textbf{L47} You seem to use the present continuous a lot “we are trying”. I think I'd go for the present simple. \done
+		\item \textbf{L113} Could you explain in a bit more detail what the differences are between the two covariances? I.e. is it that one is missing the non-Gaussian parts? \reply{We explain this better in the text now. The Gaussian Covariance Matrix (GCM) only consists of the Gaussian parts.}
+		\item \textbf{Eq. 1} Does $T$ here contain the noise bias contribution? I imagine not, but I wanted to check. \reply{This is just the formal definition.}
+		\item In both sections IV and V you seem to arbitrarily choose 200 as the number of modes to throw away. Can you justify this? \reply{We modified the text to make this clearer. This is done to achieve a reduction of about $90\%$ of the covariance matrix, so we have a “fairer” comparison between these methods and the other, more complicated compression schemes.}
+		\item \textbf{Fig. 5} This would benefit from larger labels and legend. You could even consider making it a double-column figure. \done
+		\item \textbf{L249} “compression at the ell space” - I think I'd say “map-level compression”. \done
+		\item \textbf{Eq. 6} Use $\langle$ and $\rangle$ instead of $<$ and $>$. \done
+		\item \textbf{L314} It is worth justifying that ell-independent $U^{ij}$ is a good approximation (which it usually is for cosmic shear). \reply{Low ell spread is because of the cosmic variance, and is also lower weighted by the weighted average, high ell shows great consistency in Figure 5.}
+		\item \textbf{Eq. 10} It'd be good to justify the 2ell+1 weighting. \reply{Justified by the number of modes for each ell.}
+		\item \textbf{Fig. 7} I think $W_{ij}$ should be $U^{ij}$ in the caption. \done
+		\item \textbf{L354} is $\rightarrow$ are \done
+		\item \textbf{L354} The result also makes sense in terms of the cumulative nature of lensing (i.e. the further away the source, the more lensed it is), although the thinning out of the galaxy density at higher redshifts makes the 4th bin have a lower weight than the 3rd one. \done
+		\item \textbf{Fig. 8} This plot is tiny! Do you need the right panel? \done
+		\item \textbf{Fig. 10} Seems to appear in the text before Fig. 9. Actually, I'm not sure you discuss figure 9. \reply{This was removed.}
+		\item \textbf{Eq. 12} The transformation is parameter-dependent. I assume you perform it at a fiducial cosmological model? \reply{We do indeed. We used the best-fit results from the full cosmological analysis and take those to be our fiducial cosmology everywhere.}
+		\item \textbf{Eq. 13} Probably worth emphasizing that this is the Fisher matrix of your likelihood. \done
+		\item \textbf{L415} Where does “eighty thousand” come from? \reply{We were referring to the elements of the covariance matrix. We fixed this in the text.}
+		\item “The shape and variance of the posterior is not dependent on the derivative, but the best-fit value shifts according to the point where the derivative is taken.” I'm a bit confused by this. Can you justify this statement? \reply{We've removed this paragraph from the paper. The point of it was to explain that we needed a cosmological analysis had to be done first, in order to get the bestfit values.}
+		\item You should try to reorganize the figures so they appear a bit closer to where they are discussed. \done
+		\item \textbf{L449} “We find that the mean values of the parameter constraints for the two methods agree to $1 \sigma$, which shows that they are equivalent to each other.” I don't understand this statement in the context in which it appears (the comparison between covariance matrices). \reply{Since we are comparing the two compressed covariance matrices, there are two ways of doing this: we can either compress them using the same weight (remember that the inverse of the covariance matrix is used for this result), or with a different weight for each (the weight would be obtained with the corresponding covariance matrix). We wanted to check how different weights impact the parameter constraints and found the differences to be small (as compared to the difference between the constraints for the two matrices).}
+		\item \textbf{L496} The qualitative jump between $25\%$ and $30\%$ errors is hard to digest. What is the cause of this? Also, did you do this for a single realization of the noisy covariance or for several of them? \reply{We redid the analysis with 50 realizations of the covariance matrix. The “jump” was most likely due to a large fluctuation, which was corrected with more realizations. The new analysis brought new aspects to light, which are pointed out in the new draft.}
+		\item \textbf{L510} Do you mean $\delta > -1$? \reply{We meant $|\delta| < 1$.} \\
 	\end{itemize}
-
-
+	
+	
 	\textbf{Jonathan Blazek, April 6} \\
 	
 	I have followed with interest the progress of this important work, and I congratulate the authors on completing the paper. Please let me know if you have questions about the below comments/suggestions. Note that I deliberately wrote my comments before reading the other reviews, so there is some overlap.
@@ -180,58 +277,58 @@
 	One general comment before specifics. The paper has two main goals: 1) comparing different covariance codes/methods and 2) exploring data compression. I find that these two threads are not always clearly distinguished. For instance, much of the data compression is done only on the CL covariance matrix, and the conclusions about the comparison part are not given much attention. It could help to slightly restructure where the results are presented, or to add a few words making clear when CL-only is being used and when an important comparison is being done.
 	
 	\begin{itemize}
-	\item For the reason mentioned above, the abstract should be more clear. What are the main goals and conclusions? Also “start along the path” in the first sentence sounds tentative for the start of an abstract. \reply{Updated the abstract to include more information about our goals and conclusions.}
-	\item Reference numbers are out of order. \reply{The references are in alphabetical order, that's why they're not in increasing order in the text.}
-	\item \textbf{L34}: “As data sets increase” $\rightarrow$ you mean the number of elements in the data vector, not necessarily the overall amount of observational data. \reply{We replaced \textit{data sets} with \textit{data vectors}.}
-	\item \textbf{L68} Missing section symbol. \done
-	\item \textbf{L83} Emphasize here (or elsewhere) that this analysis is done in configuration rather than Fourier space. Is there any reason we would expect the qualitative results to be different in a Fourier space analysis? \reply{Map level compression actually works better in Fourier space, but we don't think MOPED is going to differ much in two setups. The reason we use real space is because it is in line with the DES Y1 analysis.}
-	\item \textbf{Table 1} Here, and in the relevant parts of the text, it may improve clarity to add the $_{IA}$ subscript to the A and eta variables. Also, you can cite the Troxel DES cosmic shear paper when mentioning the IA params. \done
-	\item \textbf{L84} DES Y1 is the state-of-the-art for cosmic shear data sets, at least right now. You could mention this.
-	\item \textbf{L97} Are all of these citations for CosmoSIS needed? \reply{These are the references that CosmoSIS spits out after each run. We thought it would be polite to include all of them.}
-	\item \textbf{L140} The difference of 4 orders of magnitude is casually discussed without further explanation. Although your later results show that this is mostly due to non-important elements, more explanation at this stage would be helpful. Why is this happening? How can we plausibly think that these two cov matrices are roughly the same when there are such large differences. \reply{We try to address this by taking into consideration Alan's comments as well. The elements that show greatest discrepancies are the smallest ones (of order $10^{-18}$, this is probably why the constraints are not all that different. As can be seen, the diagonal elements (and the larger ones), have smaller differences.}
-	\item \textbf{Paragraph beginning at L163} I was a bit lost by the logic of this paragraph. If possible, provide more explanation of what you are doing and why. \reply{We removed the figure and the associated text.}
-	\item \textbf{L179 (and elsewhere)} Why 200 eigenmodes? This number is not explained, and the results depend strongly on how many eigenmodes are kept. Similar question about the S/N analysis. \reply{We try to explain this better in the text. This is done to achieve a reduction of about $90\%$ of the covariance matrix, so we have a “fairer” comparison between these methods and the other, more complicated compression schemes.}
-	\item \textbf{L183} “Throwing away $90\%$ of the information...” By what metric? Where does this number come from? \reply{Change to reducing the number of elements in the covariance matrix by 90\%.}
-	\item \textbf{Fig. 4 (and elsewhere)} The blue/purple/magenta color scheme is tough to parse. They look similar, especially with overlapping contours. \reply{Changed one of the blueish color to green. The goal is trying to be colorblind-friendly as well as monochrome copy friendly.}
-	\item \textbf{Fig. 4 caption} You probably don’t need all of the detail on how you remove these modes (which is included in the text anyway). You can just say that you remove those modes. \done
-	\item \textbf{L210} “very small.” How is that quantified? \reply{We meant the lowest 200.}
-	\item \textbf{L226} “signal” OF these modes... \done
-	\item \textbf{L234} “vanilla” What does this mean? \reply{Changed to 'simple'.}
-	\item \textbf{L237} Explain that the shaded region shows the modes excluded in the previous analysis. \reply{This is in the text.}
-	\item \textbf{L249} “Compression at the ell-space...” This sentence is confusing. \reply{Changed to “map-level compression”.}
-	\item \textbf{L267-269} “Eliminates even more modes… the numbers are the same.” These ideas seem to be in contradiction. Which point do you want to emphasize? \reply{This paragraph was removed.}
-	\item \textbf{Eq. 5} I don’t understand the indices. What is the summation convention? \reply{They are really just matrix multiplication, simplified to matrix representation.}
-	\item \textbf{L298} “double summation” What is meant? \reply{It really just meant $\sum_i$ $\sum_j$.}
-	\item \textbf{Eq. 8} This is the standard xi+- expression, which is not how it is described in the text above. \reply{Changed so that it is only meant to be used to derive the $\xi_{+/-}$ for the compressed data.}
-	\item \textbf{L323-324} Wrong symbol. Should be arcmin, not deg. \done
-	\item \textbf{L342} “increasing shades” is confusing. I also found the plot itself hard to parse, since the contrast between different ell values isn’t very much. \reply{Made it so it is a little easier to see the change in color.}
-	\item \textbf{L345} What is $W_\ell$? \reply{It should be $U_\ell$.}
-	\item \textbf{L347} You say earlier that the transformation has to be ell independent, but then discuss here that this is some ell dependence. Is this a problem? If not, why not? \reply{For low ells, there is the cosmic variance that is inevitable, but they are lower weighted so it is fine. For higher ells, they converge to an acceptable level.}
-	\item\textbf{ L353-354} I found this sentence confusing. \reply{Added more specifications of what the results reveal.}
-	\item \textbf{L369} First two KL modes and their cross correlation? \reply{Yes, and changed.}
-	\item \textbf{L415} Do you mean elements or linear combinations of the elements? \reply{We meant the elements.}
-	\item \textbf{L428} This discussion of parameter space volume is tough to understand without discussing the number of parameters.  Also, do you want to claim that the other parameters agree well when they are only consistent at the 2sigma level? \reply{We wanted to be very conservative here. The cosmological and IA parameters show an agreement of $> 99\%$ (with the exception of $\alpha_{\mathrm{IA}}$). The real problem are the systematic parameters.}
-	\item \textbf{Fig. 7} As I mentioned before, the different colors are pretty subtle and hard to parse. Also, you should mention the ell range spanned by the different color shades. \reply{Changed the color to blue-green-orange, should be better. Also specify the meaning of different shade level in the caption.}
-	\item \textbf{Fig. 8} Larger text, like in Fig 12. Also, why are some of the diag elements below 1, when all of the others are above? I didn’t see a discussion of this anywhere. \reply{Specified in Section III A in v2.}
-	\item \textbf{L443} Extra space in i.e. \done
-	\item \textbf{L451} Agreeing to 1sigma does not imply equivalence. \reply{Changed this.}
-	\item \textbf{A general comment about figures} There are several similar figures, and they don’t always appear right next to where they are described in the text. So it would help if each caption included info on which method of compression is being used. \done
-	\item \textbf{Fig. 9} Where in the text is this figure mentioned? \reply{We removed this figure.}
-	\item \textbf{Section VII} Is this always with the CL covariance? Is there any tolerance testing for the other one? \reply{The tolerance testing is done only on CL/FCM. We believe the results will be similar, if done with GCM.}
-	\item \textbf{L475} Clarify that the eigenvalues here are not the original eigenvalues used in the compression method. \done
-	\item \textbf{L479} What is this “extra step” which is mentioned a couple of places? Is it simply a check on the final cov matrix? If so, does this introduce a selection bias on the otherwise random noise in the cov? \reply{We made this clearer in the text. For the elements, a constant is added to the diagonal and in the case of the eigenvalues, $|\delta| > 1$.}
-	\item \textbf{L517} What is the takeaway of this result and this final sentence? The question of noise in the eigenvalues is just dropped. What does this result mean? \reply{We have given more emphasis in this new draft.}
-	\item \textbf{Conclusion} Say more about the results of the comparison between the two methods. What have you learned? \reply{We included a discussion about this in the new version.}
-	\item \textbf{L538} Is it actually untrue that these modes carry less information, or is it simply that they do carry some information? \reply{We see that they do carry relevant information, since we lost constraining power for all the parameters by applying this cut (this wasn't the case for SNR, for instance).}
-	\item \textbf{L549} The phrasing of IA being sensitive to low S/N may be misleading. You mean low S/N in cosmic shear — the cov doesn’t include IA at all. \done
-	\item \textbf{L559} “consecutive” $\rightarrow$ “resulting”? \done
-	\item \textbf{Fig. 14} It’s hard to see what’s going on since we don’t know how the x axis is ordered. \reply{We added labels to the x-axis, showing the parts corresponding to $\xi_+$ and to $\xi_-$.}
-	\item \textbf{Fig. 15} Hard to see black vs blue lines. \reply{We replace the figure, and changed the colours.}
-	\item \textbf{Fig 15} “englobes” $\rightarrow$ “covers”. \done
-	\item \textbf{L577} This is very interesting - is it truly lossless? \reply{We included more information regarding this: it is lossless only if the noise in the data does not depend on the model parameters.}
-	\item \textbf{L592} The sudden degradation in constraining power when going from $25\%$ to $30\%$ errors is surprising (to me, at least) and an interesting result. Are you able to explain what is going on? \reply{The results shown in the paper had been for only one realization of the perturbed covariance matrix. We redid the analysis for 50 of those, and the results are now different -- the previous results were likely due to statistical fluctuations.}
-	\item \textbf{L595}: What is happening with the eigenvalue noise? Are there interesting lessons from this result? \reply{Introducing noise to the eigenvalues was done in an attempt to ensure positive definiteness of the covariance matrix. The constraints obtained are similar to those obtained when the perturbation is applied to the elements themselves. The interesting lesson is what happens to the $A_{\mathrm{IA}.}$: even though the error in the final elements is small, the constraining power is largely lost for this parameter.}
-
-\end{itemize}
-
+		\item For the reason mentioned above, the abstract should be more clear. What are the main goals and conclusions? Also “start along the path” in the first sentence sounds tentative for the start of an abstract. \reply{Updated the abstract to include more information about our goals and conclusions.}
+		\item Reference numbers are out of order. \reply{The references are in alphabetical order, that's why they're not in increasing order in the text.}
+		\item \textbf{L34}: “As data sets increase” $\rightarrow$ you mean the number of elements in the data vector, not necessarily the overall amount of observational data. \reply{We replaced \textit{data sets} with \textit{data vectors}.}
+		\item \textbf{L68} Missing section symbol. \done
+		\item \textbf{L83} Emphasize here (or elsewhere) that this analysis is done in configuration rather than Fourier space. Is there any reason we would expect the qualitative results to be different in a Fourier space analysis? \reply{Map level compression actually works better in Fourier space, but we don't think MOPED is going to differ much in two setups. The reason we use real space is because it is in line with the DES Y1 analysis.}
+		\item \textbf{Table 1} Here, and in the relevant parts of the text, it may improve clarity to add the $_{IA}$ subscript to the A and eta variables. Also, you can cite the Troxel DES cosmic shear paper when mentioning the IA params. \done
+		\item \textbf{L84} DES Y1 is the state-of-the-art for cosmic shear data sets, at least right now. You could mention this.
+		\item \textbf{L97} Are all of these citations for CosmoSIS needed? \reply{These are the references that CosmoSIS spits out after each run. We thought it would be polite to include all of them.}
+		\item \textbf{L140} The difference of 4 orders of magnitude is casually discussed without further explanation. Although your later results show that this is mostly due to non-important elements, more explanation at this stage would be helpful. Why is this happening? How can we plausibly think that these two cov matrices are roughly the same when there are such large differences. \reply{We try to address this by taking into consideration Alan's comments as well. The elements that show greatest discrepancies are the smallest ones (of order $10^{-18}$, this is probably why the constraints are not all that different. As can be seen, the diagonal elements (and the larger ones), have smaller differences.}
+		\item \textbf{Paragraph beginning at L163} I was a bit lost by the logic of this paragraph. If possible, provide more explanation of what you are doing and why. \reply{We removed the figure and the associated text.}
+		\item \textbf{L179 (and elsewhere)} Why 200 eigenmodes? This number is not explained, and the results depend strongly on how many eigenmodes are kept. Similar question about the S/N analysis. \reply{We try to explain this better in the text. This is done to achieve a reduction of about $90\%$ of the covariance matrix, so we have a “fairer” comparison between these methods and the other, more complicated compression schemes.}
+		\item \textbf{L183} “Throwing away $90\%$ of the information...” By what metric? Where does this number come from? \reply{Change to reducing the number of elements in the covariance matrix by 90\%.}
+		\item \textbf{Fig. 4 (and elsewhere)} The blue/purple/magenta color scheme is tough to parse. They look similar, especially with overlapping contours. \reply{Changed one of the blueish color to green. The goal is trying to be colorblind-friendly as well as monochrome copy friendly.}
+		\item \textbf{Fig. 4 caption} You probably don’t need all of the detail on how you remove these modes (which is included in the text anyway). You can just say that you remove those modes. \done
+		\item \textbf{L210} “very small.” How is that quantified? \reply{We meant the lowest 200.}
+		\item \textbf{L226} “signal” OF these modes... \done
+		\item \textbf{L234} “vanilla” What does this mean? \reply{Changed to 'simple'.}
+		\item \textbf{L237} Explain that the shaded region shows the modes excluded in the previous analysis. \reply{This is in the text.}
+		\item \textbf{L249} “Compression at the ell-space...” This sentence is confusing. \reply{Changed to “map-level compression”.}
+		\item \textbf{L267-269} “Eliminates even more modes… the numbers are the same.” These ideas seem to be in contradiction. Which point do you want to emphasize? \reply{This paragraph was removed.}
+		\item \textbf{Eq. 5} I don’t understand the indices. What is the summation convention? \reply{They are really just matrix multiplication, simplified to matrix representation.}
+		\item \textbf{L298} “double summation” What is meant? \reply{It really just meant $\sum_i$ $\sum_j$.}
+		\item \textbf{Eq. 8} This is the standard xi+- expression, which is not how it is described in the text above. \reply{Changed so that it is only meant to be used to derive the $\xi_{+/-}$ for the compressed data.}
+		\item \textbf{L323-324} Wrong symbol. Should be arcmin, not deg. \done
+		\item \textbf{L342} “increasing shades” is confusing. I also found the plot itself hard to parse, since the contrast between different ell values isn’t very much. \reply{Made it so it is a little easier to see the change in color.}
+		\item \textbf{L345} What is $W_\ell$? \reply{It should be $U_\ell$.}
+		\item \textbf{L347} You say earlier that the transformation has to be ell independent, but then discuss here that this is some ell dependence. Is this a problem? If not, why not? \reply{For low ells, there is the cosmic variance that is inevitable, but they are lower weighted so it is fine. For higher ells, they converge to an acceptable level.}
+		\item\textbf{ L353-354} I found this sentence confusing. \reply{Added more specifications of what the results reveal.}
+		\item \textbf{L369} First two KL modes and their cross correlation? \reply{Yes, and changed.}
+		\item \textbf{L415} Do you mean elements or linear combinations of the elements? \reply{We meant the elements.}
+		\item \textbf{L428} This discussion of parameter space volume is tough to understand without discussing the number of parameters.  Also, do you want to claim that the other parameters agree well when they are only consistent at the 2sigma level? \reply{We wanted to be very conservative here. The cosmological and IA parameters show an agreement of $> 99\%$ (with the exception of $\alpha_{\mathrm{IA}}$). The real problem are the systematic parameters.}
+		\item \textbf{Fig. 7} As I mentioned before, the different colors are pretty subtle and hard to parse. Also, you should mention the ell range spanned by the different color shades. \reply{Changed the color to blue-green-orange, should be better. Also specify the meaning of different shade level in the caption.}
+		\item \textbf{Fig. 8} Larger text, like in Fig 12. Also, why are some of the diag elements below 1, when all of the others are above? I didn’t see a discussion of this anywhere. \reply{Specified in Section III A in v2.}
+		\item \textbf{L443} Extra space in i.e. \done
+		\item \textbf{L451} Agreeing to 1sigma does not imply equivalence. \reply{Changed this.}
+		\item \textbf{A general comment about figures} There are several similar figures, and they don’t always appear right next to where they are described in the text. So it would help if each caption included info on which method of compression is being used. \done
+		\item \textbf{Fig. 9} Where in the text is this figure mentioned? \reply{We removed this figure.}
+		\item \textbf{Section VII} Is this always with the CL covariance? Is there any tolerance testing for the other one? \reply{The tolerance testing is done only on CL/FCM. We believe the results will be similar, if done with GCM.}
+		\item \textbf{L475} Clarify that the eigenvalues here are not the original eigenvalues used in the compression method. \done
+		\item \textbf{L479} What is this “extra step” which is mentioned a couple of places? Is it simply a check on the final cov matrix? If so, does this introduce a selection bias on the otherwise random noise in the cov? \reply{We made this clearer in the text. For the elements, a constant is added to the diagonal and in the case of the eigenvalues, $|\delta| > 1$.}
+		\item \textbf{L517} What is the takeaway of this result and this final sentence? The question of noise in the eigenvalues is just dropped. What does this result mean? \reply{We have given more emphasis in this new draft.}
+		\item \textbf{Conclusion} Say more about the results of the comparison between the two methods. What have you learned? \reply{We included a discussion about this in the new version.}
+		\item \textbf{L538} Is it actually untrue that these modes carry less information, or is it simply that they do carry some information? \reply{We see that they do carry relevant information, since we lost constraining power for all the parameters by applying this cut (this wasn't the case for SNR, for instance).}
+		\item \textbf{L549} The phrasing of IA being sensitive to low S/N may be misleading. You mean low S/N in cosmic shear — the cov doesn’t include IA at all. \done
+		\item \textbf{L559} “consecutive” $\rightarrow$ “resulting”? \done
+		\item \textbf{Fig. 14} It’s hard to see what’s going on since we don’t know how the x axis is ordered. \reply{We added labels to the x-axis, showing the parts corresponding to $\xi_+$ and to $\xi_-$.}
+		\item \textbf{Fig. 15} Hard to see black vs blue lines. \reply{We replace the figure, and changed the colours.}
+		\item \textbf{Fig 15} “englobes” $\rightarrow$ “covers”. \done
+		\item \textbf{L577} This is very interesting - is it truly lossless? \reply{We included more information regarding this: it is lossless only if the noise in the data does not depend on the model parameters.}
+		\item \textbf{L592} The sudden degradation in constraining power when going from $25\%$ to $30\%$ errors is surprising (to me, at least) and an interesting result. Are you able to explain what is going on? \reply{The results shown in the paper had been for only one realization of the perturbed covariance matrix. We redid the analysis for 50 of those, and the results are now different -- the previous results were likely due to statistical fluctuations.}
+		\item \textbf{L595}: What is happening with the eigenvalue noise? Are there interesting lessons from this result? \reply{Introducing noise to the eigenvalues was done in an attempt to ensure positive definiteness of the covariance matrix. The constraints obtained are similar to those obtained when the perturbation is applied to the elements themselves. The interesting lesson is what happens to the $A_{\mathrm{IA}.}$: even though the error in the final elements is small, the constraining power is largely lost for this parameter.}
+		
+	\end{itemize}
+	
 \end{document}
