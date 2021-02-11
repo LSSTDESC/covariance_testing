@@ -1,0 +1,11 @@
+\ChangesListline {replaced}{Replaced\nobreakspace {}(TF)}{Year 1 (DESY1) release \cite {Troxel:2017xyo,Abbott:2018cms}}{1}
+\ChangesListline {added}{Added\nobreakspace {}(TF)}{There are a number of codes that compute covariance matrices analytically, here we test two, which, despite being different produce compatible constraints. It must follow that the parts most relevant to parameter estimation be similar to each other. Establishing which regions of the covariance matrix are most informative is the first step towards building a tool for comparing these matrices without the need for a full cosmological analysis. In this work, we use compression schemes to look for an indication of which elements should be considered for covariance matrix comparison.}{1}
+\ChangesListline {replaced}{Replaced\nobreakspace {}(TF)}{helpful}{2}
+\ChangesListline {replaced}{Replaced\nobreakspace {}(TF)}{practical}{8}
+\ChangesListline {replaced}{Replaced\nobreakspace {}(TF)}{with a percentual difference of up to $17\%$, as compared to $26\%$ with the original matrices.}{8}
+\ChangesListline {replaced}{Replaced\nobreakspace {}(TF)}{. For this reason,}{9}
+\ChangesListline {added}{Added\nobreakspace {}(TF)}{For example, in \begin {equation}C_{\alpha \beta }^{\text {new}} = e^{(1 + \delta )(\text {log}\ C^{\text {old}})_{\alpha \beta }}\ ,\end {equation}the value of $C_{\alpha \beta }^{\text {new}}$ is not necessarily within $\delta \%$ of $C_{\alpha \beta }^{\text {old}}$.}{10}
+\ChangesListline {added}{Added\nobreakspace {}(TF)}{some of its}{10}
+\ChangesListline {added}{Added\nobreakspace {}(TF)}{differing by}{10}
+\ChangesListline {replaced}{Replaced\nobreakspace {}(TF)}{from}{10}
+\ChangesListline {added}{Added\nobreakspace {}(TF)}{In this sense, one of our most important results is in the ability of using MOPED to compare different matrices.}{11}

@@ -1,50 +1,50 @@
-This is BibTeX, Version 0.99d (TeX Live 2016)
-Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+This is BibTeX, Version 0.99d (TeX Live 2020)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
 The style file: apj.bst
 Database file #1: mainNotes.bib
 Database file #2: main.bib
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
-Warning--empty journal in Bellini:2019ssw
-You've used 22 entries,
+Warning--empty note in Joachimi:2020blm
+You've used 27 entries,
             3085 wiz_defined-function locations,
-            804 strings with 9038 characters,
-and the built_in function-call counts, 9502 in all, are:
-= -- 809
-> -- 685
-< -- 10
-+ -- 228
-- -- 246
-* -- 788
-:= -- 1843
-add.period$ -- 22
-call.type$ -- 22
-change.case$ -- 140
-chr.to.int$ -- 22
-cite$ -- 23
-duplicate$ -- 435
-empty$ -- 593
-format.name$ -- 282
-if$ -- 1852
+            813 strings with 9474 characters,
+and the built_in function-call counts, 11653 in all, are:
+= -- 1001
+> -- 835
+< -- 13
++ -- 280
+- -- 301
+* -- 963
+:= -- 2252
+add.period$ -- 27
+call.type$ -- 27
+change.case$ -- 175
+chr.to.int$ -- 27
+cite$ -- 28
+duplicate$ -- 532
+empty$ -- 724
+format.name$ -- 348
+if$ -- 2272
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 22
-newline$ -- 70
-num.names$ -- 88
-pop$ -- 133
+missing$ -- 26
+newline$ -- 85
+num.names$ -- 108
+pop$ -- 166
 preamble$ -- 1
-purify$ -- 140
+purify$ -- 175
 quote$ -- 0
-skip$ -- 298
+skip$ -- 366
 stack$ -- 0
-substring$ -- 244
+substring$ -- 301
 swap$ -- 0
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 198
+type$ -- 243
 warning$ -- 1
-while$ -- 63
+while$ -- 78
 width$ -- 0
-write$ -- 243
+write$ -- 297
 (There was 1 warning)
