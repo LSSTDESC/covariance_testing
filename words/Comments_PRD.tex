@@ -3,8 +3,8 @@
 \usepackage{amsmath}
 \usepackage{xcolor}
 \usepackage{indentfirst}
+\usepackage{hyperref}
 \pagenumbering{gobble}
-\usepackage{graphicx}
 
 \newcommand\scott[1]{{\bf {\textcolor{teal}{[Scott: #1]}}}}
 \newcommand\tassia[1]{{\bf {\textcolor{teal}{[Tassia: #1]}}}}
@@ -32,13 +32,13 @@
 	
 	\begin{enumerate}
 	\item As the authors mentioned, the MOPED compression of the covariance matrix does not accelerate the speed of the analysis. In fact, the MOPED compression in eq. (11) - (13) seems to be a simple projecting the information to the parameter space. The benefit of the covariance matrix's compression is then most apparent when comparing two different covariance matrices. Is that correct? Please clarify the motivation of the work in the introduction. \\
-	\reply{There have been numerous works in the literature that have used MOPED to speed up the likelihood analysis (see references [3 - 8]). In our case, we use \texttt{CosmoSIS} to calculate the theoretical $\xi_{\pm}$ vector, before compressing it to be used for the likelihood calculation. This is also the case for the other methods of compression used in this work. MOPED is superior because it is not only able to achieve maximal compression, but it is also the only compression scheme capable of reproducing the same parameter contraints as those originally obtained by DESY1. We have added a paragraph in the Introduction about the motivation for covariance matrix comparison and also modified the second last paragraph of the Conclusions to highlight the importance of our findings. }
+		\reply{Showing that MOPED can be used with this dataset to reproduce the same parameter constraints as those originally obtained by DESY1 is, in itself, an important result. It's not obvious that a small set of simple projections can capture the information, as \href{https://doi.org/10.1093/mnrasl/sly029}{Alsing \& Wandelt, (2018)} point out, there are cases where this can fail catastrophically. We have added a paragraph in the Introduction about the motivation for covariance matrix comparison and also modified the second last paragraph of the Conclusions to highlight its significance.}
 	
 	\item The motivation for comparing the two covariance matrices is unclear in the text. Perhaps the authors can expand that point. \\	
-	\reply{This is now addressed in the fifth paragraph of  the Introduction.}
+		\reply{This is now addressed in the fifth paragraph of  the Introduction.}
 	
 	\item The authors show $S_8$ as a parameter, but isn't it natural to use $\sigma_8$ instead of $S_8$ when one also has $\Omega_m$ as a parameter? \\
-	\reply{Our analyses were done using the same settings on \texttt{CosmoSIS} as those used by Troxel $et\ al.$ (2018). Their results are displayed in the $S_8 - \Omega_m$ plane, we wanted to be cohesive by adopting the same format.}
+		\reply{The parameter $S_8$ is often used since it is the quantity most strongly constrained by the data, and to a large degree de-correlates with $\Omega_m$. Also, since our analyses were done using the same settings on \texttt{CosmoSIS} as those used by \href{https://doi.org/10.1103/PhysRevD.98.043528}{Troxel $et\ al.$ (2018)}, and their results are displayed in the $S_8 - \Omega_m$ plane, it was cohesive to adopt the same format.}
 	
 	\item Methods 1-3 do not provide a competitive constraint because the parameters $S_8$ and $A_{\text{IA}}$ are most sensitive to the low signal-to-noise modes. Is the statement about $S_8$ and $A_{\text{IA}}$ specific to DESY1, or is that true in general for other cosmic shear surveys, for example, LSST or Roman? \\	
 		\reply{Due to to characteristics of the intrinsic alignment parameters, we expect this to be the case for other surveys as well.}
