@@ -1,0 +1,82 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fullpage}
+\usepackage{hyperref}
+\usepackage{amsmath}
+
+\newcounter{cpoint}
+\setcounter{cpoint}{0}
+
+\newcommand{\thepoint}{[\arabic{cpoint}]}
+
+\newcommand{\point}[1]{\refstepcounter{cpoint}  \bigskip \noindent 
+	\textbf{Point~\thepoint} :\ #1 \par }
+
+\newcommand{\minorpoint}[1]{\bigskip \noindent 
+	\textbf{---}\ #1 \par }
+
+\newcommand{\reply}[1]{\medskip \noindent \textbf{Reply}:\ #1 
+	\medskip }
+
+\begin{document}
+	
+	\section*{Response to the reviewer report}
+	
+	We thank the reviewer for their critical assessment of our work. 
+	In the following we address their concerns point by point. 
+	
+	\bigskip \hrule \bigskip
+	
+	\point{
+		As the authors mentioned, the MOPED compression of the covariance matrix does not accelerate the speed of the analysis. In fact, the MOPED compression in eq. (11) - (13) seems to be a simple projecting the information to the parameter space. The benefit of the covariance matrix's compression is then most apparent when comparing two different covariance matrices. Is that correct? Please clarify the motivation of the work in the introduction.}
+	\reply{
+		Showing that MOPED can be used with this dataset to reproduce the same parameter constraints as those originally obtained by DESY1 is, in itself, an important result. It's not obvious that a small set of simple projections can capture the information, as \href{https://doi.org/10.1093/mnrasl/sly029}{Alsing \& Wandelt (2018)} point out, there are cases where this can fail catastrophically. We have added a paragraph in the Introduction about the motivation for covariance matrix comparison and also modified the second last paragraph of the Conclusions to highlight its significance.}
+	
+	\point{
+		The motivation for comparing the two covariance matrices is unclear in the text. Perhaps the authors can expand that point.}
+	\reply{
+		This is now addressed in the fifth paragraph of  the Introduction.}
+	
+	\point{
+		The authors show $S_8$ as a parameter, but isn't it natural to use $\sigma_8$ instead of $S_8$ when one also has $\Omega_m$ as a parameter?}
+	\reply{
+		The parameter $S_8$ is often used since it is the quantity most strongly constrained by the data, and to a large degree de-correlates with $\Omega_m$. Also, since our analyses were done using the same settings on \texttt{CosmoSIS} as those used by \href{https://doi.org/10.1103/PhysRevD.98.043528}{Troxel $et\ al.$ (2018)}, and their results are displayed in the $S_8 - \Omega_m$ plane, it was cohesive to adopt the same format.}
+	
+	\point{
+		Methods 1-3 do not provide a competitive constraint because the parameters $S_8$ and $A_{\text{IA}}$ are most sensitive to the low signal-to-noise modes. Is the statement about $S_8$ and $A_{\text{IA}}$ specific to DESY1, or is that true in general for other cosmic shear surveys, for example, LSST or Roman?}
+	\reply{
+		Due to to characteristics of the intrinsic alignment parameters, we expect this to be the case for other surveys as well.}
+	
+	\subsection*{Minor points:}
+	
+	\minorpoint{
+		DESY1 is not defined in the main text.}
+	\reply{
+		It is now defined in the second paragraph of the Introduction.}
+	
+	\minorpoint{
+		In section II.B, the authors wrote that they set ``the lowest eigenmodes to zero." However, aren't the lowest eigenmodes of the covariance matrix the smallest noise modes?}
+	\reply{
+		This is similar to an analysis in terms of the principal components, instead of the eigenvalues. For a symmetric matrix, however, like the ones we are working with, they are the same thing. It is often the case that the high eigenvalues or, consequently, those with the highest principal components, are a good approximation of the full matrix. On the other hand, the lowest eigenvalues are usually just numerical noise.}
+	
+	\minorpoint{
+		Eq. (5) may read better with the bin indexes explicitly written.}
+	\reply{
+		We added the $ij$ indexes to the equation.}
+	
+	\minorpoint{
+		Eq. (8) need further clarification, in particular, concerning the relation between $J_{0/4}$ and $\pm$.}
+	\reply{
+		The equation has been changed to address this.}
+	
+	\minorpoint{
+		On page 8, the authors wrote, ``the ratio of the diagonal elements goes up to only 2.3,", but that is not consistent with Fig 10, where red dots are all below 1.}
+	\reply{
+		The text has been corrected, we see a greater agreement, with a percentual difference of up to $17\%$, as compared to $26\%$ with the uncompressed matrices.}
+	
+	\minorpoint{
+		On page 9, the statement about perturbing the log of the covariance matrix is not clear. ``Introducing a 10\% error, for example, ... " sentence needs to be elaborated further.}
+	\reply{
+		We added an equation to clarify what the resulting covariance matrix would be, and how its elements would change.}
+	
+\end{document}

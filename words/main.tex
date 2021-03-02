@@ -1,8 +1,7 @@
 \RequirePackage{docswitch}
-\pdfoutput=1
-\setjournal{\flag}
+\setjournal{\prd}
 
-\documentclass[aps, prd, twocolumn, superscriptaddress, nofootinbib, amssymb, amsmath]{revtex4-2}
+\documentclass[twocolumn,nofootinbib]{\docclass}
 
 %%%% Scott's macros
 \newcommand{\sfig}[2]{
@@ -68,7 +67,7 @@
 \definechangesauthor[name={Tassia}, color=teal]{TF}
 
 \graphicspath{{./}{./figures/}}
-\bibliographystyle{apj}
+\bibliographystyle{prd}
 
 \usepackage{lineno}
 %\linenumbers
@@ -86,7 +85,7 @@
 	Covariance matrices are among the most difficult pieces of end-to-end cosmological analyses. In principle, for two-point functions, each component involves a four-point function, and the resulting covariance often has hundreds of thousands of elements. We investigate various compression mechanisms capable of vastly reducing the size of the covariance matrix in the context of cosmic shear statistics.  This helps identify which of its parts are most crucial to parameter estimation. We start with simple compression methods, by isolating and ``removing" 200 modes associated with the lowest eigenvalues, then those with the lowest signal-to-noise ratio, before moving on to more sophisticated schemes like compression at the tomographic level and, finally, with the Massively Optimized Parameter Estimation and Data compression (MOPED). We find that, while most of these approaches prove useful for a few parameters of interest, like $\Omega_m$, the simplest yield a loss of constraining power on the intrinsic alignment (IA) parameters as well as $S_8$. For the case considered --- cosmic shear from the first year of data from the Dark Energy Survey --- only MOPED was able to replicate the original constraints in the 16-parameter space. Finally, we apply a tolerance test to the elements of the compressed covariance matrix obtained with MOPED and confirm that the IA parameter $A_{\text{IA}}$ is the most susceptible to inaccuracies in the covariance matrix.
 \end{abstract}
 
-\maketitle
+\maketitlepost
 
 % ----------------------------------------------------------------------
 \section{Introduction}
