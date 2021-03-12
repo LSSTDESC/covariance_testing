@@ -1,0 +1,62 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fullpage}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\renewcommand\labelitemi{\tiny$\blacksquare$}
+
+\begin{document}
+	
+	\section*{Summary of the alterations to the manuscript}
+\vskip 0.5cm
+		
+\textbf{\S I \quad \small{INTRODUCTION}}
+\begin{itemize}
+	\item In the second paragraph, replaced ``(DES) Year 1 release" with ``Year 1 (DESY1) release" and added a citation by T.M.C. Abbott et al. (2018);
+	\item added a new fifth paragraph;
+	\item in the last paragraph, replaced``useful" with ``helpful".
+\end{itemize}
+
+\noindent \textbf{\S II.A \quad \small{DES COSMIC SHEAR: DATA AND ANALYSIS}}
+\begin{itemize}
+	\item In the third paragraph, replaced ``\texttt{constant efficiency}" with ``\texttt{constant\_efficiency}".
+	\item in the last paragraph, replaced ``The 68\% CL constraints" with  ``The 68\% confidence level (CL) constraints".
+\end{itemize}
+
+\noindent \textbf{\S II.D \quad \small{TOMOGRAPHIC COMPRESSION}}
+	\begin{itemize}
+		\item Added $ij$ indices to Eq. (5).
+	\end{itemize}
+
+\noindent \textbf{\S III.A \quad \small{ELEMENT-BY-ELEMENT COMPARISON}}
+\begin{itemize}
+	\item In the second paragraph, replaced ``useful" with ``practical".
+\end{itemize}
+
+\noindent \textbf{\S III.B \quad \small{COMPRESSED MATRICES COMPARISON}}
+\begin{itemize}
+	\item In the third paragraph:\\
+		-- replaced ``show" with ``shows";\\
+		-- replaced ``closer to 1, and the ratio of the diagonal elements goes up to only $\approx 2.3$" with ``closer to 1, with a fractional difference of up to $17\%$, as compared to $26\%$ with the original matrices".
+\end{itemize}
+
+\noindent \textbf{\S IV \quad \small{TOLERANCE OF THE COMPRESSED MATRICES}}
+\begin{itemize}
+	\item In the third paragraph:\\
+		-- replaced ``positive definite (PD), as such," with ``positive definite (PD). For this reason,";
+		-- added ``In 
+			\begin{equation}
+				C_{\alpha \beta}^{\text{new}} = e^{(1 + \delta)(\text{log}\ C^{\text{old}})_{\alpha \beta}}\ ,\tag{15}
+			\end{equation}
+			the value of $C_{\alpha \beta}^{\text{new}}$ is not necessarily within $\delta \%$ of $C_{\alpha \beta}^{\text{old}}$ ";\\
+		-- replaced ``matrix with elements several orders of magnitude higher than the original" with ``matrix with some of its elements differing by several orders of magnitude from the original".
+\end{itemize}
+
+\noindent \textbf{\S V \quad \small{CONCLUSION}}
+\begin{itemize}
+	\item In the fifth paragraph, replaced ``parameter inference since it has to be redone for every point in the parameter space. Recent work has been done by [8] to address this problem by using Gaussian Processes to generate the compressed theory" with ``parameter inference if the projection to form the MOPED coefficients is done at each sampled point.  For speed gains, a way to compute the theoretical MOPED coefficients rapidly needs to be found, e.g. using Gaussian Processes to generate the compressed theory [8]";
+	\item in the sixth paragraph, added ``In this sense, one of our most important results is in the ability of using MOPED to compare different matrices." as the last sentence.
+\end{itemize}
+	
+\end{document}

@@ -22,15 +22,14 @@
 	
 	\section*{Response to the reviewer report}
 	
-	We thank the reviewer for their critical assessment of our work. 
-	In the following we address their concerns point by point. 
+	We thank the referee for their constructive comments.  We provide our responses below, interspersed with the referee’s report.
 	
 	\bigskip \hrule \bigskip
 	
 	\point{
 		As the authors mentioned, the MOPED compression of the covariance matrix does not accelerate the speed of the analysis. In fact, the MOPED compression in eq. (11) - (13) seems to be a simple projecting the information to the parameter space. The benefit of the covariance matrix's compression is then most apparent when comparing two different covariance matrices. Is that correct? Please clarify the motivation of the work in the introduction.}
 	\reply{
-		Showing that MOPED can be used with this dataset to reproduce the same parameter constraints as those originally obtained by DESY1 is, in itself, an important result. It's not obvious that a small set of simple projections can capture the information, as \href{https://doi.org/10.1093/mnrasl/sly029}{Alsing \& Wandelt (2018)} point out, there are cases where this can fail catastrophically. We have added a paragraph in the Introduction about the motivation for covariance matrix comparison and also modified the second last paragraph of the Conclusions to highlight its significance.}
+		Showing that MOPED can be used with this dataset to reproduce the same parameter constraints as those originally obtained by DESY1 is, in itself, an important result. It's not obvious that a small set of simple projections can capture the information; as \href{https://doi.org/10.1093/mnrasl/sly029}{Alsing \& Wandelt (2018)} point out, there are cases where this can fail catastrophically. We have added a paragraph in the Introduction about the motivation for covariance matrix comparison and also modified the second last paragraph of the Conclusions to highlight its significance.}
 	
 	\point{
 		The motivation for comparing the two covariance matrices is unclear in the text. Perhaps the authors can expand that point.}
@@ -72,7 +71,7 @@
 	\minorpoint{
 		On page 8, the authors wrote, ``the ratio of the diagonal elements goes up to only 2.3,", but that is not consistent with Fig 10, where red dots are all below 1.}
 	\reply{
-		The text has been corrected, we see a greater agreement, with a percentual difference of up to $17\%$, as compared to $26\%$ with the uncompressed matrices.}
+		The text has been corrected; we see better agreement, with a fractional difference of up to 17\%, as compared to 26\% with the uncompressed matrices.}
 	
 	\minorpoint{
 		On page 9, the statement about perturbing the log of the covariance matrix is not clear. ``Introducing a 10\% error, for example, ... " sentence needs to be elaborated further.}
